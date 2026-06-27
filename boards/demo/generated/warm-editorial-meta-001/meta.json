@@ -1,0 +1,12 @@
+{
+  "direction": "warm-editorial-meta",
+  "name": "Warm Meta Editorial",
+  "channels": [
+    "warm-editorial",
+    "mono-meta"
+  ],
+  "model": "claude-opus-4-8",
+  "rulesApplied": 0,
+  "content": "profile.json",
+  "generated": "2026-06-25T15:44:07.143Z"
+}

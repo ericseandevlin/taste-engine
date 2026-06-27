@@ -1,0 +1,388 @@
+<!doctype html>
+<!--
+  LINEAGE
+  Direction: Evidentiary Brutalist Report
+  Channels blended: bold-primary-brutalist + case-study-functional
+  Key params:
+    ground: pure black / raw white, no atmosphere
+    type: heavy grotesk at aggressive scale, mono for metadata
+    accent: #ff3300 used once with full commitment
+    motion: scroll-driven structural reveals, abrupt cuts, no easing
+    space: tight crowding contrasted with earned emptiness
+  Palette: #000000 #ffffff #ff3300 #333333
+  Content source: real profile (Avery Quinn, Design Technologist)
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Avery Quinn, Design Technologist</title>
+<style>
+  :root{
+    --black:#000000;
+    --white:#ffffff;
+    --red:#ff3300;
+    --gray:#333333;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--white);
+    color:var(--black);
+    font-family:"Helvetica Neue",Helvetica,Arial,"Segoe UI",Roboto,sans-serif;
+    font-weight:400;
+    line-height:1.2;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none;}
+
+  /* mono for metadata / wayfinding */
+  .mono{
+    font-family:"Courier New",Courier,monospace;
+    font-weight:700;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    font-size:11px;
+  }
+
+  /* scroll reveal: structural, abrupt, no easing */
+  .reveal{opacity:0;}
+  .reveal.in{
+    opacity:1;
+    transition:opacity 0.01s step-end;
+  }
+
+  /* layout container */
+  .wrap{max-width:1200px;margin:0 auto;padding:0 24px;}
+
+  /* ---- HEADER ---- */
+  header.bar{
+    position:sticky;top:0;z-index:50;
+    background:var(--black);
+    color:var(--white);
+    border-bottom:4px solid var(--red);
+  }
+  .bar .wrap{
+    display:flex;justify-content:space-between;align-items:center;
+    height:54px;
+  }
+  .bar .id{font-weight:700;letter-spacing:0.04em;}
+  .bar .id b{color:var(--red);}
+  .bar nav{display:flex;gap:20px;}
+  .bar nav a{color:var(--white);}
+  .bar nav a:hover{color:var(--red);}
+  @media(max-width:620px){ .bar nav{display:none;} }
+
+  /* ---- HERO ---- */
+  .hero{
+    background:var(--black);
+    color:var(--white);
+    padding:70px 0 80px;
+    border-bottom:4px solid var(--white);
+  }
+  .hero .tag{color:var(--red);margin-bottom:32px;}
+  .hero h1{
+    font-weight:800;
+    font-size:clamp(56px,15vw,180px);
+    line-height:0.88;
+    letter-spacing:-0.03em;
+    text-transform:uppercase;
+  }
+  .hero h1 .red{color:var(--red);}
+  .hero .role{
+    font-weight:800;
+    font-size:clamp(24px,5vw,46px);
+    text-transform:uppercase;
+    letter-spacing:-0.02em;
+    margin-top:18px;
+  }
+  .hero .lede{
+    max-width:640px;
+    font-size:clamp(17px,2.4vw,22px);
+    line-height:1.35;
+    margin-top:34px;
+    color:var(--white);
+  }
+  .hero .meta{
+    display:flex;flex-wrap:wrap;gap:0;
+    margin-top:48px;
+    border-top:1px solid var(--gray);
+  }
+  .hero .meta div{
+    padding:16px 24px 16px 0;
+    margin-right:40px;
+    border-right:1px solid var(--gray);
+    padding-right:40px;
+  }
+  .hero .meta div:last-child{border-right:none;}
+  .hero .meta .k{color:var(--gray);display:block;margin-bottom:8px;}
+  .hero .meta .v{color:var(--white);font-weight:700;font-size:14px;}
+  .hero .meta .v.hit{color:var(--red);}
+
+  /* section heading mass */
+  .secthead{
+    display:flex;align-items:baseline;gap:18px;
+    border-top:4px solid var(--black);
+    padding-top:22px;margin-bottom:14px;
+  }
+  .secthead .num{color:var(--red);}
+  .secthead h2{
+    font-weight:800;
+    font-size:clamp(38px,9vw,110px);
+    line-height:0.9;
+    letter-spacing:-0.03em;
+    text-transform:uppercase;
+  }
+
+  /* ---- ABOUT ---- */
+  .about{padding:80px 0;}
+  .about .body{
+    max-width:760px;
+    font-size:clamp(19px,3vw,30px);
+    line-height:1.35;
+    font-weight:400;
+    margin-top:30px;
+  }
+
+  /* ---- PROJECTS ---- */
+  .work{
+    background:var(--black);
+    color:var(--white);
+    padding:80px 0 90px;
+  }
+  .work .secthead{border-top-color:var(--white);}
+  .work .secthead h2{color:var(--white);}
+  .work .intro{
+    color:var(--gray);
+    max-width:520px;margin-top:6px;margin-bottom:50px;
+  }
+
+  .proj{
+    border-top:1px solid var(--gray);
+    padding:36px 0;
+  }
+  .proj:last-child{border-bottom:1px solid var(--gray);}
+  .proj .row{
+    display:flex;align-items:flex-start;gap:40px;
+  }
+  .proj .index{
+    color:var(--red);
+    font-weight:800;
+    font-size:clamp(28px,6vw,64px);
+    line-height:0.9;
+    min-width:80px;
+  }
+  .proj .main{flex:1;}
+  .proj h3{
+    font-weight:800;
+    font-size:clamp(30px,6vw,64px);
+    line-height:0.92;
+    text-transform:uppercase;
+    letter-spacing:-0.02em;
+  }
+  .proj .summary{
+    max-width:620px;
+    margin-top:18px;
+    font-size:clamp(16px,2.4vw,20px);
+    line-height:1.4;
+    color:var(--white);
+  }
+  .proj .specs{
+    display:flex;flex-wrap:wrap;gap:0;
+    margin-top:26px;
+  }
+  .proj .specs div{
+    padding-right:30px;margin-right:30px;
+    border-right:1px solid var(--gray);
+  }
+  .proj .specs div:last-child{border-right:none;margin-right:0;}
+  .proj .specs .k{color:var(--gray);display:block;margin-bottom:7px;}
+  .proj .specs .v{color:var(--white);font-weight:700;font-size:13px;letter-spacing:0.04em;}
+  .proj .specs .v.hit{color:var(--red);}
+  @media(max-width:620px){
+    .proj .row{flex-direction:column;gap:12px;}
+    .proj .index{min-width:0;}
+    .proj .specs div{
+      border-right:none;margin-right:0;padding-right:0;
+      width:50%;margin-bottom:18px;
+    }
+  }
+
+  /* ---- CONTACT ---- */
+  .contact{padding:80px 0 90px;}
+  .contact .secthead{margin-bottom:30px;}
+  .contact .email{
+    display:inline-block;
+    font-weight:800;
+    font-size:clamp(30px,8vw,90px);
+    letter-spacing:-0.03em;
+    text-transform:uppercase;
+    word-break:break-word;
+    border-bottom:8px solid var(--red);
+    padding-bottom:6px;
+  }
+  .contact .email:hover{background:var(--red);color:var(--white);border-bottom-color:var(--black);}
+  .contact .links{
+    display:flex;flex-wrap:wrap;gap:0;
+    margin-top:48px;
+    border-top:1px solid var(--gray);
+  }
+  .contact .links a{
+    padding:18px 28px 18px 0;
+    margin-right:30px;
+    border-right:1px solid var(--gray);
+    font-weight:700;font-size:15px;
+  }
+  .contact .links a:last-child{border-right:none;}
+  .contact .links a:hover{color:var(--red);}
+
+  /* ---- FOOTER ---- */
+  footer{
+    background:var(--black);
+    color:var(--white);
+    padding:40px 0;
+    border-top:4px solid var(--red);
+  }
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;}
+  footer .mono{color:var(--gray);}
+  footer .mono b{color:var(--white);}
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="wrap">
+    <div class="id">AVERY QUINN <b>/</b></div>
+    <nav class="mono">
+      <a href="#about">About</a>
+      <a href="#work">Work</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="tag mono">Documentation, Process, Record</div>
+    <h1>Avery<br><span class="red">Quinn</span></h1>
+    <div class="role">Design Technologist</div>
+    <p class="lede">I build the connective tissue between design systems and the code that ships them.</p>
+    <div class="meta">
+      <div>
+        <span class="k mono">Location</span>
+        <span class="v">Brooklyn, NY</span>
+      </div>
+      <div>
+        <span class="k mono">Availability</span>
+        <span class="v hit">Open to select work from Q3 2026</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="wrap reveal">
+    <div class="secthead">
+      <span class="num mono">01</span>
+      <h2>About</h2>
+    </div>
+    <p class="body">I work between design and engineering: design systems, prototyping in code, and the production components that keep teams consistent. Before consulting I led the design systems group at a payments company.</p>
+  </div>
+</section>
+
+<section class="work" id="work">
+  <div class="wrap">
+    <div class="secthead reveal">
+      <span class="num mono">02</span>
+      <h2>Work</h2>
+    </div>
+    <p class="intro mono reveal">Selected projects. Evidentiary record.</p>
+
+    <div class="proj reveal">
+      <div class="row">
+        <div class="index">01</div>
+        <div class="main">
+          <h3>Lattice Design System</h3>
+          <p class="summary">Component library and token pipeline for a multi-product platform. Cut design-to-production drift across nine teams.</p>
+          <div class="specs">
+            <div><span class="k mono">Role</span><span class="v">Lead</span></div>
+            <div><span class="k mono">Stack</span><span class="v">React, Style Dictionary</span></div>
+            <div><span class="k mono">Output</span><span class="v hit">140 Components</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="proj reveal">
+      <div class="row">
+        <div class="index">02</div>
+        <div class="main">
+          <h3>Signal Prototyping Kit</h3>
+          <p class="summary">A toolkit for building interactive prototypes against real API data, so reviews test behavior rather than static screens.</p>
+          <div class="specs">
+            <div><span class="k mono">Role</span><span class="v">Design Technologist</span></div>
+            <div><span class="k mono">Stack</span><span class="v">TypeScript, Vite</span></div>
+            <div><span class="k mono">Output</span><span class="v hit">Internal Tool</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="proj reveal">
+      <div class="row">
+        <div class="index">03</div>
+        <div class="main">
+          <h3>Grid Audit Tooling</h3>
+          <p class="summary">A linter and visual overlay that checks layouts against a defined column grid in the browser, flagging spacing that falls off the baseline.</p>
+          <div class="specs">
+            <div><span class="k mono">Role</span><span class="v">Author</span></div>
+            <div><span class="k mono">Stack</span><span class="v">JavaScript, PostCSS</span></div>
+            <div><span class="k mono">Output</span><span class="v hit">Open Source</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap reveal">
+    <div class="secthead">
+      <span class="num mono">03</span>
+      <h2>Contact</h2>
+    </div>
+    <a class="email" href="mailto:hello@averyquinn.studio">hello@averyquinn.studio</a>
+    <div class="links">
+      <a class="mono" href="https://github.com/averyq">github.com/averyq</a>
+      <a class="mono" href="https://read.cv/averyq">read.cv/averyq</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span class="mono"><b>Avery Quinn</b>, Design Technologist</span>
+    <span class="mono">Brooklyn, NY / Record No. 2026</span>
+  </div>
+</footer>
+
+<script>
+  // structural scroll reveal, no easing, abrupt
+  var els = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    },{threshold:0.12});
+    els.forEach(function(el){io.observe(el);});
+  } else {
+    els.forEach(function(el){el.classList.add('in');});
+  }
+</script>
+</body>
+</html>

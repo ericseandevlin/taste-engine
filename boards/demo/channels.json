@@ -1,0 +1,237 @@
+{
+  "board": "demo",
+  "generated": "2026-06-25T00:19:33.761Z",
+  "channels": [
+    {
+      "id": "monolith-wordmark",
+      "name": "Monolith Wordmark",
+      "recipe": {
+        "ground": "Single dominant ground color — warm off-white, cream, or deep black; no gradients",
+        "type": "Oversized wordmark or logotype as primary visual element; type IS the layout",
+        "accent": "One restrained accent or none; palette stays 2-3 tones max",
+        "photo": "No photography; illustration or 3D only if subordinate to type mass",
+        "space": "Extreme negative space; generous margins; nothing competes with the wordmark",
+        "motion": "Slow, weighted reveal — letterforms settle or scale in; no kinetic distraction"
+      },
+      "forbidden": [
+        "Multiple competing headlines",
+        "Busy grid of content modules",
+        "High-density navigation bars",
+        "Decorative background textures",
+        "Photography as hero",
+        "Rainbow or multi-hue palettes"
+      ],
+      "representatives": [
+        "w005",
+        "w003"
+      ],
+      "members": [
+        "w002",
+        "w003",
+        "w005",
+        "w008"
+      ]
+    },
+    {
+      "id": "swiss-index",
+      "name": "Swiss Index",
+      "recipe": {
+        "ground": "White or light neutral; clean field with no atmospheric treatment",
+        "type": "Grotesk or mono typeface; type set on strict baseline/column grid; hierarchy via size and weight alone",
+        "accent": "Minimal — hairline rules, small numerals, metadata labels; color used sparingly if at all",
+        "photo": "Documentary or object photography cropped flush to grid; no bleed chaos",
+        "space": "Structured negative space driven by column math; breathing room is deliberate not accidental",
+        "motion": "Functional transitions — fade or slide on axis; no expressive animation"
+      },
+      "forbidden": [
+        "Decorative or display typefaces",
+        "Asymmetric blob layouts",
+        "High-saturation color fields",
+        "Overlapping or collaged elements",
+        "Gradient backgrounds",
+        "Centered hero compositions"
+      ],
+      "representatives": [
+        "w004",
+        "w005"
+      ],
+      "members": [
+        "w002",
+        "w003",
+        "w004",
+        "w005",
+        "w007",
+        "w008"
+      ]
+    },
+    {
+      "id": "dark-editorial",
+      "name": "Dark Editorial",
+      "recipe": {
+        "ground": "Near-black or deep charcoal field; darkness is the canvas, not a mood overlay",
+        "type": "Editorial serif for headlines; grotesk for metadata; contrast achieved through lightness not hue",
+        "accent": "Muted or zero chroma accents — no neon pops; let type and space carry hierarchy",
+        "photo": "High-contrast or duotone imagery integrated into dark field; edges dissolve into ground",
+        "space": "Generous, cinematic spacing; sections breathe like magazine spreads",
+        "motion": "Slow dissolves, parallax scrolling; contemplative not energetic"
+      },
+      "forbidden": [
+        "Warm or cream background tones",
+        "Bright primary color accents",
+        "Playful or rounded typefaces",
+        "Dense card grids",
+        "Hard-edged light UI components",
+        "Flat or illustrative iconography"
+      ],
+      "representatives": [
+        "w006",
+        "w003"
+      ],
+      "members": [
+        "w003",
+        "w006"
+      ]
+    },
+    {
+      "id": "warm-editorial",
+      "name": "Warm Editorial",
+      "recipe": {
+        "ground": "Cream, blush, or warm off-white base; ground radiates softness without being pastel-generic",
+        "type": "Editorial serif or refined grotesk; type set with literary spacing; unhurried reading rhythm",
+        "accent": "Warm low-saturation tones; color suggests paper and ink, not screen primaries",
+        "photo": "Soft, warm-lit photography or none; images feel tactile — print-adjacent",
+        "space": "Generous margins; whitespace is warmth; layout feels handset not automated",
+        "motion": "Gentle fade-ins; no aggressive entrance animations; content arrives calmly"
+      },
+      "forbidden": [
+        "Cold white or dark backgrounds",
+        "High-chroma neon accents",
+        "Dense information grids",
+        "Hard geometric shapes",
+        "Bold sans-serif display type",
+        "Fast or bouncy motion"
+      ],
+      "representatives": [
+        "w007",
+        "w001"
+      ],
+      "members": [
+        "w001",
+        "w007"
+      ]
+    },
+    {
+      "id": "bold-primary-brutalist",
+      "name": "Bold Primary Brutalist",
+      "recipe": {
+        "ground": "Pure black or raw white; no atmospheric treatment — ground is a blank wall",
+        "type": "Heavy grotesk or display sans at aggressive scale; type used as graphic mass",
+        "accent": "Single maximum-chroma primary or secondary — red, yellow, electric blue; one color, full commitment",
+        "photo": "Avoided or used as raw document; no retouching aesthetic",
+        "space": "Tight or intentionally crowded; space is earned not given; OR extreme emptiness as provocation",
+        "motion": "Abrupt cuts, instant state changes, no easing; motion is structural not decorative"
+      },
+      "forbidden": [
+        "Soft or warm palettes",
+        "Serif typefaces",
+        "Gradients of any kind",
+        "Rounded corners or soft UI",
+        "Multi-column editorial grids",
+        "Smooth eased transitions"
+      ],
+      "representatives": [
+        "w008",
+        "w003"
+      ],
+      "members": [
+        "w003",
+        "w008"
+      ]
+    },
+    {
+      "id": "playful-3d",
+      "name": "Playful 3D",
+      "recipe": {
+        "ground": "High-chroma warm or saturated color field; ground is energized not neutral",
+        "type": "Rounded or friendly display type; type may be extruded, inflated, or sculpted",
+        "accent": "Multiple high-chroma hues coexist; harmony via saturation consistency not hue restriction",
+        "photo": "3D rendered sculptural objects as hero; soft studio lighting; objects have material weight",
+        "space": "Objects float in space; negative space is active — it gives objects room to breathe and cast",
+        "motion": "Rotation, inflation, gentle float loops; physics-adjacent — objects have implied mass"
+      },
+      "forbidden": [
+        "Flat 2D illustration",
+        "Monochrome or desaturated palettes",
+        "Hard grid-locked layouts",
+        "Small or condensed typefaces",
+        "Dark brooding backgrounds",
+        "Static or motion-free compositions"
+      ],
+      "representatives": [
+        "w001"
+      ],
+      "members": [
+        "w001"
+      ]
+    },
+    {
+      "id": "case-study-functional",
+      "name": "Case Study Functional",
+      "recipe": {
+        "ground": "White or very light neutral; ground disappears — content is foreground",
+        "type": "Mono or grotesk for metadata, labels, captions; type serves wayfinding not expression",
+        "accent": "Sparse and semantic — accent marks state or category, not decoration",
+        "photo": "Process screens, artifacts, documentation; imagery is evidentiary not atmospheric",
+        "space": "Structured breathing room between content blocks; layout sequences like a report",
+        "motion": "Scroll-driven reveals; content loads in reading order; no theatrical entrance"
+      },
+      "forbidden": [
+        "Expressive or decorative typefaces",
+        "Atmospheric background treatments",
+        "3D or sculptural elements",
+        "High-chroma color fields",
+        "Collaged or overlapping layouts",
+        "Ambient or looping motion"
+      ],
+      "representatives": [
+        "w002",
+        "w006"
+      ],
+      "members": [
+        "w002",
+        "w006",
+        "w007"
+      ]
+    },
+    {
+      "id": "mono-meta",
+      "name": "Mono Meta",
+      "recipe": {
+        "ground": "White, light gray, or cream; ground is neutral enough to disappear behind structured data",
+        "type": "Monospaced typeface throughout or as primary voice; type signals system, code, precision",
+        "accent": "Gray scale with one functional highlight; restraint is the aesthetic",
+        "photo": "None or minimal; iconography is geometric and constructed",
+        "space": "Character-grid aligned spacing; space feels measured in ems not pixels",
+        "motion": "Terminal-style text rendering; cursor blinks; data appears not animates"
+      },
+      "forbidden": [
+        "Serif editorial typefaces",
+        "Warm or emotive color palettes",
+        "Photography as atmosphere",
+        "Organic or irregular shapes",
+        "Expressive motion or easing",
+        "High-density decorative elements"
+      ],
+      "representatives": [
+        "w004",
+        "w002"
+      ],
+      "members": [
+        "w002",
+        "w004",
+        "w005",
+        "w007"
+      ]
+    }
+  ]
+}

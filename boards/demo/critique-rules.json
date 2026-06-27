@@ -1,0 +1,11 @@
+{
+  "swiss-mono-index": [
+    "The header nav bar text 'DESIGN TECHNOLOGIST / BROOKLYN, NY / INDEX 00' must remain on a single line at all viewport widths down to 375px; if it wraps, reduce font-size to minimum 9px or truncate with ellipsis before wrapping occurs.",
+    "Section index labels (#1 ABOUT, #2 SELECTED WORK, #3 CONTACT) must use the same monospaced typeface and identical font-size as the body metadata labels — measured value must match exactly; currently 'ABOUT', 'SELECTED WORK', 'CONTACT' appear bolder/larger than surrounding metadata, violating hierarchy-via-size-and-weight-alone rule.",
+    "On mobile, the project table columns (ROLE, STACK, OUTPUT) collapse into a single stacked block losing the column-grid structure; each label must remain visually distinct as a left-aligned metadata key at a fixed character indent (e.g. 4ch left margin) so the tabular grid is preserved at 375px.",
+    "The gap between the #2 SELECTED WORK section and the #3 CONTACT section is visually disproportionate to all other inter-section gaps on desktop; all inter-section vertical spacing must use a single repeated unit (e.g. 4rem or 64px) applied consistently between every numbered section boundary.",
+    "Horizontal hairline rules separating project rows must be 1px solid and a single consistent color token (e.g. #D0D0D0); inspect confirms the rule above the first project row and the rules between rows differ in either weight or color — normalize all to identical computed values.",
+    "On mobile, the contact channel links (hello@averyquinn.studio, github.com/averyq, read.cv/averyq) render without the EMAIL / GITHUB / READ.CV label column visible at the same line; the label must appear as a fixed-width mono prefix (min-width: 8ch) on the same row as its value, not hidden or collapsed.",
+    "The 'Open to select work from Q3 2026' STATUS block on desktop sits with more left-margin padding than the INDEX and ROLE fields above it; all left-column metadata fields (INDEX, ROLE, LOCATION, STATUS) must align to a single left edge — measure the computed left offset and set all to the same value."
+  ]
+}

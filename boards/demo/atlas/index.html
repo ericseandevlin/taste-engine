@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Taste Atlas — demo</title>
+<style>
+  :root { color-scheme: dark; }
+  body { margin:0; background:#0c0c0d; color:#e8e6e1; font:14px/1.5 -apple-system,Helvetica,Arial,sans-serif; }
+  header { padding:32px 24px 8px; }
+  h1 { font-size:28px; margin:0 0 4px; letter-spacing:-0.02em; }
+  .sub { color:#8a8780; font-family:ui-monospace,monospace; font-size:12px; }
+  h2 { font-size:12px; text-transform:uppercase; letter-spacing:0.12em; color:#8a8780; margin:32px 24px 12px; font-family:ui-monospace,monospace; }
+  .channels { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:16px; padding:0 24px; }
+  .channel { border:1px solid #232325; border-radius:10px; padding:16px; background:#141415; }
+  .channel h3 { margin:0 0 10px; font-size:16px; display:flex; align-items:center; gap:8px; }
+  .count { font-family:ui-monospace,monospace; font-size:11px; color:#0c0c0d; background:#c9b48a; border-radius:10px; padding:1px 8px; }
+  .recipe div { font-size:12px; color:#c8c5bd; margin:2px 0; }
+  .recipe b { color:#e8e6e1; font-weight:600; text-transform:capitalize; }
+  .forbidden { margin-top:8px; font-size:11px; color:#b46a5e; font-family:ui-monospace,monospace; }
+  .reps { display:flex; gap:6px; margin-top:10px; }
+  .reps img { width:64px; height:64px; object-fit:cover; border-radius:4px; background:#222; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:16px; padding:0 24px 48px; }
+  .card { border:1px solid #232325; border-radius:10px; overflow:hidden; background:#141415; }
+  .thumb { aspect-ratio:4/3; background:#1a1a1b; overflow:hidden; }
+  .thumb img { width:100%; height:100%; object-fit:cover; display:block; }
+  .thumb.missing::after { content:"no local image"; display:flex; align-items:center; justify-content:center; height:100%; color:#55534e; font-family:ui-monospace,monospace; font-size:11px; }
+  .thumb.missing img { display:none; }
+  .missing { opacity:.4; }
+  .meta { padding:8px 10px 2px; }
+  .id { font-family:ui-monospace,monospace; font-size:11px; color:#8a8780; }
+  .title { font-weight:600; }
+  .sws { display:flex; gap:0; padding:4px 10px; }
+  .sw { width:24px; height:14px; }
+  .tags { display:flex; flex-wrap:wrap; gap:4px; padding:6px 10px; }
+  .tag { font-family:ui-monospace,monospace; font-size:10px; color:#c8c5bd; border:1px solid #2c2c2e; border-radius:4px; padding:1px 5px; }
+  .src { padding:6px 10px; font-family:ui-monospace,monospace; font-size:10px; }
+  .src a { color:#c9b48a; text-decoration:none; }
+  .why { padding:0 10px 12px; font-size:12px; color:#9a978f; }
+</style></head>
+<body>
+<header><h1>Taste Atlas</h1><div class="sub">board: demo · 8 items · 8 channels · generated 2026-06-25T00:19:33.758Z</div></header>
+<h2>DNA Channels</h2>
+<div class="channels"><section class="channel">
+  <h3>Monolith Wordmark <span class="count">4</span></h3>
+  <div class="recipe"><div><b>ground</b> Single dominant ground color — warm off-white, cream, or deep black; no gradients</div><div><b>type</b> Oversized wordmark or logotype as primary visual element; type IS the layout</div><div><b>accent</b> One restrained accent or none; palette stays 2-3 tones max</div><div><b>photo</b> No photography; illustration or 3D only if subordinate to type mass</div><div><b>space</b> Extreme negative space; generous margins; nothing competes with the wordmark</div><div><b>motion</b> Slow, weighted reveal — letterforms settle or scale in; no kinetic distraction</div></div>
+  <div class="forbidden">forbidden: Multiple competing headlines · Busy grid of content modules · High-density navigation bars · Decorative background textures · Photography as hero · Rainbow or multi-hue palettes</div>
+  <div class="reps"><img loading="lazy" src="../monolith.png" onerror="this.classList.add('missing')"><img loading="lazy" src="../glyphlab.png" onerror="this.classList.add('missing')"></div>
+</section><section class="channel">
+  <h3>Swiss Index <span class="count">6</span></h3>
+  <div class="recipe"><div><b>ground</b> White or light neutral; clean field with no atmospheric treatment</div><div><b>type</b> Grotesk or mono typeface; type set on strict baseline/column grid; hierarchy via size and weight alone</div><div><b>accent</b> Minimal — hairline rules, small numerals, metadata labels; color used sparingly if at all</div><div><b>photo</b> Documentary or object photography cropped flush to grid; no bleed chaos</div><div><b>space</b> Structured negative space driven by column math; breathing room is deliberate not accidental</div><div><b>motion</b> Functional transitions — fade or slide on axis; no expressive animation</div></div>
+  <div class="forbidden">forbidden: Decorative or display typefaces · Asymmetric blob layouts · High-saturation color fields · Overlapping or collaged elements · Gradient backgrounds · Centered hero compositions</div>
+  <div class="reps"><img loading="lazy" src="../gridwork.png" onerror="this.classList.add('missing')"><img loading="lazy" src="../monolith.png" onerror="this.classList.add('missing')"></div>
+</section><section class="channel">
+  <h3>Dark Editorial <span class="count">2</span></h3>
+  <div class="recipe"><div><b>ground</b> Near-black or deep charcoal field; darkness is the canvas, not a mood overlay</div><div><b>type</b> Editorial serif for headlines; grotesk for metadata; contrast achieved through lightness not hue</div><div><b>accent</b> Muted or zero chroma accents — no neon pops; let type and space carry hierarchy</div><div><b>photo</b> High-contrast or duotone imagery integrated into dark field; edges dissolve into ground</div><div><b>space</b> Generous, cinematic spacing; sections breathe like magazine spreads</div><div><b>motion</b> Slow dissolves, parallax scrolling; contemplative not energetic</div></div>
+  <div class="forbidden">forbidden: Warm or cream background tones · Bright primary color accents · Playful or rounded typefaces · Dense card grids · Hard-edged light UI components · Flat or illustrative iconography</div>
+  <div class="reps"><img loading="lazy" src="../nocturne.png" onerror="this.classList.add('missing')"><img loading="lazy" src="../glyphlab.png" onerror="this.classList.add('missing')"></div>
+</section><section class="channel">
+  <h3>Warm Editorial <span class="count">2</span></h3>
+  <div class="recipe"><div><b>ground</b> Cream, blush, or warm off-white base; ground radiates softness without being pastel-generic</div><div><b>type</b> Editorial serif or refined grotesk; type set with literary spacing; unhurried reading rhythm</div><div><b>accent</b> Warm low-saturation tones; color suggests paper and ink, not screen primaries</div><div><b>photo</b> Soft, warm-lit photography or none; images feel tactile — print-adjacent</div><div><b>space</b> Generous margins; whitespace is warmth; layout feels handset not automated</div><div><b>motion</b> Gentle fade-ins; no aggressive entrance animations; content arrives calmly</div></div>
+  <div class="forbidden">forbidden: Cold white or dark backgrounds · High-chroma neon accents · Dense information grids · Hard geometric shapes · Bold sans-serif display type · Fast or bouncy motion</div>
+  <div class="reps"><img loading="lazy" src="../paper-press.png" onerror="this.classList.add('missing')"><img loading="lazy" src="../bloom.png" onerror="this.classList.add('missing')"></div>
+</section><section class="channel">
+  <h3>Bold Primary Brutalist <span class="count">2</span></h3>
+  <div class="recipe"><div><b>ground</b> Pure black or raw white; no atmospheric treatment — ground is a blank wall</div><div><b>type</b> Heavy grotesk or display sans at aggressive scale; type used as graphic mass</div><div><b>accent</b> Single maximum-chroma primary or secondary — red, yellow, electric blue; one color, full commitment</div><div><b>photo</b> Avoided or used as raw document; no retouching aesthetic</div><div><b>space</b> Tight or intentionally crowded; space is earned not given; OR extreme emptiness as provocation</div><div><b>motion</b> Abrupt cuts, instant state changes, no easing; motion is structural not decorative</div></div>
+  <div class="forbidden">forbidden: Soft or warm palettes · Serif typefaces · Gradients of any kind · Rounded corners or soft UI · Multi-column editorial grids · Smooth eased transitions</div>
+  <div class="reps"><img loading="lazy" src="../voltage.png" onerror="this.classList.add('missing')"><img loading="lazy" src="../glyphlab.png" onerror="this.classList.add('missing')"></div>
+</section><section class="channel">
+  <h3>Playful 3D <span class="count">1</span></h3>
+  <div class="recipe"><div><b>ground</b> High-chroma warm or saturated color field; ground is energized not neutral</div><div><b>type</b> Rounded or friendly display type; type may be extruded, inflated, or sculpted</div><div><b>accent</b> Multiple high-chroma hues coexist; harmony via saturation consistency not hue restriction</div><div><b>photo</b> 3D rendered sculptural objects as hero; soft studio lighting; objects have material weight</div><div><b>space</b> Objects float in space; negative space is active — it gives objects room to breathe and cast</div><div><b>motion</b> Rotation, inflation, gentle float loops; physics-adjacent — objects have implied mass</div></div>
+  <div class="forbidden">forbidden: Flat 2D illustration · Monochrome or desaturated palettes · Hard grid-locked layouts · Small or condensed typefaces · Dark brooding backgrounds · Static or motion-free compositions</div>
+  <div class="reps"><img loading="lazy" src="../bloom.png" onerror="this.classList.add('missing')"></div>
+</section><section class="channel">
+  <h3>Case Study Functional <span class="count">3</span></h3>
+  <div class="recipe"><div><b>ground</b> White or very light neutral; ground disappears — content is foreground</div><div><b>type</b> Mono or grotesk for metadata, labels, captions; type serves wayfinding not expression</div><div><b>accent</b> Sparse and semantic — accent marks state or category, not decoration</div><div><b>photo</b> Process screens, artifacts, documentation; imagery is evidentiary not atmospheric</div><div><b>space</b> Structured breathing room between content blocks; layout sequences like a report</div><div><b>motion</b> Scroll-driven reveals; content loads in reading order; no theatrical entrance</div></div>
+  <div class="forbidden">forbidden: Expressive or decorative typefaces · Atmospheric background treatments · 3D or sculptural elements · High-chroma color fields · Collaged or overlapping layouts · Ambient or looping motion</div>
+  <div class="reps"><img loading="lazy" src="../casebook.png" onerror="this.classList.add('missing')"><img loading="lazy" src="../nocturne.png" onerror="this.classList.add('missing')"></div>
+</section><section class="channel">
+  <h3>Mono Meta <span class="count">4</span></h3>
+  <div class="recipe"><div><b>ground</b> White, light gray, or cream; ground is neutral enough to disappear behind structured data</div><div><b>type</b> Monospaced typeface throughout or as primary voice; type signals system, code, precision</div><div><b>accent</b> Gray scale with one functional highlight; restraint is the aesthetic</div><div><b>photo</b> None or minimal; iconography is geometric and constructed</div><div><b>space</b> Character-grid aligned spacing; space feels measured in ems not pixels</div><div><b>motion</b> Terminal-style text rendering; cursor blinks; data appears not animates</div></div>
+  <div class="forbidden">forbidden: Serif editorial typefaces · Warm or emotive color palettes · Photography as atmosphere · Organic or irregular shapes · Expressive motion or easing · High-density decorative elements</div>
+  <div class="reps"><img loading="lazy" src="../gridwork.png" onerror="this.classList.add('missing')"><img loading="lazy" src="../casebook.png" onerror="this.classList.add('missing')"></div>
+</section></div>
+<h2>Index — every item</h2>
+<div class="grid"><div class="card">
+  <div class="thumb"><img loading="lazy" src="../bloom.png" onerror="this.closest('.thumb').classList.add('missing')"></div>
+  <div class="meta"><span class="id">w001</span> <span class="title">Bloom</span></div>
+  <div class="sws"><span class="sw" style="background:#ff66cc" title="#ff66cc 21%"></span><span class="sw" style="background:#9966ff" title="#9966ff 15%"></span><span class="sw" style="background:#cc66cc" title="#cc66cc 14%"></span><span class="sw" style="background:#ff9999" title="#ff9999 11%"></span><span class="sw" style="background:#ffccff" title="#ffccff 11%"></span></div>
+  <div class="tags"><span class="tag">warm-ground</span><span class="tag">bold-primary</span><span class="tag">high-chroma</span><span class="tag">low-density</span><span class="tag">3d-playful</span><span class="tag">sculptural-object</span></div>
+  <div class="src"><a href="../bloom.png">LOCAL</a></div>
+  <div class="why">Gradient background (peach to magenta) creates visual momentum that frames centered white typography and UI elements with breathing room, while the 3D sphere and card illustrations provide tactile entry points for interaction.</div>
+</div><div class="card">
+  <div class="thumb"><img loading="lazy" src="../casebook.png" onerror="this.closest('.thumb').classList.add('missing')"></div>
+  <div class="meta"><span class="id">w002</span> <span class="title">Casebook</span></div>
+  <div class="sws"><span class="sw" style="background:#ffffff" title="#ffffff 96%"></span><span class="sw" style="background:#cccccc" title="#cccccc 2%"></span><span class="sw" style="background:#999999" title="#999999 1%"></span><span class="sw" style="background:#666666" title="#666666 0%"></span><span class="sw" style="background:#ccccff" title="#ccccff 0%"></span></div>
+  <div class="tags"><span class="tag">monolith-wordmark</span><span class="tag">swiss-index</span><span class="tag">mono-meta</span><span class="tag">low-density</span><span class="tag">muted-chroma</span></div>
+  <div class="src"><a href="../casebook.png">LOCAL</a></div>
+  <div class="why">Clean hierarchical layout with generous whitespace and systematic navigation creates professional credibility through restraint and clarity.</div>
+</div><div class="card">
+  <div class="thumb"><img loading="lazy" src="../glyphlab.png" onerror="this.closest('.thumb').classList.add('missing')"></div>
+  <div class="meta"><span class="id">w003</span> <span class="title">Glyphlab</span></div>
+  <div class="sws"><span class="sw" style="background:#000000" title="#000000 90%"></span><span class="sw" style="background:#333300" title="#333300 7%"></span><span class="sw" style="background:#ffff00" title="#ffff00 1%"></span><span class="sw" style="background:#99cc00" title="#99cc00 0%"></span><span class="sw" style="background:#cccc00" title="#cccc00 0%"></span></div>
+  <div class="tags"><span class="tag">dark-field</span><span class="tag">bold-primary</span><span class="tag">monolith-wordmark</span><span class="tag">swiss-index</span><span class="tag">mono-meta</span><span class="tag">high-chroma</span><span class="tag">low-density</span></div>
+  <div class="src"><a href="../glyphlab.png">LOCAL</a></div>
+  <div class="why">Oversized yellow letterforms and neon magenta accents create stark contrast against black void, with Swiss-grid structure anchoring sparse typographic hierarchy.</div>
+</div><div class="card">
+  <div class="thumb"><img loading="lazy" src="../gridwork.png" onerror="this.closest('.thumb').classList.add('missing')"></div>
+  <div class="meta"><span class="id">w004</span> <span class="title">Gridwork</span></div>
+  <div class="sws"><span class="sw" style="background:#ffffff" title="#ffffff 94%"></span><span class="sw" style="background:#cccccc" title="#cccccc 3%"></span><span class="sw" style="background:#999999" title="#999999 2%"></span><span class="sw" style="background:#666666" title="#666666 1%"></span><span class="sw" style="background:#333333" title="#333333 0%"></span></div>
+  <div class="tags"><span class="tag">swiss-index</span><span class="tag">mono-meta</span><span class="tag">grotesk-display</span><span class="tag">low-density</span><span class="tag">editorial-serif</span></div>
+  <div class="src"><a href="../gridwork.png">LOCAL</a></div>
+  <div class="why">A strict tabular grid with numbered items, generous whitespace, and hierarchical metadata creates systematic clarity without visual decoration.</div>
+</div><div class="card">
+  <div class="thumb"><img loading="lazy" src="../monolith.png" onerror="this.closest('.thumb').classList.add('missing')"></div>
+  <div class="meta"><span class="id">w005</span> <span class="title">Monolith</span></div>
+  <div class="sws"><span class="sw" style="background:#ffffcc" title="#ffffcc 89%"></span><span class="sw" style="background:#cccccc" title="#cccccc 3%"></span><span class="sw" style="background:#000000" title="#000000 2%"></span><span class="sw" style="background:#333333" title="#333333 2%"></span><span class="sw" style="background:#ffcccc" title="#ffcccc 2%"></span></div>
+  <div class="tags"><span class="tag">warm-ground</span><span class="tag">monolith-wordmark</span><span class="tag">swiss-index</span><span class="tag">mono-meta</span><span class="tag">low-density</span></div>
+  <div class="src"><a href="../monolith.png">LOCAL</a></div>
+  <div class="why">Large-scale sans-serif wordmark anchors a minimal composition with generous whitespace and a single supporting tagline in smaller meta typography.</div>
+</div><div class="card">
+  <div class="thumb"><img loading="lazy" src="../nocturne.png" onerror="this.closest('.thumb').classList.add('missing')"></div>
+  <div class="meta"><span class="id">w006</span> <span class="title">Nocturne</span></div>
+  <div class="sws"><span class="sw" style="background:#000000" title="#000000 76%"></span><span class="sw" style="background:#333333" title="#333333 21%"></span><span class="sw" style="background:#666666" title="#666666 1%"></span><span class="sw" style="background:#999999" title="#999999 1%"></span><span class="sw" style="background:#666633" title="#666633 0%"></span></div>
+  <div class="tags"><span class="tag">dark-field</span><span class="tag">editorial-serif</span><span class="tag">grotesk-display</span><span class="tag">muted-chroma</span><span class="tag">low-density</span><span class="tag">case-study</span></div>
+  <div class="src"><a href="../nocturne.png">LOCAL</a></div>
+  <div class="why">Extreme white-space separation between headline, descriptive copy, and image placeholders creates deliberate breathing room that forces focus through scarcity rather than abundance.</div>
+</div><div class="card">
+  <div class="thumb"><img loading="lazy" src="../paper-press.png" onerror="this.closest('.thumb').classList.add('missing')"></div>
+  <div class="meta"><span class="id">w007</span> <span class="title">Paper Press</span></div>
+  <div class="sws"><span class="sw" style="background:#ffffcc" title="#ffffcc 66%"></span><span class="sw" style="background:#ffcccc" title="#ffcccc 17%"></span><span class="sw" style="background:#cccccc" title="#cccccc 8%"></span><span class="sw" style="background:#cccc99" title="#cccc99 5%"></span><span class="sw" style="background:#999999" title="#999999 2%"></span></div>
+  <div class="tags"><span class="tag">warm-ground</span><span class="tag">editorial-serif</span><span class="tag">low-density</span><span class="tag">mono-meta</span><span class="tag">swiss-index</span></div>
+  <div class="src"><a href="../paper-press.png">LOCAL</a></div>
+  <div class="why">Generous whitespace and centered serif typography create a print-first aesthetic that emphasizes content hierarchy and physical materiality over screen-based urgency.</div>
+</div><div class="card">
+  <div class="thumb"><img loading="lazy" src="../voltage.png" onerror="this.closest('.thumb').classList.add('missing')"></div>
+  <div class="meta"><span class="id">w008</span> <span class="title">Voltage</span></div>
+  <div class="sws"><span class="sw" style="background:#ff3300" title="#ff3300 64%"></span><span class="sw" style="background:#000000" title="#000000 15%"></span><span class="sw" style="background:#cc3300" title="#cc3300 5%"></span><span class="sw" style="background:#ffff00" title="#ffff00 4%"></span><span class="sw" style="background:#993300" title="#993300 3%"></span></div>
+  <div class="tags"><span class="tag">bold-primary</span><span class="tag">high-chroma</span><span class="tag">grotesk-display</span><span class="tag">swiss-index</span><span class="tag">low-density</span><span class="tag">monolith-wordmark</span></div>
+  <div class="src"><a href="../voltage.png">LOCAL</a></div>
+  <div class="why">High-contrast orange field with black sans-serif typography and strategic color blocks (black, yellow) creates immediate hierarchy and memorability through chromatic extremism.</div>
+</div></div>
+</body></html>

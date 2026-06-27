@@ -1,0 +1,12 @@
+{
+  "direction": "brutalist-case-doc",
+  "name": "Brutalist Case Doc",
+  "channels": [
+    "bold-primary-brutalist",
+    "case-study-functional"
+  ],
+  "model": "claude-opus-4-8",
+  "rulesApplied": 0,
+  "content": "profile.json",
+  "generated": "2026-06-25T15:43:22.261Z"
+}

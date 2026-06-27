@@ -1,0 +1,35 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Gridwork</title>
+<style>
+  *{margin:0;box-sizing:border-box}
+  body{font-family:"Helvetica Neue",Arial,sans-serif;background:#fff;color:#111;font-size:15px;line-height:1.4}
+  .wrap{max-width:1200px;margin:0 auto;padding:48px 56px}
+  header{display:grid;grid-template-columns:repeat(12,1fr);gap:16px;align-items:baseline;border-bottom:1px solid #111;padding-bottom:16px}
+  header .mark{grid-column:1/4;font-weight:700;letter-spacing:-.02em;font-size:18px}
+  header nav{grid-column:8/13;display:flex;gap:28px;justify-content:flex-end;font-size:13px}
+  header nav span{color:#111}
+  .hero{display:grid;grid-template-columns:repeat(12,1fr);gap:16px;padding:72px 0 56px}
+  .hero h1{grid-column:1/9;font-size:64px;line-height:1.02;letter-spacing:-.03em;font-weight:700}
+  .hero .meta{grid-column:10/13;font-size:13px;color:#555;align-self:end}
+  .index{display:grid;grid-template-columns:repeat(12,1fr);gap:16px;border-top:1px solid #111}
+  .row{grid-column:1/13;display:grid;grid-template-columns:48px 4fr 3fr 2fr;gap:16px;padding:18px 0;border-bottom:1px solid #ddd;align-items:center}
+  .row .n{color:#999;font-variant-numeric:tabular-nums}
+  .row .t{font-weight:600;font-size:18px;letter-spacing:-.01em}
+  .row .c{color:#555;font-size:13px}
+  footer{display:grid;grid-template-columns:repeat(12,1fr);gap:16px;padding-top:40px;font-size:13px;color:#555}
+  footer .a{grid-column:1/5}footer .b{grid-column:9/13;text-align:right}
+</style></head>
+<body><div class="wrap">
+  <header><div class="mark">GRIDWORK</div><nav><span>Index</span><span>Studio</span><span>Contact</span></nav></header>
+  <section class="hero"><h1>A design studio organised like a system, not a portfolio.</h1>
+  <div class="meta">Selected work<br>2019 — 2026<br>Zurich / remote</div></section>
+  <section class="index">
+    <div class="row"><div class="n">01</div><div class="t">Postbank Identity</div><div class="c">Brand system, type</div><div class="c">Finance</div></div>
+    <div class="row"><div class="n">02</div><div class="t">Field Notes Quarterly</div><div class="c">Editorial, grid</div><div class="c">Publishing</div></div>
+    <div class="row"><div class="n">03</div><div class="t">Meridian Wayfinding</div><div class="c">Signage, environmental</div><div class="c">Civic</div></div>
+    <div class="row"><div class="n">04</div><div class="t">Aperture OS</div><div class="c">Product, interface</div><div class="c">Software</div></div>
+    <div class="row"><div class="n">05</div><div class="t">Salt & Stone</div><div class="c">Packaging</div><div class="c">Retail</div></div>
+  </section>
+  <footer><div class="a">Gridwork is a graphic design practice working across identity, editorial and interface.</div>
+  <div class="b">hello@gridwork.example<br>Instagram, LinkedIn</div></footer>
+</div></body></html>

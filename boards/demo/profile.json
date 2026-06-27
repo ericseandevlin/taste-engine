@@ -1,0 +1,36 @@
+{
+  "_note": "Your content, kept separate from the board's taste. This is the demo sample: replace these values with your own, or delete this file to see labeled placeholder mode.",
+  "name": "Avery Quinn",
+  "role": "Design Technologist",
+  "tagline": "I build the connective tissue between design systems and the code that ships them.",
+  "location": "Brooklyn, NY",
+  "availability": "Open to select work from Q3 2026",
+  "about": "I work between design and engineering: design systems, prototyping in code, and the production components that keep teams consistent. Before consulting I led the design systems group at a payments company.",
+  "projects": [
+    {
+      "title": "Lattice Design System",
+      "role": "Lead",
+      "stack": "React, Style Dictionary",
+      "output": "140 components",
+      "summary": "Component library and token pipeline for a multi-product platform. Cut design-to-production drift across nine teams."
+    },
+    {
+      "title": "Signal Prototyping Kit",
+      "role": "Design technologist",
+      "stack": "TypeScript, Vite",
+      "output": "Internal tool",
+      "summary": "A toolkit for building interactive prototypes against real API data, so reviews test behavior rather than static screens."
+    },
+    {
+      "title": "Grid Audit Tooling",
+      "role": "Author",
+      "stack": "JavaScript, PostCSS",
+      "output": "Open source",
+      "summary": "A linter and visual overlay that checks layouts against a defined column grid in the browser, flagging spacing that falls off the baseline."
+    }
+  ],
+  "contact": {
+    "email": "hello@averyquinn.studio",
+    "links": ["github.com/averyq", "read.cv/averyq"]
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "direction": "swiss-mono-index",
+  "name": "Swiss Mono Index",
+  "channels": [
+    "swiss-index",
+    "mono-meta"
+  ],
+  "model": "claude-opus-4-8",
+  "rulesApplied": 0,
+  "content": "profile.json",
+  "generated": "2026-06-25T15:41:51.565Z"
+}

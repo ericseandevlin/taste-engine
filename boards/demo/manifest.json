@@ -1,0 +1,468 @@
+{
+  "board": "demo",
+  "kind": "visual-ui",
+  "generated": "2026-06-25T14:55:29.802Z",
+  "items": [
+    {
+      "id": "w001",
+      "file": "bloom.png",
+      "title": "Bloom",
+      "source": {
+        "name": "Bloom",
+        "url": null,
+        "local": "boards/demo/bloom.png",
+        "arena": null
+      },
+      "measured": {
+        "w": 1440,
+        "h": 1200,
+        "aspect": 1.2,
+        "palette": [
+          {
+            "hex": "#ff66cc",
+            "pct": 21
+          },
+          {
+            "hex": "#9966ff",
+            "pct": 15
+          },
+          {
+            "hex": "#cc66cc",
+            "pct": 14
+          },
+          {
+            "hex": "#ff9999",
+            "pct": 11
+          },
+          {
+            "hex": "#ffccff",
+            "pct": 11
+          }
+        ],
+        "contrast": 0.131,
+        "density": 0.016
+      },
+      "tags": [
+        "warm-ground",
+        "bold-primary",
+        "high-chroma",
+        "low-density",
+        "3d-playful",
+        "sculptural-object"
+      ],
+      "channels": [
+        "warm-editorial",
+        "playful-3d"
+      ],
+      "notes": {
+        "why": "Gradient background (peach to magenta) creates visual momentum that frames centered white typography and UI elements with breathing room, while the 3D sphere and card illustrations provide tactile entry points for interaction.",
+        "avoid": "Don't replicate the gradient without considering content legibility; the saturation works here because text is large and centered, not scattered.",
+        "keep": "The combination of maximalist color (high-chroma gradient) with minimal information density (3 feature cards) and a single focal 3D object—this restraint within boldness defines the hierarchy."
+      }
+    },
+    {
+      "id": "w002",
+      "file": "casebook.png",
+      "title": "Casebook",
+      "source": {
+        "name": "Casebook",
+        "url": null,
+        "local": "boards/demo/casebook.png",
+        "arena": null
+      },
+      "measured": {
+        "w": 1440,
+        "h": 1200,
+        "aspect": 1.2,
+        "palette": [
+          {
+            "hex": "#ffffff",
+            "pct": 96
+          },
+          {
+            "hex": "#cccccc",
+            "pct": 2
+          },
+          {
+            "hex": "#999999",
+            "pct": 1
+          },
+          {
+            "hex": "#666666",
+            "pct": 0
+          },
+          {
+            "hex": "#ccccff",
+            "pct": 0
+          }
+        ],
+        "contrast": 0.068,
+        "density": 0.011
+      },
+      "tags": [
+        "monolith-wordmark",
+        "swiss-index",
+        "mono-meta",
+        "low-density",
+        "muted-chroma"
+      ],
+      "channels": [
+        "monolith-wordmark",
+        "swiss-index",
+        "case-study-functional",
+        "mono-meta"
+      ],
+      "notes": {
+        "why": "Clean hierarchical layout with generous whitespace and systematic navigation creates professional credibility through restraint and clarity.",
+        "avoid": "Overloading the hero section with too many visual elements or using color to differentiate features when monochromatic hierarchy suffices.",
+        "keep": "The left-aligned hero copy paired with right-aligned wireframe mockup that creates visual balance without symmetry, plus the minimal caps-lock navigation system that grounds the experience."
+      }
+    },
+    {
+      "id": "w003",
+      "file": "glyphlab.png",
+      "title": "Glyphlab",
+      "source": {
+        "name": "Glyphlab",
+        "url": null,
+        "local": "boards/demo/glyphlab.png",
+        "arena": null
+      },
+      "measured": {
+        "w": 1440,
+        "h": 1200,
+        "aspect": 1.2,
+        "palette": [
+          {
+            "hex": "#000000",
+            "pct": 90
+          },
+          {
+            "hex": "#333300",
+            "pct": 7
+          },
+          {
+            "hex": "#ffff00",
+            "pct": 1
+          },
+          {
+            "hex": "#99cc00",
+            "pct": 0
+          },
+          {
+            "hex": "#cccc00",
+            "pct": 0
+          }
+        ],
+        "contrast": 0.116,
+        "density": 0.014
+      },
+      "tags": [
+        "dark-field",
+        "bold-primary",
+        "monolith-wordmark",
+        "swiss-index",
+        "mono-meta",
+        "high-chroma",
+        "low-density"
+      ],
+      "channels": [
+        "monolith-wordmark",
+        "swiss-index",
+        "dark-editorial",
+        "bold-primary-brutalist"
+      ],
+      "notes": {
+        "why": "Oversized yellow letterforms and neon magenta accents create stark contrast against black void, with Swiss-grid structure anchoring sparse typographic hierarchy.",
+        "avoid": "Treating the neon elements as decorative rather than structural—they function as navigational markers and spatial dividers, not just color accent.",
+        "keep": "The principle of extreme negative space paired with maximum chroma saturation, allowing each typographic element to command full attention without visual competition."
+      }
+    },
+    {
+      "id": "w004",
+      "file": "gridwork.png",
+      "title": "Gridwork",
+      "source": {
+        "name": "Gridwork",
+        "url": null,
+        "local": "boards/demo/gridwork.png",
+        "arena": null
+      },
+      "measured": {
+        "w": 1440,
+        "h": 1200,
+        "aspect": 1.2,
+        "palette": [
+          {
+            "hex": "#ffffff",
+            "pct": 94
+          },
+          {
+            "hex": "#cccccc",
+            "pct": 3
+          },
+          {
+            "hex": "#999999",
+            "pct": 2
+          },
+          {
+            "hex": "#666666",
+            "pct": 1
+          },
+          {
+            "hex": "#333333",
+            "pct": 0
+          }
+        ],
+        "contrast": 0.102,
+        "density": 0.018
+      },
+      "tags": [
+        "swiss-index",
+        "mono-meta",
+        "grotesk-display",
+        "low-density",
+        "editorial-serif"
+      ],
+      "channels": [
+        "swiss-index",
+        "mono-meta"
+      ],
+      "notes": {
+        "why": "A strict tabular grid with numbered items, generous whitespace, and hierarchical metadata creates systematic clarity without visual decoration.",
+        "avoid": "Treating the portfolio as a narrative sequence—this structure explicitly rejects that in favor of transparent categorization and content taxonomy.",
+        "keep": "The right-aligned metadata column (year range, discipline, sector) that makes each project's context legible at a glance without interrupting the primary list."
+      }
+    },
+    {
+      "id": "w005",
+      "file": "monolith.png",
+      "title": "Monolith",
+      "source": {
+        "name": "Monolith",
+        "url": null,
+        "local": "boards/demo/monolith.png",
+        "arena": null
+      },
+      "measured": {
+        "w": 1440,
+        "h": 1200,
+        "aspect": 1.2,
+        "palette": [
+          {
+            "hex": "#ffffcc",
+            "pct": 89
+          },
+          {
+            "hex": "#cccccc",
+            "pct": 3
+          },
+          {
+            "hex": "#000000",
+            "pct": 2
+          },
+          {
+            "hex": "#333333",
+            "pct": 2
+          },
+          {
+            "hex": "#ffcccc",
+            "pct": 2
+          }
+        ],
+        "contrast": 0.157,
+        "density": 0.019
+      },
+      "tags": [
+        "warm-ground",
+        "monolith-wordmark",
+        "swiss-index",
+        "mono-meta",
+        "low-density"
+      ],
+      "channels": [
+        "monolith-wordmark",
+        "swiss-index",
+        "mono-meta"
+      ],
+      "notes": {
+        "why": "Large-scale sans-serif wordmark anchors a minimal composition with generous whitespace and a single supporting tagline in smaller meta typography.",
+        "avoid": "Adding decorative elements or color variation that would compromise the austere, confident restraint of the layout.",
+        "keep": "The hierarchical contrast between monumental display type and tiny explanatory text creates confident clarity without needing visual embellishment."
+      }
+    },
+    {
+      "id": "w006",
+      "file": "nocturne.png",
+      "title": "Nocturne",
+      "source": {
+        "name": "Nocturne",
+        "url": null,
+        "local": "boards/demo/nocturne.png",
+        "arena": null
+      },
+      "measured": {
+        "w": 1440,
+        "h": 1200,
+        "aspect": 1.2,
+        "palette": [
+          {
+            "hex": "#000000",
+            "pct": 76
+          },
+          {
+            "hex": "#333333",
+            "pct": 21
+          },
+          {
+            "hex": "#666666",
+            "pct": 1
+          },
+          {
+            "hex": "#999999",
+            "pct": 1
+          },
+          {
+            "hex": "#666633",
+            "pct": 0
+          }
+        ],
+        "contrast": 0.077,
+        "density": 0.016
+      },
+      "tags": [
+        "dark-field",
+        "editorial-serif",
+        "grotesk-display",
+        "muted-chroma",
+        "low-density",
+        "case-study"
+      ],
+      "channels": [
+        "dark-editorial",
+        "case-study-functional"
+      ],
+      "notes": {
+        "why": "Extreme white-space separation between headline, descriptive copy, and image placeholders creates deliberate breathing room that forces focus through scarcity rather than abundance.",
+        "avoid": "Avoid treating the serif-and-sans pairing as purely decorative; here it functions as semantic distinction between statement (serif) and fact (sans).",
+        "keep": "The two-color typographic hierarchy—warm serif accent within cool display type—creates tonal contrast without introducing new hues."
+      }
+    },
+    {
+      "id": "w007",
+      "file": "paper-press.png",
+      "title": "Paper Press",
+      "source": {
+        "name": "Paper Press",
+        "url": null,
+        "local": "boards/demo/paper-press.png",
+        "arena": null
+      },
+      "measured": {
+        "w": 1440,
+        "h": 1200,
+        "aspect": 1.2,
+        "palette": [
+          {
+            "hex": "#ffffcc",
+            "pct": 66
+          },
+          {
+            "hex": "#ffcccc",
+            "pct": 17
+          },
+          {
+            "hex": "#cccccc",
+            "pct": 8
+          },
+          {
+            "hex": "#cccc99",
+            "pct": 5
+          },
+          {
+            "hex": "#999999",
+            "pct": 2
+          }
+        ],
+        "contrast": 0.067,
+        "density": 0.016
+      },
+      "tags": [
+        "warm-ground",
+        "editorial-serif",
+        "low-density",
+        "mono-meta",
+        "swiss-index"
+      ],
+      "channels": [
+        "swiss-index",
+        "warm-editorial",
+        "case-study-functional",
+        "mono-meta"
+      ],
+      "notes": {
+        "why": "Generous whitespace and centered serif typography create a print-first aesthetic that emphasizes content hierarchy and physical materiality over screen-based urgency.",
+        "avoid": "Attempting to replicate the intentional low-density spacing and serif choices in a high-density, high-chroma digital context would undermine the deliberate analog positioning.",
+        "keep": "The three-column index structure paired with warm beige tones and restrained metadata creates a scannable yet unhurried navigation model appropriate for editorial content."
+      }
+    },
+    {
+      "id": "w008",
+      "file": "voltage.png",
+      "title": "Voltage",
+      "source": {
+        "name": "Voltage",
+        "url": null,
+        "local": "boards/demo/voltage.png",
+        "arena": null
+      },
+      "measured": {
+        "w": 1440,
+        "h": 1200,
+        "aspect": 1.2,
+        "palette": [
+          {
+            "hex": "#ff3300",
+            "pct": 64
+          },
+          {
+            "hex": "#000000",
+            "pct": 15
+          },
+          {
+            "hex": "#cc3300",
+            "pct": 5
+          },
+          {
+            "hex": "#ffff00",
+            "pct": 4
+          },
+          {
+            "hex": "#993300",
+            "pct": 3
+          }
+        ],
+        "contrast": 0.187,
+        "density": 0.028
+      },
+      "tags": [
+        "bold-primary",
+        "high-chroma",
+        "grotesk-display",
+        "swiss-index",
+        "low-density",
+        "monolith-wordmark"
+      ],
+      "channels": [
+        "monolith-wordmark",
+        "swiss-index",
+        "bold-primary-brutalist"
+      ],
+      "notes": {
+        "why": "High-contrast orange field with black sans-serif typography and strategic color blocks (black, yellow) creates immediate hierarchy and memorability through chromatic extremism.",
+        "avoid": "Avoid softening the color palette or adding gradients, which would dilute the aggressive, attention-commanding presence that makes this work.",
+        "keep": "The negative-space cutout in the O of LOUD—a literal typographic gesture that reinforces the message through form, not just color."
+      }
+    }
+  ]
+}

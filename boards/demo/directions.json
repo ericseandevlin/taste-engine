@@ -1,0 +1,62 @@
+{
+  "board": "demo",
+  "generated": "2026-06-25T14:29:31.130Z",
+  "directions": {
+    "swiss-mono-index": {
+      "name": "Swiss Mono Index",
+      "brief": "A precision-indexed portfolio or catalog site where strict column grids and monospaced type work together — labels, metadata, and category markers feel like a living specification document. The board's heaviest channels combine into a site that is rigorous, cold, and quietly authoritative. White fields, hairline rules, and character-grid spacing leave no room for decoration.",
+      "palette": "#ffffff, #000000, #333333, #cccccc",
+      "channels": [
+        "swiss-index",
+        "mono-meta"
+      ],
+      "notes": [
+        "No decorative or display typefaces — grotesk and mono only, hierarchy via size and weight",
+        "No gradients, color fields, or atmospheric backgrounds — ground must stay white or light neutral",
+        "No overlapping or collaged elements — all content crops flush to grid columns"
+      ]
+    },
+    "monolith-grid": {
+      "name": "Monolith Grid",
+      "brief": "A brand or studio landing page where a single dominant wordmark commands the white field, supported by a strict underlying grid that keeps any secondary content — metadata, a navigation index, a tagline — tightly ordered and subordinate. The board's cream-to-white ground and black type mass anchor the identity; red appears as one restrained accent at most.",
+      "palette": "#ffffff, #ffffcc, #000000, #ff3300",
+      "channels": [
+        "monolith-wordmark",
+        "swiss-index"
+      ],
+      "notes": [
+        "One accent color maximum — red (#ff3300) used sparingly if at all; never a multi-hue palette",
+        "No photography as hero and no decorative background textures — type IS the visual",
+        "No centered hero compositions or asymmetric blob layouts — grid discipline must hold even around the wordmark"
+      ]
+    },
+    "brutalist-case-doc": {
+      "name": "Brutalist Case Doc",
+      "brief": "A work or process showcase that presents documentation with aggressive graphic weight — heavy grotesk at large scale structures each section while underlying logic is strictly evidentiary: process screens, artifacts, and sequenced content blocks. The board's black-and-white ground with a single maximum-chroma red hit makes the site feel like a zine and a report simultaneously.",
+      "palette": "#000000, #ffffff, #ff3300, #333333",
+      "channels": [
+        "bold-primary-brutalist",
+        "case-study-functional"
+      ],
+      "notes": [
+        "No serif typefaces or rounded UI — heavy grotesk only, used as graphic mass",
+        "No smooth eased transitions or theatrical entrances — cuts are abrupt; scroll reveals are structural",
+        "No high-chroma color fields or atmospheric treatments — red is the single accent, used once with full commitment"
+      ]
+    },
+    "warm-editorial-meta": {
+      "name": "Warm Meta Editorial",
+      "brief": "A writing-forward or studio journal site where cream and blush grounds carry literary-spaced editorial type, while monospaced labels, datestamps, and category tags introduce a quiet system layer — warmth and precision held in careful tension. The board's pale yellow (#ffffcc), pink tones (#ffcccc, #ff66cc), and off-white palette ground this in softness without tipping into generic pastel.",
+      "palette": "#ffffcc, #ffffff, #ffcccc, #333333",
+      "channels": [
+        "warm-editorial",
+        "mono-meta"
+      ],
+      "notes": [
+        "No cold white or dark backgrounds — ground must stay warm cream or blush at all times",
+        "No high-chroma neon accents — pink and yellow used at low saturation; #ff66cc only as a restrained label accent",
+        "No expressive motion or organic shapes — mono metadata labels must feel measured and grid-anchored even within the warm editorial layout"
+      ]
+    }
+  }
+}

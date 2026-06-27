@@ -1,0 +1,44 @@
+{
+  "name": "taste-engine",
+  "version": "0.1.0",
+  "description": "Teach an AI your creative taste from a board of references. Extracts an inspectable taste thesis (with forbidden moves), not vague vibes, then generates and self-critiques against it.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Eric Devlin",
+  "homepage": "https://github.com/ericseandevlin/taste-engine",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ericseandevlin/taste-engine.git"
+  },
+  "keywords": [
+    "ai",
+    "design",
+    "taste",
+    "moodboard",
+    "claude",
+    "anthropic",
+    "creative-direction",
+    "vision"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test src/*.test.mjs",
+    "import": "node src/import.mjs",
+    "link": "node src/link.mjs",
+    "measure": "node src/measure.mjs",
+    "tag": "node src/tag.mjs",
+    "cluster": "node src/cluster.mjs",
+    "directions": "node src/directions.mjs",
+    "thesis": "node src/thesis.mjs",
+    "atlas": "node src/atlas.mjs",
+    "generate": "node src/generate.mjs",
+    "capture": "node scripts/capture.mjs",
+    "critique": "node src/critique.mjs",
+    "pipeline": "node scripts/run-pipeline.mjs"
+  },
+  "dependencies": {
+    "sharp": "^0.33.0"
+  }
+}

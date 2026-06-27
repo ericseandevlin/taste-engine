@@ -1,0 +1,424 @@
+<!doctype html>
+<!--
+  ============================================================
+  DIRECTION: Precision Index
+  CHANNELS BLENDED: Swiss Index + Mono Meta
+  KEY PARAMS:
+    - ground: #ffffff (pure white, no atmosphere)
+    - ink: #000000 / #333333
+    - rule: #cccccc (hairline 1px)
+    - type: monospace primary voice; hierarchy via size + weight only
+    - layout: strict 12-column character grid; flush crops
+    - motion: cursor blink + terminal text reveal; fade on axis only
+    - accent: none chromatic; gray scale only
+  CONTENT SOURCE: profile (Avery Quinn), exact details, no fabrication
+  ============================================================
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Avery Quinn, Design Technologist</title>
+<style>
+  :root{
+    --white:#ffffff;
+    --black:#000000;
+    --gray:#333333;
+    --rule:#cccccc;
+    --mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace;
+    --col-gap: 24px;
+    --pad: 32px;
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+
+  html{ -webkit-text-size-adjust:100%; }
+
+  body{
+    background:var(--white);
+    color:var(--black);
+    font-family:var(--mono);
+    font-size:14px;
+    line-height:1.5;
+    letter-spacing:0;
+    font-variant-ligatures:none;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{ color:var(--black); text-decoration:none; border-bottom:1px solid var(--rule); }
+  a:hover{ border-bottom-color:var(--black); }
+
+  .wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 var(--pad);
+  }
+
+  /* hairline section dividers */
+  .rule{ border-top:1px solid var(--rule); }
+
+  /* generic 12-col grid */
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(12,1fr);
+    column-gap:var(--col-gap);
+  }
+
+  .label{
+    font-size:11px;
+    color:var(--gray);
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+  }
+
+  .num{
+    font-size:11px;
+    color:var(--gray);
+  }
+
+  /* ---------- header / topbar ---------- */
+  header{
+    border-bottom:1px solid var(--black);
+  }
+  .topbar{
+    padding:14px 0;
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .topbar .id{ font-size:13px; font-weight:700; }
+  .topbar .meta{ font-size:11px; color:var(--gray); }
+
+  /* ---------- hero ---------- */
+  .hero{
+    padding:64px 0 48px;
+  }
+  .hero .spec{
+    grid-column:1 / span 2;
+  }
+  .hero .body{
+    grid-column:3 / span 9;
+  }
+  .hero h1{
+    font-size:34px;
+    font-weight:700;
+    line-height:1.15;
+    letter-spacing:-0.01em;
+    margin-bottom:20px;
+  }
+  .cursor{
+    display:inline-block;
+    width:0.55em;
+    height:1em;
+    background:var(--black);
+    margin-left:0.1em;
+    transform:translateY(0.12em);
+    animation:blink 1.1s steps(1) infinite;
+  }
+  @keyframes blink{ 50%{ opacity:0; } }
+
+  .hero .tagline{
+    font-size:16px;
+    color:var(--gray);
+    max-width:60ch;
+  }
+
+  .specrow{ margin-bottom:18px; }
+  .specrow .label{ display:block; margin-bottom:2px; }
+  .specrow .val{ font-size:12px; }
+
+  /* ---------- about ---------- */
+  section{ padding:48px 0; }
+  .sechead{
+    display:flex;
+    align-items:baseline;
+    gap:14px;
+    margin-bottom:32px;
+  }
+  .sechead .num{ font-size:11px; }
+  .sechead h2{
+    font-size:13px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:0.1em;
+  }
+
+  .about-body{ grid-column:3 / span 7; }
+  .about-side{ grid-column:1 / span 2; }
+  .about-body p{ font-size:16px; max-width:62ch; }
+
+  /* ---------- projects ---------- */
+  .proj-table{ border-top:1px solid var(--black); }
+  .proj-head{
+    display:grid;
+    grid-template-columns:48px 1fr 1.2fr 1fr;
+    column-gap:var(--col-gap);
+    padding:10px 0;
+    border-bottom:1px solid var(--rule);
+  }
+  .proj-head span{ font-size:11px; color:var(--gray); text-transform:uppercase; letter-spacing:0.08em; }
+
+  .proj{
+    display:grid;
+    grid-template-columns:48px 1fr 1.2fr 1fr;
+    column-gap:var(--col-gap);
+    padding:22px 0;
+    border-bottom:1px solid var(--rule);
+    transition:background-color 0.15s linear;
+  }
+  .proj:hover{ background:#fafafa; }
+  .proj .idx{ font-size:11px; color:var(--gray); padding-top:3px; }
+  .proj .title{ font-size:18px; font-weight:700; }
+  .proj .summary{
+    font-size:13px;
+    color:var(--gray);
+    margin-top:8px;
+    max-width:52ch;
+  }
+  .proj .field .label{ display:block; margin-bottom:4px; }
+  .proj .field .val{ font-size:13px; }
+  .proj .field + .field{ margin-top:14px; }
+
+  /* ---------- contact ---------- */
+  .contact-body{ grid-column:3 / span 9; }
+  .contact-side{ grid-column:1 / span 2; }
+  .contact-row{
+    display:flex;
+    align-items:baseline;
+    gap:16px;
+    padding:14px 0;
+    border-bottom:1px solid var(--rule);
+    flex-wrap:wrap;
+  }
+  .contact-row:first-child{ border-top:1px solid var(--black); }
+  .contact-row .label{ width:110px; flex:0 0 110px; }
+  .contact-row .val{ font-size:16px; }
+
+  /* ---------- footer ---------- */
+  footer{
+    border-top:1px solid var(--black);
+    padding:20px 0;
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  footer span{ font-size:11px; color:var(--gray); }
+
+  /* terminal reveal */
+  .reveal{ opacity:0; transform:translateY(4px); }
+  .reveal.in{
+    opacity:1;
+    transform:none;
+    transition:opacity 0.35s linear, transform 0.35s linear;
+  }
+
+  /* ---------- responsive ---------- */
+  @media (max-width:860px){
+    :root{ --pad:20px; }
+    .hero .spec,
+    .hero .body,
+    .about-body,
+    .about-side,
+    .contact-body,
+    .contact-side{ grid-column:1 / span 12; }
+    .hero .spec{ margin-bottom:32px; }
+    .about-side{ margin-bottom:20px; }
+    .contact-side{ margin-bottom:20px; }
+    .hero h1{ font-size:26px; }
+
+    .proj-head{ display:none; }
+    .proj{
+      grid-template-columns:32px 1fr;
+      padding:20px 0;
+    }
+    .proj .meta-cell{ grid-column:2; margin-top:14px; }
+    .proj .meta-cell.first{ margin-top:16px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap topbar">
+    <div class="id">AVERY QUINN</div>
+    <div class="meta">DESIGN TECHNOLOGIST &nbsp;/&nbsp; BROOKLYN, NY &nbsp;/&nbsp; INDEX 00</div>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero rule" style="border-top:none;">
+    <div class="wrap grid">
+      <div class="spec">
+        <div class="specrow">
+          <span class="label">Index</span>
+          <span class="val">00 / Profile</span>
+        </div>
+        <div class="specrow">
+          <span class="label">Role</span>
+          <span class="val">Design Technologist</span>
+        </div>
+        <div class="specrow">
+          <span class="label">Location</span>
+          <span class="val">Brooklyn, NY</span>
+        </div>
+        <div class="specrow">
+          <span class="label">Status</span>
+          <span class="val">Open to select work from Q3 2026</span>
+        </div>
+      </div>
+      <div class="body">
+        <h1 class="reveal">Avery Quinn<span class="cursor"></span></h1>
+        <p class="tagline reveal">I build the connective tissue between design systems and the code that ships them.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="rule">
+    <div class="wrap">
+      <div class="sechead">
+        <span class="num">01</span>
+        <h2>About</h2>
+      </div>
+      <div class="grid">
+        <div class="about-side">
+          <span class="label">Discipline</span>
+          <p style="font-size:12px;margin-top:4px;">Design systems<br>Prototyping in code<br>Production components</p>
+        </div>
+        <div class="about-body">
+          <p class="reveal">I work between design and engineering: design systems, prototyping in code, and the production components that keep teams consistent. Before consulting I led the design systems group at a payments company.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="rule">
+    <div class="wrap">
+      <div class="sechead">
+        <span class="num">02</span>
+        <h2>Selected Work</h2>
+      </div>
+
+      <div class="proj-table">
+        <div class="proj-head">
+          <span>#</span>
+          <span>Project</span>
+          <span>Stack</span>
+          <span>Output</span>
+        </div>
+
+        <article class="proj reveal">
+          <div class="idx">01</div>
+          <div>
+            <div class="title">Lattice Design System</div>
+            <p class="summary">Component library and token pipeline for a multi-product platform. Cut design-to-production drift across nine teams.</p>
+          </div>
+          <div class="meta-cell first">
+            <div class="field"><span class="label">Role</span><span class="val">Lead</span></div>
+            <div class="field"><span class="label">Stack</span><span class="val">React, Style Dictionary</span></div>
+          </div>
+          <div class="meta-cell">
+            <div class="field"><span class="label">Output</span><span class="val">140 components</span></div>
+          </div>
+        </article>
+
+        <article class="proj reveal">
+          <div class="idx">02</div>
+          <div>
+            <div class="title">Signal Prototyping Kit</div>
+            <p class="summary">A toolkit for building interactive prototypes against real API data, so reviews test behavior rather than static screens.</p>
+          </div>
+          <div class="meta-cell first">
+            <div class="field"><span class="label">Role</span><span class="val">Design technologist</span></div>
+            <div class="field"><span class="label">Stack</span><span class="val">TypeScript, Vite</span></div>
+          </div>
+          <div class="meta-cell">
+            <div class="field"><span class="label">Output</span><span class="val">Internal tool</span></div>
+          </div>
+        </article>
+
+        <article class="proj reveal">
+          <div class="idx">03</div>
+          <div>
+            <div class="title">Grid Audit Tooling</div>
+            <p class="summary">A linter and visual overlay that checks layouts against a defined column grid in the browser, flagging spacing that falls off the baseline.</p>
+          </div>
+          <div class="meta-cell first">
+            <div class="field"><span class="label">Role</span><span class="val">Author</span></div>
+            <div class="field"><span class="label">Stack</span><span class="val">JavaScript, PostCSS</span></div>
+          </div>
+          <div class="meta-cell">
+            <div class="field"><span class="label">Output</span><span class="val">Open source</span></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="rule">
+    <div class="wrap">
+      <div class="sechead">
+        <span class="num">03</span>
+        <h2>Contact</h2>
+      </div>
+      <div class="grid">
+        <div class="contact-side">
+          <span class="label">Channels</span>
+          <p style="font-size:12px;margin-top:4px;">Direct &amp; index</p>
+        </div>
+        <div class="contact-body">
+          <div class="contact-row">
+            <span class="label">Email</span>
+            <span class="val"><a href="mailto:hello@averyquinn.studio">hello@averyquinn.studio</a></span>
+          </div>
+          <div class="contact-row">
+            <span class="label">GitHub</span>
+            <span class="val"><a href="https://github.com/averyq">github.com/averyq</a></span>
+          </div>
+          <div class="contact-row">
+            <span class="label">Read.cv</span>
+            <span class="val"><a href="https://read.cv/averyq">read.cv/averyq</a></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap" style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;width:100%;">
+    <span>AVERY QUINN / DESIGN TECHNOLOGIST</span>
+    <span>SPEC, END OF DOCUMENT</span>
+  </div>
+</footer>
+
+<script>
+  // Terminal-style reveal: data appears, no expressive easing.
+  (function(){
+    var items = document.querySelectorAll('.reveal');
+    if(!('IntersectionObserver' in window)){
+      items.forEach(function(el){ el.classList.add('in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold:0.1 });
+    items.forEach(function(el){ io.observe(el); });
+  })();
+</script>
+
+</body>
+</html>

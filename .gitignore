@@ -1,0 +1,9 @@
+node_modules/
+.env
+.DS_Store
+*.log
+
+# Generated page screenshots are large and re-creatable; keep the demo example,
+# ignore ad-hoc captures elsewhere.
+boards/*/generated/**/*.png
+!boards/demo/generated/**/*.png

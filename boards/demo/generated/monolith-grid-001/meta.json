@@ -1,0 +1,12 @@
+{
+  "direction": "monolith-grid",
+  "name": "Monolith Grid",
+  "channels": [
+    "monolith-wordmark",
+    "swiss-index"
+  ],
+  "model": "claude-opus-4-8",
+  "rulesApplied": 0,
+  "content": "profile.json",
+  "generated": "2026-06-25T15:42:37.132Z"
+}
