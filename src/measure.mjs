@@ -19,7 +19,7 @@ import sharp from 'sharp';
 import { getBoard, REPO_ROOT } from './config.mjs';
 import { readManifest, writeManifest, mergeItemField } from './manifest.mjs';
 
-const SAMPLE = 120; // longest-edge downsample for measurement
+export const SAMPLE = 120; // longest-edge downsample for measurement (shared with score.mjs)
 const LEVELS = 51; // palette quantization step (6 levels/channel -> 216 buckets)
 
 function parseArgs(argv) {

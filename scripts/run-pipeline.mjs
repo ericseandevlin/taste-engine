@@ -2,7 +2,7 @@
 // run-pipeline.mjs — run the derive stages in order on a board, forwarding any
 // args (e.g. --board myboard) to each stage. This is the "drop a folder of
 // images, run one command" entry point. It covers the local + synthesis half:
-// import -> measure -> tag -> cluster -> directions -> thesis -> atlas.
+// import -> measure -> tag -> cluster -> directions -> thesis -> atlas -> fingerprint.
 // generate and critique are interactive choices and stay separate.
 //
 // Usage:
@@ -14,7 +14,7 @@ import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
 const SRC = join(dirname(fileURLToPath(import.meta.url)), '../src');
-const STAGES = ['import', 'measure', 'tag', 'cluster', 'directions', 'thesis', 'atlas'];
+const STAGES = ['import', 'measure', 'tag', 'cluster', 'directions', 'thesis', 'atlas', 'fingerprint'];
 const passthru = process.argv.slice(2);
 
 for (const stage of STAGES) {

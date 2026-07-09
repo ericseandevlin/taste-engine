@@ -33,7 +33,9 @@
     "directions": "node src/directions.mjs",
     "thesis": "node src/thesis.mjs",
     "atlas": "node src/atlas.mjs",
+    "fingerprint": "node src/fingerprint.mjs",
     "generate": "node src/generate.mjs",
+    "score": "node src/score.mjs",
     "capture": "node scripts/capture.mjs",
     "critique": "node src/critique.mjs",
     "pipeline": "node scripts/run-pipeline.mjs"

@@ -20,10 +20,11 @@ The longer arc is to push the same idea past images entirely, into **copywriting
 
 ## How it works
 
-A ten-stage pipeline. The middle stages call the Claude API; `import`, `measure`, and `atlas` are local-only. Everything past `tag` is a derived, inspectable artifact: the channels, the directions, and the thesis are all functions of your board, not anyone's opinion.
+A twelve-stage pipeline. The middle stages call the Claude API; `import`, `measure`, `atlas`, and `fingerprint` are local-only. Everything past `tag` is a derived, inspectable artifact: the channels, the directions, and the thesis are all functions of your board, not anyone's opinion.
 
 ```
-import -> link -> measure -> tag -> cluster -> directions -> thesis -> atlas -> generate -> critique
+import -> link -> measure -> tag -> cluster -> directions -> thesis -> atlas -> fingerprint
+                                                        generate -> capture -> score + critique
                                        |            |                              |
                                   DNA channels  candidate lanes              build one,
                                   (derived)     (derived from channels)      then critique
@@ -39,8 +40,10 @@ import -> link -> measure -> tag -> cluster -> directions -> thesis -> atlas -> 
 | `directions` | Derives the candidate directions (choose-your-lane styles) from the board's own channels, favoring its heaviest. Writes `directions.json`. | Sonnet |
 | `thesis` | Writes `THESIS.md` from the data: channels by weight, dominant palette, visual laws. | Sonnet |
 | `atlas` | Builds a browsable HTML viewer of the board and its channels. | local |
+| `fingerprint` | Aggregates the extracted features into a versioned Taste Fingerprint: per-axis center, spread, confidence, and salience, with per-reference provenance. | local |
 | `generate` | Builds one self-contained HTML page from a chosen derived direction, injecting the union of its channels' forbidden moves. | Opus |
 | `critique` | Vision pass over desktop + mobile screenshots: 3 to 8 concrete, testable rules appended for the next `generate`. | Sonnet |
+| `score` | Re-measures a generated page on the same extractors and reports per-axis deltas plus one alignment number against the fingerprint. A diagnostic, never a gate. | Haiku |
 
 ## Quickstart
 
@@ -53,7 +56,7 @@ npm install
 cp .env.example .env        # then paste your ANTHROPIC_API_KEY into .env
 
 # Run the pipeline on the bundled neutral demo board:
-npm run pipeline            # import -> measure -> tag -> cluster -> directions -> thesis -> atlas
+npm run pipeline            # import -> measure -> tag -> cluster -> directions -> thesis -> atlas -> fingerprint
 ```
 
 Then open the atlas to browse the result:
@@ -87,6 +90,31 @@ npm run generate -- --direction <id>          # <id>-002 obeys the new rules
 
 `capture` is a convenience helper that shells out to a system Chrome (nothing to install). The engine itself stays browser-free: `critique` just reads whatever `desktop.png` / `mobile.png` sit in the slug folder, so you can capture them with any tool instead, or pass `--shots a.png,b.png`. The demo ships a fully traveled example: compare `generated/swiss-mono-index-001` (`rulesApplied: 0`) with `swiss-mono-index-002` (`rulesApplied: 7`) to watch the loop tighten the page. Re-derive the lanes anytime with `npm run directions` (`--count` for more or fewer); `directions.json` is a generated artifact, re-running overwrites it.
 
+### Score: measure how close an output sits to the board
+
+`critique` judges a page qualitatively. `score` measures it: the generated page's screenshot
+is run through the exact same extractors the references went through (palette, contrast,
+density, plus derived color axes and the same tag vocabulary), then compared per axis to the
+board's fingerprint.
+
+```bash
+npm run fingerprint                    # aggregate the board -> boards/demo/fingerprints/v001.json
+npm run score -- --slug <id>-001       # per-axis deltas + one alignment number
+```
+
+The fingerprint is a versioned artifact: per axis it records the board's center, spread,
+confidence, and salience (weight, derived from how much the references agree on that axis),
+with every per-reference value kept as provenance. Re-running writes a new version only when
+the content actually changed, so drift shows up as a git diff.
+
+`score` reports where the page deviates and by how much ("2 more accent colors than this
+scope carries", "missing tag: swiss-index, present in 6 of 8 refs"), plus one weighted
+alignment number out of 100. Outputs are scored against their direction's references by
+default (that is what they were generated from), with the whole-board number printed
+alongside; `--scope board`, `--direction`, `--channels`, and `--fingerprint` override. The
+score is a diagnostic for your own selection. It never auto-rejects an output; picking
+winners stays your job.
+
 ### Make it yours: content vs. taste
 
 Taste and content are separate things. The board defines the *taste*; `boards/<board>/profile.json` defines the *content*, your name, role, bio, projects, and contact. `generate` builds the page around your profile and is instructed not to invent anything. The demo ships a sample `profile.json` (Avery Quinn) so the example pages have real content you can trace to a file; replace its values with your own, or delete it. With no profile, `generate` prints a notice and falls back to clearly-labeled placeholder copy (`[Your Name]`, `[Project One]`), never a convincing fake. Every generated page's `meta.json` records `content: profile.json` or `content: placeholder`, so you always know which you are looking at.
@@ -98,7 +126,7 @@ The demo board is deliberately generic. To build a taste profile from your own r
 ```bash
 mkdir boards/myboard
 cp ~/screenshots/*.png boards/myboard/     # 15 to 30 references; full-page beats hero-only (8+ for a quick try)
-npm run pipeline  -- --board myboard       # import -> measure -> tag -> cluster -> directions -> thesis -> atlas
+npm run pipeline  -- --board myboard       # the full derive pipeline, fingerprint included
 npm run generate  -- --board myboard --direction <id>
 ```
 
@@ -110,12 +138,13 @@ A `kind` (currently just `visual-ui`) selects the measure strategy and tag vocab
 
 After a run, `boards/demo/` holds:
 
-- `manifest.json` — the canonical, inspectable database. One record per image: measured palette/contrast/density, rule-tags, channels, WHY/AVOID/KEEP notes.
-- `channels.json` — the DNA channels. Each is a generative recipe plus a forbidden-moves list and its representative images.
-- `directions.json` — the candidate directions derived from those channels: the choose-your-lane styles, each a channel blend with a brief and palette.
-- `THESIS.md` — the human-readable thesis generated from the data.
-- `atlas/index.html` — a browsable viewer.
-- `generated/` — pages the engine produced, with a lineage comment recording which channels and critique rules shaped each one.
+- `manifest.json`: the canonical, inspectable database. One record per image: measured palette/contrast/density, rule-tags, channels, WHY/AVOID/KEEP notes.
+- `channels.json`: the DNA channels. Each is a generative recipe plus a forbidden-moves list and its representative images.
+- `directions.json`: the candidate directions derived from those channels: the choose-your-lane styles, each a channel blend with a brief and palette.
+- `fingerprints/vNNN.json`: the versioned Taste Fingerprint: per-axis center/spread/confidence/salience aggregated from the references, with per-reference provenance.
+- `THESIS.md`: the human-readable thesis generated from the data.
+- `atlas/index.html`: a browsable viewer.
+- `generated/`: pages the engine produced, with a lineage comment recording which channels and critique rules shaped each one.
 
 ## Cost
 

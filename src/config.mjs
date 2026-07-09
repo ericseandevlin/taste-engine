@@ -35,6 +35,7 @@ export const MODELS = {
   thesis: 'claude-sonnet-4-6', // writing
   generate: 'claude-opus-4-8', // hardest synthesis
   critique: 'claude-sonnet-4-6',
+  score: 'claude-haiku-4-5-20251001', // re-tag pass on generated output (same tier as tag)
 };
 
 // --- Kind registry: a kind selects the measure strategy + tag rubric ---
