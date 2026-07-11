@@ -3,7 +3,6 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
   CONSTANTS,
-  accentCountOf,
   aggregateAxes,
   aggregatePalette,
   aggregateScalar,
@@ -13,9 +12,12 @@ import {
   chromaOf,
   contributions,
   deltaE76,
+  familyOf,
+  familyRollup,
   fingerprintCanonical,
   groundLightnessOf,
   hexToRgb,
+  hueDelta,
   luminance601,
   madSpread,
   median,
@@ -74,34 +76,23 @@ test('groundLightnessOf uses the dominant entry', () => {
   assert.equal(groundLightnessOf(pal), 1); // white dominates by coverage
 });
 
-test('accentCountOf: chromatic hue-distinct entries beyond the ground', () => {
-  // white ground: any chromatic entry counts
-  assert.equal(
-    accentCountOf([
-      { hex: '#ffffff', pct: 70 },
-      { hex: '#ff0000', pct: 20 },
-      { hex: '#0000ff', pct: 10 },
-    ]),
-    2,
-  );
-  // achromatic extras don't count
-  assert.equal(
-    accentCountOf([
-      { hex: '#ffffff', pct: 70 },
-      { hex: '#cccccc', pct: 30 },
-    ]),
-    0,
-  );
-  // chromatic ground: same-hue entries are family, not accents
-  assert.equal(
-    accentCountOf([
-      { hex: '#ff0000', pct: 70 },
-      { hex: '#ee1100', pct: 20 }, // hue ~4deg from ground
-      { hex: '#0000ff', pct: 10 },
-    ]),
-    1,
-  );
-  assert.equal(accentCountOf([]), null);
+// v1's accentCountOf is retired (coverage-blind, d=1.00 on all six Phase 1 demo
+// pages); the v2 pixel-level accent metrics are tested in measure.test.mjs,
+// including the pink-chip-at-SAMPLE-resolution fixture.
+
+test('hueDelta wraps the circle', () => {
+  assert.equal(hueDelta(10, 350), 20);
+  assert.equal(hueDelta(0, 180), 180);
+  assert.equal(hueDelta(90, 90), 0);
+});
+
+test('familyOf routes every axis to exactly one family', () => {
+  assert.equal(familyOf('contrast'), 'surface');
+  assert.equal(familyOf('accentCoverage'), 'surface');
+  assert.equal(familyOf('accentHueCount'), 'surface');
+  assert.equal(familyOf('palette'), 'color');
+  assert.equal(familyOf('tags'), 'behavior');
+  assert.equal(familyOf('nope'), null);
 });
 
 // --- normalization & robust stats ---
@@ -109,7 +100,8 @@ test('accentCountOf: chromatic hue-distinct entries beyond the ground', () => {
 test('normalizeScalar scales per axis and clamps', () => {
   assert.equal(normalizeScalar('contrast', 0.5), 1); // realizable max
   assert.equal(normalizeScalar('density', 0.3), 1); // clamped past practical max
-  assert.equal(normalizeScalar('accentCount', 2), 0.5);
+  assert.equal(normalizeScalar('accentHueCount', 2), 0.5);
+  assert.equal(normalizeScalar('accentCoverage', 0.25), 0.5);
   assert.equal(normalizeScalar('chroma', null), null);
   assert.throws(() => normalizeScalar('nope', 0.1), /unknown axis/);
 });
@@ -159,13 +151,19 @@ test('aggregatePalette: coverage-weighted union, top-K, weights sum to ~1', () =
   assert.ok(Math.abs(total - 1) < 0.01);
 });
 
-test('paletteDistance: subset of the board palette scores 0, alien color scores high', () => {
+test('paletteDistance v2 is symmetric: a missing scope color now costs (reverse direction)', () => {
   const entries = [
     { hex: '#ffffff', weight: 0.7 },
     { hex: '#000000', weight: 0.3 },
   ];
+  // Output uses only white: forward = 0 (white exists in scope), reverse pays
+  // for the scope's black having no counterpart (deltaE ~100 -> clipped 1,
+  // weighted 0.3). v1 scored this 0 and was inert on grayscale lanes.
   const subset = paletteDistance([{ hex: '#ffffff', pct: 100 }], entries);
-  assert.equal(subset.d, 0);
+  assert.equal(subset.dForward, 0);
+  assert.ok(Math.abs(subset.dReverse - 0.3) < 0.01);
+  assert.ok(Math.abs(subset.d - 0.15) < 0.01);
+  assert.equal(subset.missing[0].hex, '#000000');
   const alien = paletteDistance([{ hex: '#ff00ff', pct: 100 }], entries);
   assert.ok(alien.d > 0.5);
   assert.equal(paletteDistance([], entries), null);
@@ -259,6 +257,8 @@ function syntheticManifest() {
       ],
       contrast,
       density: 0.02,
+      accentCoverage: 0.2,
+      accentHueCount: 1,
     },
     tags,
     channels,
@@ -276,12 +276,12 @@ function syntheticManifest() {
   };
 }
 
-test('buildFingerprint: refs table + all seven axes, exclude works', () => {
+test('buildFingerprint: refs table + all eight axes, exclude works', () => {
   const fp = buildFingerprint(syntheticManifest());
   assert.deepEqual(Object.keys(fp.refs), ['w001', 'w002', 'w003']);
   assert.deepEqual(
     Object.keys(fp.axes).sort(),
-    ['accentCount', 'chroma', 'contrast', 'density', 'groundLightness', 'palette', 'tags'],
+    ['accentCoverage', 'accentHueCount', 'chroma', 'contrast', 'density', 'groundLightness', 'palette', 'tags'],
   );
   assert.equal(fp.axes.contrast.n, 3);
   const loo = buildFingerprint(syntheticManifest(), { exclude: ['w003'] });
@@ -366,35 +366,71 @@ test('scalarDistance handles nulls', () => {
   assert.equal(scalarDistance(0.5, { center: null, spread: null }), null);
 });
 
-test('alignmentScore: weighted mean, degenerate zero-weight scope is null', () => {
+test('alignmentScore: within-family weighted mean, degenerate zero-weight scope is null', () => {
   const rows = [
-    { distance: 0, weight: 1 },
-    { distance: 1, weight: 1 },
+    { id: 'contrast', distance: 0, weight: 1 },
+    { id: 'density', distance: 1, weight: 1 },
   ];
   assert.equal(alignmentScore(rows), 50);
-  assert.equal(alignmentScore([{ distance: 0.5, weight: 0 }]), null);
+  assert.equal(alignmentScore([{ id: 'contrast', distance: 0.5, weight: 0 }]), null);
   assert.equal(alignmentScore([]), null);
 });
 
-test('contributions sum to 1 and reflect weighted distance shares', () => {
+test('family balance: one behavioral axis counterweights five surface axes (the v1 failure)', () => {
+  // v1: five correlated surface axes at d=1 drowned tags at d=0 (~83% deficit).
+  // v2: surface and behavior are one family each -> alignment 50, not ~17.
   const rows = [
-    { id: 'a', distance: 0.5, weight: 1 },
-    { id: 'b', distance: 0.5, weight: 1 },
-    { id: 'c', distance: 0, weight: 1 },
+    ...['contrast', 'density', 'chroma', 'groundLightness', 'accentCoverage'].map((id) => ({
+      id,
+      distance: 1,
+      weight: 1,
+    })),
+    { id: 'tags', distance: 0, weight: 0.5 },
   ];
-  const c = contributions(rows);
-  assert.equal(c.a, 0.5);
-  assert.equal(c.b, 0.5);
-  assert.equal(c.c, 0);
+  assert.equal(alignmentScore(rows), 50);
+  const fams = familyRollup(rows);
+  assert.equal(fams.surface.D, 1);
+  assert.equal(fams.behavior.D, 0);
 });
 
-test('frozen constants are what the design doc registered (moving one voids the demo)', () => {
+test('a family with no usable axis drops out and F shrinks', () => {
+  const rows = [
+    { id: 'contrast', distance: 0.4, weight: 1 },
+    { id: 'tags', distance: null, weight: 0.5 },
+    { id: 'palette', distance: 0.2, weight: 0 },
+  ];
+  assert.equal(Object.keys(familyRollup(rows)).length, 1);
+  assert.equal(alignmentScore(rows), 60);
+});
+
+test('contributions sum to 1, equal-family shares regardless of raw weight', () => {
+  // Within one family, shares follow weighted distance as before.
+  const surface = contributions([
+    { id: 'contrast', distance: 0.5, weight: 1 },
+    { id: 'density', distance: 0.5, weight: 1 },
+    { id: 'chroma', distance: 0, weight: 1 },
+  ]);
+  assert.equal(surface.contrast, 0.5);
+  assert.equal(surface.density, 0.5);
+  assert.equal(surface.chroma, 0);
+  // Across families, each family carries 1/F of the deficit no matter how
+  // small its internal weight is (tags weight 0.5 vs contrast weight 1).
+  const cross = contributions([
+    { id: 'contrast', distance: 1, weight: 1 },
+    { id: 'tags', distance: 1, weight: 0.5 },
+  ]);
+  assert.ok(Math.abs(cross.contrast - 0.5) < 0.001);
+  assert.ok(Math.abs(cross.tags - 0.5) < 0.001);
+});
+
+test('frozen constants are what the v2 design registered (moving one after the freeze voids the run)', () => {
   assert.deepEqual(CONSTANTS.AXIS_SCALE, {
     contrast: 0.5,
     density: 0.15,
     chroma: 1,
     groundLightness: 1,
-    accentCount: 4,
+    accentCoverage: 0.5,
+    accentHueCount: 4,
   });
   assert.equal(CONSTANTS.SPREAD_FLOOR, 0.05);
   assert.equal(CONSTANTS.DISTANCE_SPREADS, 2);
@@ -404,5 +440,7 @@ test('frozen constants are what the design doc registered (moving one voids the 
   assert.equal(CONSTANTS.TAG_ALIEN_FREQ, 0.25);
   assert.equal(CONSTANTS.ACCENT_SATURATION, 0.25);
   assert.equal(CONSTANTS.ACCENT_HUE_DELTA, 30);
+  assert.equal(CONSTANTS.ACCENT_HUE_BIN, 30);
+  assert.equal(CONSTANTS.ACCENT_COVERAGE_FLOOR, 0.002);
   assert.equal(CONSTANTS.PALETTE_TOP_K, 8);
 });

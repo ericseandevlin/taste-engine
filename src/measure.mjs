@@ -17,6 +17,7 @@ import { join } from 'path';
 import { fileURLToPath } from 'url';
 import sharp from 'sharp';
 import { getBoard, REPO_ROOT } from './config.mjs';
+import { CONSTANTS, hexToRgb, hueDelta, rgbToHsl } from './features.mjs';
 import { readManifest, writeManifest, mergeItemField } from './manifest.mjs';
 
 export const SAMPLE = 120; // longest-edge downsample for measurement (shared with score.mjs)
@@ -98,7 +99,37 @@ export function computeFeatures(data, info) {
       pct: Math.round((c / total) * 100),
     }));
 
-  return { palette, contrast, density };
+  // v2 accent metrics, PIXEL-level (v1 counted chromatic palette entries and
+  // was coverage-blind: a 1% pink chip was invisible, d=1.00 on all six Phase 1
+  // demo pages). Anchor hue is GROUND-derived: the dominant palette entry, with
+  // the achromatic-ground escape (any chromatic pixel counts on an achromatic
+  // ground), matching the v1 lineage; never the modal chromatic hue, which
+  // diverges exactly on chromatic-ground pages.
+  // - accentCoverage: fraction of opaque pixels that are chromatic and
+  //   hue-distinct from the ground.
+  // - accentHueCount: occupied ACCENT_HUE_BIN-degree hue bins among those
+  //   pixels whose per-bin coverage clears ACCENT_COVERAGE_FLOOR.
+  let accentCoverage = 0;
+  let accentHueCount = 0;
+  if (palette.length) {
+    const ground = rgbToHsl(hexToRgb(palette[0].hex));
+    const groundAchromatic = ground.s <= CONSTANTS.ACCENT_SATURATION;
+    const binCounts = new Map();
+    let accentPx = 0;
+    for (let i = 0, p = 0; p < px; i += ch, p++) {
+      if (ch === 4 && data[i + 3] === 0) continue;
+      const hsl = rgbToHsl({ r: data[i], g: data[i + 1], b: data[i + 2] });
+      if (hsl.s <= CONSTANTS.ACCENT_SATURATION) continue;
+      if (!groundAchromatic && hueDelta(hsl.h, ground.h) < CONSTANTS.ACCENT_HUE_DELTA) continue;
+      accentPx++;
+      const bin = Math.floor((((hsl.h % 360) + 360) % 360) / CONSTANTS.ACCENT_HUE_BIN);
+      binCounts.set(bin, (binCounts.get(bin) || 0) + 1);
+    }
+    accentCoverage = +(accentPx / n).toFixed(4);
+    accentHueCount = [...binCounts.values()].filter((c) => c / n >= CONSTANTS.ACCENT_COVERAGE_FLOOR).length;
+  }
+
+  return { palette, contrast, density, accentCoverage, accentHueCount };
 }
 
 export async function measureFile(absPath) {

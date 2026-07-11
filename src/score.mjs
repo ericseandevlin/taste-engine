@@ -34,8 +34,8 @@ import {
   alignmentScore,
   chromaOf,
   contributions,
+  familyRollup,
   groundLightnessOf,
-  accentCountOf,
   medianAspect,
   normalizeScalar,
   paletteDistance,
@@ -43,6 +43,20 @@ import {
   scopeRefIds,
   tagDistance,
 } from './features.mjs';
+
+// v2 schema guard: a fingerprint built before the v2 axis set (accentCoverage,
+// accentHueCount) fails with instructions instead of throwing mid-report or
+// silently dropping axes. The repo is public; existing BYO-board fingerprints
+// will hit this after upgrading.
+export function assertFingerprintAxes(fp) {
+  const missing = SCALAR_AXES.filter((a) => !fp?.axes?.[a]);
+  if (missing.length) {
+    throw new Error(
+      `fingerprint predates the v2 axis set (missing: ${missing.join(', ')}); ` +
+        're-run measure --force and fingerprint, then score again',
+    );
+  }
+}
 
 function parseArgs(argv) {
   const args = {
@@ -211,6 +225,11 @@ function printReport({ label, fpLabel, scope, crop, rowsScope, rowsBoard, alignS
   const palRow = rowsScope.find((r) => r.id === 'palette');
   const worst = [...(palRow.detail || [])].sort((a, b) => b.deltaE - a.deltaE)[0];
   if (worst) console.log(`  palette: farthest color ${worst.hex} (nearest board entry ${worst.nearest}, deltaE ${worst.deltaE})`);
+  const families = familyRollup(rowsScope);
+  const famLine = Object.entries(families)
+    .map(([f, v]) => `${f} D=${v.D} (${v.axes.length} axes)`)
+    .join('; ');
+  console.log(`  families (equal weight, F=${Object.keys(families).length}): ${famLine || 'none usable'}`);
   const alignLine = alignScope == null ? 'no coherent axes, alignment undefined' : `${alignScope}/100`;
   const boardLine = scope.channels ? ` (board scope: ${alignBoard == null ? 'undefined' : `${alignBoard}/100`})` : '';
   console.log(`  alignment: ${alignLine}${boardLine}`);
@@ -225,6 +244,7 @@ async function main() {
 
   const board = getBoard(args.board);
   const { fp, label: fpLabel } = loadFingerprint(board, args.fingerprint);
+  assertFingerprintAxes(fp);
 
   // Resolve the page to score: a generated slug, or explicit shot paths.
   let shotPath;
@@ -308,7 +328,8 @@ async function main() {
     density: measured.density,
     chroma: chromaOf(measured.palette) != null ? +chromaOf(measured.palette).toFixed(4) : null,
     groundLightness: groundLightnessOf(measured.palette) != null ? +groundLightnessOf(measured.palette).toFixed(4) : null,
-    accentCount: accentCountOf(measured.palette),
+    accentCoverage: measured.accentCoverage,
+    accentHueCount: measured.accentHueCount,
     palette: measured.palette,
     tags,
   };
@@ -348,6 +369,7 @@ async function main() {
         tagVoteDetail: votes,
         output,
         axes: { scope: rowsScope, board: rowsBoard },
+        families: { scope: familyRollup(rowsScope), board: familyRollup(rowsBoard) },
         alignment: { scope: alignScope, board: alignBoard },
         contributions: { scope: contribScope, board: contribBoard },
         generated: new Date().toISOString(),

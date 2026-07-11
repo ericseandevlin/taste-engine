@@ -39,45 +39,102 @@ export const MODELS = {
 };
 
 // --- Kind registry: a kind selects the measure strategy + tag rubric ---
+//
+// v2 vocabulary rules (see docs/styles/ and the v2 design doc):
+// - Every id is BEHAVIOR language: what the page does, checkable from a
+//   screenshot. Never a style, movement, or brand name (v1's "swiss-index"
+//   contaminated measurement with the model's prior on the word "swiss").
+// - Every id carries a one-sentence testable definition. The definition goes
+//   INTO the tag prompt; the id string alone is never the semantic instruction.
+// - Grounded in the determinants research (docs/styles/*.md, literature-cited).
+//   53 ids pre-calibration; the pre-freeze jitter calibration prunes ids that
+//   flip run-to-run (consistency-only pruning, never score-based).
 export const KINDS = {
   'visual-ui': {
     measure: 'visual', // measure.mjs strategy key
     // Controlled tag vocabulary (rules, not vibes). tag.mjs rejects anything
     // outside this list so taste stays inspectable, not freeform adjectives.
     tagVocabulary: [
-      'dark-field',
-      'warm-ground',
-      'bold-primary',
-      'monolith-wordmark',
-      'swiss-index',
-      'mono-meta',
-      'experimental-type',
-      'case-study',
-      'editorial-serif',
-      'grotesk-display',
-      'high-chroma',
-      'muted-chroma',
-      'high-density',
-      'low-density',
-      'art-directed-photo',
-      'sculptural-object',
-      '3d-playful',
-      'animated',
+      // structure & layout
+      { id: 'strict-column-grid', definition: 'Content blocks align to a repeating column grid with uniform gutters, so the left and right edges of unrelated elements fall on a small shared set of vertical lines.' },
+      { id: 'flush-left-ragged-right', definition: 'Running text and multi-line headings are set flush left with a ragged right edge, with no centered body text or centered multi-line headlines.' },
+      { id: 'asymmetric-composition', definition: 'Masses of text, image, and empty space balance unequally around the vertical center line; mirroring the page would visibly change it and no centered axial arrangement dominates.' },
+      { id: 'active-negative-space', definition: 'Large empty regions are deliberate and shaped, with edges that align to the layout lines, and a substantial share of the canvas carries no content.' },
+      { id: 'hairline-dividers', definition: 'Sections are separated by very thin rules of roughly one pixel rather than by boxes, cards, or heavy bars.' },
+      { id: 'heavy-rule-scaffolding', definition: 'Thick solid rules or bars, horizontal or vertical, divide zones, underline emphasis, or anchor the composition.' },
+      { id: 'full-bleed-imagery', definition: 'At least one image runs to the canvas edge on one or more sides instead of sitting inset within margins.' },
+      { id: 'index-table-listing', definition: 'Content is organized as a tabular index or catalog: rows of aligned fields such as titles, dates, and categories, reading as a listing rather than prose.' },
+      { id: 'dense-utilitarian-lists', definition: 'Content is packed into dense text lists or tables with minimal padding and little or no imagery, prioritizing information transfer over visual comfort.' },
+      { id: 'monolithic-block-massing', definition: 'The layout reads as a few heavy, hard-edged, often full-width rectangular slabs stacked or interlocked, not as many small floating cards.' },
+      { id: 'deliberate-misalignment-or-overlap', definition: 'Elements overlap, collide, or sit visibly off-grid on purpose, while enough craft elsewhere shows the roughness is chosen rather than accidental.' },
+      { id: 'tilted-rotated-elements', definition: 'One or more shapes, pattern blocks, or lines of type are rotated off the horizontal axis, deliberately breaking orthogonal alignment.' },
+      { id: 'process-documentation', definition: 'The page documents work or process (steps, specs, artifacts, annotations) in a documentary register rather than marketing prose.' },
+      // typography
+      { id: 'single-sans-family', definition: 'All text is set in one neutral grotesque or neo-grotesque sans-serif family, varied only by size and weight, with at most one auxiliary family.' },
+      { id: 'geometric-sans-display', definition: 'Display type is a geometric sans-serif with circular bowls and a compass-drawn feel, rather than a neutral grotesque or a serif.' },
+      { id: 'grotesk-display', definition: 'Display or headline type is a grotesque or neo-grotesque sans with even, unshowy letterforms.' },
+      { id: 'editorial-serif', definition: 'A serif family carries body or display text in an editorial register.' },
+      { id: 'monospace-metadata', definition: 'Metadata such as dates, indices, captions, or labels is set in a monospace face distinct from the main text family.' },
+      { id: 'oversized-wordmark', definition: 'A single word or name is set so large it acts as the page dominant visual mass.' },
+      { id: 'oversized-load-bearing-type', definition: 'Display type is set at monumental scale relative to the viewport, sometimes cropped by container or viewport edges, functioning as raw visual mass rather than a polished headline.' },
+      { id: 'size-weight-position-hierarchy', definition: 'Information hierarchy is carried only by type size, weight, and position on the page, with no decorative devices such as banners, badge boxes, drop caps, or flourish underlines.' },
+      { id: 'extreme-type-scale-contrast', definition: 'Display type is roughly four times body size or larger, producing a stepped scale with few intermediate sizes rather than a smooth ramp.' },
+      { id: 'type-as-image', definition: 'Letterforms are the composition primary graphic material: single letters or short words scaled, cropped, layered, or arranged as shapes.' },
+      { id: 'broken-grid-type', definition: 'Type is deliberately set off any grid: warped, scattered, overlapped, or on colliding baselines.' },
+      { id: 'system-or-monospace-typography', definition: 'Body and interface text use system stacks, default serif, or monospace faces rather than a display face chosen for polish.' },
+      { id: 'chunky-playful-display-type', definition: 'Headlines use bold rounded or toy-like display letterforms, often multicolored per letter, outlined, or set on a bouncing or tilted baseline.' },
+      // imagery
+      { id: 'art-directed-photo', definition: 'Photography is deliberately staged, lit, or graded as the page aesthetic centerpiece.' },
+      { id: 'objective-documentary-imagery', definition: 'Imagery is objective documentary photography, often black-and-white, or flat constructed geometric abstraction, with no hand-drawn, painterly, cartoon, or textured-3D illustration.' },
+      { id: 'sculptural-object', definition: 'A photographed or rendered three-dimensional object is the page hero element.' },
+      { id: 'dimensional-render', definition: 'Soft-shaded 3D renders with visible depth and lighting appear as content.' },
+      // graphic devices & ornament
+      { id: 'flat-geometric-primitives', definition: 'Flat, hard-edged circles, squares, triangles, or bars act as compositional elements, not icons or data marks, constructible with ruler and compass.' },
+      { id: 'scattered-geometric-primitives', definition: 'Elementary shapes are strewn across or behind the content as pure ornament rather than as functional icons or data marks.' },
+      { id: 'squiggle-motif', definition: 'Freeform wavy or squiggly lines appear as decoration, either as single strokes or as a dense squiggle field filling a surface.' },
+      { id: 'speckle-chip-pattern', definition: 'A terrazzo-like or confetti-like field of small irregular multicolor chips fills a background, band, or shape interior.' },
+      { id: 'black-white-counterchange-pattern', definition: 'High-contrast black-and-white stripes, checkerboards, grids, or dot fields appear as pattern blocks.' },
+      { id: 'pattern-clash-adjacency', definition: 'Two or more unrelated patterns sit directly adjacent with a hard edge and no transitional or harmonizing element.' },
+      { id: 'ornament-without-function', definition: 'A substantial share of visual elements carry no informational, navigational, or structural role; deleting them would leave content and layout intact.' },
+      { id: 'black-keyline-outlines', definition: 'Shapes, cards, or buttons carry solid black outline strokes of uniform weight, reading as drawn contours.' },
+      { id: 'hard-offset-shadows', definition: 'Elements cast flat, zero-blur shadow copies offset diagonally in solid black or a clashing color.' },
+      { id: 'playful-geometry', definition: 'Rounded, toy-like geometric shapes act as interface or content elements, giving the page a deliberately playful register.' },
+      // construction & surface
+      { id: 'flat-unmodulated-color-fields', definition: 'Every colored area is a single flat unmodulated fill, with no gradients, drop shadows, bevels, glows, or simulated depth anywhere on the page.' },
+      { id: 'hard-edged-zero-effects', definition: 'Containers have square corners and flat fills, with no soft shadows, blurs, glass effects, or layered elevation anywhere.' },
+      { id: 'undisguised-construction', definition: 'The page structural seams (borders, table rules, dividers, native form widgets, grid edges) are visibly exposed rather than concealed behind whitespace or chrome.' },
+      { id: 'browser-default-styling', definition: 'Text, links, and controls look close to unstyled HTML: default or system fonts, underlined links, native buttons and inputs.' },
+      { id: 'restricted-palette-single-accent', definition: 'The page is black, white, and greys plus at most one or two saturated accent hues.' },
+      // color & field behavior (kept from v1, definitions added)
+      { id: 'dark-field', definition: 'The dominant ground is near-black or very dark.' },
+      { id: 'warm-ground', definition: 'The dominant ground is a warm off-white, cream, or beige.' },
+      { id: 'bold-primary', definition: 'Large areas of saturated primary color act as structural blocks rather than small accents.' },
+      { id: 'high-chroma', definition: 'Saturated color is a major presence across the page.' },
+      { id: 'muted-chroma', definition: 'Color presence is desaturated or restrained overall.' },
+      { id: 'high-density', definition: 'The canvas is busy: many elements, little breathing room.' },
+      { id: 'low-density', definition: 'The canvas is sparse: few elements, lots of breathing room.' },
+      { id: 'animated', definition: 'Visible motion or animation artifacts are present, such as carousels mid-transition, marquee text, or motion blur.' },
     ],
-    // Prior channels from the draft THESIS.md; cluster.mjs seeds with these
-    // but lets the data revise them.
+    // Prior channels; cluster.mjs seeds with these but lets the data revise
+    // them. Behavior names only (display-layer metadata, never style brands).
     channelSeeds: [
-      'monolith-wordmark',
+      'oversized-wordmark',
       'dark-editorial',
       'warm-editorial',
-      'bold-primary-brutalist',
-      'swiss-index',
-      'case-study-functional',
-      'experimental-type',
-      'playful-3d',
+      'bold-primary-block',
+      'grid-index',
+      'process-documentation',
+      'type-as-image',
+      'dimensional-playful',
     ],
   },
 };
+
+// Vocabulary ids, tolerant of both v2 entries ({ id, definition }) and legacy
+// v1 string vocabularies (public repo: BYO boards may still register strings).
+export function vocabIds(vocabulary) {
+  return (vocabulary || []).map((v) => (typeof v === 'string' ? v : v.id));
+}
 
 // --- Board registry: maps a board name to its folder + kind ---
 // Add your own board by dropping images in boards/<name>/ and registering it here.

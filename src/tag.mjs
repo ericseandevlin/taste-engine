@@ -15,7 +15,7 @@
 import { join } from 'path';
 import { fileURLToPath } from 'url';
 import sharp from 'sharp';
-import { getBoard, REPO_ROOT, MODELS, loadEnv } from './config.mjs';
+import { getBoard, REPO_ROOT, MODELS, loadEnv, vocabIds } from './config.mjs';
 import { readManifest, writeManifest, mergeItemField } from './manifest.mjs';
 
 const MAX_RETRIES = 2;
@@ -32,14 +32,24 @@ function parseArgs(argv) {
   return args;
 }
 
+// v2: every vocabulary entry carries a one-sentence testable definition that
+// goes INTO the prompt. v1 sent bare ids, so the id string was the entire
+// semantic instruction; a brand-flavored id contaminated measurement with the
+// model's prior on the word. Apply a tag only when its DEFINITION holds.
+// Legacy string vocabularies (BYO boards) still render as bare ids.
 export function buildTagPrompt(vocabulary, channelSeeds) {
+  const vocabLines = vocabulary.map((v) =>
+    typeof v === 'string' ? `  ${v}` : `  ${v.id}: ${v.definition}`,
+  );
   return [
     'You are analyzing a website / UI screenshot to extract its design DNA as inspectable data.',
     'Describe what the design DOES, in rules, not vibe words.',
     '',
     'Return ONLY a JSON object with exactly these keys:',
-    '  "tags":    array of ids chosen ONLY from this controlled vocabulary:',
-    `             ${vocabulary.join(', ')}`,
+    '  "tags":    array of ids chosen ONLY from the controlled vocabulary below.',
+    '             Apply an id only when its definition holds for this screenshot;',
+    '             judge by the definition, never by associations with the id text.',
+    ...vocabLines,
     '  "channels": array of 1-3 candidate channel ids chosen ONLY from:',
     `             ${channelSeeds.join(', ')}`,
     '  "notes":   { "why": "...", "avoid": "...", "keep": "..." }',
@@ -62,7 +72,7 @@ export function parseTagResponse(raw, vocabulary, channelSeeds) {
   } catch (err) {
     throw new Error(`malformed JSON: ${err.message}`);
   }
-  const vocab = new Set(vocabulary);
+  const vocab = new Set(vocabIds(vocabulary));
   const seeds = new Set(channelSeeds);
   const tags = Array.isArray(obj.tags)
     ? [...new Set(obj.tags.filter((t) => vocab.has(t)))]
