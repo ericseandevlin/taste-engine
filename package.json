@@ -36,6 +36,8 @@
     "fingerprint": "node src/fingerprint.mjs",
     "generate": "node src/generate.mjs",
     "score": "node src/score.mjs",
+    "validate": "node src/validate.mjs",
+    "calibrate": "node src/calibrate.mjs",
     "capture": "node scripts/capture.mjs",
     "critique": "node src/critique.mjs",
     "pipeline": "node scripts/run-pipeline.mjs"
