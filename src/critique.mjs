@@ -33,13 +33,15 @@ function parseArgs(argv) {
   return args;
 }
 
+// Channel and direction NAMES never enter the prompt (naming decoupling): the
+// target is described by the design lane's recipe and forbidden moves only.
 export function buildCritiquePrompt(resolved) {
   return [
-    `Critique this generated webpage against its intended direction "${resolved.name}". You are shown desktop and mobile screenshots.`,
+    'Critique this generated webpage against its design lane: the intended recipe and forbidden moves below. You are shown desktop and mobile screenshots.',
     'Be concrete and testable. Name the element, the problem, and the fix as a rule. Do NOT say "make it cooler/cleaner/more modern".',
     '',
     'Intended recipe:',
-    ...resolved.recipes.map((r) => `- ${r.name}: ${Object.entries(r.recipe).map(([k, v]) => `${k}: ${v}`).join('; ')}`),
+    ...resolved.recipes.map((r) => `- ${Object.entries(r.recipe).map(([k, v]) => `${k}: ${v}`).join('; ')}`),
     '',
     'Forbidden moves it must respect:',
     ...resolved.forbidden.map((f) => `- ${f}`),

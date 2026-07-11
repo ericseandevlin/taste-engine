@@ -51,11 +51,22 @@ test('appendRules dedupes and reports added count', () => {
   assert.equal(doc.house.length, 3);
 });
 
-test('buildCritiquePrompt names the direction, recipe, forbidden, and bans vague language', () => {
+test('buildCritiquePrompt carries the recipe, forbidden moves, and bans vague language', () => {
   const p = buildCritiquePrompt(resolved);
-  assert.ok(p.includes('Stark Swiss Brutalist'));
-  assert.ok(p.includes('Swiss Index'));
+  assert.ok(p.includes('ground: white'));
   assert.ok(p.includes('gradients'));
   assert.ok(/make it "?cooler/i.test(p));
   assert.ok(p.includes('JSON'));
+});
+
+test('poison: channel and direction names never reach the critique prompt', () => {
+  const poisoned = {
+    name: 'POISON-DIRECTION-PLUGH',
+    recipes: [{ id: 'poison-ch', name: 'POISON-STYLE-XYZZY', recipe: { ground: 'white' } }],
+    forbidden: ['gradients'],
+  };
+  const p = buildCritiquePrompt(poisoned);
+  assert.ok(!p.includes('POISON-STYLE-XYZZY'));
+  assert.ok(!p.includes('POISON-DIRECTION-PLUGH'));
+  assert.ok(p.includes('ground: white')); // the recipe itself still gets through
 });

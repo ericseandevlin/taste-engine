@@ -50,6 +50,8 @@ export function resolveDirection(directionsDoc, channelsDoc, id) {
 
 // Pure: build the generation prompt. extraRules are critique rules from prior
 // rounds; profile (if present) is the user's real content, kept separate from taste.
+// Channel and direction NAMES never enter the prompt (naming decoupling): the model
+// sees only recipes, briefs, palettes, forbidden moves, and critique rules.
 export function buildGeneratePrompt(resolved, extraRules = [], profile = null) {
   const lines = [
     'Build a complete, production-quality single-page website (a homepage) as ONE self-contained HTML file with inline <style>.',
@@ -61,7 +63,7 @@ export function buildGeneratePrompt(resolved, extraRules = [], profile = null) {
     '',
     'DESIGN RECIPES (blend these; together they define the taste):',
     ...resolved.recipes.map(
-      (r) => `- ${r.name}: ${Object.entries(r.recipe).map(([k, v]) => `${k}: ${v}`).join('; ')}`,
+      (r) => `- ${Object.entries(r.recipe).map(([k, v]) => `${k}: ${v}`).join('; ')}`,
     ),
     '',
     'FORBIDDEN (hard constraints, do not violate any):',
@@ -72,7 +74,7 @@ export function buildGeneratePrompt(resolved, extraRules = [], profile = null) {
   }
   lines.push(
     '',
-    'At the very top of the file, include an HTML comment block (the lineage) listing: the direction name, the channel ids blended, the key params, and the content source (profile or placeholder).',
+    'At the very top of the file, include an HTML comment block (the lineage) listing: the number of design recipes blended, the number of critique rules applied, and the content source (profile or placeholder).',
   );
   if (profile) {
     const { _note, ...content } = profile;

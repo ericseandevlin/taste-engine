@@ -74,6 +74,29 @@ test('buildGeneratePrompt falls back to labeled placeholder content with no prof
   assert.ok(!/realistic content for a design technologist/i.test(p)); // old fabrication line is gone
 });
 
+test('poison: channel and direction names never reach the generate prompt', () => {
+  const poisonChannels = {
+    channels: [
+      { id: 'poison-ch', name: 'POISON-STYLE-XYZZY', recipe: { ground: 'white' }, forbidden: ['warm backgrounds'] },
+    ],
+  };
+  const poisonDirections = {
+    directions: {
+      poison: { name: 'POISON-DIRECTION-PLUGH', channels: ['poison-ch'], palette: 'black on white', brief: 'portfolio homepage', notes: [] },
+    },
+  };
+  const r = resolveDirection(poisonDirections, poisonChannels, 'poison');
+  // with and without critique rules + profile: names must never leak
+  for (const p of [
+    buildGeneratePrompt(r),
+    buildGeneratePrompt(r, ['keep mobile type at 14px or larger'], { name: 'Avery Quinn' }),
+  ]) {
+    assert.ok(!p.includes('POISON-STYLE-XYZZY'));
+    assert.ok(!p.includes('POISON-DIRECTION-PLUGH'));
+    assert.ok(p.includes('ground: white')); // the recipe itself still gets through
+  }
+});
+
 test('extractHtml strips markdown fences', () => {
   const raw = 'Here you go:\n```html\n<!doctype html><html><body>hi</body></html>\n```\nDone';
   const html = extractHtml(raw);
