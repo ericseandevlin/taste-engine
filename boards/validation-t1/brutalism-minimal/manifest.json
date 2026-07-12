@@ -1,0 +1,428 @@
+{
+  "board": "validation-t1/brutalism-minimal",
+  "kind": "visual-ui",
+  "generated": "2026-07-12T15:45:18.986Z",
+  "items": [
+    {
+      "id": "w001",
+      "file": "brutalism-minimal-01.png",
+      "title": "Brutalism Minimal",
+      "source": {
+        "name": "Brutalism Minimal",
+        "url": null,
+        "local": "boards/validation-t1/brutalism-minimal/brutalism-minimal-01.png",
+        "arena": null
+      },
+      "measured": {
+        "w": 1440,
+        "h": 1200,
+        "aspect": 1.2,
+        "palette": [
+          {
+            "hex": "#ffffff",
+            "pct": 59
+          },
+          {
+            "hex": "#ccccff",
+            "pct": 24
+          },
+          {
+            "hex": "#cccccc",
+            "pct": 12
+          },
+          {
+            "hex": "#336699",
+            "pct": 2
+          },
+          {
+            "hex": "#3366cc",
+            "pct": 1
+          }
+        ],
+        "contrast": 0.134,
+        "density": 0.037,
+        "accentCoverage": 0.3479,
+        "accentHueCount": 2
+      },
+      "tags": [
+        "asymmetric-composition",
+        "browser-default-styling",
+        "dense-utilitarian-lists",
+        "flat-unmodulated-color-fields",
+        "flush-left-ragged-right",
+        "grotesk-display",
+        "hairline-dividers",
+        "hard-edged-zero-effects",
+        "high-density",
+        "index-table-listing",
+        "monospace-metadata",
+        "muted-chroma",
+        "objective-documentary-imagery",
+        "restricted-palette-single-accent",
+        "single-sans-family",
+        "size-weight-position-hierarchy",
+        "strict-column-grid",
+        "system-or-monospace-typography",
+        "undisguised-construction"
+      ],
+      "channels": [
+        "grid-index",
+        "process-documentation"
+      ],
+      "notes": {
+        "why": "A multi-column classified listing organized by strict vertical column alignment with hairline dividers creates efficient information retrieval through dense categorization and hyperlinked entries.",
+        "avoid": "Do not add decorative imagery, shadows, rounded corners, or ornamental motifs—they would undermine the utilitarian clarity and fast scanability that makes this directory work.",
+        "keep": "The exposed hairline-rule scaffolding and left-aligned hyperlinked text in a monospace-like sans creates a browser-native, accessible registry that prioritizes information density and link discovery over visual polish."
+      }
+    },
+    {
+      "id": "w002",
+      "file": "brutalism-minimal-02.png",
+      "title": "Brutalism Minimal",
+      "source": {
+        "name": "Brutalism Minimal",
+        "url": null,
+        "local": "boards/validation-t1/brutalism-minimal/brutalism-minimal-02.png",
+        "arena": null
+      },
+      "measured": {
+        "w": 1440,
+        "h": 1200,
+        "aspect": 1.2,
+        "palette": [
+          {
+            "hex": "#ffffff",
+            "pct": 90
+          },
+          {
+            "hex": "#ccccff",
+            "pct": 5
+          },
+          {
+            "hex": "#cccccc",
+            "pct": 3
+          },
+          {
+            "hex": "#999999",
+            "pct": 1
+          },
+          {
+            "hex": "#666666",
+            "pct": 1
+          }
+        ],
+        "contrast": 0.084,
+        "density": 0.016,
+        "accentCoverage": 0.0755,
+        "accentHueCount": 1
+      },
+      "tags": [
+        "asymmetric-composition",
+        "browser-default-styling",
+        "dense-utilitarian-lists",
+        "flush-left-ragged-right",
+        "grotesk-display",
+        "high-density",
+        "index-table-listing",
+        "muted-chroma",
+        "objective-documentary-imagery",
+        "process-documentation",
+        "restricted-palette-single-accent",
+        "single-sans-family",
+        "size-weight-position-hierarchy",
+        "system-or-monospace-typography",
+        "undisguised-construction"
+      ],
+      "channels": [
+        "grid-index",
+        "process-documentation"
+      ],
+      "notes": {
+        "why": "A dense search results listing prioritizes information scannability through consistent left alignment, minimal visual hierarchy, and raw tabular structure without decorative overhead.",
+        "avoid": "Do not add cards, boxes, shadows, or rounded corners—they would contradict the utilitarian density and slow eye movement down the list.",
+        "keep": "The strict left-flush ragged-right layout with size and color as the only hierarchy markers, allowing rapid scanning of result titles and metadata without visual noise."
+      }
+    },
+    {
+      "id": "w003",
+      "file": "brutalism-minimal-03.png",
+      "title": "Brutalism Minimal",
+      "source": {
+        "name": "Brutalism Minimal",
+        "url": null,
+        "local": "boards/validation-t1/brutalism-minimal/brutalism-minimal-03.png",
+        "arena": null
+      },
+      "measured": {
+        "w": 1440,
+        "h": 1200,
+        "aspect": 1.2,
+        "palette": [
+          {
+            "hex": "#cccccc",
+            "pct": 86
+          },
+          {
+            "hex": "#999999",
+            "pct": 11
+          },
+          {
+            "hex": "#cc9999",
+            "pct": 1
+          },
+          {
+            "hex": "#9999cc",
+            "pct": 1
+          },
+          {
+            "hex": "#996666",
+            "pct": 1
+          }
+        ],
+        "contrast": 0.072,
+        "density": 0.023,
+        "accentCoverage": 0.0179,
+        "accentHueCount": 2
+      },
+      "tags": [
+        "active-negative-space",
+        "asymmetric-composition",
+        "browser-default-styling",
+        "dense-utilitarian-lists",
+        "flat-unmodulated-color-fields",
+        "flush-left-ragged-right",
+        "grotesk-display",
+        "hairline-dividers",
+        "hard-edged-zero-effects",
+        "high-density",
+        "monolithic-block-massing",
+        "muted-chroma",
+        "objective-documentary-imagery",
+        "process-documentation",
+        "restricted-palette-single-accent",
+        "single-sans-family",
+        "size-weight-position-hierarchy",
+        "system-or-monospace-typography",
+        "undisguised-construction",
+        "warm-ground"
+      ],
+      "channels": [
+        "process-documentation",
+        "grid-index",
+        "warm-editorial"
+      ],
+      "notes": {
+        "why": "Academic CV layout prioritizes information density and utility through flush-left stacking, minimal decoration, and structural transparency—allowing rapid scanning of credentials, publications, and courses.",
+        "avoid": "Do not add decorative elements, cards, shadows, or visual hierarchy devices beyond type scale and weight; the authority comes from restraint and clarity, not ornamentation.",
+        "keep": "The use of hyperlinked abbreviations (PDF, IDM) as functional metadata within dense text lists, which signals both digital accessibility and scholarly precision without disrupting the monolithic block composition."
+      }
+    },
+    {
+      "id": "w004",
+      "file": "brutalism-minimal-04.png",
+      "title": "Brutalism Minimal",
+      "source": {
+        "name": "Brutalism Minimal",
+        "url": null,
+        "local": "boards/validation-t1/brutalism-minimal/brutalism-minimal-04.png",
+        "arena": null
+      },
+      "measured": {
+        "w": 1440,
+        "h": 1200,
+        "aspect": 1.2,
+        "palette": [
+          {
+            "hex": "#cccccc",
+            "pct": 80
+          },
+          {
+            "hex": "#9999cc",
+            "pct": 18
+          },
+          {
+            "hex": "#ffffff",
+            "pct": 1
+          },
+          {
+            "hex": "#999999",
+            "pct": 1
+          },
+          {
+            "hex": "#cccc99",
+            "pct": 0
+          }
+        ],
+        "contrast": 0.053,
+        "density": 0.025,
+        "accentCoverage": 0.0655,
+        "accentHueCount": 1
+      },
+      "tags": [
+        "browser-default-styling",
+        "dense-utilitarian-lists",
+        "flat-unmodulated-color-fields",
+        "flush-left-ragged-right",
+        "grotesk-display",
+        "hard-edged-zero-effects",
+        "high-density",
+        "index-table-listing",
+        "monolithic-block-massing",
+        "monospace-metadata",
+        "muted-chroma",
+        "objective-documentary-imagery",
+        "process-documentation",
+        "restricted-palette-single-accent",
+        "single-sans-family",
+        "size-weight-position-hierarchy",
+        "system-or-monospace-typography",
+        "undisguised-construction"
+      ],
+      "channels": [
+        "grid-index",
+        "process-documentation"
+      ],
+      "notes": {
+        "why": "A utilitarian archive index prioritizes information density and rapid scanning through strict tabular alignment, monospace dates, and minimal visual hierarchy—no decoration interferes with content retrieval.",
+        "avoid": "Do not add decorative elements, rounded corners, colored badges, or card containers; they would obscure the utilitarian register and slow visual parsing of the dense list.",
+        "keep": "The combination of hairline dividers, monospace metadata columns, and flush-left link text creates a transparent, legible index that feels like a raw database output rather than a designed product."
+      }
+    },
+    {
+      "id": "w005",
+      "file": "brutalism-minimal-05.png",
+      "title": "Brutalism Minimal",
+      "source": {
+        "name": "Brutalism Minimal",
+        "url": null,
+        "local": "boards/validation-t1/brutalism-minimal/brutalism-minimal-05.png",
+        "arena": null
+      },
+      "measured": {
+        "w": 1440,
+        "h": 1200,
+        "aspect": 1.2,
+        "palette": [
+          {
+            "hex": "#ffffcc",
+            "pct": 60
+          },
+          {
+            "hex": "#cccccc",
+            "pct": 31
+          },
+          {
+            "hex": "#ffcccc",
+            "pct": 3
+          },
+          {
+            "hex": "#cccc99",
+            "pct": 3
+          },
+          {
+            "hex": "#9999cc",
+            "pct": 1
+          }
+        ],
+        "contrast": 0.068,
+        "density": 0.027,
+        "accentCoverage": 0.0213,
+        "accentHueCount": 1
+      },
+      "tags": [
+        "browser-default-styling",
+        "dense-utilitarian-lists",
+        "hairline-dividers",
+        "hard-edged-zero-effects",
+        "high-density",
+        "index-table-listing",
+        "monolithic-block-massing",
+        "muted-chroma",
+        "objective-documentary-imagery",
+        "restricted-palette-single-accent",
+        "single-sans-family",
+        "size-weight-position-hierarchy",
+        "system-or-monospace-typography",
+        "undisguised-construction",
+        "warm-ground"
+      ],
+      "channels": [
+        "grid-index",
+        "process-documentation"
+      ],
+      "notes": {
+        "why": "A utilitarian database or inventory table prioritizes information density and scannability through aligned rows, minimal visual styling, and strict columnar organization.",
+        "avoid": "Do not add decorative elements, cards, or visual hierarchy devices that would clutter the index; the functional clarity of the table structure is the entire design.",
+        "keep": "The use of hairline rules and monospace/default typography to let the tabular data structure itself carry all organizational logic without ornament."
+      }
+    },
+    {
+      "id": "w006",
+      "file": "brutalism-minimal-06.png",
+      "title": "Brutalism Minimal",
+      "source": {
+        "name": "Brutalism Minimal",
+        "url": null,
+        "local": "boards/validation-t1/brutalism-minimal/brutalism-minimal-06.png",
+        "arena": null
+      },
+      "measured": {
+        "w": 1440,
+        "h": 1200,
+        "aspect": 1.2,
+        "palette": [
+          {
+            "hex": "#000000",
+            "pct": 97
+          },
+          {
+            "hex": "#333333",
+            "pct": 2
+          },
+          {
+            "hex": "#666666",
+            "pct": 1
+          },
+          {
+            "hex": "#999999",
+            "pct": 0
+          },
+          {
+            "hex": "#003333",
+            "pct": 0
+          }
+        ],
+        "contrast": 0.056,
+        "density": 0.01,
+        "accentCoverage": 0.0055,
+        "accentHueCount": 0
+      },
+      "tags": [
+        "active-negative-space",
+        "asymmetric-composition",
+        "browser-default-styling",
+        "dark-field",
+        "dense-utilitarian-lists",
+        "flat-unmodulated-color-fields",
+        "flush-left-ragged-right",
+        "grotesk-display",
+        "hard-edged-zero-effects",
+        "low-density",
+        "objective-documentary-imagery",
+        "process-documentation",
+        "restricted-palette-single-accent",
+        "single-sans-family",
+        "size-weight-position-hierarchy",
+        "system-or-monospace-typography"
+      ],
+      "channels": [
+        "process-documentation"
+      ],
+      "notes": {
+        "why": "Stripped-down event listing using flush-left typographic hierarchy and cyan accent links against a dark ground, prioritizing information density and scanability over visual polish.",
+        "avoid": "Avoid adding decorative elements, rounded corners, or boxes—the stark utility of the layout is its strength and any visual ornamentation would undermine the documentary register.",
+        "keep": "The use of single-color type hierarchy and cyan hyperlinks as the only visual accent, creating a clear information-first aesthetic that scales to any amount of listing content."
+      }
+    }
+  ]
+}

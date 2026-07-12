@@ -1,0 +1,1441 @@
+{
+  "header": "BUILD GATES: iterated-to-pass during development; zero evidential weight in any run verdict.",
+  "classIds": [
+    "its",
+    "bauhaus",
+    "brutalism-minimal",
+    "brutalism-maximal",
+    "memphis-revival"
+  ],
+  "counts": {
+    "its": 6,
+    "bauhaus": 6,
+    "brutalism-minimal": 6,
+    "brutalism-maximal": 6,
+    "memphis-revival": 6
+  },
+  "pooled": {
+    "contrast": 0.2491,
+    "density": 0.2026,
+    "chroma": 0.3859,
+    "groundLightness": 0.1314,
+    "accentCoverage": 0.2326,
+    "accentHueCount": 0.1853
+  },
+  "matrices": {
+    "full": {
+      "matrix": {
+        "its": {
+          "its": 4,
+          "bauhaus": 2,
+          "brutalism-minimal": 0,
+          "brutalism-maximal": 0,
+          "memphis-revival": 0,
+          "tie": 0,
+          "none": 0
+        },
+        "bauhaus": {
+          "its": 2,
+          "bauhaus": 3,
+          "brutalism-minimal": 0,
+          "brutalism-maximal": 0,
+          "memphis-revival": 1,
+          "tie": 0,
+          "none": 0
+        },
+        "brutalism-minimal": {
+          "its": 1,
+          "bauhaus": 0,
+          "brutalism-minimal": 5,
+          "brutalism-maximal": 0,
+          "memphis-revival": 0,
+          "tie": 0,
+          "none": 0
+        },
+        "brutalism-maximal": {
+          "its": 0,
+          "bauhaus": 0,
+          "brutalism-minimal": 0,
+          "brutalism-maximal": 6,
+          "memphis-revival": 0,
+          "tie": 0,
+          "none": 0
+        },
+        "memphis-revival": {
+          "its": 0,
+          "bauhaus": 1,
+          "brutalism-minimal": 0,
+          "brutalism-maximal": 0,
+          "memphis-revival": 5,
+          "tie": 0,
+          "none": 0
+        }
+      },
+      "overall": 0.7666666666666667,
+      "total": 30,
+      "perClass": {
+        "its": {
+          "n": 6,
+          "correct": 4,
+          "accuracy": 0.6666666666666666
+        },
+        "bauhaus": {
+          "n": 6,
+          "correct": 3,
+          "accuracy": 0.5
+        },
+        "brutalism-minimal": {
+          "n": 6,
+          "correct": 5,
+          "accuracy": 0.8333333333333334
+        },
+        "brutalism-maximal": {
+          "n": 6,
+          "correct": 6,
+          "accuracy": 1
+        },
+        "memphis-revival": {
+          "n": 6,
+          "correct": 5,
+          "accuracy": 0.8333333333333334
+        }
+      }
+    },
+    "ablated": {
+      "matrix": {
+        "its": {
+          "its": 2,
+          "bauhaus": 1,
+          "brutalism-minimal": 3,
+          "brutalism-maximal": 0,
+          "memphis-revival": 0,
+          "tie": 0,
+          "none": 0
+        },
+        "bauhaus": {
+          "its": 2,
+          "bauhaus": 4,
+          "brutalism-minimal": 0,
+          "brutalism-maximal": 0,
+          "memphis-revival": 0,
+          "tie": 0,
+          "none": 0
+        },
+        "brutalism-minimal": {
+          "its": 4,
+          "bauhaus": 1,
+          "brutalism-minimal": 1,
+          "brutalism-maximal": 0,
+          "memphis-revival": 0,
+          "tie": 0,
+          "none": 0
+        },
+        "brutalism-maximal": {
+          "its": 0,
+          "bauhaus": 1,
+          "brutalism-minimal": 0,
+          "brutalism-maximal": 5,
+          "memphis-revival": 0,
+          "tie": 0,
+          "none": 0
+        },
+        "memphis-revival": {
+          "its": 0,
+          "bauhaus": 2,
+          "brutalism-minimal": 0,
+          "brutalism-maximal": 0,
+          "memphis-revival": 4,
+          "tie": 0,
+          "none": 0
+        }
+      },
+      "overall": 0.5333333333333333,
+      "total": 30,
+      "perClass": {
+        "its": {
+          "n": 6,
+          "correct": 2,
+          "accuracy": 0.3333333333333333
+        },
+        "bauhaus": {
+          "n": 6,
+          "correct": 4,
+          "accuracy": 0.6666666666666666
+        },
+        "brutalism-minimal": {
+          "n": 6,
+          "correct": 1,
+          "accuracy": 0.16666666666666666
+        },
+        "brutalism-maximal": {
+          "n": 6,
+          "correct": 5,
+          "accuracy": 0.8333333333333334
+        },
+        "memphis-revival": {
+          "n": 6,
+          "correct": 4,
+          "accuracy": 0.6666666666666666
+        }
+      }
+    }
+  },
+  "gates": {
+    "separation": {
+      "label": "separation",
+      "pass": false,
+      "overall": 0.7666666666666667,
+      "minClassAccuracy": 0.5,
+      "pairConfusion": {
+        "brutalism-minimal->brutalism-maximal": 0,
+        "brutalism-maximal->brutalism-minimal": 0
+      }
+    },
+    "tagsAblated": {
+      "label": "tags-ablated separation",
+      "pass": false,
+      "overall": 0.5333333333333333,
+      "chance": 0.2
+    },
+    "degeneracy": {
+      "label": "degeneracy",
+      "pass": true,
+      "fraction": 0.16666666666666666,
+      "totalCells": 30,
+      "cellsBelowFloor": [
+        {
+          "class": "its",
+          "axis": "density",
+          "spread": 0.0445
+        },
+        {
+          "class": "its",
+          "axis": "chroma",
+          "spread": 0.0225
+        },
+        {
+          "class": "bauhaus",
+          "axis": "chroma",
+          "spread": 0.0414
+        },
+        {
+          "class": "brutalism-minimal",
+          "axis": "contrast",
+          "spread": 0.0415
+        },
+        {
+          "class": "brutalism-minimal",
+          "axis": "accentCoverage",
+          "spread": 0.0427
+        }
+      ],
+      "clippedScalarDs": 145
+    },
+    "characterization": {
+      "label": "characterization",
+      "pass": false,
+      "threshold": 0.667,
+      "classes": {
+        "its": {
+          "n": 6,
+          "checkable": 7,
+          "passed": 7,
+          "excluded": [],
+          "pass": true,
+          "rows": [
+            {
+              "determinant": "modular-column-grid",
+              "type": "tag",
+              "id": "strict-column-grid",
+              "count": 6,
+              "n": 6,
+              "observed": 1,
+              "pass": true,
+              "secondary": null,
+              "blindSpotNote": null
+            },
+            {
+              "determinant": "single-sans-serif-family",
+              "type": "tag",
+              "id": "single-sans-family",
+              "count": 6,
+              "n": 6,
+              "observed": 1,
+              "pass": true,
+              "secondary": null,
+              "blindSpotNote": null
+            },
+            {
+              "determinant": "flush-left-ragged-right",
+              "type": "tag",
+              "id": "flush-left-ragged-right",
+              "count": 5,
+              "n": 6,
+              "observed": 0.8333,
+              "pass": true,
+              "secondary": null,
+              "blindSpotNote": null
+            },
+            {
+              "determinant": "asymmetric-composition",
+              "type": "tag",
+              "id": "asymmetric-composition",
+              "count": 6,
+              "n": 6,
+              "observed": 1,
+              "pass": true,
+              "secondary": null,
+              "blindSpotNote": null
+            },
+            {
+              "determinant": "size-weight-position-hierarchy",
+              "type": "tag",
+              "id": "size-weight-position-hierarchy",
+              "count": 6,
+              "n": 6,
+              "observed": 1,
+              "pass": true,
+              "secondary": null,
+              "blindSpotNote": null
+            },
+            {
+              "determinant": "photographic-or-geometric-imagery",
+              "type": "tag",
+              "id": "objective-documentary-imagery",
+              "count": 6,
+              "n": 6,
+              "observed": 1,
+              "pass": true,
+              "secondary": null,
+              "blindSpotNote": null
+            },
+            {
+              "determinant": "flat-unmodulated-color-fields",
+              "type": "tag",
+              "id": "flat-unmodulated-color-fields",
+              "count": 6,
+              "n": 6,
+              "observed": 1,
+              "pass": true,
+              "secondary": null,
+              "blindSpotNote": null
+            }
+          ]
+        },
+        "bauhaus": {
+          "n": 6,
+          "checkable": 7,
+          "passed": 6,
+          "excluded": [
+            "geometric-sans-only"
+          ],
+          "pass": false,
+          "rows": [
+            {
+              "determinant": "asymmetric-composition",
+              "type": "tag",
+              "id": "asymmetric-composition",
+              "count": 6,
+              "n": 6,
+              "observed": 1,
+              "pass": true,
+              "secondary": null,
+              "blindSpotNote": null
+            },
+            {
+              "determinant": "geometric-sans-only",
+              "excluded": true
+            },
+            {
+              "determinant": "primary-triad-plus-black-palette",
+              "type": "tag",
+              "id": "bold-primary",
+              "count": 6,
+              "n": 6,
+              "observed": 1,
+              "pass": true,
+              "secondary": {
+                "type": "scalar",
+                "id": "accentHueCount",
+                "n": 6,
+                "observed": 2.5,
+                "range": [
+                  1,
+                  3
+                ],
+                "pass": true
+              },
+              "blindSpotNote": null
+            },
+            {
+              "determinant": "flat-geometric-primitives",
+              "type": "tag",
+              "id": "flat-geometric-primitives",
+              "count": 6,
+              "n": 6,
+              "observed": 1,
+              "pass": true,
+              "secondary": null,
+              "blindSpotNote": null
+            },
+            {
+              "determinant": "extreme-scale-hierarchy",
+              "type": "tag",
+              "id": "extreme-type-scale-contrast",
+              "count": 6,
+              "n": 6,
+              "observed": 1,
+              "pass": true,
+              "secondary": null,
+              "blindSpotNote": null
+            },
+            {
+              "determinant": "active-whitespace-counterweight",
+              "type": "tag",
+              "id": "active-negative-space",
+              "count": 6,
+              "n": 6,
+              "observed": 1,
+              "pass": true,
+              "secondary": null,
+              "blindSpotNote": null
+            },
+            {
+              "determinant": "flush-left-ragged-right",
+              "type": "tag",
+              "id": "flush-left-ragged-right",
+              "count": 3,
+              "n": 6,
+              "observed": 0.5,
+              "pass": false,
+              "secondary": null,
+              "blindSpotNote": null
+            },
+            {
+              "determinant": "hard-edge-flat-fill",
+              "type": "tag",
+              "id": "flat-unmodulated-color-fields",
+              "count": 6,
+              "n": 6,
+              "observed": 1,
+              "pass": true,
+              "secondary": null,
+              "blindSpotNote": null
+            }
+          ]
+        },
+        "brutalism-minimal": {
+          "n": 6,
+          "checkable": 4,
+          "passed": 4,
+          "excluded": [],
+          "pass": true,
+          "rows": [
+            {
+              "determinant": "undisguised-construction",
+              "type": "tag",
+              "id": "undisguised-construction",
+              "count": 5,
+              "n": 6,
+              "observed": 0.8333,
+              "pass": true,
+              "secondary": null,
+              "blindSpotNote": null
+            },
+            {
+              "determinant": "hard-edged-zero-effects",
+              "type": "tag",
+              "id": "hard-edged-zero-effects",
+              "count": 5,
+              "n": 6,
+              "observed": 0.8333,
+              "pass": true,
+              "secondary": null,
+              "blindSpotNote": null
+            },
+            {
+              "determinant": "browser-default-styling",
+              "type": "tag",
+              "id": "browser-default-styling",
+              "count": 6,
+              "n": 6,
+              "observed": 1,
+              "pass": true,
+              "secondary": null,
+              "blindSpotNote": null
+            },
+            {
+              "determinant": "dense-utilitarian-lists",
+              "type": "tag",
+              "id": "dense-utilitarian-lists",
+              "count": 6,
+              "n": 6,
+              "observed": 1,
+              "pass": true,
+              "secondary": null,
+              "blindSpotNote": null
+            }
+          ]
+        },
+        "brutalism-maximal": {
+          "n": 6,
+          "checkable": 5,
+          "passed": 5,
+          "excluded": [],
+          "pass": true,
+          "rows": [
+            {
+              "determinant": "undisguised-construction",
+              "type": "tag",
+              "id": "undisguised-construction",
+              "count": 6,
+              "n": 6,
+              "observed": 1,
+              "pass": true,
+              "secondary": null,
+              "blindSpotNote": null
+            },
+            {
+              "determinant": "hard-edged-zero-effects",
+              "type": "tag",
+              "id": "hard-edged-zero-effects",
+              "count": 6,
+              "n": 6,
+              "observed": 1,
+              "pass": true,
+              "secondary": null,
+              "blindSpotNote": null
+            },
+            {
+              "determinant": "harsh-unharmonized-color-clash",
+              "type": "scalar",
+              "id": "accentHueCount",
+              "n": 6,
+              "observed": 6,
+              "range": [
+                2,
+                8
+              ],
+              "pass": true,
+              "secondary": null,
+              "blindSpotNote": "adjacency without mediation is not verified, only hue-family count"
+            },
+            {
+              "determinant": "oversized-load-bearing-type",
+              "type": "tag",
+              "id": "oversized-load-bearing-type",
+              "count": 4,
+              "n": 6,
+              "observed": 0.6667,
+              "pass": true,
+              "secondary": null,
+              "blindSpotNote": null
+            },
+            {
+              "determinant": "deliberate-misalignment-or-overlap",
+              "type": "tag",
+              "id": "deliberate-misalignment-or-overlap",
+              "count": 5,
+              "n": 6,
+              "observed": 0.8333,
+              "pass": true,
+              "secondary": null,
+              "blindSpotNote": null
+            }
+          ]
+        },
+        "memphis-revival": {
+          "n": 6,
+          "checkable": 7,
+          "passed": 7,
+          "excluded": [],
+          "pass": true,
+          "rows": [
+            {
+              "determinant": "clashing-pastel-primary-palette",
+              "type": "scalar",
+              "id": "accentHueCount",
+              "n": 6,
+              "observed": 6.5,
+              "range": [
+                3,
+                8
+              ],
+              "pass": true,
+              "secondary": null,
+              "blindSpotNote": null
+            },
+            {
+              "determinant": "squiggle-motif",
+              "type": "tag",
+              "id": "squiggle-motif",
+              "count": 6,
+              "n": 6,
+              "observed": 1,
+              "pass": true,
+              "secondary": null,
+              "blindSpotNote": null
+            },
+            {
+              "determinant": "scattered-geometric-primitives",
+              "type": "tag",
+              "id": "scattered-geometric-primitives",
+              "count": 6,
+              "n": 6,
+              "observed": 1,
+              "pass": true,
+              "secondary": null,
+              "blindSpotNote": null
+            },
+            {
+              "determinant": "ornament-without-function",
+              "type": "tag",
+              "id": "ornament-without-function",
+              "count": 6,
+              "n": 6,
+              "observed": 1,
+              "pass": true,
+              "secondary": null,
+              "blindSpotNote": null
+            },
+            {
+              "determinant": "pattern-clash-adjacency",
+              "type": "tag",
+              "id": "pattern-clash-adjacency",
+              "count": 5,
+              "n": 6,
+              "observed": 0.8333,
+              "pass": true,
+              "secondary": null,
+              "blindSpotNote": null
+            },
+            {
+              "determinant": "flat-unmodeled-color",
+              "type": "tag",
+              "id": "flat-unmodulated-color-fields",
+              "count": 6,
+              "n": 6,
+              "observed": 1,
+              "pass": true,
+              "secondary": null,
+              "blindSpotNote": null
+            },
+            {
+              "determinant": "asymmetric-scatter-composition",
+              "type": "tag",
+              "id": "asymmetric-composition",
+              "count": 5,
+              "n": 6,
+              "observed": 0.8333,
+              "pass": true,
+              "secondary": null,
+              "blindSpotNote": "the scatter half is corroborated by scattered-geometric-primitives; the instrument checks the asymmetry half"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "perAxis": {
+    "contrast": {
+      "own": {
+        "n": 30,
+        "min": 0.0161,
+        "median": 0.3031,
+        "max": 0.839,
+        "clipped": 0
+      },
+      "cross": {
+        "n": 120,
+        "min": 0.002,
+        "median": 0.4767,
+        "max": 1,
+        "clipped": 9
+      },
+      "dropped": 0
+    },
+    "density": {
+      "own": {
+        "n": 30,
+        "min": 0,
+        "median": 0.181,
+        "max": 1,
+        "clipped": 1
+      },
+      "cross": {
+        "n": 120,
+        "min": 0,
+        "median": 0.4195,
+        "max": 1,
+        "clipped": 5
+      },
+      "dropped": 0
+    },
+    "chroma": {
+      "own": {
+        "n": 30,
+        "min": 0.013,
+        "median": 0.1145,
+        "max": 1,
+        "clipped": 1
+      },
+      "cross": {
+        "n": 120,
+        "min": 0.0003,
+        "median": 0.5147,
+        "max": 1,
+        "clipped": 6
+      },
+      "dropped": 0
+    },
+    "groundLightness": {
+      "own": {
+        "n": 30,
+        "min": 0.2053,
+        "median": 0.4137,
+        "max": 1,
+        "clipped": 7
+      },
+      "cross": {
+        "n": 120,
+        "min": 0.0182,
+        "median": 0.3372,
+        "max": 1,
+        "clipped": 26
+      },
+      "dropped": 0
+    },
+    "accentCoverage": {
+      "own": {
+        "n": 30,
+        "min": 0.0187,
+        "median": 0.1767,
+        "max": 1,
+        "clipped": 1
+      },
+      "cross": {
+        "n": 120,
+        "min": 0.0019,
+        "median": 0.5724,
+        "max": 1,
+        "clipped": 28
+      },
+      "dropped": 0
+    },
+    "accentHueCount": {
+      "own": {
+        "n": 30,
+        "min": 0,
+        "median": 0.3373,
+        "max": 1,
+        "clipped": 2
+      },
+      "cross": {
+        "n": 120,
+        "min": 0,
+        "median": 0.8993,
+        "max": 1,
+        "clipped": 59
+      },
+      "dropped": 0
+    },
+    "palette": {
+      "own": {
+        "n": 30,
+        "min": 0.0123,
+        "median": 0.1324,
+        "max": 0.5828,
+        "clipped": 0
+      },
+      "cross": {
+        "n": 120,
+        "min": 0.012,
+        "median": 0.2217,
+        "max": 0.4921,
+        "clipped": 0
+      },
+      "dropped": 0
+    },
+    "tags": {
+      "own": {
+        "n": 30,
+        "min": 0.0183,
+        "median": 0.3162,
+        "max": 0.5657,
+        "clipped": 0
+      },
+      "cross": {
+        "n": 120,
+        "min": 0.2066,
+        "median": 0.5706,
+        "max": 0.804,
+        "clipped": 0
+      },
+      "dropped": 0
+    }
+  },
+  "predictions": [
+    {
+      "class": "its",
+      "id": "w001",
+      "alignments": {
+        "its": 93.4,
+        "bauhaus": 77.9,
+        "brutalism-minimal": 72.8,
+        "brutalism-maximal": 53.4,
+        "memphis-revival": 59.6
+      },
+      "predicted": "its",
+      "tie": false,
+      "ablatedAlignments": {
+        "its": 94.1,
+        "bauhaus": 81.9,
+        "brutalism-minimal": 86.6,
+        "brutalism-maximal": 61.3,
+        "memphis-revival": 60.6
+      },
+      "ablatedPredicted": "its",
+      "ablatedTie": false
+    },
+    {
+      "class": "its",
+      "id": "w002",
+      "alignments": {
+        "its": 73.3,
+        "bauhaus": 83.5,
+        "brutalism-minimal": 71.6,
+        "brutalism-maximal": 56.6,
+        "memphis-revival": 64.2
+      },
+      "predicted": "bauhaus",
+      "tie": false,
+      "ablatedAlignments": {
+        "its": 87.8,
+        "bauhaus": 88.5,
+        "brutalism-minimal": 83.1,
+        "brutalism-maximal": 64.3,
+        "memphis-revival": 66.1
+      },
+      "ablatedPredicted": "bauhaus",
+      "ablatedTie": false
+    },
+    {
+      "class": "its",
+      "id": "w003",
+      "alignments": {
+        "its": 79.2,
+        "bauhaus": 69.1,
+        "brutalism-minimal": 68.4,
+        "brutalism-maximal": 44.7,
+        "memphis-revival": 64.3
+      },
+      "predicted": "its",
+      "tie": false,
+      "ablatedAlignments": {
+        "its": 70.9,
+        "bauhaus": 68.5,
+        "brutalism-minimal": 75.8,
+        "brutalism-maximal": 49.9,
+        "memphis-revival": 66.9
+      },
+      "ablatedPredicted": "brutalism-minimal",
+      "ablatedTie": false
+    },
+    {
+      "class": "its",
+      "id": "w004",
+      "alignments": {
+        "its": 71.5,
+        "bauhaus": 73.7,
+        "brutalism-minimal": 72.6,
+        "brutalism-maximal": 48.1,
+        "memphis-revival": 52.9
+      },
+      "predicted": "bauhaus",
+      "tie": false,
+      "ablatedAlignments": {
+        "its": 78,
+        "bauhaus": 74.1,
+        "brutalism-minimal": 84.1,
+        "brutalism-maximal": 47.5,
+        "memphis-revival": 52.2
+      },
+      "ablatedPredicted": "brutalism-minimal",
+      "ablatedTie": false
+    },
+    {
+      "class": "its",
+      "id": "w005",
+      "alignments": {
+        "its": 85.2,
+        "bauhaus": 73.4,
+        "brutalism-minimal": 75.4,
+        "brutalism-maximal": 43.1,
+        "memphis-revival": 55.2
+      },
+      "predicted": "its",
+      "tie": false,
+      "ablatedAlignments": {
+        "its": 78.8,
+        "bauhaus": 73.5,
+        "brutalism-minimal": 89.1,
+        "brutalism-maximal": 46.4,
+        "memphis-revival": 52.4
+      },
+      "ablatedPredicted": "brutalism-minimal",
+      "ablatedTie": false
+    },
+    {
+      "class": "its",
+      "id": "w006",
+      "alignments": {
+        "its": 82.5,
+        "bauhaus": 74.3,
+        "brutalism-minimal": 76.1,
+        "brutalism-maximal": 45.9,
+        "memphis-revival": 52.7
+      },
+      "predicted": "its",
+      "tie": false,
+      "ablatedAlignments": {
+        "its": 83.5,
+        "bauhaus": 78.5,
+        "brutalism-minimal": 82.4,
+        "brutalism-maximal": 56.2,
+        "memphis-revival": 55.3
+      },
+      "ablatedPredicted": "its",
+      "ablatedTie": false
+    },
+    {
+      "class": "bauhaus",
+      "id": "w001",
+      "alignments": {
+        "its": 55.7,
+        "bauhaus": 63,
+        "brutalism-minimal": 45.9,
+        "brutalism-maximal": 60.8,
+        "memphis-revival": 65.8
+      },
+      "predicted": "memphis-revival",
+      "tie": false,
+      "ablatedAlignments": {
+        "its": 57.7,
+        "bauhaus": 69.5,
+        "brutalism-minimal": 53.4,
+        "brutalism-maximal": 68.1,
+        "memphis-revival": 64.3
+      },
+      "ablatedPredicted": "bauhaus",
+      "ablatedTie": false
+    },
+    {
+      "class": "bauhaus",
+      "id": "w002",
+      "alignments": {
+        "its": 75.4,
+        "bauhaus": 77.5,
+        "brutalism-minimal": 65.2,
+        "brutalism-maximal": 65.6,
+        "memphis-revival": 65.8
+      },
+      "predicted": "bauhaus",
+      "tie": false,
+      "ablatedAlignments": {
+        "its": 85,
+        "bauhaus": 86.9,
+        "brutalism-minimal": 78.4,
+        "brutalism-maximal": 70.5,
+        "memphis-revival": 66.3
+      },
+      "ablatedPredicted": "bauhaus",
+      "ablatedTie": false
+    },
+    {
+      "class": "bauhaus",
+      "id": "w003",
+      "alignments": {
+        "its": 69.3,
+        "bauhaus": 83.5,
+        "brutalism-minimal": 60.1,
+        "brutalism-maximal": 53.5,
+        "memphis-revival": 66.3
+      },
+      "predicted": "bauhaus",
+      "tie": false,
+      "ablatedAlignments": {
+        "its": 79.4,
+        "bauhaus": 83.1,
+        "brutalism-minimal": 76.6,
+        "brutalism-maximal": 60.1,
+        "memphis-revival": 64
+      },
+      "ablatedPredicted": "bauhaus",
+      "ablatedTie": false
+    },
+    {
+      "class": "bauhaus",
+      "id": "w004",
+      "alignments": {
+        "its": 68.9,
+        "bauhaus": 68.6,
+        "brutalism-minimal": 59.9,
+        "brutalism-maximal": 57.4,
+        "memphis-revival": 58.9
+      },
+      "predicted": "its",
+      "tie": false,
+      "ablatedAlignments": {
+        "its": 78.2,
+        "bauhaus": 73,
+        "brutalism-minimal": 74.2,
+        "brutalism-maximal": 57.8,
+        "memphis-revival": 61.5
+      },
+      "ablatedPredicted": "its",
+      "ablatedTie": false
+    },
+    {
+      "class": "bauhaus",
+      "id": "w005",
+      "alignments": {
+        "its": 68.4,
+        "bauhaus": 72.9,
+        "brutalism-minimal": 55.9,
+        "brutalism-maximal": 57.7,
+        "memphis-revival": 65.7
+      },
+      "predicted": "bauhaus",
+      "tie": false,
+      "ablatedAlignments": {
+        "its": 71,
+        "bauhaus": 74.4,
+        "brutalism-minimal": 66.1,
+        "brutalism-maximal": 69.8,
+        "memphis-revival": 72.5
+      },
+      "ablatedPredicted": "bauhaus",
+      "ablatedTie": false
+    },
+    {
+      "class": "bauhaus",
+      "id": "w006",
+      "alignments": {
+        "its": 72.3,
+        "bauhaus": 70,
+        "brutalism-minimal": 64.2,
+        "brutalism-maximal": 43.9,
+        "memphis-revival": 47.4
+      },
+      "predicted": "its",
+      "tie": false,
+      "ablatedAlignments": {
+        "its": 83.8,
+        "bauhaus": 70.8,
+        "brutalism-minimal": 82,
+        "brutalism-maximal": 44.9,
+        "memphis-revival": 47.1
+      },
+      "ablatedPredicted": "its",
+      "ablatedTie": false
+    },
+    {
+      "class": "brutalism-minimal",
+      "id": "w001",
+      "alignments": {
+        "its": 61.9,
+        "bauhaus": 64.5,
+        "brutalism-minimal": 73.6,
+        "brutalism-maximal": 50.1,
+        "memphis-revival": 54.6
+      },
+      "predicted": "brutalism-minimal",
+      "tie": false,
+      "ablatedAlignments": {
+        "its": 74.8,
+        "bauhaus": 78,
+        "brutalism-minimal": 77.7,
+        "brutalism-maximal": 57.1,
+        "memphis-revival": 66.7
+      },
+      "ablatedPredicted": "bauhaus",
+      "ablatedTie": false
+    },
+    {
+      "class": "brutalism-minimal",
+      "id": "w002",
+      "alignments": {
+        "its": 67.9,
+        "bauhaus": 63.5,
+        "brutalism-minimal": 91.4,
+        "brutalism-maximal": 40.9,
+        "memphis-revival": 47.5
+      },
+      "predicted": "brutalism-minimal",
+      "tie": false,
+      "ablatedAlignments": {
+        "its": 88.6,
+        "bauhaus": 77.6,
+        "brutalism-minimal": 91.8,
+        "brutalism-maximal": 46.8,
+        "memphis-revival": 59
+      },
+      "ablatedPredicted": "brutalism-minimal",
+      "ablatedTie": false
+    },
+    {
+      "class": "brutalism-minimal",
+      "id": "w003",
+      "alignments": {
+        "its": 70.5,
+        "bauhaus": 67.3,
+        "brutalism-minimal": 84.4,
+        "brutalism-maximal": 41,
+        "memphis-revival": 45.4
+      },
+      "predicted": "brutalism-minimal",
+      "tie": false,
+      "ablatedAlignments": {
+        "its": 86.5,
+        "bauhaus": 78.1,
+        "brutalism-minimal": 83.1,
+        "brutalism-maximal": 45.5,
+        "memphis-revival": 52.3
+      },
+      "ablatedPredicted": "its",
+      "ablatedTie": false
+    },
+    {
+      "class": "brutalism-minimal",
+      "id": "w004",
+      "alignments": {
+        "its": 68.4,
+        "bauhaus": 64.2,
+        "brutalism-minimal": 86.3,
+        "brutalism-maximal": 43.8,
+        "memphis-revival": 44.1
+      },
+      "predicted": "brutalism-minimal",
+      "tie": false,
+      "ablatedAlignments": {
+        "its": 87.9,
+        "bauhaus": 76.9,
+        "brutalism-minimal": 86.8,
+        "brutalism-maximal": 46.1,
+        "memphis-revival": 53.9
+      },
+      "ablatedPredicted": "its",
+      "ablatedTie": false
+    },
+    {
+      "class": "brutalism-minimal",
+      "id": "w005",
+      "alignments": {
+        "its": 61.1,
+        "bauhaus": 55.7,
+        "brutalism-minimal": 78.3,
+        "brutalism-maximal": 38.3,
+        "memphis-revival": 50.5
+      },
+      "predicted": "brutalism-minimal",
+      "tie": false,
+      "ablatedAlignments": {
+        "its": 79.9,
+        "bauhaus": 67.3,
+        "brutalism-minimal": 79.7,
+        "brutalism-maximal": 47.6,
+        "memphis-revival": 64.9
+      },
+      "ablatedPredicted": "its",
+      "ablatedTie": false
+    },
+    {
+      "class": "brutalism-minimal",
+      "id": "w006",
+      "alignments": {
+        "its": 66.7,
+        "bauhaus": 58,
+        "brutalism-minimal": 56.9,
+        "brutalism-maximal": 37.5,
+        "memphis-revival": 42.5
+      },
+      "predicted": "its",
+      "tie": false,
+      "ablatedAlignments": {
+        "its": 78.6,
+        "bauhaus": 66.5,
+        "brutalism-minimal": 61.5,
+        "brutalism-maximal": 39.5,
+        "memphis-revival": 47
+      },
+      "ablatedPredicted": "its",
+      "ablatedTie": false
+    },
+    {
+      "class": "brutalism-maximal",
+      "id": "w001",
+      "alignments": {
+        "its": 43.2,
+        "bauhaus": 52.3,
+        "brutalism-minimal": 38,
+        "brutalism-maximal": 64.6,
+        "memphis-revival": 50.5
+      },
+      "predicted": "brutalism-maximal",
+      "tie": false,
+      "ablatedAlignments": {
+        "its": 42.2,
+        "bauhaus": 49.6,
+        "brutalism-minimal": 36,
+        "brutalism-maximal": 72.5,
+        "memphis-revival": 54.4
+      },
+      "ablatedPredicted": "brutalism-maximal",
+      "ablatedTie": false
+    },
+    {
+      "class": "brutalism-maximal",
+      "id": "w002",
+      "alignments": {
+        "its": 54.3,
+        "bauhaus": 66.3,
+        "brutalism-minimal": 48.9,
+        "brutalism-maximal": 71.3,
+        "memphis-revival": 56.6
+      },
+      "predicted": "brutalism-maximal",
+      "tie": false,
+      "ablatedAlignments": {
+        "its": 61.1,
+        "bauhaus": 71.2,
+        "brutalism-minimal": 54.5,
+        "brutalism-maximal": 76.3,
+        "memphis-revival": 59.5
+      },
+      "ablatedPredicted": "brutalism-maximal",
+      "ablatedTie": false
+    },
+    {
+      "class": "brutalism-maximal",
+      "id": "w003",
+      "alignments": {
+        "its": 54.4,
+        "bauhaus": 65.6,
+        "brutalism-minimal": 48.6,
+        "brutalism-maximal": 75.2,
+        "memphis-revival": 61.3
+      },
+      "predicted": "brutalism-maximal",
+      "tie": false,
+      "ablatedAlignments": {
+        "its": 59.8,
+        "bauhaus": 64.2,
+        "brutalism-minimal": 56.9,
+        "brutalism-maximal": 69.6,
+        "memphis-revival": 66.2
+      },
+      "ablatedPredicted": "brutalism-maximal",
+      "ablatedTie": false
+    },
+    {
+      "class": "brutalism-maximal",
+      "id": "w004",
+      "alignments": {
+        "its": 50.1,
+        "bauhaus": 65.3,
+        "brutalism-minimal": 44,
+        "brutalism-maximal": 68.3,
+        "memphis-revival": 62
+      },
+      "predicted": "brutalism-maximal",
+      "tie": false,
+      "ablatedAlignments": {
+        "its": 51.9,
+        "bauhaus": 58.3,
+        "brutalism-minimal": 48.9,
+        "brutalism-maximal": 80.7,
+        "memphis-revival": 70
+      },
+      "ablatedPredicted": "brutalism-maximal",
+      "ablatedTie": false
+    },
+    {
+      "class": "brutalism-maximal",
+      "id": "w005",
+      "alignments": {
+        "its": 47.9,
+        "bauhaus": 65.1,
+        "brutalism-minimal": 38.8,
+        "brutalism-maximal": 69.4,
+        "memphis-revival": 55.4
+      },
+      "predicted": "brutalism-maximal",
+      "tie": false,
+      "ablatedAlignments": {
+        "its": 54.1,
+        "bauhaus": 66.4,
+        "brutalism-minimal": 44.6,
+        "brutalism-maximal": 63.7,
+        "memphis-revival": 56.6
+      },
+      "ablatedPredicted": "bauhaus",
+      "ablatedTie": false
+    },
+    {
+      "class": "brutalism-maximal",
+      "id": "w006",
+      "alignments": {
+        "its": 46,
+        "bauhaus": 56.9,
+        "brutalism-minimal": 39.7,
+        "brutalism-maximal": 76.7,
+        "memphis-revival": 61.2
+      },
+      "predicted": "brutalism-maximal",
+      "tie": false,
+      "ablatedAlignments": {
+        "its": 51.5,
+        "bauhaus": 56,
+        "brutalism-minimal": 45.4,
+        "brutalism-maximal": 87.6,
+        "memphis-revival": 72
+      },
+      "ablatedPredicted": "brutalism-maximal",
+      "ablatedTie": false
+    },
+    {
+      "class": "memphis-revival",
+      "id": "w001",
+      "alignments": {
+        "its": 48,
+        "bauhaus": 57.8,
+        "brutalism-minimal": 43.7,
+        "brutalism-maximal": 57.6,
+        "memphis-revival": 60.9
+      },
+      "predicted": "memphis-revival",
+      "tie": false,
+      "ablatedAlignments": {
+        "its": 50.5,
+        "bauhaus": 58.1,
+        "brutalism-minimal": 52.4,
+        "brutalism-maximal": 59.6,
+        "memphis-revival": 67.9
+      },
+      "ablatedPredicted": "memphis-revival",
+      "ablatedTie": false
+    },
+    {
+      "class": "memphis-revival",
+      "id": "w002",
+      "alignments": {
+        "its": 48.3,
+        "bauhaus": 54.2,
+        "brutalism-minimal": 45.4,
+        "brutalism-maximal": 54.3,
+        "memphis-revival": 78.4
+      },
+      "predicted": "memphis-revival",
+      "tie": false,
+      "ablatedAlignments": {
+        "its": 53.2,
+        "bauhaus": 57.3,
+        "brutalism-minimal": 56,
+        "brutalism-maximal": 60.3,
+        "memphis-revival": 76.2
+      },
+      "ablatedPredicted": "memphis-revival",
+      "ablatedTie": false
+    },
+    {
+      "class": "memphis-revival",
+      "id": "w003",
+      "alignments": {
+        "its": 51.8,
+        "bauhaus": 67.5,
+        "brutalism-minimal": 46.8,
+        "brutalism-maximal": 58.9,
+        "memphis-revival": 68.5
+      },
+      "predicted": "memphis-revival",
+      "tie": false,
+      "ablatedAlignments": {
+        "its": 54.4,
+        "bauhaus": 68.9,
+        "brutalism-minimal": 55.3,
+        "brutalism-maximal": 61.2,
+        "memphis-revival": 59.1
+      },
+      "ablatedPredicted": "bauhaus",
+      "ablatedTie": false
+    },
+    {
+      "class": "memphis-revival",
+      "id": "w004",
+      "alignments": {
+        "its": 55.3,
+        "bauhaus": 61.1,
+        "brutalism-minimal": 51.2,
+        "brutalism-maximal": 53.2,
+        "memphis-revival": 65
+      },
+      "predicted": "memphis-revival",
+      "tie": false,
+      "ablatedAlignments": {
+        "its": 61.9,
+        "bauhaus": 63.1,
+        "brutalism-minimal": 63.6,
+        "brutalism-maximal": 61.8,
+        "memphis-revival": 68.6
+      },
+      "ablatedPredicted": "memphis-revival",
+      "ablatedTie": false
+    },
+    {
+      "class": "memphis-revival",
+      "id": "w005",
+      "alignments": {
+        "its": 55.7,
+        "bauhaus": 66.4,
+        "brutalism-minimal": 48.3,
+        "brutalism-maximal": 56.9,
+        "memphis-revival": 45.1
+      },
+      "predicted": "bauhaus",
+      "tie": false,
+      "ablatedAlignments": {
+        "its": 62.9,
+        "bauhaus": 68.8,
+        "brutalism-minimal": 57.5,
+        "brutalism-maximal": 54.2,
+        "memphis-revival": 33.5
+      },
+      "ablatedPredicted": "bauhaus",
+      "ablatedTie": false
+    },
+    {
+      "class": "memphis-revival",
+      "id": "w006",
+      "alignments": {
+        "its": 44.2,
+        "bauhaus": 48.9,
+        "brutalism-minimal": 42.4,
+        "brutalism-maximal": 57.8,
+        "memphis-revival": 65.9
+      },
+      "predicted": "memphis-revival",
+      "tie": false,
+      "ablatedAlignments": {
+        "its": 47.3,
+        "bauhaus": 50.2,
+        "brutalism-minimal": 49.9,
+        "brutalism-maximal": 64.7,
+        "memphis-revival": 71
+      },
+      "ablatedPredicted": "memphis-revival",
+      "ablatedTie": false
+    }
+  ],
+  "notices": [],
+  "generated": "2026-07-12T15:46:14.349Z"
+}

@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Foundry &amp; Bar Press: Price List</title>
+<style>
+  :root{
+    --red:#E5231B;
+    --yellow:#FFD200;
+    --blue:#0047AB;
+    --black:#141414;
+    --paper:#FFFFFF;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{width:1440px;background:var(--paper);}
+  body{
+    font-family:Futura, "Avenir Next", Avenir, sans-serif;
+    color:var(--black);
+  }
+  .canvas{
+    position:relative;
+    width:1440px;
+    height:1300px;
+    background:var(--paper);
+    overflow:hidden;
+  }
+  .bar{position:absolute;background:var(--black);}
+  .title{
+    position:absolute;
+    top:60px;
+    left:64px;
+    font-size:96px;
+    line-height:0.9;
+    text-transform:lowercase;
+    font-weight:700;
+    letter-spacing:-1px;
+  }
+  .title .dot{color:var(--red);}
+  .tag{
+    position:absolute;
+    top:80px;
+    right:90px;
+    width:260px;
+    font-size:15px;
+    line-height:1.5;
+    text-align:left;
+  }
+  .black-square{
+    position:absolute;
+    width:44px;
+    height:44px;
+    background:var(--black);
+  }
+  .red-bar{
+    position:absolute;
+    background:var(--red);
+  }
+  .color-band-red{
+    position:absolute;
+    top:300px;
+    left:0;
+    width:1440px;
+    height:175px;
+    background:var(--red);
+  }
+  .circle-yellow{
+    position:absolute;
+    top:10px;
+    right:-50px;
+    width:280px;
+    height:280px;
+    border-radius:50%;
+    background:var(--black);
+  }
+  .triangle-blue{
+    position:absolute;
+    width:0;
+    height:0;
+    border-left:90px solid transparent;
+    border-right:90px solid transparent;
+    border-bottom:160px solid var(--red);
+    top:800px;
+    left:1150px;
+  }
+  .row-group{
+    position:absolute;
+    left:64px;
+    width:1312px;
+  }
+  .row{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    padding:22px 0;
+    text-align:left;
+  }
+  .row .name{
+    text-transform:lowercase;
+    font-weight:700;
+  }
+  .row .meta{
+    font-size:14px;
+    text-transform:lowercase;
+    color:#555;
+    margin-top:6px;
+  }
+  .row .price{
+    font-weight:700;
+    white-space:nowrap;
+  }
+  .featured .name{font-size:66px;color:#fff;}
+  .featured .price{font-size:66px;color:#fff;}
+  .featured .meta{color:#f4f1e7;}
+  .row.standard .name{font-size:30px;}
+  .row.standard .price{font-size:30px;}
+  .row.small .name{font-size:22px;}
+  .row.small .price{font-size:22px;}
+  .divider-thin{height:5px;background:var(--black);width:100%;}
+  .divider-thick{height:10px;background:var(--black);width:100%;}
+  .note{
+    position:absolute;
+    top:990px;
+    left:64px;
+    width:520px;
+    font-size:16px;
+    line-height:1.6;
+    text-align:left;
+  }
+  .rush{
+    position:absolute;
+    top:990px;
+    left:700px;
+    width:400px;
+    text-align:left;
+  }
+  .rush .label{
+    font-size:15px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    font-weight:700;
+    color:var(--black);
+  }
+  .rush .figure{
+    font-size:52px;
+    font-weight:700;
+    line-height:1;
+    margin-top:8px;
+  }
+  .diag-rush-rule{
+    position:absolute;
+    width:400px;
+    height:24px;
+    background:var(--black);
+    top:1100px;
+    left:640px;
+    transform:rotate(-18deg);
+  }
+  .footer{
+    position:absolute;
+    top:1210px;
+    left:64px;
+    width:1312px;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    text-align:left;
+  }
+  .footer .brand{
+    font-size:22px;
+    font-weight:700;
+    text-transform:lowercase;
+  }
+  .footer .contact{
+    font-size:15px;
+    line-height:1.6;
+  }
+</style>
+</head>
+<body>
+<div class="canvas">
+
+  <div class="bar" style="top:0; left:0; width:16px; height:100%;"></div>
+
+  <div class="circle-yellow"></div>
+
+  <div class="title">foundry &amp;<br>bar press<span class="dot">.</span></div>
+  <div class="tag">
+    A small job-printing shop running letterpress and offset. Current
+    price list, revised quarterly. All prices before paper surcharge.
+  </div>
+
+  <div class="color-band-red"></div>
+
+  <div class="black-square" style="top:270px; left:64px;"></div>
+  <div class="red-bar" style="top:280px; left:130px; width:1246px; height:8px;"></div>
+
+  <div class="row-group" style="top:320px;">
+    <div class="row featured">
+      <div>
+        <div class="name">business cards</div>
+        <div class="meta">100 count, one color, standard stock</div>
+      </div>
+      <div class="price">$48</div>
+    </div>
+    <div class="divider-thick"></div>
+
+    <div class="row standard">
+      <div>
+        <div class="name">letterheads</div>
+        <div class="meta">250 sheets, up to two colors</div>
+      </div>
+      <div class="price">$110</div>
+    </div>
+    <div class="divider-thin"></div>
+
+    <div class="row standard">
+      <div>
+        <div class="name">posters, 18 x 24</div>
+        <div class="meta">per unit, run of 25 or more</div>
+      </div>
+      <div class="price">$19</div>
+    </div>
+    <div class="divider-thin"></div>
+
+    <div class="row small">
+      <div>
+        <div class="name">wedding stationery sets</div>
+        <div class="meta">invitation, reply card, envelope liner</div>
+      </div>
+      <div class="price">from $6.50 / set</div>
+    </div>
+    <div class="divider-thin"></div>
+
+    <div class="row small">
+      <div>
+        <div class="name">notecards</div>
+        <div class="meta">flat or folded, 50 count</div>
+      </div>
+      <div class="price">$32</div>
+    </div>
+  </div>
+
+  <div class="note">
+    Paper stock options: cotton rag, uncoated recycled, or heavy cover
+    stock. Sample swatches held at the counter. Turnaround runs seven to
+    ten working days on standard jobs.
+  </div>
+
+  <div class="rush">
+    <div class="label">rush order surcharge</div>
+    <div class="figure">+35%</div>
+  </div>
+  <div class="triangle-blue"></div>
+  <div class="diag-rush-rule"></div>
+
+  <div class="footer">
+    <div class="brand">foundry &amp; bar press</div>
+    <div class="contact">
+      412 Coble Street, Unit 3<br>
+      open Tuesday through Saturday, 9 to 5
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

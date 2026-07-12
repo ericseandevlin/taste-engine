@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440, initial-scale=1">
+<title>DEV OKONKWO, PORTFOLIO</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; border-radius: 0; }
+  html, body { width: 1440px; background: #FFFFFF; overflow-x: hidden; }
+  body { font-family: Arial, sans-serif; color: #000000; }
+
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #000000;
+    padding: 18px 24px;
+    border-bottom: 6px solid #FFFF00;
+  }
+  .topbar .name {
+    font-family: "Arial Black", Arial, sans-serif;
+    font-weight: 900;
+    font-size: 26px;
+    color: #FFFFFF;
+  }
+  .topbar nav ul { list-style: none; display: flex; gap: 26px; }
+  .topbar nav a { color: #00FFFF; text-decoration: underline; font-family: "Courier New", monospace; font-size: 14px; }
+
+  .work {
+    position: relative;
+    background: #FFFF00;
+    padding: 60px 20px 100px;
+    min-height: 640px;
+  }
+  .work h2 {
+    position: absolute;
+    top: -10px;
+    left: -40px;
+    font-family: "Arial Black", Arial, sans-serif;
+    font-weight: 900;
+    font-size: 300px;
+    line-height: 0.85;
+    letter-spacing: -8px;
+    white-space: nowrap;
+    color: #FF0000;
+    z-index: 4;
+  }
+
+  .thumb {
+    position: absolute;
+    background: #FFFFFF;
+    border: 5px solid #000000;
+    padding: 0;
+  }
+  .thumb .swatch { width: 100%; height: 160px; }
+  .thumb .meta {
+    padding: 10px 12px;
+    font-family: "Courier New", monospace;
+    font-size: 11px;
+  }
+  .thumb .meta .title {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 16px;
+    margin-bottom: 6px;
+  }
+  .thumb:hover .swatch { filter: invert(1); }
+
+  .thumb-1 { top: 130px; left: 40px; width: 320px; z-index: 3; }
+  .thumb-2 { top: 180px; left: 270px; width: 320px; z-index: 2; transform: rotate(-9deg); }
+  .thumb-3 { top: 370px; left: 130px; width: 320px; z-index: 1; transform: rotate(6deg); }
+  .thumb-4 { top: 140px; left: 720px; width: 320px; z-index: 2; transform: rotate(-7deg); }
+  .thumb-5 { top: 350px; left: 630px; width: 320px; z-index: 3; transform: rotate(8deg); }
+  .thumb-6 { top: 290px; left: 950px; width: 320px; z-index: 1; transform: rotate(-5deg); }
+
+  .about {
+    background: #00FFFF;
+    padding: 40px 20px;
+    border-top: 6px solid #000000;
+    border-bottom: 6px solid #000000;
+  }
+  .about h2 {
+    font-family: "Arial Black", Arial, sans-serif;
+    font-size: 32px;
+    margin-bottom: 16px;
+  }
+  .about p {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 17px;
+    line-height: 1.4;
+    max-width: 900px;
+  }
+
+  .credits {
+    background: #FFFFFF;
+    padding: 30px 20px;
+  }
+  .credits h2 {
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    margin-bottom: 14px;
+    font-weight: bold;
+  }
+  table.credits-table {
+    border-collapse: collapse;
+    width: 100%;
+    font-family: "Courier New", monospace;
+    font-size: 13px;
+  }
+  table.credits-table th, table.credits-table td {
+    border: 1px solid #000000;
+    padding: 6px 10px;
+    text-align: left;
+  }
+  table.credits-table thead th { background: #EEEEEE; }
+
+  footer {
+    background: #000000;
+    color: #FFFFFF;
+    padding: 20px;
+    font-family: "Courier New", monospace;
+    font-size: 12px;
+  }
+  footer a { color: #FFFF00; text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span class="name">DEV OKONKWO</span>
+  <nav>
+    <ul>
+      <li><a href="#work">WORK</a></li>
+      <li><a href="#about">ABOUT</a></li>
+      <li><a href="#credits">CREDITS</a></li>
+    </ul>
+  </nav>
+</div>
+
+<section class="work" id="work">
+  <h2>OKONKWO</h2>
+
+  <div class="thumb thumb-1">
+    <div class="swatch" style="background: #FF0000;"></div>
+    <div class="meta">
+      <p class="title">RECTO / VERSO</p>
+      <p>YEAR: 2023 / MEDIUM: RISO / CLIENT: SELF-INITIATED</p>
+    </div>
+  </div>
+
+  <div class="thumb thumb-2">
+    <div class="swatch" style="background: #00FFFF;"></div>
+    <div class="meta">
+      <p class="title">GROUND FLOOR CATALOG</p>
+      <p>YEAR: 2022 / MEDIUM: PRINT AND WEB / CLIENT: NO FIXED ADDRESS</p>
+    </div>
+  </div>
+
+  <div class="thumb thumb-3">
+    <div class="swatch" style="background: #000000;"></div>
+    <div class="meta">
+      <p class="title">VOID CULT IDENTITY</p>
+      <p>YEAR: 2021 / MEDIUM: BRAND SYSTEM / CLIENT: VOID CULT RECORDS</p>
+    </div>
+  </div>
+
+  <div class="thumb thumb-4">
+    <div class="swatch" style="background: #FFFF00;"></div>
+    <div class="meta">
+      <p class="title">AGGRO CAPSULE LOOKBOOK</p>
+      <p>YEAR: 2024 / MEDIUM: ART DIRECTION / CLIENT: AGGRO STUDIO</p>
+    </div>
+  </div>
+
+  <div class="thumb thumb-5">
+    <div class="swatch" style="background: #FF0000;"></div>
+    <div class="meta">
+      <p class="title">OFFCUT MASTHEAD REDESIGN</p>
+      <p>YEAR: 2020 / MEDIUM: TYPOGRAPHY / CLIENT: OFFCUT ZINE</p>
+    </div>
+  </div>
+
+  <div class="thumb thumb-6">
+    <div class="swatch" style="background: #00FFFF;"></div>
+    <div class="meta">
+      <p class="title">STATIC//NIGHTS FLYER SERIES</p>
+      <p>YEAR: 2024 / MEDIUM: POSTER SYSTEM / CLIENT: STATIC//NIGHTS</p>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <h2>ABOUT</h2>
+  <p>
+    Dev Okonkwo is a graphic designer working across print, brand identity, and web.
+    Recent clients include an independent record label, a zine, and a recurring club
+    night. Work is available for commission; unsolicited pitches are read but rarely
+    answered quickly.
+  </p>
+</section>
+
+<section class="credits" id="credits">
+  <h2>Site Credits</h2>
+  <table class="credits-table">
+    <thead><tr><th>Role</th><th>Name</th><th>Year</th></tr></thead>
+    <tbody>
+      <tr><td>Design and build</td><td>Dev Okonkwo</td><td>2024</td></tr>
+      <tr><td>Typography</td><td>System stack, no licensed faces</td><td>2024</td></tr>
+      <tr><td>Photography</td><td>None used, swatches only</td><td>2024</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<footer>
+  <p>CONTACT <a href="mailto:hello@devokonkwo.example">hello@devokonkwo.example</a> FOR COMMISSION INQUIRIES.</p>
+</footer>
+
+</body>
+</html>

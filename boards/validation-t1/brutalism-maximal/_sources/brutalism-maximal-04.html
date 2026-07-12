@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440, initial-scale=1">
+<title>OFFCUT</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; border-radius: 0; }
+  html, body { width: 1440px; background: #CCFF00; overflow-x: hidden; }
+  body { font-family: "Times New Roman", Times, serif; color: #000000; }
+
+  .masthead {
+    position: relative;
+    width: 1440px;
+    height: 260px;
+    background: #000000;
+    overflow: hidden;
+    border-bottom: 6px solid #FF00FF;
+  }
+  .masthead h1 {
+    position: absolute;
+    top: -60px;
+    left: -15px;
+    font-family: "Arial Black", Arial, sans-serif;
+    font-weight: 900;
+    font-size: 400px;
+    line-height: 0.8;
+    letter-spacing: -8px;
+    color: #FFFFFF;
+    white-space: nowrap;
+  }
+  .masthead .issue {
+    position: absolute;
+    bottom: 14px;
+    right: 24px;
+    font-family: "Courier New", monospace;
+    font-size: 16px;
+    color: #CCFF00;
+  }
+
+  nav.main {
+    background: #CCFF00;
+    padding: 12px 20px;
+    border-bottom: 5px solid #000000;
+  }
+  nav.main ul { list-style: none; display: flex; gap: 26px; }
+  nav.main a { color: #0000EE; text-decoration: underline; font-family: "Courier New", monospace; font-size: 15px; }
+
+  .toc {
+    background: #FF00FF;
+    padding: 30px 20px;
+    border-bottom: 6px solid #000000;
+  }
+  .toc h2 {
+    font-family: "Arial Black", Arial, sans-serif;
+    font-size: 32px;
+    margin-bottom: 16px;
+    color: #000000;
+  }
+  .toc ol {
+    list-style: none;
+    font-family: "Courier New", monospace;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .toc li { border-bottom: 1px solid #000000; padding: 2px 0; }
+  .toc .tag { font-weight: bold; }
+
+  .article {
+    background: #FFFFFF;
+    padding: 40px 20px;
+    display: flex;
+    gap: 30px;
+    position: relative;
+  }
+  .article .body {
+    flex: 1;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 18px;
+    line-height: 1.4;
+    column-count: 2;
+    column-gap: 30px;
+  }
+  .article .sidebar {
+    width: 280px;
+    background: #000000;
+    color: #CCFF00;
+    font-family: "Courier New", monospace;
+    font-size: 12px;
+    padding: 16px;
+    border: 4px solid #000000;
+  }
+  .article .sidebar h3 {
+    font-family: "Arial Black", Arial, sans-serif;
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #FFFFFF;
+  }
+
+  .pullquote {
+    position: absolute;
+    top: 100px;
+    left: 740px;
+    width: 440px;
+    background: #CCFF00;
+    border: 5px solid #000000;
+    padding: 18px;
+    font-family: "Arial Black", Arial, sans-serif;
+    font-size: 26px;
+    line-height: 1.15;
+    transform: rotate(-8deg);
+    z-index: 2;
+  }
+
+  .zine-strip {
+    background: #FF00FF;
+    padding: 20px;
+    border-top: 6px solid #000000;
+    border-bottom: 6px solid #000000;
+    font-family: "Courier New", monospace;
+    font-size: 13px;
+  }
+
+  footer {
+    background: #000000;
+    color: #FFFFFF;
+    padding: 20px;
+    font-family: "Courier New", monospace;
+    font-size: 12px;
+  }
+  footer a { color: #CCFF00; text-decoration: underline; }
+
+  .collision-slab {
+    position: absolute;
+    top: 208px;
+    left: 660px;
+    width: 520px;
+    z-index: 60;
+    font-family: "Arial Black", Arial, sans-serif;
+    font-weight: 900;
+    font-size: 34px;
+    background: #FF00FF;
+    color: #000000;
+    border: 5px solid #000000;
+    padding: 16px 24px;
+    line-height: 1.05;
+    transform: rotate(6deg);
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <h1>OFFCUT</h1>
+  <p class="issue">[ISSUE 04] PHOTOCOPIED, NOT SCANNED CLEAN</p>
+</header>
+
+<div class="collision-slab">ISSUE 04 OUT NOW, 400 COPIES, CASH ONLY</div>
+
+<nav class="main">
+  <ul>
+    <li><a href="#toc">CONTENTS</a></li>
+    <li><a href="#feature">FEATURE</a></li>
+    <li><a href="#archive">BACK ISSUES</a></li>
+  </ul>
+</nav>
+
+<section class="toc" id="toc">
+  <h2>CONTENTS, ISSUE 04</h2>
+  <ol>
+    <li><span class="tag">[REPORT]</span> A WEEK INSIDE THE PRINT SHOP THAT WON'T FIX ITS TONER STREAK</li>
+    <li><span class="tag">[INTERVIEW]</span> THE LETTERPRESS OPERATOR WHO REFUSES DIGITAL PROOFS</li>
+    <li><span class="tag">[ESSAY]</span> ON THE OFFCUT AS A UNIT OF MEASUREMENT</li>
+    <li><span class="tag">[LISTING]</span> WHERE TO FIND THIS ISSUE IN PERSON</li>
+  </ol>
+</section>
+
+<section class="article" id="feature">
+  <div class="body">
+    <p>
+      The toner streak has been running down the left margin of every issue since
+      volume one, and nobody on staff will fix it. The copier that makes it is older
+      than half the contributors. Replacing the drum would remove the mark that half
+      the readers now associate with the publication itself, so the copier stays.
+    </p>
+    <p>
+      OFFCUT does not proof digitally before print. Layout happens on a light table
+      with actual scissors, actual tape, and an actual ruler that nobody trusts past
+      the twelve inch mark. The web edition you are reading is a direct scan of those
+      boards, reproduced at whatever size the boards happened to be that month, not a
+      redesign for the browser.
+    </p>
+    <p>
+      Subscriptions do not exist. If you want the next issue, you go to the distro
+      table and buy the next issue. The mailing list announces the table's location
+      and nothing else, twelve words a month, no images attached. Contributors are
+      paid in copies and in beer, in that order, and every masthead role rotates
+      whenever somebody gets tired of it.
+    </p>
+    <p>
+      The type in this issue was set in whatever the copier could hold onto. Where a
+      character dropped out, it stays dropped. Page numbers were rubber-stamped by
+      hand, which is why issue three has two page nines and no page ten, and why
+      nobody has ever asked us to fix it.
+    </p>
+  </div>
+  <aside class="sidebar">
+    <h3>MASTHEAD</h3>
+    <p>EDITOR: R. AXELROD</p>
+    <p>LAYOUT: J. FERRO</p>
+    <p>PRINT RUN: 400</p>
+    <p>PRICE: $6 CASH ONLY</p>
+    <p>NEXT DEADLINE: SEPTEMBER 01</p>
+  </aside>
+  <div class="pullquote">"THE STREAK STAYS. IT IS THE ONLY THING PROVING THIS WAS PRINTED, NOT DESIGNED."</div>
+</section>
+
+<section class="zine-strip" id="archive">
+  <p>BACK ISSUES 01 THROUGH 03 AVAILABLE AT THE DISTRO TABLE ONLY. NO ONLINE STORE, NO SHIPPING, NO EXCEPTIONS.</p>
+</section>
+
+<footer>
+  <p>OFFCUT IS SELF DISTRIBUTED. WRITE TO <a href="mailto:offcutzine@example.com">offcutzine@example.com</a> TO CONTRIBUTE.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Studio Zigzag - Brand and Motion Design</title>
+<meta name="viewport" content="width=1440">
+<style>
+  :root{
+    --ink:#101010;
+    --paper:#f8eecb;
+    --red:#d6321f;
+    --cobalt:#1c3fd0;
+    --yellow:#eec12a;
+    --peach:#f7dc8e;
+    --lav:#aebdf7;
+    --mint:#f0a89b;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:var(--paper);}
+  body{
+    width:1440px;
+    font-family:-apple-system, "Helvetica Neue", Arial, sans-serif;
+    color:var(--ink);
+    position:relative;
+  }
+  .page{width:1440px;position:relative;}
+  .ornament{position:absolute; pointer-events:none;}
+
+  header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:34px 72px;
+    position:relative;
+    z-index:5;
+  }
+  .logo{
+    font-weight:900;
+    font-size:22px;
+    letter-spacing:1px;
+    border:3px solid var(--ink);
+    padding:6px 14px;
+    display:inline-block;
+    transform:rotate(-6deg);
+    background:var(--yellow);
+    box-shadow:5px 5px 0 var(--ink);
+  }
+  nav a{
+    color:var(--ink);
+    text-decoration:none;
+    font-weight:700;
+    margin-left:30px;
+    font-size:15px;
+  }
+
+  .hero{
+    position:relative;
+    padding:40px 72px 40px;
+    overflow:hidden;
+  }
+  .hero-line{
+    font-size:72px;
+    font-weight:900;
+    line-height:1.02;
+    letter-spacing:-1px;
+    max-width:980px;
+    position:relative;
+    z-index:4;
+    margin:0;
+  }
+  .hero-line .accent{
+    color:var(--red);
+  }
+  .hero-meta{
+    display:flex;
+    gap:60px;
+    margin-top:36px;
+    position:relative;
+    z-index:4;
+  }
+  .hero-meta div{
+    font-size:14px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    max-width:200px;
+  }
+
+  .squiggle-field{
+    background-color:var(--lav);
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='32'><path d='M0 8 Q 8 0 16 8 T 32 8 T 48 8 T 64 8' fill='none' stroke='%23101010' stroke-width='4'/><path d='M0 24 Q 8 16 16 24 T 32 24 T 48 24 T 64 24' fill='none' stroke='%23101010' stroke-width='4'/></svg>");
+    background-size:64px 32px;
+  }
+  .squiggle-band{
+    height:230px;
+    border-top:4px solid var(--ink);
+  }
+  .checker-band{
+    height:34px;
+    width:100%;
+    background-image:repeating-conic-gradient(#101010 0% 25%, #f4efe4 0% 50%);
+    background-size:34px 34px;
+    border-top:4px solid var(--ink);
+    border-bottom:4px solid var(--ink);
+    position:relative;
+    z-index:3;
+  }
+
+  section.clients{
+    padding:250px 72px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:var(--cobalt);
+  }
+  .client-name{
+    font-size:20px;
+    font-weight:800;
+    letter-spacing:0.5px;
+    color:var(--paper);
+  }
+
+  section.work{
+    padding:24px 72px 110px;
+    position:relative;
+  }
+  section.work h2{
+    font-size:16px;
+    text-transform:uppercase;
+    letter-spacing:2px;
+    font-weight:800;
+    margin:0 0 46px;
+  }
+  .work-grid{
+    display:grid;
+    grid-template-columns:1.2fr 1fr 1fr;
+    gap:32px;
+    align-items:start;
+  }
+  .case-card{
+    background:var(--paper);
+    border:3px solid var(--ink);
+    padding:0;
+    box-shadow:9px 9px 0 var(--cobalt);
+    overflow:hidden;
+  }
+  .case-card:nth-child(2){
+    margin-top:60px;
+    transform:rotate(3deg);
+    box-shadow:9px 9px 0 var(--red);
+  }
+  .case-card:nth-child(3){
+    transform:rotate(-3deg);
+    box-shadow:9px 9px 0 var(--yellow);
+  }
+  .case-thumb{
+    height:420px;
+    position:relative;
+    overflow:hidden;
+  }
+  .case-card:nth-child(1) .case-thumb{background:var(--lav);}
+  .case-card:nth-child(2) .case-thumb{background:var(--mint);}
+  .case-card:nth-child(3) .case-thumb{background:var(--peach);}
+  .case-body{padding:22px;}
+  .case-body .tag{
+    font-size:12px;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    color:#555;
+  }
+  .case-body h3{
+    font-size:24px;
+    font-weight:900;
+    margin:8px 0 0;
+  }
+
+  section.manifesto{
+    background:var(--ink);
+    color:var(--paper);
+    padding:90px 72px;
+    position:relative;
+    overflow:hidden;
+  }
+  section.manifesto p{
+    font-size:32px;
+    font-weight:700;
+    max-width:820px;
+    line-height:1.4;
+    position:relative;
+    z-index:4;
+    margin:0;
+  }
+
+  footer{
+    padding:40px 72px;
+    display:flex;
+    justify-content:space-between;
+    font-size:14px;
+    font-weight:700;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="logo">STUDIO ZIGZAG</div>
+    <nav>
+      <a href="#">Work</a>
+      <a href="#">Studio</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1 class="hero-line">Brand and motion for companies that don't want to blend in.
+    <span class="accent">Especially the ones scared to try.</span></h1>
+    <div class="hero-meta">
+      <div>Five person studio, Chicago</div>
+      <div>Brand identity, motion, web</div>
+      <div>Working with six clients a year, on purpose</div>
+    </div>
+
+    <svg class="ornament" style="top:0px; left:1150px; width:100px; height:100px;" viewBox="0 0 100 100">
+      <polygon points="50,5 95,95 5,95" fill="none" stroke="#1c3fd0" stroke-width="6"/>
+    </svg>
+    <svg class="ornament" style="top:150px; left:1240px; width:130px; height:130px;" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="45" fill="#eec12a"/>
+    </svg>
+    <svg class="ornament" style="top:20px; left:660px; width:70px; height:70px;" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="45" fill="#eec12a"/>
+    </svg>
+    <svg class="ornament" style="top:280px; left:1120px; width:80px; height:44px;" viewBox="0 0 100 60">
+      <path d="M5 30 L25 10 L45 30 L65 10 L85 30" fill="none" stroke="#d6321f" stroke-width="7" stroke-linecap="round"/>
+    </svg>
+    <svg class="ornament" style="top:330px; left:640px; width:460px; height:70px;" viewBox="0 0 460 70">
+      <path d="M10 40 Q 38 5, 66 40 T 122 40 T 178 40 T 234 40 T 290 40 T 346 40 T 402 40 T 450 40" fill="none" stroke="#1c3fd0" stroke-width="10" stroke-linecap="round"/>
+    </svg>
+    <svg class="ornament" style="top:420px; left:1020px; width:380px; height:60px;" viewBox="0 0 380 60">
+      <path d="M8 34 Q 32 4, 56 34 T 104 34 T 152 34 T 200 34 T 248 34 T 296 34 T 344 34 T 372 34" fill="none" stroke="#d6321f" stroke-width="9" stroke-linecap="round"/>
+    </svg>
+    <svg class="ornament" style="top:150px; left:1010px; width:56px; height:56px;" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="45" fill="#d6321f"/>
+    </svg>
+  </section>
+
+  <div class="squiggle-band squiggle-field"></div>
+  <div class="checker-band"></div>
+
+  <section class="clients">
+    <div class="client-name">FERAL & CO.</div>
+    <div class="client-name">NORTHWIND</div>
+    <div class="client-name">PLUMB STUDIO</div>
+    <div class="client-name">GRIDLOCK MEDIA</div>
+    <div class="client-name">OARSMAN</div>
+  </section>
+
+  <section class="work">
+    <h2>Selected case studies</h2>
+    <div class="work-grid">
+      <div class="case-card">
+        <div class="case-thumb">
+          <svg style="position:absolute; top:20px; left:20px; width:70px; height:70px;" viewBox="0 0 100 100">
+            <rect x="10" y="10" width="80" height="80" fill="none" stroke="#101010" stroke-width="6"/>
+          </svg>
+          <svg style="position:absolute; bottom:16px; right:24px; width:50px; height:50px;" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="45" fill="#101010"/>
+          </svg>
+        </div>
+        <div class="case-body">
+          <div class="tag">Identity + Web</div>
+          <h3>Feral &amp; Co. rebrand</h3>
+        </div>
+      </div>
+      <div class="case-card">
+        <div class="case-thumb">
+          <svg style="position:absolute; top:30px; left:40px; width:90px; height:50px;" viewBox="0 0 100 60">
+            <path d="M5 30 L25 10 L45 30 L65 10 L85 30" fill="none" stroke="#101010" stroke-width="8" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="case-body">
+          <div class="tag">Motion</div>
+          <h3>Northwind launch film</h3>
+        </div>
+      </div>
+      <div class="case-card">
+        <div class="case-thumb">
+          <svg style="position:absolute; top:20px; left:30px; width:60px; height:60px;" viewBox="0 0 100 100">
+            <polygon points="50,5 95,95 5,95" fill="#101010"/>
+          </svg>
+        </div>
+        <div class="case-body">
+          <div class="tag">Packaging</div>
+          <h3>Plumb Studio system</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="manifesto">
+    <svg class="ornament" style="top:30px; left:1000px; width:150px; height:150px;" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="45" fill="none" stroke="#eec12a" stroke-width="6"/>
+    </svg>
+    <svg class="ornament" style="bottom:20px; left:1150px; width:80px; height:80px;" viewBox="0 0 100 100">
+      <rect x="30" y="10" width="14" height="80" fill="#d6321f"/>
+      <rect x="10" y="30" width="80" height="14" fill="#d6321f"/>
+    </svg>
+    <p>We do not design things to be liked immediately. We design things people keep
+    noticing a week later, which is a slower and much harder trick.</p>
+  </section>
+
+  <footer>
+    <div>STUDIO ZIGZAG</div>
+    <div>hello@studiozigzag.com</div>
+    <div>Chicago, IL</div>
+  </footer>
+
+</div>
+</body>
+</html>

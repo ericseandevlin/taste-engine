@@ -1,0 +1,470 @@
+{
+  "board": "validation-t1/brutalism-maximal",
+  "kind": "visual-ui",
+  "generated": "2026-07-12T15:45:47.967Z",
+  "items": [
+    {
+      "id": "w001",
+      "file": "brutalism-maximal-01.png",
+      "title": "Brutalism Maximal",
+      "source": {
+        "name": "Brutalism Maximal",
+        "url": null,
+        "local": "boards/validation-t1/brutalism-maximal/brutalism-maximal-01.png",
+        "arena": null
+      },
+      "measured": {
+        "w": 1440,
+        "h": 1200,
+        "aspect": 1.2,
+        "palette": [
+          {
+            "hex": "#000000",
+            "pct": 37
+          },
+          {
+            "hex": "#ff0000",
+            "pct": 12
+          },
+          {
+            "hex": "#00ffff",
+            "pct": 11
+          },
+          {
+            "hex": "#ccff00",
+            "pct": 8
+          },
+          {
+            "hex": "#333333",
+            "pct": 3
+          }
+        ],
+        "contrast": 0.307,
+        "density": 0.08,
+        "accentCoverage": 0.6983,
+        "accentHueCount": 8
+      },
+      "tags": [
+        "black-keyline-outlines",
+        "bold-primary",
+        "dark-field",
+        "dense-utilitarian-lists",
+        "extreme-type-scale-contrast",
+        "flat-geometric-primitives",
+        "flat-unmodulated-color-fields",
+        "grotesk-display",
+        "hard-edged-zero-effects",
+        "heavy-rule-scaffolding",
+        "high-chroma",
+        "high-density",
+        "index-table-listing",
+        "monolithic-block-massing",
+        "monospace-metadata",
+        "objective-documentary-imagery",
+        "oversized-wordmark",
+        "process-documentation",
+        "restricted-palette-single-accent",
+        "single-sans-family",
+        "size-weight-position-hierarchy",
+        "strict-column-grid",
+        "undisguised-construction"
+      ],
+      "channels": [
+        "oversized-wordmark",
+        "process-documentation",
+        "grid-index"
+      ],
+      "notes": {
+        "why": "Massive neon-yellow wordmark anchors a black-ground layout where thick rules and tight grid structure organize utilitarian tabular content and transmission specs as raw working documents.",
+        "avoid": "Do not soften the graphic severity with rounded corners, gradients, or drop shadows; the flat high-contrast color and hard edges are what make the industrial register work.",
+        "keep": "The stacking of monolithic color blocks (neon yellow, cyan, red) separated by thick black rules creates visual hierarchy and legibility without any decorative ornament."
+      }
+    },
+    {
+      "id": "w002",
+      "file": "brutalism-maximal-02.png",
+      "title": "Brutalism Maximal",
+      "source": {
+        "name": "Brutalism Maximal",
+        "url": null,
+        "local": "boards/validation-t1/brutalism-maximal/brutalism-maximal-02.png",
+        "arena": null
+      },
+      "measured": {
+        "w": 1440,
+        "h": 1200,
+        "aspect": 1.2,
+        "palette": [
+          {
+            "hex": "#ffffff",
+            "pct": 41
+          },
+          {
+            "hex": "#ff0000",
+            "pct": 16
+          },
+          {
+            "hex": "#00ffff",
+            "pct": 7
+          },
+          {
+            "hex": "#000000",
+            "pct": 6
+          },
+          {
+            "hex": "#cccccc",
+            "pct": 5
+          }
+        ],
+        "contrast": 0.341,
+        "density": 0.087,
+        "accentCoverage": 0.4921,
+        "accentHueCount": 3
+      },
+      "tags": [
+        "black-keyline-outlines",
+        "black-white-counterchange-pattern",
+        "bold-primary",
+        "deliberate-misalignment-or-overlap",
+        "dense-utilitarian-lists",
+        "extreme-type-scale-contrast",
+        "flat-geometric-primitives",
+        "flat-unmodulated-color-fields",
+        "full-bleed-imagery",
+        "grotesk-display",
+        "hard-edged-zero-effects",
+        "heavy-rule-scaffolding",
+        "high-chroma",
+        "high-density",
+        "index-table-listing",
+        "monolithic-block-massing",
+        "objective-documentary-imagery",
+        "pattern-clash-adjacency",
+        "process-documentation",
+        "restricted-palette-single-accent",
+        "single-sans-family",
+        "size-weight-position-hierarchy",
+        "strict-column-grid",
+        "undisguised-construction"
+      ],
+      "channels": [
+        "process-documentation",
+        "bold-primary-block",
+        "grid-index"
+      ],
+      "notes": {
+        "why": "Oversized red wordmark and aggressive black-and-white geometric patterns establish visual dominance while a strict columnar grid beneath organizes product specs and table data with utilitarian clarity.",
+        "avoid": "Do not soften the palette, round corners, or add decorative layering—the raw red-cyan-black clash and hard edges are essential to the aggressive energy.",
+        "keep": "The bold red headline bleeding full-width over cyan and the hard-edged checkerboard pattern block create instant visual contrast that draws eye before the dense information below."
+      }
+    },
+    {
+      "id": "w003",
+      "file": "brutalism-maximal-03.png",
+      "title": "Brutalism Maximal",
+      "source": {
+        "name": "Brutalism Maximal",
+        "url": null,
+        "local": "boards/validation-t1/brutalism-maximal/brutalism-maximal-03.png",
+        "arena": null
+      },
+      "measured": {
+        "w": 1440,
+        "h": 1200,
+        "aspect": 1.2,
+        "palette": [
+          {
+            "hex": "#ccff00",
+            "pct": 38
+          },
+          {
+            "hex": "#000000",
+            "pct": 26
+          },
+          {
+            "hex": "#ffffff",
+            "pct": 8
+          },
+          {
+            "hex": "#cccccc",
+            "pct": 5
+          },
+          {
+            "hex": "#99cc00",
+            "pct": 4
+          }
+        ],
+        "contrast": 0.365,
+        "density": 0.073,
+        "accentCoverage": 0.1203,
+        "accentHueCount": 7
+      },
+      "tags": [
+        "active-negative-space",
+        "asymmetric-composition",
+        "black-keyline-outlines",
+        "bold-primary",
+        "deliberate-misalignment-or-overlap",
+        "extreme-type-scale-contrast",
+        "flat-geometric-primitives",
+        "flat-unmodulated-color-fields",
+        "grotesk-display",
+        "hard-edged-zero-effects",
+        "hard-offset-shadows",
+        "heavy-rule-scaffolding",
+        "high-chroma",
+        "high-density",
+        "index-table-listing",
+        "objective-documentary-imagery",
+        "oversized-load-bearing-type",
+        "process-documentation",
+        "restricted-palette-single-accent",
+        "single-sans-family",
+        "size-weight-position-hierarchy",
+        "tilted-rotated-elements",
+        "type-as-image",
+        "undisguised-construction"
+      ],
+      "channels": [
+        "bold-primary-block",
+        "type-as-image",
+        "process-documentation"
+      ],
+      "notes": {
+        "why": "High-contrast neon yellow and black, with dynamically rotated and overlapping typography and raw tabular data, creates urgent visual energy that reads as anti-design punk documentation.",
+        "avoid": "Softening the palette, rounding corners, or adding hierarchical chrome—the rawness and flatness are essential to the rebellious register.",
+        "keep": "The collision of oversized display type, rotated stickers, and exposed table rows, all in a two-color palette with zero effects, is instantly distinctive and enforces information-first urgency."
+      }
+    },
+    {
+      "id": "w004",
+      "file": "brutalism-maximal-04.png",
+      "title": "Brutalism Maximal",
+      "source": {
+        "name": "Brutalism Maximal",
+        "url": null,
+        "local": "boards/validation-t1/brutalism-maximal/brutalism-maximal-04.png",
+        "arena": null
+      },
+      "measured": {
+        "w": 1440,
+        "h": 1200,
+        "aspect": 1.2,
+        "palette": [
+          {
+            "hex": "#ffffff",
+            "pct": 21
+          },
+          {
+            "hex": "#ccff00",
+            "pct": 20
+          },
+          {
+            "hex": "#ff00ff",
+            "pct": 19
+          },
+          {
+            "hex": "#000000",
+            "pct": 14
+          },
+          {
+            "hex": "#cccccc",
+            "pct": 7
+          }
+        ],
+        "contrast": 0.338,
+        "density": 0.066,
+        "accentCoverage": 0.5819,
+        "accentHueCount": 6
+      },
+      "tags": [
+        "active-negative-space",
+        "asymmetric-composition",
+        "bold-primary",
+        "deliberate-misalignment-or-overlap",
+        "extreme-type-scale-contrast",
+        "flat-geometric-primitives",
+        "flat-unmodulated-color-fields",
+        "flush-left-ragged-right",
+        "grotesk-display",
+        "hard-edged-zero-effects",
+        "heavy-rule-scaffolding",
+        "high-chroma",
+        "high-density",
+        "monolithic-block-massing",
+        "objective-documentary-imagery",
+        "oversized-load-bearing-type",
+        "process-documentation",
+        "restricted-palette-single-accent",
+        "single-sans-family",
+        "size-weight-position-hierarchy",
+        "tilted-rotated-elements",
+        "type-as-image",
+        "undisguised-construction"
+      ],
+      "channels": [
+        "oversized-wordmark",
+        "process-documentation",
+        "type-as-image"
+      ],
+      "notes": {
+        "why": "Brutalist editorial layout using oversized sans-serif type as raw visual mass, vibrant neon color blocks, and deliberate misalignment to create urgent documentary energy.",
+        "avoid": "Do not soften the edges, add shadows or gradients, or center the composition—the visual tension comes from hard orthogonal collision and off-grid rotated callouts.",
+        "keep": "The rotated yellow and magenta banner strips used as emphasis devices that break grid alignment while maintaining stark flat color and legibility."
+      }
+    },
+    {
+      "id": "w005",
+      "file": "brutalism-maximal-05.png",
+      "title": "Brutalism Maximal",
+      "source": {
+        "name": "Brutalism Maximal",
+        "url": null,
+        "local": "boards/validation-t1/brutalism-maximal/brutalism-maximal-05.png",
+        "arena": null
+      },
+      "measured": {
+        "w": 1440,
+        "h": 1200,
+        "aspect": 1.2,
+        "palette": [
+          {
+            "hex": "#ff0000",
+            "pct": 41
+          },
+          {
+            "hex": "#000000",
+            "pct": 19
+          },
+          {
+            "hex": "#00ffff",
+            "pct": 13
+          },
+          {
+            "hex": "#cc0000",
+            "pct": 5
+          },
+          {
+            "hex": "#ffffff",
+            "pct": 3
+          }
+        ],
+        "contrast": 0.248,
+        "density": 0.047,
+        "accentCoverage": 0.2702,
+        "accentHueCount": 4
+      },
+      "tags": [
+        "black-keyline-outlines",
+        "bold-primary",
+        "deliberate-misalignment-or-overlap",
+        "extreme-type-scale-contrast",
+        "flat-geometric-primitives",
+        "flat-unmodulated-color-fields",
+        "full-bleed-imagery",
+        "grotesk-display",
+        "hard-edged-zero-effects",
+        "heavy-rule-scaffolding",
+        "high-chroma",
+        "high-density",
+        "index-table-listing",
+        "oversized-load-bearing-type",
+        "restricted-palette-single-accent",
+        "single-sans-family",
+        "size-weight-position-hierarchy",
+        "strict-column-grid",
+        "tilted-rotated-elements",
+        "type-as-image",
+        "undisguised-construction"
+      ],
+      "channels": [
+        "oversized-wordmark",
+        "bold-primary-block",
+        "grid-index"
+      ],
+      "notes": {
+        "why": "Massive red-and-cyan color contrast with oversized type and rotated overlapping blocks creates urgency and visual collision while maintaining grid-aligned information layers beneath.",
+        "avoid": "Do not soften the edges, add gradients, or reduce the chromatic intensity—the harshness is essential to the register; avoid centering content or balancing masses symmetrically.",
+        "keep": "The stacked yellow banner + rotated black type overlay + cyan table structure creates a three-layer hierarchy that works through collision, not refinement."
+      }
+    },
+    {
+      "id": "w006",
+      "file": "brutalism-maximal-06.png",
+      "title": "Brutalism Maximal",
+      "source": {
+        "name": "Brutalism Maximal",
+        "url": null,
+        "local": "boards/validation-t1/brutalism-maximal/brutalism-maximal-06.png",
+        "arena": null
+      },
+      "measured": {
+        "w": 1440,
+        "h": 1200,
+        "aspect": 1.2,
+        "palette": [
+          {
+            "hex": "#ffffff",
+            "pct": 19
+          },
+          {
+            "hex": "#ffff00",
+            "pct": 18
+          },
+          {
+            "hex": "#00ffff",
+            "pct": 16
+          },
+          {
+            "hex": "#ff0000",
+            "pct": 14
+          },
+          {
+            "hex": "#000000",
+            "pct": 12
+          }
+        ],
+        "contrast": 0.318,
+        "density": 0.061,
+        "accentCoverage": 0.6552,
+        "accentHueCount": 6
+      },
+      "tags": [
+        "active-negative-space",
+        "asymmetric-composition",
+        "black-keyline-outlines",
+        "bold-primary",
+        "broken-grid-type",
+        "deliberate-misalignment-or-overlap",
+        "extreme-type-scale-contrast",
+        "flat-geometric-primitives",
+        "flat-unmodulated-color-fields",
+        "grotesk-display",
+        "hard-edged-zero-effects",
+        "hard-offset-shadows",
+        "high-chroma",
+        "high-density",
+        "index-table-listing",
+        "monolithic-block-massing",
+        "objective-documentary-imagery",
+        "oversized-load-bearing-type",
+        "restricted-palette-single-accent",
+        "scattered-geometric-primitives",
+        "size-weight-position-hierarchy",
+        "tilted-rotated-elements",
+        "type-as-image",
+        "undisguised-construction"
+      ],
+      "channels": [
+        "oversized-wordmark",
+        "type-as-image",
+        "bold-primary-block"
+      ],
+      "notes": {
+        "why": "Massive rotated wordmark dominates the canvas as raw typographic mass, while scattered offset rectangles with labeled content create controlled chaos through deliberate misalignment and high-contrast color blocking.",
+        "avoid": "Do not soften the edges, add gradients, or center-align anything; the tension comes from hard collisions and asymmetric placement on a strict two-color ground.",
+        "keep": "The technique of using black-outlined colored rectangles as both functional content holders and compositional sculptural elements, allowing information and visual mass to merge into one system."
+      }
+    }
+  ]
+}

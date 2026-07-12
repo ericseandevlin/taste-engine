@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Salt Line Print Collective: Poster Archive</title>
+<style>
+  :root{
+    --red:#E5231B;
+    --yellow:#FFD200;
+    --blue:#0047AB;
+    --black:#141414;
+    --paper:#F6EFDE;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{width:1440px;background:var(--paper);}
+  body{
+    font-family:Futura, "Avenir Next", Avenir, sans-serif;
+    color:var(--black);
+  }
+  .canvas{
+    position:relative;
+    width:1440px;
+    height:1260px;
+    background:var(--paper);
+    overflow:hidden;
+  }
+  .bar{position:absolute;background:var(--black);}
+  .field-blue{
+    position:absolute;
+    top:0;
+    left:1000px;
+    width:440px;
+    height:560px;
+    background:var(--blue);
+  }
+  .archive-title{
+    position:absolute;
+    top:56px;
+    left:64px;
+    font-size:70px;
+    font-weight:700;
+    text-transform:lowercase;
+    letter-spacing:-1px;
+  }
+  .filter-note{
+    position:absolute;
+    top:70px;
+    right:70px;
+    width:340px;
+    font-size:15px;
+    line-height:1.6;
+    text-align:right;
+    color:var(--paper);
+  }
+  .search-bar{
+    position:absolute;
+    top:180px;
+    right:70px;
+    width:340px;
+    height:44px;
+    border:3px solid var(--paper);
+    display:flex;
+    align-items:center;
+    padding-left:14px;
+    font-size:14px;
+    text-transform:lowercase;
+    color:#d9e2f2;
+    text-align:left;
+  }
+  .circle-red{
+    position:absolute;
+    top:260px;
+    left:1000px;
+    width:180px;
+    height:180px;
+    border-radius:50%;
+    background:var(--red);
+  }
+  .triangle-yellow{
+    position:absolute;
+    width:0;
+    height:0;
+    border-left:110px solid transparent;
+    border-right:110px solid transparent;
+    border-bottom:190px solid var(--red);
+    top:380px;
+    left:1080px;
+  }
+  .diag-black{
+    position:absolute;
+    width:720px;
+    height:44px;
+    background:var(--black);
+    top:540px;
+    left:-50px;
+    transform:rotate(-14deg);
+  }
+  .entry{
+    position:absolute;
+    text-align:left;
+  }
+  .entry .swatch{
+    background:#3a3a3a;
+    position:relative;
+  }
+  .entry .featured-tag{
+    position:absolute;
+    top:12px;
+    left:12px;
+    background:var(--red);
+    color:#fff;
+    font-size:12px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    padding:5px 10px;
+  }
+  .entry .cap{
+    margin-top:12px;
+    font-size:16px;
+    font-weight:700;
+    text-transform:lowercase;
+  }
+  .entry .cap-meta{
+    font-size:13px;
+    color:#555;
+    margin-top:3px;
+    text-transform:lowercase;
+  }
+  .hero-title{
+    position:absolute;
+    top:340px;
+    left:130px;
+    font-size:150px;
+    font-weight:700;
+    line-height:0.85;
+    text-transform:lowercase;
+    color:var(--red);
+    transform:rotate(-8deg);
+    transform-origin:left center;
+    z-index:2;
+  }
+  .footer{
+    position:absolute;
+    top:1185px;
+    left:64px;
+    width:1312px;
+    display:flex;
+    justify-content:space-between;
+    font-size:13px;
+    text-transform:lowercase;
+    color:#555;
+    text-align:left;
+  }
+</style>
+</head>
+<body>
+<div class="canvas">
+
+  <div class="bar" style="top:0; left:0; width:100%; height:14px;"></div>
+
+  <div class="field-blue"></div>
+
+  <div class="archive-title">salt line archive</div>
+  <div class="filter-note">
+    412 posters catalogued from the Salt Line Print Collective, active
+    1974 to 1989. Filter by year, designer, or campaign below.
+  </div>
+  <div class="search-bar">search the archive</div>
+
+  <div class="bar" style="top:240px; left:64px; width:870px; height:14px;"></div>
+
+  <div class="circle-red"></div>
+  <div class="triangle-yellow"></div>
+  <div class="diag-black"></div>
+
+  <div class="hero-title">no cars<br>downtown</div>
+
+  <div class="entry" style="top:660px; left:64px; width:360px;">
+    <div class="swatch" style="height:220px;">
+      <div class="featured-tag">featured</div>
+    </div>
+    <div class="cap">no cars downtown, 1978</div>
+    <div class="cap-meta">designer: R. Okonkwo-Byrd</div>
+  </div>
+
+  <div class="entry" style="top:660px; left:460px; width:220px;">
+    <div class="swatch" style="height:140px;"></div>
+    <div class="cap">rent strike march, 1981</div>
+    <div class="cap-meta">designer: unattributed</div>
+  </div>
+
+  <div class="entry" style="top:890px; left:460px; width:220px;">
+    <div class="swatch" style="height:170px;"></div>
+    <div class="cap">the docks benefit, 1976</div>
+    <div class="cap-meta">designer: L. Farrant</div>
+  </div>
+
+  <div class="entry" style="top:660px; left:720px; width:260px;">
+    <div class="swatch" style="height:320px;">
+      <div class="featured-tag">featured</div>
+    </div>
+    <div class="cap">river cleanup coalition, 1983</div>
+    <div class="cap-meta">designer: R. Okonkwo-Byrd</div>
+  </div>
+
+  <div class="entry" style="top:660px; left:1020px; width:300px;">
+    <div class="swatch" style="height:150px;"></div>
+    <div class="cap">warehouse sessions, 1985</div>
+    <div class="cap-meta">designer: J. Muir Castellanos</div>
+  </div>
+
+  <div class="entry" style="top:910px; left:1020px; width:300px;">
+    <div class="swatch" style="height:200px;"></div>
+    <div class="cap">tenant power assembly, 1979</div>
+    <div class="cap-meta">designer: unattributed</div>
+  </div>
+
+  <div class="entry" style="top:970px; left:64px; width:360px;">
+    <div class="swatch" style="height:140px;"></div>
+    <div class="cap">may day poster, 1980</div>
+    <div class="cap-meta">designer: r. okonkwo-byrd</div>
+  </div>
+
+  <div class="entry" style="top:1040px; left:720px; width:260px;">
+    <div class="swatch" style="height:100px;"></div>
+    <div class="cap">harbor watch bulletin, 1984</div>
+    <div class="cap-meta">designer: l. farrant</div>
+  </div>
+
+  <div class="footer">
+    <div>Salt Line Print Collective archive, maintained by volunteers</div>
+    <div>Scans available for research use, contact the archivist</div>
+  </div>
+
+</div>
+</body>
+</html>

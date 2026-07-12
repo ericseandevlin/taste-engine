@@ -1,0 +1,478 @@
+{
+  "board": "validation-t1/memphis-revival",
+  "kind": "visual-ui",
+  "generated": "2026-07-12T15:46:13.877Z",
+  "items": [
+    {
+      "id": "w001",
+      "file": "memphis-revival-01.png",
+      "title": "Memphis Revival",
+      "source": {
+        "name": "Memphis Revival",
+        "url": null,
+        "local": "boards/validation-t1/memphis-revival/memphis-revival-01.png",
+        "arena": null
+      },
+      "measured": {
+        "w": 1440,
+        "h": 1200,
+        "aspect": 1.2,
+        "palette": [
+          {
+            "hex": "#ffcc66",
+            "pct": 38
+          },
+          {
+            "hex": "#ffccff",
+            "pct": 9
+          },
+          {
+            "hex": "#ffffff",
+            "pct": 7
+          },
+          {
+            "hex": "#99ffcc",
+            "pct": 7
+          },
+          {
+            "hex": "#cc9999",
+            "pct": 4
+          }
+        ],
+        "contrast": 0.19,
+        "density": 0.072,
+        "accentCoverage": 0.3142,
+        "accentHueCount": 5
+      },
+      "tags": [
+        "active-negative-space",
+        "asymmetric-composition",
+        "black-keyline-outlines",
+        "black-white-counterchange-pattern",
+        "bold-primary",
+        "deliberate-misalignment-or-overlap",
+        "extreme-type-scale-contrast",
+        "flat-geometric-primitives",
+        "flat-unmodulated-color-fields",
+        "grotesk-display",
+        "hard-edged-zero-effects",
+        "heavy-rule-scaffolding",
+        "high-chroma",
+        "low-density",
+        "ornament-without-function",
+        "oversized-load-bearing-type",
+        "pattern-clash-adjacency",
+        "process-documentation",
+        "restricted-palette-single-accent",
+        "scattered-geometric-primitives",
+        "single-sans-family",
+        "size-weight-position-hierarchy",
+        "squiggle-motif",
+        "tilted-rotated-elements",
+        "undisguised-construction",
+        "warm-ground"
+      ],
+      "channels": [
+        "process-documentation",
+        "oversized-wordmark",
+        "bold-primary-block"
+      ],
+      "notes": {
+        "why": "Maximalist geometric ornament and bold type hierarchy communicate event logistics with high visual energy while maintaining informational clarity through layered pattern blocks and strict typographic hierarchy.",
+        "avoid": "Do not soften the hard edges between pattern fields or add subtle gradients; the clash and visual friction between stripes and dots is essential to the energetic register.",
+        "keep": "The combination of monumentally scaled headline type, clashing pattern fields (wavy stripe + yellow stripes), and small functional typography (monospace metadata) creates a distinctive documentary-playful register that feels both purposeful and irreverent."
+      }
+    },
+    {
+      "id": "w002",
+      "file": "memphis-revival-02.png",
+      "title": "Memphis Revival",
+      "source": {
+        "name": "Memphis Revival",
+        "url": null,
+        "local": "boards/validation-t1/memphis-revival/memphis-revival-02.png",
+        "arena": null
+      },
+      "measured": {
+        "w": 1440,
+        "h": 1200,
+        "aspect": 1.2,
+        "palette": [
+          {
+            "hex": "#ffccff",
+            "pct": 38
+          },
+          {
+            "hex": "#99ffcc",
+            "pct": 13
+          },
+          {
+            "hex": "#ffffff",
+            "pct": 8
+          },
+          {
+            "hex": "#3333cc",
+            "pct": 6
+          },
+          {
+            "hex": "#cccccc",
+            "pct": 5
+          }
+        ],
+        "contrast": 0.195,
+        "density": 0.051,
+        "accentCoverage": 0.7988,
+        "accentHueCount": 7
+      },
+      "tags": [
+        "active-negative-space",
+        "asymmetric-composition",
+        "black-keyline-outlines",
+        "deliberate-misalignment-or-overlap",
+        "extreme-type-scale-contrast",
+        "flat-geometric-primitives",
+        "flat-unmodulated-color-fields",
+        "flush-left-ragged-right",
+        "grotesk-display",
+        "hard-edged-zero-effects",
+        "heavy-rule-scaffolding",
+        "high-chroma",
+        "low-density",
+        "ornament-without-function",
+        "pattern-clash-adjacency",
+        "playful-geometry",
+        "restricted-palette-single-accent",
+        "scattered-geometric-primitives",
+        "single-sans-family",
+        "size-weight-position-hierarchy",
+        "speckle-chip-pattern",
+        "squiggle-motif",
+        "tilted-rotated-elements",
+        "warm-ground"
+      ],
+      "channels": [
+        "warm-editorial",
+        "bold-primary-block",
+        "process-documentation"
+      ],
+      "notes": {
+        "why": "Energetic, youth-friendly composition balances a bold headline with playful geometric ornaments and colored pattern bands that feel deliberate and structured despite their whimsy.",
+        "avoid": "Overloading the ornamental elements into noise; the scattered shapes and patterns must remain subordinate to the clear information hierarchy of the session cards below.",
+        "keep": "The full-width patterned divider bands (chevron, speckle, pink dot field) that physically separate content zones while adding visual texture without functional purpose."
+      }
+    },
+    {
+      "id": "w003",
+      "file": "memphis-revival-03.png",
+      "title": "Memphis Revival",
+      "source": {
+        "name": "Memphis Revival",
+        "url": null,
+        "local": "boards/validation-t1/memphis-revival/memphis-revival-03.png",
+        "arena": null
+      },
+      "measured": {
+        "w": 1440,
+        "h": 1200,
+        "aspect": 1.2,
+        "palette": [
+          {
+            "hex": "#ffffcc",
+            "pct": 34
+          },
+          {
+            "hex": "#3333cc",
+            "pct": 28
+          },
+          {
+            "hex": "#9999cc",
+            "pct": 11
+          },
+          {
+            "hex": "#669999",
+            "pct": 7
+          },
+          {
+            "hex": "#cccc99",
+            "pct": 3
+          }
+        ],
+        "contrast": 0.279,
+        "density": 0.05,
+        "accentCoverage": 0.4575,
+        "accentHueCount": 2
+      },
+      "tags": [
+        "active-negative-space",
+        "asymmetric-composition",
+        "black-white-counterchange-pattern",
+        "bold-primary",
+        "deliberate-misalignment-or-overlap",
+        "extreme-type-scale-contrast",
+        "flat-geometric-primitives",
+        "flat-unmodulated-color-fields",
+        "flush-left-ragged-right",
+        "full-bleed-imagery",
+        "grotesk-display",
+        "hard-edged-zero-effects",
+        "heavy-rule-scaffolding",
+        "high-chroma",
+        "low-density",
+        "objective-documentary-imagery",
+        "ornament-without-function",
+        "oversized-load-bearing-type",
+        "pattern-clash-adjacency",
+        "restricted-palette-single-accent",
+        "scattered-geometric-primitives",
+        "single-sans-family",
+        "size-weight-position-hierarchy",
+        "squiggle-motif",
+        "tilted-rotated-elements",
+        "undisguised-construction",
+        "warm-ground"
+      ],
+      "channels": [
+        "oversized-wordmark",
+        "bold-primary-block",
+        "type-as-image"
+      ],
+      "notes": {
+        "why": "Monumental headline type paired with bold primary-color blocks and decorative geometric pattern work creates visual drama and memorability through scale contrast and purposeful misalignment.",
+        "avoid": "Avoid over-decorating with ornament; the pattern-clash between the squiggle, checkerboard, and solid blue sections works only because they have hard edges and don't soften into one another.",
+        "keep": "The stacked layering of distinct pattern zones (wave, checkerboard, solid color) as full-bleed dividers is a powerful device for sectioning content without fussy cards or subtle transitions."
+      }
+    },
+    {
+      "id": "w004",
+      "file": "memphis-revival-04.png",
+      "title": "Memphis Revival",
+      "source": {
+        "name": "Memphis Revival",
+        "url": null,
+        "local": "boards/validation-t1/memphis-revival/memphis-revival-04.png",
+        "arena": null
+      },
+      "measured": {
+        "w": 1440,
+        "h": 1200,
+        "aspect": 1.2,
+        "palette": [
+          {
+            "hex": "#ffffff",
+            "pct": 39
+          },
+          {
+            "hex": "#99ffcc",
+            "pct": 18
+          },
+          {
+            "hex": "#cccccc",
+            "pct": 10
+          },
+          {
+            "hex": "#ffcc99",
+            "pct": 8
+          },
+          {
+            "hex": "#99cccc",
+            "pct": 4
+          }
+        ],
+        "contrast": 0.159,
+        "density": 0.044,
+        "accentCoverage": 0.843,
+        "accentHueCount": 6
+      },
+      "tags": [
+        "active-negative-space",
+        "asymmetric-composition",
+        "bold-primary",
+        "extreme-type-scale-contrast",
+        "flat-geometric-primitives",
+        "flat-unmodulated-color-fields",
+        "flush-left-ragged-right",
+        "full-bleed-imagery",
+        "grotesk-display",
+        "hairline-dividers",
+        "hard-edged-zero-effects",
+        "high-chroma",
+        "low-density",
+        "ornament-without-function",
+        "restricted-palette-single-accent",
+        "scattered-geometric-primitives",
+        "single-sans-family",
+        "size-weight-position-hierarchy",
+        "speckle-chip-pattern",
+        "squiggle-motif",
+        "tilted-rotated-elements",
+        "warm-ground"
+      ],
+      "channels": [
+        "warm-editorial",
+        "bold-primary-block",
+        "dimensional-playful"
+      ],
+      "notes": {
+        "why": "Energetic asymmetry between oversized sans-serif headlines and a sculptural product hero, anchored by playful flat shapes and decorative wavy/speckle motifs that give personality without cluttering the breathing space.",
+        "avoid": "Applying too many different pattern textures or allowing ornamental elements to overwhelm the legibility of the core message and product showcase.",
+        "keep": "The deliberate collision of clean typography, rotated decorative lines, and a confident geometric color palette (mint, peach, primary blue) that reads as modern, friendly, and approachable without sacrificing clarity."
+      }
+    },
+    {
+      "id": "w005",
+      "file": "memphis-revival-05.png",
+      "title": "Memphis Revival",
+      "source": {
+        "name": "Memphis Revival",
+        "url": null,
+        "local": "boards/validation-t1/memphis-revival/memphis-revival-05.png",
+        "arena": null
+      },
+      "measured": {
+        "w": 1440,
+        "h": 1200,
+        "aspect": 1.2,
+        "palette": [
+          {
+            "hex": "#000000",
+            "pct": 51
+          },
+          {
+            "hex": "#333333",
+            "pct": 7
+          },
+          {
+            "hex": "#666666",
+            "pct": 6
+          },
+          {
+            "hex": "#cc9999",
+            "pct": 5
+          },
+          {
+            "hex": "#999999",
+            "pct": 4
+          }
+        ],
+        "contrast": 0.284,
+        "density": 0.124,
+        "accentCoverage": 0.2403,
+        "accentHueCount": 7
+      },
+      "tags": [
+        "active-negative-space",
+        "asymmetric-composition",
+        "black-white-counterchange-pattern",
+        "bold-primary",
+        "dark-field",
+        "deliberate-misalignment-or-overlap",
+        "extreme-type-scale-contrast",
+        "flat-geometric-primitives",
+        "flat-unmodulated-color-fields",
+        "grotesk-display",
+        "hard-edged-zero-effects",
+        "heavy-rule-scaffolding",
+        "high-chroma",
+        "high-density",
+        "objective-documentary-imagery",
+        "ornament-without-function",
+        "oversized-load-bearing-type",
+        "pattern-clash-adjacency",
+        "restricted-palette-single-accent",
+        "scattered-geometric-primitives",
+        "single-sans-family",
+        "size-weight-position-hierarchy",
+        "squiggle-motif",
+        "tilted-rotated-elements",
+        "undisguised-construction"
+      ],
+      "channels": [
+        "oversized-wordmark",
+        "bold-primary-block",
+        "type-as-image"
+      ],
+      "notes": {
+        "why": "Massive primary-color typography anchors the layout while scattered geometric ornament and clashing patterns create visual chaos that reads as intentional festival branding.",
+        "avoid": "Do not try to make the pattern fields harmonize or transition smoothly; their jarring adjacency is the point.",
+        "keep": "The stacked colored text blocks (yellow, pink, green) as the sole compositional anchor—everything else orbits these bold typographic slabs."
+      }
+    },
+    {
+      "id": "w006",
+      "file": "memphis-revival-06.png",
+      "title": "Memphis Revival",
+      "source": {
+        "name": "Memphis Revival",
+        "url": null,
+        "local": "boards/validation-t1/memphis-revival/memphis-revival-06.png",
+        "arena": null
+      },
+      "measured": {
+        "w": 1440,
+        "h": 1200,
+        "aspect": 1.2,
+        "palette": [
+          {
+            "hex": "#ccffff",
+            "pct": 18
+          },
+          {
+            "hex": "#ccccff",
+            "pct": 11
+          },
+          {
+            "hex": "#ffcc33",
+            "pct": 11
+          },
+          {
+            "hex": "#669999",
+            "pct": 7
+          },
+          {
+            "hex": "#ffcccc",
+            "pct": 6
+          }
+        ],
+        "contrast": 0.183,
+        "density": 0.074,
+        "accentCoverage": 0.6602,
+        "accentHueCount": 8
+      },
+      "tags": [
+        "active-negative-space",
+        "black-keyline-outlines",
+        "bold-primary",
+        "flat-geometric-primitives",
+        "flat-unmodulated-color-fields",
+        "grotesk-display",
+        "hard-edged-zero-effects",
+        "heavy-rule-scaffolding",
+        "high-chroma",
+        "high-density",
+        "index-table-listing",
+        "ornament-without-function",
+        "pattern-clash-adjacency",
+        "playful-geometry",
+        "restricted-palette-single-accent",
+        "scattered-geometric-primitives",
+        "single-sans-family",
+        "size-weight-position-hierarchy",
+        "speckle-chip-pattern",
+        "squiggle-motif",
+        "strict-column-grid",
+        "undisguised-construction",
+        "warm-ground"
+      ],
+      "channels": [
+        "grid-index",
+        "bold-primary-block",
+        "dimensional-playful"
+      ],
+      "notes": {
+        "why": "A utilitarian product grid anchored by bold primary color blocks and decorative geometric patterns creates visual energy while maintaining strict structural organization.",
+        "avoid": "Avoid mixing the ornamental pattern field (squiggles, speckle, zigzag) with softer, more sophisticated typography or muted color; the playfulness requires bold conviction.",
+        "keep": "The four-column card grid with hard black outlines, each card a single flat color, paired with clash-pattern header bands—this modular, toylike product display system is reusable and immediately distinctive."
+      }
+    }
+  ]
+}

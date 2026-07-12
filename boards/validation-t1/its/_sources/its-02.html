@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1440">
+<title>Graphic Design Department: Term Course Index</title>
+<style>
+  :root {
+    --accent: #1449c8;
+    --ink: #111111;
+    --grey: #6b6b6b;
+    --line: #d9d9d9;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    width: 1440px;
+    background: #f0ede6;
+    color: var(--ink);
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page { width: 1440px; padding: 26px 64px 12px 64px; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: 24px;
+  }
+  .kicker {
+    grid-column: 2 / 6;
+    grid-row: 1;
+    align-self: start;
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  h1 {
+    grid-column: 2 / 8;
+    grid-row: 1;
+    align-self: start;
+    margin-top: 34px;
+    font-size: 74px;
+    line-height: 0.9;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .term {
+    grid-column: 9 / 13;
+    grid-row: 1;
+    align-self: start;
+    font-size: 15px;
+    line-height: 1.7;
+    color: #cfcfcf;
+    background: var(--ink);
+    padding: 32px 28px;
+    min-height: 400px;
+    margin-top: 4px;
+  }
+  .term strong { display: block; color: #ffffff; font-size: 24px; font-weight: 700; margin-bottom: 6px; }
+  .rule {
+    grid-column: 2 / 13;
+    height: 40px;
+    background: var(--ink);
+    margin: 12px 0 12px 0;
+  }
+  .colheads {
+    grid-column: 2 / 13;
+    display: grid;
+    grid-template-columns: 90px 1fr 110px 200px;
+    column-gap: 24px;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--grey);
+    padding: 6px 0;
+  }
+  .listing {
+    grid-column: 2 / 13;
+  }
+  .listing.two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 24px;
+  }
+  .listing.two-col .col + .col {
+    border-left: 1px solid var(--line);
+    padding-left: 24px;
+  }
+  .row {
+    display: grid;
+    grid-template-columns: 90px 1fr 110px 200px;
+    column-gap: 24px;
+    align-items: baseline;
+    padding: 4px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .row.narrow {
+    grid-template-columns: 64px 1fr;
+    column-gap: 16px;
+  }
+  .row.core .code { color: var(--accent); }
+  .code { font-size: 44px; font-weight: 700; }
+  .titleblock .name { font-size: 16px; font-weight: 700; }
+  .titleblock .desc { font-size: 12px; color: var(--grey); margin-top: 2px; line-height: 1.35; }
+  .titleblock .meta { font-size: 11px; color: var(--grey); margin-top: 3px; }
+  .credits { font-size: 13px; color: var(--ink); }
+  .credits span { color: var(--grey); font-size: 11px; display: block; }
+  .row.narrow .credits { font-size: 11px; }
+  .instructor { font-size: 12px; color: var(--grey); text-align: left; }
+  .section-label {
+    grid-column: 2 / 13;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--grey);
+    margin: 8px 0 2px 0;
+  }
+  .note {
+    grid-column: 2 / 7;
+    font-size: 12px;
+    line-height: 1.4;
+    color: var(--grey);
+    margin-top: 5px;
+  }
+  .note .lead { color: var(--ink); font-weight: 700; font-size: 14px; margin-bottom: 8px; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="grid">
+    <div class="kicker">Graphic Design Department</div>
+    <h1>Course<br>Index</h1>
+    <div class="term">
+      <strong>Winter Term</strong>
+      Registration opens Nov 3<br>
+      Advising hours posted weekly
+    </div>
+
+    <div class="rule"></div>
+    <div class="colheads">
+      <div>Code</div><div>Title</div><div>Credits</div><div>Instructor</div>
+    </div>
+
+    <div class="section-label">Core Sequence</div>
+    <div class="listing">
+      <div class="row core">
+        <div class="code">101</div>
+        <div class="titleblock">
+          <div class="name">Typographic Fundamentals</div>
+          <div class="desc">Letterform anatomy, grid construction, and hierarchy through weight, size, and position rather than ornament.</div>
+        </div>
+        <div class="credits">4<span>credits</span></div>
+        <div class="instructor">R. Anselm</div>
+      </div>
+      <div class="row core">
+        <div class="code">140</div>
+        <div class="titleblock">
+          <div class="name">Grid Systems</div>
+          <div class="desc">The modular column armature as an organizing device across posters, publications, and screens.</div>
+        </div>
+        <div class="credits">4<span>credits</span></div>
+        <div class="instructor">R. Anselm</div>
+      </div>
+      <div class="row core">
+        <div class="code">205</div>
+        <div class="titleblock">
+          <div class="name">Editorial Systems</div>
+          <div class="desc">Multi-page design for journals and catalogs; masthead, folio, and running-text conventions.</div>
+        </div>
+        <div class="credits">3<span>credits</span></div>
+        <div class="instructor">D. Okafor</div>
+      </div>
+    </div>
+
+    <div class="section-label">Electives</div>
+    <div class="listing two-col">
+      <div class="col">
+        <div class="row narrow">
+          <div class="code">212</div>
+          <div class="titleblock">
+            <div class="name">Signage and Wayfinding</div>
+            <div class="desc">Environmental identity systems built from a shared symbol and column set.</div>
+            <div class="meta">3 cr, M. Falk</div>
+          </div>
+        </div>
+        <div class="row narrow">
+          <div class="code">228</div>
+          <div class="titleblock">
+            <div class="name">Corporate Identity Manuals</div>
+            <div class="desc">Standards documentation, from mark construction to stationery and vehicle livery.</div>
+            <div class="meta">3 cr, D. Okafor</div>
+          </div>
+        </div>
+        <div class="row narrow">
+          <div class="code">241</div>
+          <div class="titleblock">
+            <div class="name">Design for Screens</div>
+            <div class="desc">Porting print-grid discipline to responsive layout without losing edge alignment.</div>
+            <div class="meta">4 cr, S. Kessler</div>
+          </div>
+        </div>
+        <div class="row narrow">
+          <div class="code">296</div>
+          <div class="titleblock">
+            <div class="name">Publication Design Studio</div>
+            <div class="desc">A working periodical produced across a full term, folio to cover.</div>
+            <div class="meta">4 cr, R. Anselm</div>
+          </div>
+        </div>
+        <div class="row narrow">
+          <div class="code">312</div>
+          <div class="titleblock">
+            <div class="name">Packaging Systems</div>
+            <div class="desc">Structural dielines and surface graphics resolved as one system.</div>
+            <div class="meta">3 cr, M. Falk</div>
+          </div>
+        </div>
+        <div class="row narrow">
+          <div class="code">327</div>
+          <div class="titleblock">
+            <div class="name">Information Graphics</div>
+            <div class="desc">Charting and diagramming as grid-bound argument, not illustration.</div>
+            <div class="meta">3 cr, S. Kessler</div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="row narrow">
+          <div class="code">265</div>
+          <div class="titleblock">
+            <div class="name">Documentary Photography for Designers</div>
+            <div class="desc">Matter-of-fact image making as content, not decoration, for use inside a grid.</div>
+            <div class="meta">3 cr, M. Falk</div>
+          </div>
+        </div>
+        <div class="row narrow">
+          <div class="code">277</div>
+          <div class="titleblock">
+            <div class="name">Type Design Studio</div>
+            <div class="desc">Drawing a working grotesque family across weights and spacing pairs.</div>
+            <div class="meta">4 cr, S. Kessler</div>
+          </div>
+        </div>
+        <div class="row narrow">
+          <div class="code">284</div>
+          <div class="titleblock">
+            <div class="name">Exhibition and Wall Graphics</div>
+            <div class="desc">Large-format hierarchy, viewing distance, and grid discipline at architectural scale.</div>
+            <div class="meta">3 cr, M. Falk</div>
+          </div>
+        </div>
+        <div class="row narrow">
+          <div class="code">301</div>
+          <div class="titleblock">
+            <div class="name">Motion Systems</div>
+            <div class="desc">Grid logic extended into time: titling, transitions, and kinetic type.</div>
+            <div class="meta">3 cr, D. Okafor</div>
+          </div>
+        </div>
+        <div class="row narrow">
+          <div class="code">318</div>
+          <div class="titleblock">
+            <div class="name">Editorial Photography Layout</div>
+            <div class="desc">Sequencing images across spreads within a fixed column armature.</div>
+            <div class="meta">3 cr, M. Falk</div>
+          </div>
+        </div>
+        <div class="row narrow">
+          <div class="code">339</div>
+          <div class="titleblock">
+            <div class="name">Design Systems for Products</div>
+            <div class="desc">Component libraries and token sets as a grid extended into software.</div>
+            <div class="meta">4 cr, S. Kessler</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-label">Graduate Seminars</div>
+    <div class="listing two-col">
+      <div class="col">
+        <div class="row narrow">
+          <div class="code">510</div>
+          <div class="titleblock">
+            <div class="name">Seminar: Objectivity in Design History</div>
+            <div class="desc">Close reading of the postwar Zurich and Basel doctrine texts, week by week.</div>
+            <div class="meta">3 cr, R. Anselm</div>
+          </div>
+        </div>
+        <div class="row narrow">
+          <div class="code">522</div>
+          <div class="titleblock">
+            <div class="name">Seminar: Systems and Standards</div>
+            <div class="desc">Manual-writing as a design act, from mark construction to full identity documentation.</div>
+            <div class="meta">3 cr, D. Okafor</div>
+          </div>
+        </div>
+        <div class="row narrow">
+          <div class="code">548</div>
+          <div class="titleblock">
+            <div class="name">Seminar: Archive as Source Material</div>
+            <div class="desc">Working directly from the department's primary-source type specimens.</div>
+            <div class="meta">3 cr, R. Anselm</div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="row narrow">
+          <div class="code">534</div>
+          <div class="titleblock">
+            <div class="name">Seminar: The Grid as Argument</div>
+            <div class="desc">Reading the column armature as a claim about order, not a neutral scaffold.</div>
+            <div class="meta">3 cr, S. Kessler</div>
+          </div>
+        </div>
+        <div class="row narrow">
+          <div class="code">541</div>
+          <div class="titleblock">
+            <div class="name">Seminar: Studio Practice and Critique</div>
+            <div class="desc">Weekly pin-up format; written critique due before each session.</div>
+            <div class="meta">3 cr, R. Anselm</div>
+          </div>
+        </div>
+        <div class="row narrow">
+          <div class="code">556</div>
+          <div class="titleblock">
+            <div class="name">Seminar: Teaching Practicum</div>
+            <div class="desc">Supervised co-teaching in the undergraduate core sequence.</div>
+            <div class="meta">2 cr, D. Okafor</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="note">
+      <div class="lead">Advising</div>
+      Students declaring the design major should meet with a core faculty
+      advisor before the end of week two to confirm sequence eligibility.
+    </div>
+  </div>
+</div>
+</body>
+</html>
