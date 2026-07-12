@@ -71,7 +71,6 @@ export const KINDS = {
       { id: 'process-documentation', definition: 'The page documents work or process (steps, specs, artifacts, annotations) in a documentary register rather than marketing prose.' },
       // typography
       { id: 'single-sans-family', definition: 'All text is set in one neutral grotesque or neo-grotesque sans-serif family, varied only by size and weight, with at most one auxiliary family.' },
-      { id: 'geometric-sans-display', definition: 'Display type is a geometric sans-serif: perfectly circular bowls on o and e, a single-story a, pointed apexes on A and N, compass-drawn feel. When display type is a neutral workhorse grotesque instead, do not apply.' },
       { id: 'grotesk-display', definition: 'Display or headline type is a grotesque or neo-grotesque sans with even, unshowy letterforms.' },
       { id: 'editorial-serif', definition: 'A serif family carries body or display text in an editorial register.' },
       { id: 'monospace-metadata', definition: 'Metadata such as dates, indices, captions, or labels is set in a monospace face distinct from the main text family.' },
@@ -101,7 +100,7 @@ export const KINDS = {
       { id: 'playful-geometry', definition: 'Rounded, toy-like geometric shapes act as interface or content elements, giving the page a deliberately playful register.' },
       // construction & surface
       { id: 'flat-unmodulated-color-fields', definition: 'Every fill on the page, colored or not (including whites, greys, and blacks), is a single flat unmodulated tone: no gradients, drop shadows, bevels, glows, or simulated depth anywhere. Black-and-white pages qualify when all their fills are flat.' },
-      { id: 'hard-edged-zero-effects', definition: 'Every box or region on the page has square corners and flat fills, with no soft shadows, blurs, glass effects, rounded corners, or layered elevation anywhere. Plain unstyled pages with default square boxes qualify.' },
+      { id: 'hard-edged-zero-effects', definition: 'Nothing anywhere on the page has rounded corners, soft shadows, blurs, glass effects, gradients, or layered elevation: every edge is square and every fill is flat. Applies to plain unstyled pages and table layouts as much as to designed ones.' },
       { id: 'undisguised-construction', definition: 'Structural seams (borders, table rules, dividers, native form widgets, visible grid edges) are left exposed as part of the design rather than hidden behind padding, whitespace, or decorative chrome. Apply only when exposed structure is a visible feature of the page, not merely because rules exist.' },
       { id: 'browser-default-styling', definition: 'Text, links, and controls look close to unstyled HTML: default or system fonts, underlined links, native buttons and inputs.' },
       { id: 'restricted-palette-single-accent', definition: 'The page is built from black, white, and greys plus AT MOST two saturated accent hues. Pages with zero accents qualify; a third saturated hue disqualifies.' },

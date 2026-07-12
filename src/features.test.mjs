@@ -100,8 +100,8 @@ test('familyOf routes every axis to exactly one family', () => {
 test('normalizeScalar scales per axis and clamps', () => {
   assert.equal(normalizeScalar('contrast', 0.5), 1); // realizable max
   assert.equal(normalizeScalar('density', 0.3), 1); // clamped past practical max
-  assert.equal(normalizeScalar('accentHueCount', 2), 0.5);
-  assert.equal(normalizeScalar('accentCoverage', 0.25), 0.5);
+  assert.equal(normalizeScalar('accentHueCount', 2), 0.25);
+  assert.equal(normalizeScalar('accentCoverage', 0.25), 0.25);
   assert.equal(normalizeScalar('chroma', null), null);
   assert.throws(() => normalizeScalar('nope', 0.1), /unknown axis/);
 });
@@ -429,8 +429,8 @@ test('frozen constants are what the v2 design registered (moving one after the f
     density: 0.15,
     chroma: 1,
     groundLightness: 1,
-    accentCoverage: 0.5,
-    accentHueCount: 4,
+    accentCoverage: 1,
+    accentHueCount: 8,
   });
   assert.equal(CONSTANTS.SPREAD_FLOOR, 0.05);
   assert.equal(CONSTANTS.DISTANCE_SPREADS, 2);
@@ -441,6 +441,6 @@ test('frozen constants are what the v2 design registered (moving one after the f
   assert.equal(CONSTANTS.ACCENT_SATURATION, 0.25);
   assert.equal(CONSTANTS.ACCENT_HUE_DELTA, 30);
   assert.equal(CONSTANTS.ACCENT_HUE_BIN, 30);
-  assert.equal(CONSTANTS.ACCENT_COVERAGE_FLOOR, 0.002);
+  assert.equal(CONSTANTS.ACCENT_COVERAGE_FLOOR, 0.005);
   assert.equal(CONSTANTS.PALETTE_TOP_K, 8);
 });

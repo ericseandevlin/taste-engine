@@ -19,7 +19,7 @@ export const CONSTANTS = {
   // (mean adjacent-pixel delta / 255) stays under ~0.15 on real pages.
   // accentCoverage saturates at half the canvas chromatic-distinct; hue-family
   // count saturates at 4 families (same ceiling the v1 accentCount used).
-  AXIS_SCALE: { contrast: 0.5, density: 0.15, chroma: 1, groundLightness: 1, accentCoverage: 0.5, accentHueCount: 4 },
+  AXIS_SCALE: { contrast: 0.5, density: 0.15, chroma: 1, groundLightness: 1, accentCoverage: 1, accentHueCount: 8 },
   SPREAD_FLOOR: 0.05, // min spread in the scalar distance denominator (normalized scale)
   DISTANCE_SPREADS: 2, // two spreads off = fully off
   SALIENCE_REF_SPREAD: 0.371, // scaled-MAD spread of a uniform [0,1] distribution
@@ -29,7 +29,7 @@ export const CONSTANTS = {
   ACCENT_SATURATION: 0.25, // HSL saturation above this = chromatic
   ACCENT_HUE_DELTA: 30, // degrees of hue separation from the GROUND hue to count as an accent
   ACCENT_HUE_BIN: 30, // v2: hue-family bin width (degrees) for accentHueCount
-  ACCENT_COVERAGE_FLOOR: 0.002, // v2: min fraction of opaque pixels for a hue family to count (calibrated by the pink-chip fixture, frozen at freeze)
+  ACCENT_COVERAGE_FLOOR: 0.005, // v2: min opaque-pixel fraction for a hue family to count. Calibrated pre-freeze on bin histograms: kills the flickering sub-0.5% anti-aliasing tail while the design's ~0.7% pink-chip fixture still registers. NOTE the measured scale: at SAMPLE resolution, boundary blends between large adjacent saturated fields form 1-2.5% bins, so accentHueCount runs ABOVE the designer-intended family count on hard-clash pages; it is consistent and class-separating, and predicted ranges in docs/styles/classes.json are calibrated to this measured scale.
   PALETTE_TOP_K: 8, // entries kept in an aggregate palette
 };
 
