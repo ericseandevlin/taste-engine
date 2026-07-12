@@ -17,7 +17,14 @@
 // applies the prune by hand, keeping it visibly consistency-only, never
 // score-based. No score or alignment computation lives here.
 //
-// Usage: npm run calibrate [-- --board-root boards/validation-t1]
+// --votes N (default 1): the shipped tagging procedure is majority-of-N
+// votes (tag.mjs --votes), so calibration measures THAT procedure. Each of
+// the 3 passes becomes a majority-of-N tag result per exemplar (N raw
+// tagImage calls per exemplar per pass; total calls = exemplars x 3 x N).
+// Flip counting and the prune derivation operate on the majority-level pass
+// results exactly as they do on single-pass results.
+//
+// Usage: npm run calibrate [-- --board-root boards/validation-t1 --votes 3]
 
 import { writeFileSync } from 'fs';
 import { basename, join, relative } from 'path';
@@ -25,6 +32,7 @@ import { fileURLToPath } from 'url';
 import { getBoard, loadEnv, MODELS, REPO_ROOT, vocabIds } from './config.mjs';
 import { readManifest } from './manifest.mjs';
 import { tagImage } from './tag.mjs';
+import { majorityTags } from './features.mjs';
 import { makeVisionCaller } from './anthropic.mjs';
 
 export const PASSES = 3;
@@ -85,14 +93,36 @@ export function pruneList(table) {
     .sort();
 }
 
+// The 3 calibration passes for one exemplar, each a majority-of-`votes` tag
+// result (votes=1 passes the single call's tags straight through, the
+// pre-amendment behavior). tagOnce is injected so tests never hit the
+// network; main wires it to tagImage + the real API caller, whose per-call
+// retries are unchanged. Returns the majority-level passes plus the raw
+// per-vote sublists.
+export async function calibrationPasses(tagOnce, votes = 1) {
+  const passes = [];
+  const raw = [];
+  for (let p = 0; p < PASSES; p++) {
+    const lists = [];
+    for (let v = 0; v < votes; v++) lists.push((await tagOnce()).tags);
+    raw.push(lists);
+    passes.push(votes > 1 ? majorityTags(lists) : lists[0]);
+  }
+  return { passes, raw };
+}
+
 // --- I/O + API loop (main-only) ---
 
 function parseArgs(argv) {
-  const args = { boardRoot: 'boards/validation-t1', model: MODELS.tag, concurrency: 2 };
+  const args = { boardRoot: 'boards/validation-t1', model: MODELS.tag, concurrency: 2, votes: 1 };
   for (let i = 0; i < argv.length; i++) {
     if (argv[i] === '--board-root') args.boardRoot = argv[++i];
     else if (argv[i] === '--model') args.model = argv[++i];
     else if (argv[i] === '--concurrency') args.concurrency = Number(argv[++i]);
+    else if (argv[i] === '--votes') args.votes = Number(argv[++i]);
+  }
+  if (!Number.isInteger(args.votes) || args.votes < 1) {
+    throw new Error(`--votes must be a positive integer (got ${args.votes})`);
   }
   return args;
 }
@@ -140,8 +170,14 @@ async function main() {
   }
 
   console.log(
-    `[calibrate] board-root=${args.boardRoot} classes=${Object.keys(spec.classes).length} exemplars=${jobs.length} passes=${PASSES} model=${args.model}`,
+    `[calibrate] board-root=${args.boardRoot} classes=${Object.keys(spec.classes).length} exemplars=${jobs.length} passes=${PASSES} votes=${args.votes} model=${args.model}`,
   );
+  if (args.votes > 1) {
+    console.log(
+      `  majority mode: each pass is a majority-of-${args.votes} tag result (the shipped tagging procedure); ` +
+        `flips and the prune rule apply at the majority level; total tagImage calls = ${jobs.length * PASSES * args.votes}`,
+    );
+  }
   console.log(`  REGISTERED PRUNE RULE: ${PRUNE_RULE}`);
   console.log(`  ${OPERATIONALIZATION_NOTE}`);
 
@@ -149,12 +185,9 @@ async function main() {
   const votes = [];
   await pool(jobs, args.concurrency, async (job) => {
     const absPath = join(REPO_ROOT, job.item.source.local);
-    const passes = [];
-    for (let p = 0; p < PASSES; p++) {
-      passes.push((await tagImage(absPath, job.board, callModel)).tags);
-    }
+    const { passes, raw } = await calibrationPasses(() => tagImage(absPath, job.board, callModel), args.votes);
     const exemplar = `${job.cid}/${job.item.id}`;
-    votes.push({ exemplar, passes });
+    votes.push(args.votes > 1 ? { exemplar, passes, raw } : { exemplar, passes });
     const flips = flipIds(passes);
     console.log(`  ${exemplar}: ${flips.length ? `flips ${flips.join(', ')}` : 'stable'}`);
   });
@@ -186,6 +219,11 @@ async function main() {
         generated: new Date().toISOString(),
         model: args.model,
         passes: PASSES,
+        votes: args.votes,
+        procedure:
+          args.votes > 1
+            ? `each pass is a majority-of-${args.votes} tag result (the shipped tagging procedure); flips and the prune rule apply at the majority level`
+            : 'each pass is a single tag call',
         boardRoot: args.boardRoot,
         exemplars: votes.length,
         flips: table,

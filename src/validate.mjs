@@ -13,7 +13,7 @@
 // works; reading a clean confusion matrix as proof is the exact mistake this
 // project exists to stop making.
 //
-// Gates (design doc section 5, pinned):
+// Gates (design doc section 5, pinned), ORIGINAL registered bars:
 //   1 separation: overall own-class accuracy >= 80% AND every class >= 60%
 //     AND brutalism-minimal/brutalism-maximal mutual confusion <= 40%.
 //   2 tags-ablated separation >= 60% (chance 20%): same procedure with the
@@ -25,6 +25,17 @@
 //     detection threshold; scalar class median inside the registered raw
 //     range, inclusive). Determinants with no instrument are excluded ex ante
 //     and the per-class denominator is recomputed and printed.
+//
+// AMENDED bars (protocol addendum, registered 2026-07-12): gate 1 >= 75%
+// overall AND >= 50% per class (strand confusion rule unchanged); gate 2
+// >= 50%; gate 4 tolerates at most ONE tag-threshold knife-edge miss across
+// all classes, where knife-edge means the observed frequency is exactly one
+// exemplar short of the 2/3 detection threshold (e.g. 3/6 observed vs 4/6
+// required); the tolerated miss is printed with class + determinant. Gate 3
+// is single-bar, unchanged. Gates are JUDGED on the amended bars (exit code
+// and the "build gates failing" line); every gate line prints BOTH verdicts,
+// and report.json records { passOriginal, passAmended } plus the bar values
+// per gate.
 //
 // Small-n spread handling (doc gate 6): every scalar axis spread in every
 // ruler is floored at the cross-class pooled scaled-MAD for that axis (pooled
@@ -57,6 +68,26 @@ import {
 export const HEADER =
   'BUILD GATES: iterated-to-pass during development; zero evidential weight in any run verdict.';
 export const GATE_LABEL = 'BUILD GATE (zero evidential weight)';
+
+// Registered bars. Gates are JUDGED on `amended` (protocol addendum,
+// 2026-07-12); `original` verdicts stay printed and in report.json
+// permanently. Gate 3 and the strand-confusion rule are single-bar.
+export const BARS = {
+  separation: {
+    original: { overall: 0.8, minClass: 0.6 },
+    amended: { overall: 0.75, minClass: 0.5 },
+    pairConfusionMax: 0.4, // both bars
+  },
+  tagsAblated: { original: 0.6, amended: 0.5 },
+  degeneracy: { maxFraction: 0.2, note: 'single bar, unchanged by the 2026-07-12 amendment' },
+  characterization: {
+    original: 'every checkable defining determinant passes its instrument check',
+    amended:
+      'at most one tag-threshold knife-edge miss across all classes ' +
+      '(observed frequency exactly one exemplar short of the detection threshold, e.g. 3/6 vs 4/6 required)',
+    maxKnifeEdgeMisses: 1,
+  },
+};
 
 const BRUTAL_PAIR = ['brutalism-minimal', 'brutalism-maximal'];
 const AXIS_IDS = [...SCALAR_AXES, 'palette', 'tags'];
@@ -182,7 +213,19 @@ export function checkInstrument(inst, refs, threshold) {
     const count = refs.filter((r) => (r.tags || []).includes(inst.id)).length;
     const freq = n ? +(count / n).toFixed(4) : 0;
     const pass = (n ? +(count / n).toFixed(3) : 0) >= threshold;
-    return { type: 'tag', id: inst.id, count, n, observed: freq, pass };
+    // Knife-edge (amended gate 4): the smallest count that clears the
+    // threshold at its own 3-decimal precision, exactly the comparison the
+    // pass uses; a miss is knife-edge when the observed count is exactly one
+    // exemplar short of it (e.g. 3/6 observed vs 4/6 required).
+    let required = null;
+    for (let c = 0; c <= n; c++) {
+      if (n && +(c / n).toFixed(3) >= threshold) {
+        required = c;
+        break;
+      }
+    }
+    const knifeEdge = !pass && required != null && count === required - 1;
+    return { type: 'tag', id: inst.id, count, n, required, observed: freq, pass, knifeEdge };
   }
   if (inst.type === 'scalar') {
     const values = refs.map((r) => r[inst.id]).filter((v) => v != null);
@@ -193,14 +236,17 @@ export function checkInstrument(inst, refs, threshold) {
   return { type: inst.type, id: inst.id, observed: null, pass: false, note: 'unknown instrument type' };
 }
 
-// Gate 4: per class, EVERY checkable defining determinant must pass its
-// (primary) instrument check. Determinants with no instrument are excluded ex
-// ante as named blind spots and the denominator is recomputed. A registered
-// "secondary" instrument is checked and reported as corroboration, non-gating.
+// Gate 4. ORIGINAL bar: per class, EVERY checkable defining determinant must
+// pass its (primary) instrument check. AMENDED bar (2026-07-12): at most ONE
+// tag-threshold knife-edge miss across all classes is tolerated, and the
+// tolerated miss is named (class + determinant). Determinants with no
+// instrument are excluded ex ante as named blind spots and the denominator is
+// recomputed. A registered "secondary" instrument is checked and reported as
+// corroboration, non-gating. The `pass` field is the judged (amended) verdict.
 export function characterization(spec, fingerprintsById) {
   const threshold = spec.tagDetectionThreshold ?? 0.667;
   const classes = {};
-  let allPass = true;
+  const misses = [];
   for (const [cid, cls] of Object.entries(spec.classes)) {
     const refs = Object.values(fingerprintsById[cid]?.refs || {});
     const rows = [];
@@ -217,13 +263,60 @@ export function characterization(spec, fingerprintsById) {
       const res = checkInstrument(det.instrument, refs, threshold);
       const secondary = det.secondary ? checkInstrument(det.secondary, refs, threshold) : null;
       if (res.pass) passed++;
+      else {
+        misses.push({
+          class: cid,
+          determinant: det.determinant,
+          type: res.type,
+          id: res.id,
+          knifeEdge: res.knifeEdge === true,
+          count: res.count ?? null,
+          n: res.n ?? null,
+          required: res.required ?? null,
+          observed: res.observed ?? null,
+        });
+      }
       rows.push({ determinant: det.determinant, ...res, secondary, blindSpotNote: det.blindSpotNote || null });
     }
-    const pass = passed === checkable;
-    if (!pass) allPass = false;
-    classes[cid] = { n: refs.length, checkable, passed, excluded, pass, rows };
+    // Per-class pass keeps the original all-checkable semantics for the table.
+    classes[cid] = { n: refs.length, checkable, passed, excluded, pass: passed === checkable, rows };
   }
-  return { pass: allPass, threshold, classes };
+  const passOriginal = misses.length === 0;
+  const passAmended = passOriginal || (misses.length === 1 && misses[0].knifeEdge);
+  const toleratedMiss = passAmended && !passOriginal ? misses[0] : null;
+  return { pass: passAmended, passOriginal, passAmended, toleratedMiss, misses, threshold, classes };
+}
+
+// Gate 1 dual-bar verdicts. pairOk (strand mutual confusion <= 40%) is a
+// single-bar rule and binds BOTH verdicts. `pass` is the judged (amended) one.
+export function separationGate(overall, minClassAccuracy, pairOk, pairConfusion) {
+  const b = BARS.separation;
+  const passOriginal = overall >= b.original.overall && minClassAccuracy >= b.original.minClass && pairOk;
+  const passAmended = overall >= b.amended.overall && minClassAccuracy >= b.amended.minClass && pairOk;
+  return {
+    label: 'separation',
+    pass: passAmended,
+    passOriginal,
+    passAmended,
+    bars: b,
+    overall,
+    minClassAccuracy,
+    pairConfusion,
+  };
+}
+
+// Gate 2 dual-bar verdicts. `pass` is the judged (amended) one.
+export function tagsAblatedGate(overall, chance) {
+  const b = BARS.tagsAblated;
+  return {
+    label: 'tags-ablated separation',
+    pass: overall >= b.amended,
+    passOriginal: overall >= b.original,
+    passAmended: overall >= b.amended,
+    bars: b,
+    overall,
+    chance,
+  };
 }
 
 function summarize(ds) {
@@ -327,30 +420,28 @@ export function runHarness(spec, manifests) {
       [`${b}->${a}`]: full.perClass[b].n ? full.matrix[b][a] / full.perClass[b].n : 0,
     };
   }
-  const pairOk = !havePair || Object.values(pairConfusion).every((v) => v <= 0.4);
-  const separation = {
-    label: 'separation',
-    pass: full.overall >= 0.8 && minClassAccuracy >= 0.6 && pairOk,
-    overall: full.overall,
+  const pairOk = !havePair || Object.values(pairConfusion).every((v) => v <= BARS.separation.pairConfusionMax);
+  const separation = separationGate(
+    full.overall,
     minClassAccuracy,
-    pairConfusion: havePair ? pairConfusion : 'n/a (brutalism strand pair not registered)',
-  };
-  const tagsAblated = {
-    label: 'tags-ablated separation',
-    pass: abl.overall >= 0.6,
-    overall: abl.overall,
-    chance: 1 / classIds.length,
-  };
+    pairOk,
+    havePair ? pairConfusion : 'n/a (brutalism strand pair not registered)',
+  );
+  const tagsAblated = tagsAblatedGate(abl.overall, 1 / classIds.length);
   const deg = degeneracyCells(fps);
+  const degPass = deg.fraction < BARS.degeneracy.maxFraction; // single bar: original = amended
   const degeneracy = {
     label: 'degeneracy',
-    pass: deg.fraction < 0.2,
+    pass: degPass,
+    passOriginal: degPass,
+    passAmended: degPass,
+    bars: BARS.degeneracy,
     fraction: deg.fraction,
     totalCells: deg.cells.length,
     cellsBelowFloor: deg.below.map(({ class: cid, axis, spread }) => ({ class: cid, axis, spread })),
     clippedScalarDs,
   };
-  const charac = { label: 'characterization', ...characterization(spec, fps) };
+  const charac = { label: 'characterization', bars: BARS.characterization, ...characterization(spec, fps) };
 
   const perAxisSummary = {};
   for (const a of AXIS_IDS) {
@@ -410,6 +501,47 @@ function pct(x) {
 
 function num(v) {
   return v == null ? '-' : String(v);
+}
+
+// One verdict string carrying BOTH bars, e.g.
+// "PASS amended (>=75%/50%); would FAIL original (>=80%/60%)".
+export function dualVerdict(passAmended, passOriginal, amendedDesc, originalDesc) {
+  if (passAmended && passOriginal) return `PASS both bars (amended ${amendedDesc}; original ${originalDesc})`;
+  if (passAmended) return `PASS amended (${amendedDesc}); would FAIL original (${originalDesc})`;
+  if (passOriginal) return `FAIL amended (${amendedDesc}); would PASS original (${originalDesc})`;
+  return `FAIL both bars (amended ${amendedDesc}; original ${originalDesc})`;
+}
+
+// The four gate verdict lines, exported so tests can pin the dual-bar text.
+export function gateLines(g) {
+  const pairStr =
+    typeof g.separation.pairConfusion === 'string'
+      ? g.separation.pairConfusion
+      : Object.entries(g.separation.pairConfusion)
+          .map(([k, v]) => `${k} ${pct(v)}`)
+          .join(', ');
+  const lines = [];
+  lines.push(
+    `${GATE_LABEL} 1 separation: ${dualVerdict(g.separation.passAmended, g.separation.passOriginal, '>=75% overall / >=50% per class', '>=80% overall / >=60% per class')}: overall ${pct(g.separation.overall)}, min class ${pct(g.separation.minClassAccuracy)}, strand mutual confusion ${pairStr} vs <= 40% (both bars)`,
+  );
+  lines.push(
+    `${GATE_LABEL} 2 tags-ablated separation: ${dualVerdict(g.tagsAblated.passAmended, g.tagsAblated.passOriginal, '>=50%', '>=60%')}: overall ${pct(g.tagsAblated.overall)}, chance ${pct(g.tagsAblated.chance)}`,
+  );
+  lines.push(
+    `${GATE_LABEL} 3 degeneracy: ${g.degeneracy.pass ? 'PASS' : 'FAIL'} both bars (single bar, unchanged by the 2026-07-12 amendment): ${g.degeneracy.cellsBelowFloor.length}/${g.degeneracy.totalCells} scalar-axis cells (${pct(g.degeneracy.fraction)}) below the raw spread floor vs < 20%; ${g.degeneracy.clippedScalarDs} pairwise scalar d values clipped at exactly 1.00`,
+  );
+  const ch = g.characterization;
+  let line4 = `${GATE_LABEL} 4 characterization: ${dualVerdict(ch.passAmended, ch.passOriginal, '<=1 tag-threshold knife-edge miss', 'every checkable determinant passes')}: ${Object.entries(
+    ch.classes,
+  )
+    .map(([cid, c]) => `${cid} ${c.passed}/${c.checkable}`)
+    .join('; ')}`;
+  if (ch.toleratedMiss) {
+    const m = ch.toleratedMiss;
+    line4 += `; tolerated knife-edge miss: class ${m.class}, determinant ${m.determinant} (tag:${m.id} ${m.count}/${m.n} observed vs ${m.required}/${m.n} required)`;
+  }
+  lines.push(line4);
+  return lines;
 }
 
 function printReport(report) {
@@ -473,27 +605,7 @@ function printReport(report) {
     }
   }
 
-  const g = report.gates;
-  const pairStr =
-    typeof g.separation.pairConfusion === 'string'
-      ? g.separation.pairConfusion
-      : Object.entries(g.separation.pairConfusion)
-          .map(([k, v]) => `${k} ${pct(v)}`)
-          .join(', ');
-  console.log(
-    `${GATE_LABEL} 1 separation: ${g.separation.pass ? 'PASS' : 'FAIL'} (overall ${pct(g.separation.overall)} vs >= 80%; min class ${pct(g.separation.minClassAccuracy)} vs >= 60%; strand mutual confusion ${pairStr} vs <= 40%)`,
-  );
-  console.log(
-    `${GATE_LABEL} 2 tags-ablated separation: ${g.tagsAblated.pass ? 'PASS' : 'FAIL'} (overall ${pct(g.tagsAblated.overall)} vs >= 60%, chance ${pct(g.tagsAblated.chance)})`,
-  );
-  console.log(
-    `${GATE_LABEL} 3 degeneracy: ${g.degeneracy.pass ? 'PASS' : 'FAIL'} (${g.degeneracy.cellsBelowFloor.length}/${g.degeneracy.totalCells} scalar-axis cells (${pct(g.degeneracy.fraction)}) below the raw spread floor vs < 20%; ${g.degeneracy.clippedScalarDs} pairwise scalar d values clipped at exactly 1.00)`,
-  );
-  console.log(
-    `${GATE_LABEL} 4 characterization: ${g.characterization.pass ? 'PASS' : 'FAIL'} (${Object.entries(g.characterization.classes)
-      .map(([cid, c]) => `${cid} ${c.passed}/${c.checkable}`)
-      .join('; ')})`,
-  );
+  for (const line of gateLines(report.gates)) console.log(line);
 }
 
 function main() {
@@ -512,7 +624,9 @@ function main() {
 
   const failing = Object.values(report.gates).filter((g) => !g.pass).map((g) => g.label);
   if (failing.length) {
-    console.log(`  build gates failing: ${failing.join(', ')} (build not done; zero evidential weight either way)`);
+    console.log(
+      `  build gates failing (judged on the amended 2026-07-12 bars): ${failing.join(', ')} (build not done; zero evidential weight either way)`,
+    );
     process.exitCode = 1;
   }
 }

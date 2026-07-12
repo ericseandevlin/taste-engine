@@ -11,10 +11,16 @@ import {
   checkInstrument,
   degeneracyCells,
   dropTagsRow,
+  dualVerdict,
   flooredAxes,
+  gateLines,
   loadClassManifests,
   pooledSpreads,
   runHarness,
+  separationGate,
+  tagsAblatedGate,
+  BARS,
+  GATE_LABEL,
   HEADER,
 } from './validate.mjs';
 import { buildFingerprint, CONSTANTS } from './features.mjs';
@@ -135,6 +141,67 @@ test('runHarness: degeneracy counts (scalar axis, class) cells with raw pre-floo
   assert.ok(report.gates.degeneracy.clippedScalarDs >= 0);
 });
 
+test('runHarness: every gate carries dual-bar verdicts and its registered bar values for report.json', () => {
+  const report = runHarness(fixtureSpec(), fixtureManifests());
+  for (const key of ['separation', 'tagsAblated', 'degeneracy', 'characterization']) {
+    const g = report.gates[key];
+    assert.equal(typeof g.passOriginal, 'boolean');
+    assert.equal(typeof g.passAmended, 'boolean');
+    assert.ok(g.bars, `${key} gate records its bar values`);
+    assert.equal(g.pass, g.passAmended, `${key} gate is judged on the amended bar`);
+  }
+  assert.deepEqual(report.gates.separation.bars, BARS.separation);
+  assert.equal(report.gates.separation.bars.amended.overall, 0.75);
+  assert.equal(report.gates.separation.bars.original.overall, 0.8);
+  assert.equal(report.gates.tagsAblated.bars.amended, 0.5);
+  assert.equal(report.gates.tagsAblated.bars.original, 0.6);
+  // Gate 3 is single-bar: the two verdicts always coincide.
+  assert.equal(report.gates.degeneracy.passOriginal, report.gates.degeneracy.passAmended);
+});
+
+test('separationGate: 76.7% overall / 50% min class passes amended, would fail original', () => {
+  const g = separationGate(23 / 30, 0.5, true, 'n/a');
+  assert.equal(g.passAmended, true);
+  assert.equal(g.passOriginal, false);
+  assert.equal(g.pass, true); // judged on the amended bar
+  const both = separationGate(0.9, 0.8, true, 'n/a');
+  assert.equal(both.passOriginal, true);
+  assert.equal(both.passAmended, true);
+  assert.equal(separationGate(0.7, 0.5, true, 'n/a').passAmended, false); // overall below both
+  const lowClass = separationGate(0.9, 0.45, true, 'n/a'); // min class below even the amended 50%
+  assert.equal(lowClass.passAmended, false);
+  assert.equal(lowClass.passOriginal, false);
+});
+
+test('separationGate: strand mutual confusion rule is single-bar and binds BOTH verdicts', () => {
+  const g = separationGate(0.95, 0.9, false, { 'brutalism-minimal->brutalism-maximal': 0.6 });
+  assert.equal(g.passOriginal, false);
+  assert.equal(g.passAmended, false);
+  assert.equal(g.pass, false);
+});
+
+test('tagsAblatedGate: 53.3% passes amended and would fail original; 60% both; 45% neither', () => {
+  const mid = tagsAblatedGate(16 / 30, 0.2);
+  assert.equal(mid.passAmended, true);
+  assert.equal(mid.passOriginal, false);
+  assert.equal(mid.pass, true);
+  const both = tagsAblatedGate(0.6, 0.2);
+  assert.equal(both.passOriginal, true);
+  assert.equal(both.passAmended, true);
+  const low = tagsAblatedGate(0.45, 0.2);
+  assert.equal(low.passAmended, false);
+  assert.equal(low.passOriginal, false);
+});
+
+test('dualVerdict: prints both verdicts in every combination', () => {
+  assert.equal(dualVerdict(true, true, 'A', 'O'), 'PASS both bars (amended A; original O)');
+  assert.equal(
+    dualVerdict(true, false, '>=75%/50%', '>=80%/60%'),
+    'PASS amended (>=75%/50%); would FAIL original (>=80%/60%)',
+  );
+  assert.equal(dualVerdict(false, false, 'A', 'O'), 'FAIL both bars (amended A; original O)');
+});
+
 test('argmaxPredict: a shared maximum is a tie (misclassification); all-null predicts nothing', () => {
   assert.deepEqual(argmaxPredict({ a: 50, b: 50, c: 10 }), { predicted: null, tie: true });
   assert.deepEqual(argmaxPredict({ a: 60, b: 50 }), { predicted: 'a', tie: false });
@@ -233,6 +300,22 @@ test('checkInstrument: tag threshold at the registered 2/3 knife edge (4/6 passe
   assert.equal(checkInstrument({ type: 'tag', id: 'x' }, three, 0.667).pass, false);
 });
 
+test('checkInstrument: a knife-edge tag miss is exactly one exemplar short of the detection threshold', () => {
+  const refs = (tagsList) => tagsList.map((tags) => ({ tags }));
+  const threeOfSix = checkInstrument({ type: 'tag', id: 'x' }, refs([['x'], ['x'], ['x'], [], [], []]), 0.667);
+  assert.equal(threeOfSix.pass, false);
+  assert.equal(threeOfSix.required, 4); // 4/6 -> 0.667 clears the threshold
+  assert.equal(threeOfSix.knifeEdge, true);
+  const twoOfSix = checkInstrument({ type: 'tag', id: 'x' }, refs([['x'], ['x'], [], [], [], []]), 0.667);
+  assert.equal(twoOfSix.knifeEdge, false); // two short: an ordinary miss
+  const oneOfThree = checkInstrument({ type: 'tag', id: 'x' }, refs([['x'], [], []]), 0.667);
+  assert.equal(oneOfThree.required, 2); // 2/3 required
+  assert.equal(oneOfThree.knifeEdge, true);
+  const fourOfSix = checkInstrument({ type: 'tag', id: 'x' }, refs([['x'], ['x'], ['x'], ['x'], [], []]), 0.667);
+  assert.equal(fourOfSix.pass, true);
+  assert.equal(fourOfSix.knifeEdge, false); // a pass is never a knife-edge miss
+});
+
 test('checkInstrument: scalar uses the class median of RAW values, range inclusive', () => {
   const refs = [{ contrast: 0.1 }, { contrast: 0.12 }, { contrast: 0.3 }];
   const onEdge = checkInstrument({ type: 'scalar', id: 'contrast', range: [0.05, 0.12] }, refs, 0.667);
@@ -277,6 +360,139 @@ test('characterization: gates on checkable determinants only, excludes no-instru
   assert.equal(byDet.ghost.pass, false);
   assert.equal(byDet.hot.pass, false);
   assert.equal(byDet['true-grid-geometry'].excluded, true);
+});
+
+// Six-exemplar class where tag `edge` sits at 3/6 (one short of the 4/6
+// detection threshold): the canonical knife-edge miss.
+function knifeEdgeRefs() {
+  return {
+    w1: { tags: ['grid', 'edge'] },
+    w2: { tags: ['grid', 'edge'] },
+    w3: { tags: ['grid', 'edge'] },
+    w4: { tags: ['grid'] },
+    w5: { tags: ['grid'] },
+    w6: { tags: ['grid'] },
+  };
+}
+
+test('characterization: exactly one knife-edge tag miss passes amended, fails original, and names the tolerated miss', () => {
+  const fps = { a: { refs: knifeEdgeRefs() } };
+  const spec = {
+    tagDetectionThreshold: 0.667,
+    classes: {
+      a: {
+        defining: [
+          { determinant: 'grid', instrument: { type: 'tag', id: 'grid' } }, // 6/6 pass
+          { determinant: 'edge-case', instrument: { type: 'tag', id: 'edge' } }, // 3/6 vs 4/6: knife-edge miss
+        ],
+      },
+    },
+  };
+  const res = characterization(spec, fps);
+  assert.equal(res.passOriginal, false);
+  assert.equal(res.passAmended, true);
+  assert.equal(res.pass, true); // judged on the amended bar
+  assert.equal(res.misses.length, 1);
+  assert.equal(res.toleratedMiss.class, 'a');
+  assert.equal(res.toleratedMiss.determinant, 'edge-case');
+  assert.equal(res.toleratedMiss.knifeEdge, true);
+  assert.equal(res.toleratedMiss.count, 3);
+  assert.equal(res.toleratedMiss.required, 4);
+});
+
+test('characterization: two knife-edge misses (even across classes) fail the amended bar', () => {
+  const fps = { a: { refs: knifeEdgeRefs() }, b: { refs: knifeEdgeRefs() } };
+  const det = [{ determinant: 'edge-case', instrument: { type: 'tag', id: 'edge' } }];
+  const spec = { tagDetectionThreshold: 0.667, classes: { a: { defining: det }, b: { defining: det } } };
+  const res = characterization(spec, fps);
+  assert.equal(res.misses.length, 2);
+  assert.ok(res.misses.every((m) => m.knifeEdge));
+  assert.equal(res.passAmended, false);
+  assert.equal(res.pass, false);
+  assert.equal(res.toleratedMiss, null);
+});
+
+test('characterization: a single non-knife-edge miss fails both bars (no tolerance for ordinary misses)', () => {
+  const fps = { a: { refs: { w1: { tags: [], contrast: 0.3 }, w2: { tags: [], contrast: 0.3 } } } };
+  const scalarSpec = {
+    tagDetectionThreshold: 0.667,
+    classes: {
+      a: { defining: [{ determinant: 'calm', instrument: { type: 'scalar', id: 'contrast', range: [0.05, 0.15] } }] },
+    },
+  };
+  const scalarRes = characterization(scalarSpec, fps);
+  assert.equal(scalarRes.passOriginal, false);
+  assert.equal(scalarRes.passAmended, false); // a scalar miss is never knife-edge
+  const tagSpec = {
+    tagDetectionThreshold: 0.667,
+    classes: { a: { defining: [{ determinant: 'ghost', instrument: { type: 'tag', id: 'nope' } }] } },
+  };
+  const tagRes = characterization(tagSpec, fps); // 0/2 vs 2/2 required: two short
+  assert.equal(tagRes.passAmended, false);
+});
+
+test('characterization: a knife-edge miss alongside an ordinary miss still fails amended', () => {
+  const fps = { a: { refs: knifeEdgeRefs() } };
+  const spec = {
+    tagDetectionThreshold: 0.667,
+    classes: {
+      a: {
+        defining: [
+          { determinant: 'edge-case', instrument: { type: 'tag', id: 'edge' } }, // knife-edge miss
+          { determinant: 'ghost', instrument: { type: 'tag', id: 'nope' } }, // ordinary miss
+        ],
+      },
+    },
+  };
+  const res = characterization(spec, fps);
+  assert.equal(res.misses.length, 2);
+  assert.equal(res.passAmended, false);
+});
+
+test('gateLines: every gate line prints both verdicts under the gate label; tolerated miss carries class + determinant', () => {
+  const gates = {
+    separation: separationGate(23 / 30, 0.5, true, 'n/a (brutalism strand pair not registered)'),
+    tagsAblated: tagsAblatedGate(16 / 30, 0.2),
+    degeneracy: {
+      label: 'degeneracy',
+      pass: true,
+      passOriginal: true,
+      passAmended: true,
+      bars: BARS.degeneracy,
+      fraction: 0.1,
+      totalCells: 30,
+      cellsBelowFloor: [{}, {}, {}],
+      clippedScalarDs: 0,
+    },
+    characterization: {
+      label: 'characterization',
+      pass: true,
+      passOriginal: false,
+      passAmended: true,
+      toleratedMiss: { class: 'beta', determinant: 'dark', type: 'tag', id: 'dark-b', count: 3, n: 6, required: 4, knifeEdge: true },
+      classes: { alpha: { passed: 2, checkable: 2 }, beta: { passed: 1, checkable: 2 } },
+    },
+  };
+  const lines = gateLines(gates);
+  assert.equal(lines.length, 4);
+  for (const line of lines) assert.ok(line.startsWith(GATE_LABEL));
+  assert.match(lines[0], /PASS amended \(>=75% overall \/ >=50% per class\); would FAIL original \(>=80% overall \/ >=60% per class\)/);
+  assert.match(lines[0], /overall 76\.7%, min class 50\.0%/);
+  assert.match(lines[1], /PASS amended \(>=50%\); would FAIL original \(>=60%\)/);
+  assert.match(lines[2], /single bar, unchanged/);
+  assert.match(lines[3], /tolerated knife-edge miss: class beta, determinant dark/);
+  assert.match(lines[3], /3\/6 observed vs 4\/6 required/);
+
+  // A clean run prints PASS both bars and no tolerated miss.
+  const clean = gateLines({
+    ...gates,
+    separation: separationGate(1, 1, true, 'n/a'),
+    tagsAblated: tagsAblatedGate(1, 0.2),
+    characterization: { ...gates.characterization, passOriginal: true, toleratedMiss: null },
+  });
+  assert.match(clean[0], /PASS both bars/);
+  assert.match(clean[3], /PASS both bars/);
+  assert.ok(!clean[3].includes('tolerated'));
 });
 
 test('characterization: a secondary instrument is reported but never gates', () => {
