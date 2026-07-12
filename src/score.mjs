@@ -114,18 +114,10 @@ export function cropGeometry(width, height, targetAspect) {
   return { width, height: targetH, cropped: true };
 }
 
-// Pure: majority vote across tag passes (votes=1 passes tags through).
-export function majorityTags(voteLists) {
-  const need = Math.floor(voteLists.length / 2) + 1;
-  const counts = new Map();
-  for (const tags of voteLists) {
-    for (const t of new Set(tags || [])) counts.set(t, (counts.get(t) || 0) + 1);
-  }
-  return [...counts.entries()]
-    .filter(([, c]) => c >= need)
-    .map(([t]) => t)
-    .sort();
-}
+// majorityTags moved to features.mjs (shared with tag.mjs --votes);
+// imported for local use in main() and re-exported for existing importers.
+import { majorityTags } from './features.mjs';
+export { majorityTags };
 
 // Pure: assemble the per-axis rows for one scope's axes object.
 export function buildRows(output, axes) {
