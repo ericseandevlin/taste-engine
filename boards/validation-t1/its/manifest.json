@@ -1,7 +1,7 @@
 {
   "board": "validation-t1/its",
   "kind": "visual-ui",
-  "generated": "2026-07-12T15:44:28.392Z",
+  "generated": "2026-07-12T16:26:23.174Z",
   "items": [
     {
       "id": "w001",
@@ -60,17 +60,19 @@
         "restricted-palette-single-accent",
         "single-sans-family",
         "size-weight-position-hierarchy",
-        "strict-column-grid"
+        "strict-column-grid",
+        "undisguised-construction",
+        "warm-ground"
       ],
       "channels": [
         "oversized-wordmark",
-        "dark-editorial",
-        "grid-index"
+        "grid-index",
+        "process-documentation"
       ],
       "notes": {
-        "why": "Extreme typographic scale contrast and asymmetric composition balance a monumental heading against structured index listings, creating visual hierarchy through size and negative space alone.",
-        "avoid": "Do not add decorative elements, shadows, or rounded corners—the power lies in restraint and flat color fields.",
-        "keep": "The hairline red divider as the sole accent and structural anchor separating sections within a black-and-white grid."
+        "why": "Massive left-aligned headline dominates while a thin red rule and flush-left indexed program listing create hierarchical clarity through type scale and minimal structural dividers alone.",
+        "avoid": "Do not add decorative elements, shadows, or rounded corners—the power comes from restraint and the contrast between the huge display type and the dense information listing below.",
+        "keep": "The combination of an oversized sans-serif wordmark paired with a thin horizontal rule and tabular program index creates a modernist editorial structure that feels both authoritative and approachable."
       }
     },
     {
@@ -137,12 +139,12 @@
       "channels": [
         "grid-index",
         "process-documentation",
-        "oversized-wordmark"
+        "dark-editorial"
       ],
       "notes": {
-        "why": "A two-column index layout anchored by an oversized 'Course Index' headline and a heavy black rule, with course listings organized in a strict grid using size and weight hierarchy alone, set against warm off-white with minimal decoration.",
-        "avoid": "Do not add decorative shapes, patterns, or imagery; do not round corners or soften edges; do not pack content densely—the breathing room and restraint are essential to the authority.",
-        "keep": "The heavy horizontal rule as the primary scaffolding device and the extreme contrast between the monumental headline and small body text create immediate visual order and documentary clarity."
+        "why": "A strict two-column grid paired with heavy horizontal rules and indexed course listings creates institutional clarity through structure rather than decoration.",
+        "avoid": "Do not add decorative layers, imagery, or color: the authority comes from restraint and orthogonal alignment, not visual ornament.",
+        "keep": "The black band anchoring the top and the bold rule separating course index sections—thick structural elements that frame and organize without softening."
       }
     },
     {
@@ -211,9 +213,9 @@
         "grid-index"
       ],
       "notes": {
-        "why": "A columnar grid with hairline dividers and strategic whitespace creates clarity and hierarchy for transit-planning documentation, balancing information density with legibility.",
-        "avoid": "Do not add decorative elements, shadows, or ornamental geometry; the restraint is essential to the utilitarian authority.",
-        "keep": "The single orange accent applied consistently to highlight affected segments and headings, paired with a warm neutral ground and minimal sans-serif type, establishes both visual order and approachability."
+        "why": "Austere, left-aligned process documentation using a single sans-serif, thin dividers, and generous negative space to explain service disruption with clarity and hierarchy.",
+        "avoid": "Do not add decorative flourishes, rounded corners, shadows, or color beyond the restricted orange accent—this register demands structural honesty and minimal ornament.",
+        "keep": "The combination of a large flush-left heading, tabular metadata layout, and thin horizontal rules as the sole dividing device creates readable urgency without visual noise."
       }
     },
     {
@@ -267,17 +269,14 @@
         "flat-unmodulated-color-fields",
         "flush-left-ragged-right",
         "grotesk-display",
-        "hairline-dividers",
         "hard-edged-zero-effects",
         "index-table-listing",
         "low-density",
-        "monolithic-block-massing",
         "objective-documentary-imagery",
         "restricted-palette-single-accent",
         "single-sans-family",
         "size-weight-position-hierarchy",
-        "strict-column-grid",
-        "undisguised-construction"
+        "strict-column-grid"
       ],
       "channels": [
         "oversized-wordmark",
@@ -285,9 +284,9 @@
         "grid-index"
       ],
       "notes": {
-        "why": "Oversized sans-serif headline combined with a sparse grid layout and flat color blocks creates authority through scale and restraint rather than decoration.",
-        "avoid": "Resist adding ornamental patterns, shadows, or gradient effects—the power comes from pure typographic and geometric contrast against empty space.",
-        "keep": "The pairing of monumental display type (the unremarked city) with a clean tabular index below, separated by aligned flat color rectangles, establishes clear visual hierarchy without any auxiliary styling."
+        "why": "Oversized sans-serif wordmark dominates the dark field while a tabular index of works anchors the lower half, with flat color blocks providing visual weight asymmetrically.",
+        "avoid": "Do not add decorative elements, gradients, or shadows—the power comes from restraint and the contrast between the monumental type and sparse geometric blocks.",
+        "keep": "The pairing of extreme type scale (huge headline vs. small metadata) with a structured index table creates both visual drama and clear information hierarchy without ornamentation."
       }
     },
     {
@@ -342,6 +341,7 @@
         "hairline-dividers",
         "hard-edged-zero-effects",
         "low-density",
+        "muted-chroma",
         "objective-documentary-imagery",
         "process-documentation",
         "restricted-palette-single-accent",
@@ -352,13 +352,14 @@
         "warm-ground"
       ],
       "channels": [
+        "oversized-wordmark",
         "process-documentation",
         "warm-editorial"
       ],
       "notes": {
-        "why": "Sparse grid-aligned layout with overscale headline, thin dividers, and documentary register communicates structural practice credentials through restrained information hierarchy.",
-        "avoid": "Do not add decorative flourishes, rounded corners, shadows, or color beyond the warm neutral palette—the strength is in austere clarity.",
-        "keep": "The combination of extreme type scale contrast (37 / 340ft as dominant masses), thin hairline dividers, and asymmetric negative space creates professional authority without decoration."
+        "why": "Extreme type scale and generous negative space create a calm, authoritative presentation of structural engineering credentials through deliberate restraint and alignment.",
+        "avoid": "Do not add decorative elements, colors, or imagery beyond the documentary geometric diagram; the power lies in what is omitted.",
+        "keep": "The massive headline paired with hairline dividers and sparse metric callouts—this creates authority through understatement and proportion alone."
       }
     },
     {
@@ -405,13 +406,15 @@
       "tags": [
         "active-negative-space",
         "asymmetric-composition",
+        "extreme-type-scale-contrast",
         "flat-unmodulated-color-fields",
+        "flush-left-ragged-right",
         "grotesk-display",
         "hairline-dividers",
         "hard-edged-zero-effects",
         "low-density",
-        "monolithic-block-massing",
         "objective-documentary-imagery",
+        "oversized-wordmark",
         "process-documentation",
         "restricted-palette-single-accent",
         "single-sans-family",
@@ -422,13 +425,13 @@
       ],
       "channels": [
         "oversized-wordmark",
-        "process-documentation",
-        "grid-index"
+        "dark-editorial",
+        "process-documentation"
       ],
       "notes": {
-        "why": "Large asymmetric composition using extreme type scale and generous whitespace to establish a disciplined modernist grid structure that documents design process.",
-        "avoid": "Avoid adding decorative elements, rounded corners, or color fills—the power comes from austere restraint and structural clarity, not ornamentation.",
-        "keep": "The pairing of a massive display number ('no. 14') flush left with a dark rectangular block and minimal content below, using hairline dividers to separate sections while respecting a hidden column grid."
+        "why": "A monumental sans-serif numeral anchors a sparse, grid-locked layout where negative space and thin rules create deliberate breathing room around indexed content.",
+        "avoid": "Do not add decorative imagery, color, or rounded elements; the power lies in restraint and structural clarity, not visual ornamentation.",
+        "keep": "The extreme scale jump between the oversized 'no. 14' and body text, combined with strict vertical alignment and ample white space, creates a confident editorial system."
       }
     }
   ]

@@ -1,7 +1,7 @@
 {
   "board": "validation-t1/bauhaus",
   "kind": "visual-ui",
-  "generated": "2026-07-12T15:44:55.978Z",
+  "generated": "2026-07-12T16:26:49.441Z",
   "items": [
     {
       "id": "w001",
@@ -65,17 +65,18 @@
         "single-sans-family",
         "size-weight-position-hierarchy",
         "tilted-rotated-elements",
+        "undisguised-construction",
         "warm-ground"
       ],
       "channels": [
         "process-documentation",
-        "bold-primary-block",
-        "type-as-image"
+        "oversized-wordmark",
+        "bold-primary-block"
       ],
       "notes": {
-        "why": "A rotated red bar and primary-color geometric shapes anchor an asymmetric, documentary-register layout that balances photographic evidence with modernist visual structure.",
-        "avoid": "Do not center the composition or add ornamental elements that soften the stark utilitarian intent; the rawness is essential to credibility.",
-        "keep": "The deliberate collision of a tilted red bar with orthogonal type and geometric shapes—overlapping without apology—creates visual energy while preserving informational clarity."
+        "why": "Rotated red bar and bold primary color blocks anchor an asymmetric layout of documentary photography and sans-serif type, creating dynamic tension between ordered grid alignment and purposeful collision.",
+        "avoid": "Do not treat the geometric shapes as decorative ornament—they are structural anchors that organize and frame the photographic content; avoid softening their hard edges or adding effects.",
+        "keep": "The tilted red bar crossing through the composition and the restricted primary color palette (blue, red, yellow) on warm ground create visual momentum while maintaining documentary clarity."
       }
     },
     {
@@ -123,7 +124,6 @@
         "active-negative-space",
         "asymmetric-composition",
         "bold-primary",
-        "deliberate-misalignment-or-overlap",
         "extreme-type-scale-contrast",
         "flat-geometric-primitives",
         "flat-unmodulated-color-fields",
@@ -138,8 +138,6 @@
         "restricted-palette-single-accent",
         "single-sans-family",
         "size-weight-position-hierarchy",
-        "strict-column-grid",
-        "tilted-rotated-elements",
         "undisguised-construction"
       ],
       "channels": [
@@ -148,9 +146,9 @@
         "bold-primary-block"
       ],
       "notes": {
-        "why": "A clean modernist grid anchored by bold red bars and flat geometric shapes creates hierarchy through typographic scale and deliberate rotation, balancing dense information with active negative space.",
-        "avoid": "Do not soften the edges, add gradients, or round corners—the strength lies in hard black-and-white construction with red as a single primary accent; also avoid centering or over-ornamenting.",
-        "keep": "The tilted triangle and rotated surcharge stripe break the grid just enough to signal energy and importance without disrupting the underlying columnar structure or legibility."
+        "why": "A simple, functional price list uses stark red bars and hairline rules to anchor a dense information hierarchy built entirely from sans-serif weight and size shifts, with deliberate geometric shapes breaking the grid for visual punctuation.",
+        "avoid": "Attempting to soften the aesthetic with rounded corners, shadows, or intermediate accent colors would undermine the utilitarian directness and information-first logic.",
+        "keep": "The red bar and geometric triangle and diagonal rule as pure compositional mass—they carry no data but anchor the eye and inject energy into an otherwise type-driven layout."
       }
     },
     {
@@ -204,7 +202,6 @@
         "flat-unmodulated-color-fields",
         "flush-left-ragged-right",
         "grotesk-display",
-        "hairline-dividers",
         "hard-edged-zero-effects",
         "heavy-rule-scaffolding",
         "low-density",
@@ -217,14 +214,14 @@
         "warm-ground"
       ],
       "channels": [
-        "process-documentation",
-        "bold-primary-block",
-        "warm-editorial"
+        "oversized-wordmark",
+        "warm-editorial",
+        "bold-primary-block"
       ],
       "notes": {
-        "why": "Overlapping geometric shapes and a tilted red diagonal rule energize a sparse, left-aligned lecture listing that balances dense text with aggressive negative space and primary color accents.",
-        "avoid": "Do not add decorative detail, shadows, or rounded corners—the raw geometry and flat color fields are the entire visual system.",
-        "keep": "The deliberate collision between orthogonal text and rotated/tilted abstract shapes (red diagonal, blue circle, yellow triangle) creates visual tension without compromising readability or hierarchy."
+        "why": "Oversized 'public lectures' headline anchors the page while rotated primary-color shapes and carefully spaced speaker entries create dynamic asymmetry within a disciplined sans-serif grid.",
+        "avoid": "Do not add decorative refinement (shadows, gradients, rounded corners) or center the composition; the power comes from stark geometric contrast and deliberate off-axis placement.",
+        "keep": "The collision between the bold primary-color shapes (red diagonal, blue circle, yellow triangle) and the austere flush-left typography—each element occupying its own spatial zone with no overlap or decoration—produces modernist tension without fussiness."
       }
     },
     {
@@ -277,28 +274,31 @@
         "extreme-type-scale-contrast",
         "flat-geometric-primitives",
         "flat-unmodulated-color-fields",
+        "flush-left-ragged-right",
         "grotesk-display",
         "hard-edged-zero-effects",
         "heavy-rule-scaffolding",
+        "high-chroma",
         "low-density",
         "objective-documentary-imagery",
-        "oversized-load-bearing-type",
+        "ornament-without-function",
         "oversized-wordmark",
         "process-documentation",
         "restricted-palette-single-accent",
+        "scattered-geometric-primitives",
         "single-sans-family",
         "size-weight-position-hierarchy",
         "tilted-rotated-elements"
       ],
       "channels": [
+        "oversized-wordmark",
         "process-documentation",
-        "bold-primary-block",
-        "oversized-wordmark"
+        "bold-primary-block"
       ],
       "notes": {
-        "why": "Rotated geometric elements and overlapping type layers create kinetic tension against a dark field, while oversized sans-serif headlines and a bold red call-to-action anchor the functional workshop listing.",
-        "avoid": "Attempting to balance the composition symmetrically or adding decorative effects—the power comes from sparse, deliberate placement and the raw contrast of flat color and hard edges.",
-        "keep": "The tilted diagonal line and triangle as compositional counterweight to the vertical stacking of text and the red circular button; this rotation breaks static grid without becoming chaotic."
+        "why": "Bold primary color blocks and geometric shapes anchor asymmetric composition around a dominant oversized wordmark, while dark field and sparse layout prioritize legibility and workshop-document clarity.",
+        "avoid": "Do not center content or add decorative complexity; avoid soft shadows, rounded corners, or gradients that would soften the utilitarian workshop register.",
+        "keep": "The interplay of flat geometric primitives (triangle, square, diagonal line) scattered without function alongside utilitarian type creates visual energy without sacrificing clarity."
       }
     },
     {
@@ -349,29 +349,32 @@
         "extreme-type-scale-contrast",
         "flat-geometric-primitives",
         "flat-unmodulated-color-fields",
+        "flush-left-ragged-right",
         "grotesk-display",
         "hard-edged-zero-effects",
         "heavy-rule-scaffolding",
+        "high-chroma",
+        "index-table-listing",
         "low-density",
-        "monolithic-block-massing",
         "objective-documentary-imagery",
-        "oversized-load-bearing-type",
         "process-documentation",
         "restricted-palette-single-accent",
+        "scattered-geometric-primitives",
         "single-sans-family",
         "size-weight-position-hierarchy",
-        "strict-column-grid",
+        "type-as-image",
+        "undisguised-construction",
         "warm-ground"
       ],
       "channels": [
         "oversized-wordmark",
         "process-documentation",
-        "bold-primary-block"
+        "grid-index"
       ],
       "notes": {
-        "why": "Archival catalog organized by aligned grid with dramatic type mass and bold primary color blocks that separate content zones without decoration.",
-        "avoid": "Avoid adding ornament, shadows, or rounded corners; the strength lies in restraint and the contrast between massive type and sparse layout.",
-        "keep": "The oversized red headline acting as both typographic mass and compositional anchor, paired with a columnar grid of documented artifacts below."
+        "why": "A bold red wordmark and geometric shapes dominate a sparse warm ground, anchored by a heavy horizontal rule and a systematic grid of documentary project cards below.",
+        "avoid": "Avoid centering the composition or adding decorative detail to the geometric shapes—their crude flatness and off-center placement is what makes the asymmetry work.",
+        "keep": "The juxtaposition of an oversized playful word-image against a rigorous indexing structure below, held together by a single heavy line and a two-color palette."
       }
     },
     {
@@ -437,13 +440,13 @@
       ],
       "channels": [
         "process-documentation",
-        "bold-primary-block",
-        "type-as-image"
+        "type-as-image",
+        "bold-primary-block"
       ],
       "notes": {
-        "why": "Large red geometric shapes and oversized numeral anchor compositional weight against sparse, flush-left text documenting design process, leaving substantial grey breathing room.",
-        "avoid": "Do not add visual complexity through gradients, shadows, or decorative pattern—the stark flatness and negative space are essential to the documentary clarity.",
-        "keep": "The pairing of monumental red shapes (circle, diamond, bar) with austere text hierarchy and ample grey void creates confident restraint that reads as authoritative design thinking."
+        "why": "Oversized numbered type anchors a sparse layout where flat geometric shapes and documentary text about workshop process balance unequally around negative space.",
+        "avoid": "Do not add decorative depth, shadows, or rounded corners; the stark flatness and orthogonal geometry are essential to the utilitarian register.",
+        "keep": "The giant red numeral as compositional anchor paired with geometric primitives (circle, diamond, bar) and flush-left documentary text establishes a repeatable system for multi-page workshop documentation."
       }
     }
   ]

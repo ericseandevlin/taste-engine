@@ -1,7 +1,7 @@
 {
   "board": "validation-t1/brutalism-maximal",
   "kind": "visual-ui",
-  "generated": "2026-07-12T15:45:47.967Z",
+  "generated": "2026-07-12T16:27:37.917Z",
   "items": [
     {
       "id": "w001",
@@ -52,13 +52,13 @@
         "extreme-type-scale-contrast",
         "flat-geometric-primitives",
         "flat-unmodulated-color-fields",
+        "full-bleed-imagery",
         "grotesk-display",
         "hard-edged-zero-effects",
         "heavy-rule-scaffolding",
         "high-chroma",
         "high-density",
         "index-table-listing",
-        "monolithic-block-massing",
         "monospace-metadata",
         "objective-documentary-imagery",
         "oversized-wordmark",
@@ -72,12 +72,12 @@
       "channels": [
         "oversized-wordmark",
         "process-documentation",
-        "grid-index"
+        "bold-primary-block"
       ],
       "notes": {
-        "why": "Massive neon-yellow wordmark anchors a black-ground layout where thick rules and tight grid structure organize utilitarian tabular content and transmission specs as raw working documents.",
-        "avoid": "Do not soften the graphic severity with rounded corners, gradients, or drop shadows; the flat high-contrast color and hard edges are what make the industrial register work.",
-        "keep": "The stacking of monolithic color blocks (neon yellow, cyan, red) separated by thick black rules creates visual hierarchy and legibility without any decorative ornament."
+        "why": "Neon yellow and cyan sans-serif type on black, paired with thick red rules and a structured data table, creates high-contrast utilitarian energy that reads as raw, unpolished record-keeping.",
+        "avoid": "Do not soften the palette or add gradients; the flat, clashing neons and blacks are essential to the harsh, documentary register.",
+        "keep": "The oversized \"VOID CUI\" wordmark and tilted cyan stickers act as visual anchors that pull attention through dense tabular content below, making the bureaucratic form feel almost playful."
       }
     },
     {
@@ -137,7 +137,6 @@
         "high-chroma",
         "high-density",
         "index-table-listing",
-        "monolithic-block-massing",
         "objective-documentary-imagery",
         "pattern-clash-adjacency",
         "process-documentation",
@@ -145,6 +144,7 @@
         "single-sans-family",
         "size-weight-position-hierarchy",
         "strict-column-grid",
+        "tilted-rotated-elements",
         "undisguised-construction"
       ],
       "channels": [
@@ -153,9 +153,9 @@
         "grid-index"
       ],
       "notes": {
-        "why": "Oversized red wordmark and aggressive black-and-white geometric patterns establish visual dominance while a strict columnar grid beneath organizes product specs and table data with utilitarian clarity.",
-        "avoid": "Do not soften the palette, round corners, or add decorative layering—the raw red-cyan-black clash and hard edges are essential to the aggressive energy.",
-        "keep": "The bold red headline bleeding full-width over cyan and the hard-edged checkerboard pattern block create instant visual contrast that draws eye before the dense information below."
+        "why": "Aggressive color contrast (red, black, cyan) and tight geometric composition combine industrial scaffolding with deliberate collision and overlap to project raw urgency and catalog inventory.",
+        "avoid": "Do not soften the edges or add rounded corners; do not introduce gradients or shadows; do not reduce the palette or muffle the contrast—the harshness is the message.",
+        "keep": "The rotated 'NO RESTOCK' diagonal banner colliding with the product block and the bold cyan bands cutting through black table sections—this deliberate misalignment and color clash reads as dynamic constraint rather than chaos."
       }
     },
     {
@@ -202,38 +202,32 @@
       "tags": [
         "active-negative-space",
         "asymmetric-composition",
-        "black-keyline-outlines",
         "bold-primary",
+        "broken-grid-type",
         "deliberate-misalignment-or-overlap",
         "extreme-type-scale-contrast",
-        "flat-geometric-primitives",
         "flat-unmodulated-color-fields",
         "grotesk-display",
         "hard-edged-zero-effects",
-        "hard-offset-shadows",
         "heavy-rule-scaffolding",
         "high-chroma",
         "high-density",
         "index-table-listing",
-        "objective-documentary-imagery",
-        "oversized-load-bearing-type",
-        "process-documentation",
         "restricted-palette-single-accent",
         "single-sans-family",
-        "size-weight-position-hierarchy",
         "tilted-rotated-elements",
         "type-as-image",
         "undisguised-construction"
       ],
       "channels": [
-        "bold-primary-block",
         "type-as-image",
-        "process-documentation"
+        "bold-primary-block",
+        "grid-index"
       ],
       "notes": {
-        "why": "High-contrast neon yellow and black, with dynamically rotated and overlapping typography and raw tabular data, creates urgent visual energy that reads as anti-design punk documentation.",
-        "avoid": "Softening the palette, rounding corners, or adding hierarchical chrome—the rawness and flatness are essential to the rebellious register.",
-        "keep": "The collision of oversized display type, rotated stickers, and exposed table rows, all in a two-color palette with zero effects, is instantly distinctive and enforces information-first urgency."
+        "why": "Extreme typographic scale and deliberate rotated overlays create kinetic energy within a rigid black-and-yellow primary palette and exposed table structure.",
+        "avoid": "Do not soften the edges, add gradients or shadows, or center the composition—the rawness and asymmetry are essential to the aggressive register.",
+        "keep": "The rotated red diagonal banner and tilted 'SHOW 09' text layered over the grid table: orthogonal structure broken by rotated typography creates tension without losing legibility."
       }
     },
     {
@@ -291,9 +285,9 @@
         "heavy-rule-scaffolding",
         "high-chroma",
         "high-density",
-        "monolithic-block-massing",
         "objective-documentary-imagery",
-        "oversized-load-bearing-type",
+        "ornament-without-function",
+        "pattern-clash-adjacency",
         "process-documentation",
         "restricted-palette-single-accent",
         "single-sans-family",
@@ -304,13 +298,13 @@
       ],
       "channels": [
         "oversized-wordmark",
-        "process-documentation",
+        "bold-primary-block",
         "type-as-image"
       ],
       "notes": {
-        "why": "Brutalist editorial layout using oversized sans-serif type as raw visual mass, vibrant neon color blocks, and deliberate misalignment to create urgent documentary energy.",
-        "avoid": "Do not soften the edges, add shadows or gradients, or center the composition—the visual tension comes from hard orthogonal collision and off-grid rotated callouts.",
-        "keep": "The rotated yellow and magenta banner strips used as emphasis devices that break grid alignment while maintaining stark flat color and legibility."
+        "why": "Massive sans headline anchors the page while neon magenta and yellow solid blocks, diagonal stripes, and deliberately rotated label stickers create urgent visual noise that signals DIY editorial production.",
+        "avoid": "Do not soften the color clash or round the angles; the hard edges and saturated magenta-yellow collision are the entire point—removing them would lose the edgy, urgent register.",
+        "keep": "The tilted, overlapping label sticker on the magenta bar reading 'ISSUE 04 OUT NOW, 400 COPIES, CASH ONLY' — it breaks the grid on purpose and signals immediate, tactile, anti-digital production."
       }
     },
     {
@@ -355,20 +349,18 @@
         "accentHueCount": 4
       },
       "tags": [
-        "black-keyline-outlines",
+        "asymmetric-composition",
         "bold-primary",
         "deliberate-misalignment-or-overlap",
         "extreme-type-scale-contrast",
         "flat-geometric-primitives",
         "flat-unmodulated-color-fields",
-        "full-bleed-imagery",
         "grotesk-display",
         "hard-edged-zero-effects",
         "heavy-rule-scaffolding",
         "high-chroma",
         "high-density",
         "index-table-listing",
-        "oversized-load-bearing-type",
         "restricted-palette-single-accent",
         "single-sans-family",
         "size-weight-position-hierarchy",
@@ -378,14 +370,14 @@
         "undisguised-construction"
       ],
       "channels": [
-        "oversized-wordmark",
         "bold-primary-block",
-        "grid-index"
+        "grid-index",
+        "type-as-image"
       ],
       "notes": {
-        "why": "Massive red-and-cyan color contrast with oversized type and rotated overlapping blocks creates urgency and visual collision while maintaining grid-aligned information layers beneath.",
-        "avoid": "Do not soften the edges, add gradients, or reduce the chromatic intensity—the harshness is essential to the register; avoid centering content or balancing masses symmetrically.",
-        "keep": "The stacked yellow banner + rotated black type overlay + cyan table structure creates a three-layer hierarchy that works through collision, not refinement."
+        "why": "Layered primary-color blocks (red, cyan, black) with rotated type bands and exposed tabular structure create visual urgency through collision rather than refinement.",
+        "avoid": "Do not soften the edges, add shadows, or increase whitespace—the roughness and density are structural to the energy.",
+        "keep": "Rotating type and banner overlays deliberately off the grid while maintaining strict column alignment underneath—chaos held in place by geometry."
       }
     },
     {
@@ -442,14 +434,13 @@
         "grotesk-display",
         "hard-edged-zero-effects",
         "hard-offset-shadows",
+        "heavy-rule-scaffolding",
         "high-chroma",
         "high-density",
-        "index-table-listing",
-        "monolithic-block-massing",
-        "objective-documentary-imagery",
-        "oversized-load-bearing-type",
+        "oversized-wordmark",
         "restricted-palette-single-accent",
         "scattered-geometric-primitives",
+        "single-sans-family",
         "size-weight-position-hierarchy",
         "tilted-rotated-elements",
         "type-as-image",
@@ -461,9 +452,9 @@
         "bold-primary-block"
       ],
       "notes": {
-        "why": "Massive rotated wordmark dominates the canvas as raw typographic mass, while scattered offset rectangles with labeled content create controlled chaos through deliberate misalignment and high-contrast color blocking.",
-        "avoid": "Do not soften the edges, add gradients, or center-align anything; the tension comes from hard collisions and asymmetric placement on a strict two-color ground.",
-        "keep": "The technique of using black-outlined colored rectangles as both functional content holders and compositional sculptural elements, allowing information and visual mass to merge into one system."
+        "why": "Enormous primary-color letterforms collide with rotated rectangular blocks and white label cards on a yellow ground, creating kinetic visual tension through deliberate overlap and off-axis positioning.",
+        "avoid": "Do not try to make the overlaps feel accidental or soften the hard edges; the craft lies in the precision of the collision, not in hiding it.",
+        "keep": "The stacked white label cards with black outlines and monospace captions act as a systematic counterweight to the chaotic typographic mass, anchoring the composition with ordered documentary detail."
       }
     }
   ]

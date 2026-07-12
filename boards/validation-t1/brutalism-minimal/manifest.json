@@ -1,7 +1,7 @@
 {
   "board": "validation-t1/brutalism-minimal",
   "kind": "visual-ui",
-  "generated": "2026-07-12T15:45:18.986Z",
+  "generated": "2026-07-12T16:27:11.830Z",
   "items": [
     {
       "id": "w001",
@@ -45,6 +45,7 @@
         "accentHueCount": 2
       },
       "tags": [
+        "active-negative-space",
         "asymmetric-composition",
         "browser-default-styling",
         "dense-utilitarian-lists",
@@ -55,7 +56,6 @@
         "hard-edged-zero-effects",
         "high-density",
         "index-table-listing",
-        "monospace-metadata",
         "muted-chroma",
         "objective-documentary-imagery",
         "restricted-palette-single-accent",
@@ -63,16 +63,17 @@
         "size-weight-position-hierarchy",
         "strict-column-grid",
         "system-or-monospace-typography",
-        "undisguised-construction"
+        "undisguised-construction",
+        "warm-ground"
       ],
       "channels": [
         "grid-index",
         "process-documentation"
       ],
       "notes": {
-        "why": "A multi-column classified listing organized by strict vertical column alignment with hairline dividers creates efficient information retrieval through dense categorization and hyperlinked entries.",
-        "avoid": "Do not add decorative imagery, shadows, rounded corners, or ornamental motifs—they would undermine the utilitarian clarity and fast scanability that makes this directory work.",
-        "keep": "The exposed hairline-rule scaffolding and left-aligned hyperlinked text in a monospace-like sans creates a browser-native, accessible registry that prioritizes information density and link discovery over visual polish."
+        "why": "A multi-column classified index uses vertical column alignment, hairline dividers, and dense listing to organize large amounts of linked catalog content into scannable categories without visual ornamentation.",
+        "avoid": "Do not add decorative elements, colored badges, or heavy visual hierarchy devices—they would obscure the utilitarian structure and slow information retrieval.",
+        "keep": "The strict multi-column grid with minimal padding and blue hyperlinks as the only accent creates an efficient, trustworthy archive aesthetic that prioritizes density and clarity over aesthetic comfort."
       }
     },
     {
@@ -122,6 +123,8 @@
         "dense-utilitarian-lists",
         "flush-left-ragged-right",
         "grotesk-display",
+        "hairline-dividers",
+        "hard-edged-zero-effects",
         "high-density",
         "index-table-listing",
         "muted-chroma",
@@ -135,12 +138,13 @@
       ],
       "channels": [
         "grid-index",
-        "process-documentation"
+        "process-documentation",
+        "dark-editorial"
       ],
       "notes": {
-        "why": "A dense search results listing prioritizes information scannability through consistent left alignment, minimal visual hierarchy, and raw tabular structure without decorative overhead.",
-        "avoid": "Do not add cards, boxes, shadows, or rounded corners—they would contradict the utilitarian density and slow eye movement down the list.",
-        "keep": "The strict left-flush ragged-right layout with size and color as the only hierarchy markers, allowing rapid scanning of result titles and metadata without visual noise."
+        "why": "A dense search results listing uses size, weight, and left alignment to organize information into a utilitarian index that prioritizes rapid scanning and information density over visual comfort.",
+        "avoid": "Adding decorative elements, cards, or heavy visual separation would contradict the functional transparency of this reference interface; avoid ornament that slows comprehension.",
+        "keep": "The consistent flush-left alignment with minimal padding and subtle typographic hierarchy (size, weight, link color) that allows users to scan many results efficiently without cognitive load from decoration."
       }
     },
     {
@@ -195,7 +199,6 @@
         "hairline-dividers",
         "hard-edged-zero-effects",
         "high-density",
-        "monolithic-block-massing",
         "muted-chroma",
         "objective-documentary-imagery",
         "process-documentation",
@@ -209,12 +212,12 @@
       "channels": [
         "process-documentation",
         "grid-index",
-        "warm-editorial"
+        "dark-editorial"
       ],
       "notes": {
-        "why": "Academic CV layout prioritizes information density and utility through flush-left stacking, minimal decoration, and structural transparency—allowing rapid scanning of credentials, publications, and courses.",
-        "avoid": "Do not add decorative elements, cards, shadows, or visual hierarchy devices beyond type scale and weight; the authority comes from restraint and clarity, not ornamentation.",
-        "keep": "The use of hyperlinked abbreviations (PDF, IDM) as functional metadata within dense text lists, which signals both digital accessibility and scholarly precision without disrupting the monolithic block composition."
+        "why": "Information-dense academic CV uses minimal typographic hierarchy and exposed table structure to prioritize content clarity and scanability over visual refinement.",
+        "avoid": "Attempting to add decorative elements, boxes, or visual embellishment would undermine the utilitarian register and make the document harder to parse quickly.",
+        "keep": "The reliance on type size, weight, and position alone—combined with thin dividers and flush-left alignment—creates a self-evident hierarchy that serves the documentary purpose."
       }
     },
     {
@@ -261,20 +264,18 @@
       "tags": [
         "browser-default-styling",
         "dense-utilitarian-lists",
-        "flat-unmodulated-color-fields",
         "flush-left-ragged-right",
-        "grotesk-display",
+        "hairline-dividers",
         "hard-edged-zero-effects",
         "high-density",
         "index-table-listing",
-        "monolithic-block-massing",
         "monospace-metadata",
-        "muted-chroma",
         "objective-documentary-imagery",
         "process-documentation",
         "restricted-palette-single-accent",
         "single-sans-family",
         "size-weight-position-hierarchy",
+        "strict-column-grid",
         "system-or-monospace-typography",
         "undisguised-construction"
       ],
@@ -283,9 +284,9 @@
         "process-documentation"
       ],
       "notes": {
-        "why": "A utilitarian archive index prioritizes information density and rapid scanning through strict tabular alignment, monospace dates, and minimal visual hierarchy—no decoration interferes with content retrieval.",
-        "avoid": "Do not add decorative elements, rounded corners, colored badges, or card containers; they would obscure the utilitarian register and slow visual parsing of the dense list.",
-        "keep": "The combination of hairline dividers, monospace metadata columns, and flush-left link text creates a transparent, legible index that feels like a raw database output rather than a designed product."
+        "why": "A tabular archive listing prioritizes information density and rapid scanning through aligned rows, minimal decoration, and monochromatic restraint.",
+        "avoid": "Adding visual ornament, card containers, or decorative spacing would obscure the utilitarian clarity that makes a reference index useful.",
+        "keep": "The exposed table structure with thin hairline dividers and system typography—leaving borders visible as functional scaffolding rather than hiding them—creates trustworthy documentary legibility."
       }
     },
     {
@@ -336,9 +337,9 @@
         "hard-edged-zero-effects",
         "high-density",
         "index-table-listing",
-        "monolithic-block-massing",
         "muted-chroma",
         "objective-documentary-imagery",
+        "process-documentation",
         "restricted-palette-single-accent",
         "single-sans-family",
         "size-weight-position-hierarchy",
@@ -351,9 +352,9 @@
         "process-documentation"
       ],
       "notes": {
-        "why": "A utilitarian database or inventory table prioritizes information density and scannability through aligned rows, minimal visual styling, and strict columnar organization.",
-        "avoid": "Do not add decorative elements, cards, or visual hierarchy devices that would clutter the index; the functional clarity of the table structure is the entire design.",
-        "keep": "The use of hairline rules and monospace/default typography to let the tabular data structure itself carry all organizational logic without ornament."
+        "why": "A dense, utility-first table of equipment listings prioritizes information retrieval over visual polish, using only type hierarchy and hairline rules to organize rows.",
+        "avoid": "Adding decorative ornaments, card containers, or visual styling would undermine the transparent, scan-optimized structure that makes rapid lookup possible.",
+        "keep": "The unflinching use of thin rules and aligned columns with minimal padding creates immediate legibility for a catalog of repetitive structured data."
       }
     },
     {
@@ -413,15 +414,17 @@
         "restricted-palette-single-accent",
         "single-sans-family",
         "size-weight-position-hierarchy",
-        "system-or-monospace-typography"
+        "system-or-monospace-typography",
+        "undisguised-construction"
       ],
       "channels": [
-        "process-documentation"
+        "process-documentation",
+        "dark-editorial"
       ],
       "notes": {
-        "why": "Stripped-down event listing using flush-left typographic hierarchy and cyan accent links against a dark ground, prioritizing information density and scanability over visual polish.",
-        "avoid": "Avoid adding decorative elements, rounded corners, or boxes—the stark utility of the layout is its strength and any visual ornamentation would undermine the documentary register.",
-        "keep": "The use of single-color type hierarchy and cyan hyperlinks as the only visual accent, creating a clear information-first aesthetic that scales to any amount of listing content."
+        "why": "A sparse, no-frills event listing prioritizes pure information delivery through minimal typography and structure, relying on hierarchy via size and whitespace alone.",
+        "avoid": "Adding decorative elements, colorful accent blocks, or visual polish would undermine the utilitarian documentary register and distract from event details.",
+        "keep": "The strict use of flush-left text, monospace-like date formatting, and abundant negative space creates an austere, trustworthy authority appropriate to community event scheduling."
       }
     }
   ]

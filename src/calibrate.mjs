@@ -5,7 +5,8 @@
 // vocabulary ids that flip run-to-run are prune-listed.
 //
 // REGISTERED PRUNE RULE (printed and written into the report): an id is
-// prune-listed when it flips on MORE THAN ONE distinct exemplar, where a flip
+// prune-listed at a flip rate of 20% of exemplars or higher (registered rule,
+// revised 2026-07-11 in the Life-OS protocol addendum), where a flip
 // is minority presence, the id appearing in 1 or 2 of the 3 passes on one
 // exemplar. Operationalization note: the design doc sentence "flip in more
 // than 1 of 3 passes on any exemplar" cannot bind per-exemplar with 3 passes
@@ -38,7 +39,7 @@ import { makeVisionCaller } from './anthropic.mjs';
 export const PASSES = 3;
 
 export const PRUNE_RULE =
-  'An id is prune-listed when it flips on MORE THAN ONE distinct exemplar; a flip is minority presence, ' +
+  'An id is prune-listed when its flip rate is 20% of exemplars or higher (registered 2026-07-11 revision); a flip is minority presence, ' +
   `the id appearing in 1 or 2 of the ${PASSES} passes on one exemplar.`;
 
 export const OPERATIONALIZATION_NOTE =
@@ -85,10 +86,12 @@ export function flipTable(votes, ids = []) {
   return table;
 }
 
-// The registered rule: flips on more than one distinct exemplar.
-export function pruneList(table) {
+// The registered rule (2026-07-11 revision, Life-OS protocol addendum): an id
+// is pruned when its flip rate is 20% of exemplars or higher.
+export function pruneList(table, exemplarCount) {
+  const bar = Math.ceil(0.2 * exemplarCount);
   return Object.entries(table)
-    .filter(([, r]) => r.flips > 1)
+    .filter(([, r]) => r.flips >= bar)
     .map(([id]) => id)
     .sort();
 }
@@ -195,7 +198,7 @@ async function main() {
 
   const ids = vocabIds(board.tagVocabulary);
   const table = flipTable(votes, ids);
-  const prune = pruneList(table);
+  const prune = pruneList(table, votes.length);
 
   const flipped = Object.entries(table)
     .filter(([, r]) => r.flips > 0)

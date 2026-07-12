@@ -65,7 +65,6 @@ export const KINDS = {
       { id: 'full-bleed-imagery', definition: 'At least one image runs to the canvas edge on one or more sides instead of sitting inset within margins.' },
       { id: 'index-table-listing', definition: 'The dominant content structure is a tabular index or catalog: three or more rows of aligned fields such as titles, dates, and categories. Apply only when the listing is the main content, not for a small table on an otherwise compositional page.' },
       { id: 'dense-utilitarian-lists', definition: 'Content is packed into dense text lists or tables with minimal padding and little or no imagery, prioritizing information transfer over visual comfort.' },
-      { id: 'monolithic-block-massing', definition: 'The layout reads as a few heavy, hard-edged, often full-width rectangular slabs stacked or interlocked, not as many small floating cards.' },
       { id: 'deliberate-misalignment-or-overlap', definition: 'Elements visibly overlap, collide, or sit off-grid on purpose: rotated or offset blocks, type crossing other elements, colliding edges, while craft elsewhere shows the roughness is chosen.' },
       { id: 'tilted-rotated-elements', definition: 'One or more shapes, pattern blocks, or lines of type are rotated off the horizontal axis, deliberately breaking orthogonal alignment.' },
       { id: 'process-documentation', definition: 'The page documents work or process (steps, specs, artifacts, annotations) in a documentary register rather than marketing prose.' },
@@ -75,7 +74,6 @@ export const KINDS = {
       { id: 'editorial-serif', definition: 'A serif family carries body or display text in an editorial register.' },
       { id: 'monospace-metadata', definition: 'Metadata such as dates, indices, captions, or labels is set in a monospace face distinct from the main text family.' },
       { id: 'oversized-wordmark', definition: 'A single word or name is set so large it acts as the page dominant visual mass.' },
-      { id: 'oversized-load-bearing-type', definition: 'Display type is set at monumental scale, filling a large fraction of the viewport width or cropped by container or viewport edges, functioning as raw visual mass rather than a polished headline.' },
       { id: 'size-weight-position-hierarchy', definition: 'Information hierarchy is carried only by type size, weight, and position on the page, with no decorative devices such as banners, badge boxes, drop caps, or flourish underlines.' },
       { id: 'extreme-type-scale-contrast', definition: 'Display type is roughly four times body size or larger, producing a stepped scale with few intermediate sizes rather than a smooth ramp.' },
       { id: 'type-as-image', definition: 'Letterforms are the composition primary graphic material: single letters or short words scaled, cropped, layered, or arranged as shapes.' },
@@ -84,7 +82,7 @@ export const KINDS = {
       { id: 'chunky-playful-display-type', definition: 'Headlines use bold rounded or toy-like display letterforms, often multicolored per letter, outlined, or set on a bouncing or tilted baseline.' },
       // imagery
       { id: 'art-directed-photo', definition: 'Photography is deliberately staged, lit, or graded as the page aesthetic centerpiece.' },
-      { id: 'objective-documentary-imagery', definition: 'Any imagery present is objective documentary photography, often black-and-white, or flat constructed geometric abstraction. Apply when ALL imagery on the page fits; pages whose only imagery is flat geometric abstraction qualify.' },
+      { id: 'objective-documentary-imagery', definition: 'Any imagery present is objective documentary photography, often black-and-white, or flat constructed geometric abstraction. Apply when ALL imagery fits, when the only imagery is flat geometric abstraction, or when the page has no imagery at all (nothing violates the objectivity rule).' },
       { id: 'sculptural-object', definition: 'A photographed or rendered three-dimensional object is the page hero element.' },
       { id: 'dimensional-render', definition: 'Soft-shaded 3D renders with visible depth and lighting appear as content.' },
       // graphic devices & ornament

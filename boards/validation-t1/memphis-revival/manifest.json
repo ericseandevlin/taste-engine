@@ -1,7 +1,7 @@
 {
   "board": "validation-t1/memphis-revival",
   "kind": "visual-ui",
-  "generated": "2026-07-12T15:46:13.877Z",
+  "generated": "2026-07-12T16:28:07.199Z",
   "items": [
     {
       "id": "w001",
@@ -60,9 +60,7 @@
         "high-chroma",
         "low-density",
         "ornament-without-function",
-        "oversized-load-bearing-type",
         "pattern-clash-adjacency",
-        "process-documentation",
         "restricted-palette-single-accent",
         "scattered-geometric-primitives",
         "single-sans-family",
@@ -74,13 +72,13 @@
       ],
       "channels": [
         "process-documentation",
-        "oversized-wordmark",
-        "bold-primary-block"
+        "bold-primary-block",
+        "type-as-image"
       ],
       "notes": {
-        "why": "Maximalist geometric ornament and bold type hierarchy communicate event logistics with high visual energy while maintaining informational clarity through layered pattern blocks and strict typographic hierarchy.",
-        "avoid": "Do not soften the hard edges between pattern fields or add subtle gradients; the clash and visual friction between stripes and dots is essential to the energetic register.",
-        "keep": "The combination of monumentally scaled headline type, clashing pattern fields (wavy stripe + yellow stripes), and small functional typography (monospace metadata) creates a distinctive documentary-playful register that feels both purposeful and irreverent."
+        "why": "Playful typographic hierarchy and geometric abstraction on a warm ground create energy without visual fussiness, using color, scale, and compositional offset to organize event information.",
+        "avoid": "Don't apply effects, shadows, or rounded corners to the geometric elements; the flatness and hard edges are essential to the craft.",
+        "keep": "The tilted squiggle lines and scattered geometric shapes floating above and around the structured text blocks—they signal informality while the rigid sans-serif typography and color-blocked info boxes keep the practical details scannable."
       }
     },
     {
@@ -128,6 +126,7 @@
         "active-negative-space",
         "asymmetric-composition",
         "black-keyline-outlines",
+        "bold-primary",
         "deliberate-misalignment-or-overlap",
         "extreme-type-scale-contrast",
         "flat-geometric-primitives",
@@ -151,14 +150,14 @@
         "warm-ground"
       ],
       "channels": [
-        "warm-editorial",
         "bold-primary-block",
-        "process-documentation"
+        "type-as-image",
+        "dimensional-playful"
       ],
       "notes": {
-        "why": "Energetic, youth-friendly composition balances a bold headline with playful geometric ornaments and colored pattern bands that feel deliberate and structured despite their whimsy.",
-        "avoid": "Overloading the ornamental elements into noise; the scattered shapes and patterns must remain subordinate to the clear information hierarchy of the session cards below.",
-        "keep": "The full-width patterned divider bands (chevron, speckle, pink dot field) that physically separate content zones while adding visual texture without functional purpose."
+        "why": "Large primary-color blocks and scattered geometric ornament create visual energy while maintaining legibility through clear typographic hierarchy and generous negative space.",
+        "avoid": "Do not overload the composition with additional pattern or imagery; the page works because ornament is sparse and shapes are elementary, leaving room for the content to breathe.",
+        "keep": "The combination of bold saturated color fields (mint green, pink, yellow) with flat geometric shapes and hand-drawn squiggle lines as pure decoration, placed asymmetrically around a clean typographic core."
       }
     },
     {
@@ -215,12 +214,9 @@
         "full-bleed-imagery",
         "grotesk-display",
         "hard-edged-zero-effects",
-        "heavy-rule-scaffolding",
         "high-chroma",
         "low-density",
-        "objective-documentary-imagery",
         "ornament-without-function",
-        "oversized-load-bearing-type",
         "pattern-clash-adjacency",
         "restricted-palette-single-accent",
         "scattered-geometric-primitives",
@@ -233,13 +229,13 @@
       ],
       "channels": [
         "oversized-wordmark",
-        "bold-primary-block",
-        "type-as-image"
+        "warm-editorial",
+        "bold-primary-block"
       ],
       "notes": {
-        "why": "Monumental headline type paired with bold primary-color blocks and decorative geometric pattern work creates visual drama and memorability through scale contrast and purposeful misalignment.",
-        "avoid": "Avoid over-decorating with ornament; the pattern-clash between the squiggle, checkerboard, and solid blue sections works only because they have hard edges and don't soften into one another.",
-        "keep": "The stacked layering of distinct pattern zones (wave, checkerboard, solid color) as full-bleed dividers is a powerful device for sectioning content without fussy cards or subtle transitions."
+        "why": "Oversized bold headlines anchored by warm cream ground and primary blue block create immediate visual hierarchy; scattered geometric shapes and pattern clash energize without competing with type.",
+        "avoid": "Do not apply consistent padding or centered symmetry; the roughness and collisions are intentional and would be lost with refinement.",
+        "keep": "The pattern clash between wavy lines and checkerboard zones—abrupt, unmodulated, adjacent—delivers visual energy without decoration that serves no purpose beyond stimulation."
       }
     },
     {
@@ -293,14 +289,12 @@
         "flush-left-ragged-right",
         "full-bleed-imagery",
         "grotesk-display",
-        "hairline-dividers",
         "hard-edged-zero-effects",
         "high-chroma",
         "low-density",
         "ornament-without-function",
         "restricted-palette-single-accent",
         "scattered-geometric-primitives",
-        "single-sans-family",
         "size-weight-position-hierarchy",
         "speckle-chip-pattern",
         "squiggle-motif",
@@ -308,14 +302,14 @@
         "warm-ground"
       ],
       "channels": [
-        "warm-editorial",
+        "dimensional-playful",
         "bold-primary-block",
-        "dimensional-playful"
+        "warm-editorial"
       ],
       "notes": {
-        "why": "Energetic asymmetry between oversized sans-serif headlines and a sculptural product hero, anchored by playful flat shapes and decorative wavy/speckle motifs that give personality without cluttering the breathing space.",
-        "avoid": "Applying too many different pattern textures or allowing ornamental elements to overwhelm the legibility of the core message and product showcase.",
-        "keep": "The deliberate collision of clean typography, rotated decorative lines, and a confident geometric color palette (mint, peach, primary blue) that reads as modern, friendly, and approachable without sacrificing clarity."
+        "why": "Asymmetric composition balances a bold oversized headline against a sculptural product hero and abstract geometric ornament (wavy lines, triangles, speckles), creating visual energy through deliberate misalignment and pattern collision rather than symmetry.",
+        "avoid": "Do not add drop shadows, gradients, or rounded corners—the flat hard-edged palette and playful geometry already carry the energy; embellishment would clutter.",
+        "keep": "The collision of multiple pattern types (squiggles, speckles, geometric shapes) placed as pure ornament around the product and headline, creating visual excitement without competing with the message."
       }
     },
     {
@@ -374,9 +368,8 @@
         "heavy-rule-scaffolding",
         "high-chroma",
         "high-density",
-        "objective-documentary-imagery",
         "ornament-without-function",
-        "oversized-load-bearing-type",
+        "oversized-wordmark",
         "pattern-clash-adjacency",
         "restricted-palette-single-accent",
         "scattered-geometric-primitives",
@@ -384,6 +377,7 @@
         "size-weight-position-hierarchy",
         "squiggle-motif",
         "tilted-rotated-elements",
+        "type-as-image",
         "undisguised-construction"
       ],
       "channels": [
@@ -392,9 +386,9 @@
         "type-as-image"
       ],
       "notes": {
-        "why": "Massive primary-color typography anchors the layout while scattered geometric ornament and clashing patterns create visual chaos that reads as intentional festival branding.",
-        "avoid": "Do not try to make the pattern fields harmonize or transition smoothly; their jarring adjacency is the point.",
-        "keep": "The stacked colored text blocks (yellow, pink, green) as the sole compositional anchor—everything else orbits these bold typographic slabs."
+        "why": "Massive stacked headlines and scattered primary-color label blocks compete for visual dominance over a dark ground, anchored by orthogonal structure (heavy wavy divider, checkerboard grid) that frames chaos.",
+        "avoid": "Do not soften the edges, add gradients, or center the composition—the off-kilter clash and hard blacks/yellows/pinks are essential to the energy; prettifying it kills the raw festival poster register.",
+        "keep": "The stacked multicolor label blocks (Marigold Static, The Cold Foxes, DJ Perimeter) sitting on a structured checkerboard grid—this marries playful typography hierarchy with utilitarian indexing, making artist names both readable and visual."
       }
     },
     {
@@ -440,13 +434,14 @@
       },
       "tags": [
         "active-negative-space",
+        "asymmetric-composition",
         "black-keyline-outlines",
         "bold-primary",
+        "extreme-type-scale-contrast",
         "flat-geometric-primitives",
         "flat-unmodulated-color-fields",
         "grotesk-display",
         "hard-edged-zero-effects",
-        "heavy-rule-scaffolding",
         "high-chroma",
         "high-density",
         "index-table-listing",
@@ -460,18 +455,17 @@
         "speckle-chip-pattern",
         "squiggle-motif",
         "strict-column-grid",
-        "undisguised-construction",
         "warm-ground"
       ],
       "channels": [
         "grid-index",
-        "bold-primary-block",
-        "dimensional-playful"
+        "dimensional-playful",
+        "bold-primary-block"
       ],
       "notes": {
-        "why": "A utilitarian product grid anchored by bold primary color blocks and decorative geometric patterns creates visual energy while maintaining strict structural organization.",
-        "avoid": "Avoid mixing the ornamental pattern field (squiggles, speckle, zigzag) with softer, more sophisticated typography or muted color; the playfulness requires bold conviction.",
-        "keep": "The four-column card grid with hard black outlines, each card a single flat color, paired with clash-pattern header bands—this modular, toylike product display system is reusable and immediately distinctive."
+        "why": "A product grid with consistent column alignment and bright solid colors creates visual rhythm while decorative geometric patterns and squiggles scattered across the header reinforce playful, mail-centric brand identity.",
+        "avoid": "Do not add shadows, gradients, or rounded corners to the cards—the hard edges and flat fills are essential to the direct, utilitarian aesthetic.",
+        "keep": "The four-column product card grid with black-outlined boxes and saturated spot colors (mint, lavender, pink, yellow) paired with a pattern-clash header (squiggle + speckle + stripes) establishes a distinct, reproducible system."
       }
     }
   ]

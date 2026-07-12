@@ -63,11 +63,11 @@
         { "determinant": "undisguised-construction", "instrument": { "type": "tag", "id": "undisguised-construction" } },
         { "determinant": "hard-edged-zero-effects", "instrument": { "type": "tag", "id": "hard-edged-zero-effects" } },
         { "determinant": "harsh-unharmonized-color-clash", "instrument": { "type": "scalar", "id": "accentHueCount", "range": [2, 8] }, "blindSpotNote": "adjacency without mediation is not verified, only hue-family count" },
-        { "determinant": "oversized-load-bearing-type", "instrument": { "type": "tag", "id": "oversized-load-bearing-type" } },
+        { "determinant": "oversized-load-bearing-type", "excluded": true, "blindSpotNote": "instrument pruned by the binding jitter calibration (flip rate 6/30 exemplars at majority-of-3, >= 20% registered bar); excluded ex ante, denominator recomputed" },
         { "determinant": "deliberate-misalignment-or-overlap", "instrument": { "type": "tag", "id": "deliberate-misalignment-or-overlap" } }
       ],
-      "checkable": "5/5",
-      "notes": "Strand-level defining list per the v2 design: umbrella plus harsh-unharmonized-color-clash, oversized-load-bearing-type, deliberate-misalignment-or-overlap promoted (Deville catalog lineage)."
+      "checkable": "4/5",
+      "notes": "Strand-level defining list per the v2 design: umbrella plus harsh-unharmonized-color-clash, oversized-load-bearing-type, deliberate-misalignment-or-overlap promoted (Deville catalog lineage). oversized-load-bearing-type lost its instrument to the binding calibration prune."
     },
     "memphis-revival": {
       "label": "Memphis / postmodern revival",

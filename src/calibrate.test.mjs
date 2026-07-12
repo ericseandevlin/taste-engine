@@ -50,15 +50,17 @@ test('flipTable: one flip event per (id, exemplar), counted over distinct exempl
   assert.equal(table.z.flips, 0); // seeded from the vocabulary, zero flips reported
 });
 
-test('pruneList: registered rule prunes ids flipping on MORE THAN ONE distinct exemplar', () => {
+test('pruneList: registered rule prunes ids at a flip rate of 20% of exemplars or higher', () => {
   const votes = [
     { exemplar: 'its/w001', passes: [['x', 'w'], [], []] },
     { exemplar: 'its/w002', passes: [['x', 'y'], ['x'], ['x']] },
     { exemplar: 'bauhaus/w001', passes: [['x'], [], ['y']] },
   ];
   const table = flipTable(votes, ['x', 'y', 'w', 'z']);
-  // x and y flip on 2 exemplars each -> pruned; w flips on exactly 1 -> kept.
-  assert.deepEqual(pruneList(table), ['x', 'y']);
+  // bar = ceil(0.2 x 3) = 1 flip exemplar: x (3), y (2), w (1) prune; z (0) kept.
+  assert.deepEqual(pruneList(table, votes.length), ['w', 'x', 'y']);
+  // at 30 exemplars the bar is 6: nothing here reaches it.
+  assert.deepEqual(pruneList(table, 30), []);
 });
 
 test('calibrationPasses: votes=1 passes each single call straight through (3 calls, pre-amendment behavior)', async () => {
@@ -117,12 +119,12 @@ test('majority-level pass results feed flip counting and the prune derivation ex
   assert.equal(table.a.flips, 0); // a is stable in every majority pass
   assert.equal(table.b.flips, 2);
   assert.deepEqual(table.b.exemplars, ['its/w001', 'bauhaus/w001']);
-  assert.deepEqual(pruneList(table), ['b']); // registered rule, unchanged, on majority-level results
+  assert.deepEqual(pruneList(table, 2), ['b']); // registered 20% rule (bar = ceil(0.2 x 2) = 1) on majority-level results
 });
 
 test('the prune rule and its cross-exemplar operationalization are registered in the report text', () => {
   assert.equal(PASSES, 3);
-  assert.match(PRUNE_RULE, /MORE THAN ONE distinct exemplar/);
+  assert.match(PRUNE_RULE, /20% of exemplars or higher/);
   assert.match(PRUNE_RULE, /1 or 2 of the 3 passes/);
   assert.match(OPERATIONALIZATION_NOTE, /cannot bind per-exemplar/);
   assert.match(OPERATIONALIZATION_NOTE, /ACROSS exemplars/);
