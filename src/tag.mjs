@@ -16,18 +16,24 @@ import { join } from 'path';
 import { fileURLToPath } from 'url';
 import sharp from 'sharp';
 import { getBoard, REPO_ROOT, MODELS, loadEnv, vocabIds } from './config.mjs';
+import { majorityTags } from './features.mjs';
 import { readManifest, writeManifest, mergeItemField } from './manifest.mjs';
 
 const MAX_RETRIES = 2;
 
 function parseArgs(argv) {
-  const args = { board: 'demo', force: false, concurrency: 4, model: MODELS.tag, limit: 0 };
+  const args = { board: 'demo', force: false, concurrency: 4, model: MODELS.tag, limit: 0, votes: 1 };
   for (let i = 0; i < argv.length; i++) {
     if (argv[i] === '--board') args.board = argv[++i];
     else if (argv[i] === '--force') args.force = true;
     else if (argv[i] === '--concurrency') args.concurrency = Number(argv[++i]);
     else if (argv[i] === '--model') args.model = argv[++i];
     else if (argv[i] === '--limit') args.limit = Number(argv[++i]);
+    else if (argv[i] === '--votes') {
+      const n = Number(argv[++i]);
+      if (!Number.isInteger(n) || n < 1) throw new Error('--votes must be a positive integer');
+      args.votes = n;
+    }
   }
   return args;
 }
@@ -180,10 +186,14 @@ async function main() {
   await pool(todo, args.concurrency, async (item) => {
     const absPath = join(REPO_ROOT, item.source.local);
     try {
-      const result = await tagImage(absPath, board, callModel);
-      mergeItemField(manifest, item.id, 'tags', result.tags);
-      mergeItemField(manifest, item.id, 'channels', result.channels);
-      mergeItemField(manifest, item.id, 'notes', result.notes);
+      // --votes N: N independent passes, majority tags (stabilizes ids that
+      // sit on a judgment knife edge); channels/notes come from the first pass.
+      const results = [];
+      for (let v = 0; v < args.votes; v++) results.push(await tagImage(absPath, board, callModel));
+      const tags = args.votes > 1 ? majorityTags(results.map((r) => r.tags)) : results[0].tags;
+      mergeItemField(manifest, item.id, 'tags', tags);
+      mergeItemField(manifest, item.id, 'channels', results[0].channels);
+      mergeItemField(manifest, item.id, 'notes', results[0].notes);
       done++;
       if (done % 10 === 0) {
         writeManifest(manifestPath, manifest, { stamp: new Date().toISOString() });

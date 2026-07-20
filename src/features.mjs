@@ -333,6 +333,21 @@ export function tagDistance(outputTags, freq) {
   };
 }
 
+// Majority vote across tag passes (votes=1 passes tags through). Lives here
+// (pure, shared): score.mjs uses it on outputs, tag.mjs on board manifests
+// (--votes), so references and outputs go through the same stabilization.
+export function majorityTags(voteLists) {
+  const need = Math.floor(voteLists.length / 2) + 1;
+  const counts = new Map();
+  for (const tags of voteLists) {
+    for (const t of new Set(tags || [])) counts.set(t, (counts.get(t) || 0) + 1);
+  }
+  return [...counts.entries()]
+    .filter(([, c]) => c >= need)
+    .map(([t]) => t)
+    .sort();
+}
+
 // Leave-one-out self-agreement on tags.
 export function tagSelfAgreement(refTagLists) {
   const lists = refTagLists.filter((t) => (t || []).length);
