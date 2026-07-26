@@ -10,3 +10,8 @@ boards/*/generated/**/*.png
 
 # Eric's private focused board: real designers' screenshots, NEVER committed (symlink into Life-OS)
 /boards/swiss-focus
+/boards/face-treatments
+/boards/flat-layering
+/boards/negative-space
+/boards/experimental-type
+/boards/gothic-heraldry
