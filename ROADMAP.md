@@ -50,5 +50,5 @@ The release version, ready for someone who isn't the author to use.
 ## How to use this roadmap
 
 - **The narrative lives here.** Read this to understand direction.
-- **The work lives in [issues](https://github.com/ericseandevlin/taste-engine/issues).** Each issue is filed under a milestone and labeled by workstream (`flow-control`, `poster-kind`, `survey`, `architecture`, `docs`, `enhancement`).
-- **The milestones** track the three phases. Issues roll up into them.
+- **The work lives in [Plane](https://plane.ericdevlin.co).** Issues, sprints, and execution tracking have moved to Plane (workspace: Eric Projects). GitHub issues are closed and no longer maintained.
+- **ROADMAP.md stays here** as the public-facing direction doc for anyone reading the repo.
