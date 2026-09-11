@@ -14,7 +14,7 @@ import { join } from 'path';
 import { fileURLToPath } from 'url';
 import { getBoard, MODELS, loadEnv } from './config.mjs';
 import { readManifest } from './manifest.mjs';
-import { makeTextCaller } from './anthropic.mjs';
+import { resolveTextCaller } from './models.mjs';
 import { stripEmDash } from './thesis.mjs';
 
 function parseArgs(argv) {
@@ -126,8 +126,16 @@ function nextIndex(genRoot, direction) {
 async function main() {
   const args = parseArgs(process.argv.slice(2));
   loadEnv();
-  const apiKey = process.env.ANTHROPIC_API_KEY;
-  if (!apiKey) throw new Error('ANTHROPIC_API_KEY not set (.env)');
+
+  // Resolve model provider from the environment. If no Anthropic key is set
+  // but a Gemini key is, fall back to a Gemini text model (planes ROADMAP v0.2:
+  // "OpenRouter-compatible model path" — any provider, not just Anthropic).
+  const env = { ANTHROPIC_API_KEY: process.env.ANTHROPIC_API_KEY, GEMINI_API_KEY: process.env.GEMINI_API_KEY, OPENROUTER_API_KEY: process.env.OPENROUTER_API_KEY };
+  let model = args.model;
+  if (model === MODELS.generate && !env.ANTHROPIC_API_KEY && env.GEMINI_API_KEY) {
+    model = 'gemini-3.5-flash'; // text model, verified available on the board's Gemini key
+  }
+  const { caller: call } = resolveTextCaller(model, env);
 
   const board = getBoard(args.board);
   const channelsDoc = readManifest(join(board.absDir, 'channels.json'));
@@ -147,7 +155,6 @@ async function main() {
     );
   }
   const prompt = buildGeneratePrompt(resolved, extraRules, profile);
-  const call = makeTextCaller(args.model, apiKey);
 
   const genRoot = join(board.absDir, 'generated');
   mkdirSync(genRoot, { recursive: true });

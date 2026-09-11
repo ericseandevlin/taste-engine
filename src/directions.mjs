@@ -19,7 +19,7 @@ import { join } from 'path';
 import { fileURLToPath } from 'url';
 import { getBoard, MODELS, loadEnv } from './config.mjs';
 import { readManifest, writeManifest } from './manifest.mjs';
-import { makeTextCaller } from './anthropic.mjs';
+import { resolveTextCaller } from './models.mjs';
 
 const MIN_DIRECTIONS = 3;
 const MAX_RETRIES = 2;
@@ -141,9 +141,6 @@ export function toKeyed(list) {
 async function main() {
   const args = parseArgs(process.argv.slice(2));
   loadEnv();
-  const apiKey = process.env.ANTHROPIC_API_KEY;
-  if (!apiKey) throw new Error('ANTHROPIC_API_KEY not set (.env)');
-
   const board = getBoard(args.board);
   const manifest = readManifest(join(board.absDir, 'manifest.json'));
   const channelsDoc = readManifest(join(board.absDir, 'channels.json'));
@@ -155,7 +152,7 @@ async function main() {
   const validChannelIds = input.map((c) => c.id);
   const palette = boardPalette(manifest);
   const prompt = buildDirectionsPrompt(input, palette, args.count);
-  const call = makeTextCaller(args.model, apiKey);
+  const { caller: call } = resolveTextCaller(args.model, process.env);
 
   let list;
   let lastErr;

@@ -17,7 +17,7 @@ import { fileURLToPath } from 'url';
 import { writeFileSync } from 'fs';
 import { getBoard, MODELS, loadEnv } from './config.mjs';
 import { readManifest } from './manifest.mjs';
-import { makeTextCaller } from './anthropic.mjs';
+import { resolveTextCaller } from './models.mjs';
 
 const CLAIMED_TASTE = [
   'award-winning', 'passionate', 'an eye for', 'refined taste',
@@ -142,9 +142,6 @@ function buildProsePrompt(agg, channels) {
 async function main() {
   const args = parseArgs(process.argv.slice(2));
   loadEnv();
-  const apiKey = process.env.ANTHROPIC_API_KEY;
-  if (!apiKey) throw new Error('ANTHROPIC_API_KEY not set (.env)');
-
   const board = getBoard(args.board);
   const manifest = readManifest(join(board.absDir, 'manifest.json'));
   const channelsDoc = readManifest(join(board.absDir, 'channels.json'));
@@ -152,7 +149,7 @@ async function main() {
   const channels = channelsDoc.channels || [];
   const agg = buildThesisInput(manifest, channels);
 
-  const call = makeTextCaller(args.model, apiKey);
+  const { caller: call } = resolveTextCaller(args.model, process.env);
   let prose = await call({ prompt: buildProsePrompt(agg, channels), maxTokens: 2000 });
   // One corrective retry if the model used em dashes.
   if (hasEmDash(prose)) {

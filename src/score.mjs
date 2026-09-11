@@ -24,7 +24,7 @@ import { fileURLToPath } from 'url';
 import sharp from 'sharp';
 import { getBoard, MODELS, loadEnv } from './config.mjs';
 import { readManifest } from './manifest.mjs';
-import { makeVisionCaller } from './anthropic.mjs';
+import { resolveVisionCaller } from './models.mjs';
 import { computeFeatures, SAMPLE } from './measure.mjs';
 import { tagImage } from './tag.mjs';
 import { latestVersion } from './fingerprint.mjs';
@@ -220,8 +220,7 @@ function printReport({ label, fpLabel, scope, crop, rowsScope, rowsBoard, alignS
 async function main() {
   const args = parseArgs(process.argv.slice(2));
   loadEnv();
-  const apiKey = process.env.ANTHROPIC_API_KEY;
-  if (!apiKey) throw new Error('ANTHROPIC_API_KEY not set (.env)');
+  const { caller: callModel } = resolveVisionCaller(args.model, process.env);
 
   const board = getBoard(args.board);
   const { fp, label: fpLabel } = loadFingerprint(board, args.fingerprint);
@@ -296,7 +295,6 @@ async function main() {
     .toBuffer({ resolveWithObject: true });
   const measured = computeFeatures(data, info);
 
-  const callModel = makeVisionCaller(args.model, apiKey);
   const votes = [];
   for (let v = 0; v < args.tagVotes; v++) {
     votes.push((await tagImage(measurePath, board, callModel)).tags);

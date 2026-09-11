@@ -17,6 +17,7 @@ import { fileURLToPath } from 'url';
 import sharp from 'sharp';
 import { getBoard, REPO_ROOT, MODELS, loadEnv } from './config.mjs';
 import { readManifest, writeManifest, mergeItemField } from './manifest.mjs';
+import { resolveVisionCaller } from './models.mjs';
 
 const MAX_RETRIES = 2;
 
@@ -103,36 +104,6 @@ export async function tagImage(absPath, board, callModel) {
   throw new Error(`tagImage failed after retries: ${lastErr.message}`);
 }
 
-// Real Anthropic Messages API call (only used by main).
-function makeAnthropicCaller(model, apiKey) {
-  return async ({ image, mediaType, prompt }) => {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'x-api-key': apiKey,
-        'anthropic-version': '2023-06-01',
-        'content-type': 'application/json',
-      },
-      body: JSON.stringify({
-        model,
-        max_tokens: 600,
-        messages: [
-          {
-            role: 'user',
-            content: [
-              { type: 'image', source: { type: 'base64', media_type: mediaType, data: image } },
-              { type: 'text', text: prompt },
-            ],
-          },
-        ],
-      }),
-    });
-    if (!res.ok) throw new Error(`anthropic ${res.status}: ${await res.text()}`);
-    const j = await res.json();
-    return (j.content || []).map((c) => c.text || '').join('');
-  };
-}
-
 // Bounded-concurrency map.
 async function pool(items, size, worker) {
   const results = [];
@@ -150,19 +121,17 @@ async function pool(items, size, worker) {
 async function main() {
   const args = parseArgs(process.argv.slice(2));
   loadEnv();
-  const apiKey = process.env.ANTHROPIC_API_KEY;
-  if (!apiKey) throw new Error('ANTHROPIC_API_KEY not set (.env)');
+  const { caller: callModel, provider } = resolveVisionCaller(args.model, process.env);
 
   const board = getBoard(args.board);
   const manifestPath = join(board.absDir, 'manifest.json');
   const manifest = readManifest(manifestPath);
   if (!manifest) throw new Error(`No manifest at ${manifestPath} — run import.mjs first`);
 
-  const callModel = makeAnthropicCaller(args.model, apiKey);
   let todo = manifest.items.filter((it) => args.force || !it.tags?.length);
   if (args.limit > 0) todo = todo.slice(0, args.limit);
   console.log(
-    `[tag] board=${board.name} model=${args.model} to-tag=${todo.length} (skip ${manifest.items.length - todo.length})`,
+    `[tag] board=${board.name} model=${args.model} (${provider}) to-tag=${todo.length} (skip ${manifest.items.length - todo.length})`,
   );
 
   let done = 0;

@@ -4,7 +4,7 @@ Teach an AI your creative taste from a board of references, then have it generat
 
 Most "AI design taste" tools extract surface tokens: colors, spacing, a border radius. Taste Engine extracts a **thesis with forbidden moves**. It turns a folder of references into inspectable data (not vibe-labels), clusters that data into named "DNA channels," and writes a thesis the generator builds from and rejects violations against. The taste lives in version-controlled JSON you can read, diff, and argue with, not in a prompt you cross your fingers over.
 
-It runs locally through the Claude API. No subscription, no black box.
+It runs locally through the Google Gemini API (with OpenRouter support for any provider). No subscription, no black box.
 
 ## Scope
 
@@ -20,7 +20,7 @@ The longer arc is to push the same idea past images entirely, into **copywriting
 
 ## How it works
 
-A twelve-stage pipeline. The middle stages call the Claude API; `import`, `measure`, `atlas`, and `fingerprint` are local-only. Everything past `tag` is a derived, inspectable artifact: the channels, the directions, and the thesis are all functions of your board, not anyone's opinion.
+A twelve-stage pipeline. The synthesis stages call the Gemini API (or any OpenRouter model); `import`, `measure`, `atlas`, and `fingerprint` are local-only. Everything past `tag` is a derived, inspectable artifact: the channels, the directions, and the thesis are all functions of your board, not anyone's opinion.
 
 ```
 import -> link -> measure -> tag -> cluster -> directions -> thesis -> atlas -> fingerprint
@@ -35,25 +35,25 @@ import -> link -> measure -> tag -> cluster -> directions -> thesis -> atlas -> 
 | `import` | Scans a board folder, one manifest record per image. Idempotent. | local |
 | `link` | Optional. Joins real names + URLs onto records from a `sources.txt`. | local |
 | `measure` | Extracts dominant palette, contrast, and visual density per image. | local (Sharp) |
-| `tag` | Vision pass: assigns rule-tags from a controlled vocabulary + WHY/AVOID/KEEP notes. Tags outside the vocabulary are dropped. | Haiku |
-| `cluster` | Groups records into DNA channels, each a generative recipe with forbidden moves and representatives. | Sonnet |
-| `directions` | Derives the candidate directions (choose-your-lane styles) from the board's own channels, favoring its heaviest. Writes `directions.json`. | Sonnet |
-| `thesis` | Writes `THESIS.md` from the data: channels by weight, dominant palette, visual laws. | Sonnet |
+| `tag` | Vision pass: assigns rule-tags from a controlled vocabulary + WHY/AVOID/KEEP notes. Tags outside the vocabulary are dropped. | gemini-3.1-flash-image |
+| `cluster` | Groups records into DNA channels, each a generative recipe with forbidden moves and representatives. | gemini-3.5-flash |
+| `directions` | Derives the candidate directions (choose-your-lane styles) from the board's own channels, favoring its heaviest. Writes `directions.json`. | gemini-3.5-flash |
+| `thesis` | Writes `THESIS.md` from the data: channels by weight, dominant palette, visual laws. | gemini-3.5-flash |
 | `atlas` | Builds a browsable HTML viewer of the board and its channels. | local |
 | `fingerprint` | Aggregates the extracted features into a versioned Taste Fingerprint: per-axis center, spread, confidence, and salience, with per-reference provenance. | local |
-| `generate` | Builds one self-contained HTML page from a chosen derived direction, injecting the union of its channels' forbidden moves. | Opus |
-| `critique` | Vision pass over desktop + mobile screenshots: 3 to 8 concrete, testable rules appended for the next `generate`. | Sonnet |
-| `score` | Re-measures a generated page on the same extractors and reports per-axis deltas plus one alignment number against the fingerprint. A diagnostic, never a gate. | Haiku |
+| `generate` | Builds one self-contained HTML page from a chosen derived direction, injecting the union of its channels' forbidden moves. | gemini-3.1-flash-image |
+| `critique` | Vision pass over desktop + mobile screenshots: 3 to 8 concrete, testable rules appended for the next `generate`. | gemini-3.1-flash-image |
+| `score` | Re-measures a generated page on the same extractors and reports per-axis deltas plus one alignment number against the fingerprint. A diagnostic, never a gate. | gemini-3.1-flash-image |
 
 ## Quickstart
 
-Requires Node 20+ and an [Anthropic API key](https://console.anthropic.com/).
+Requires Node 20+ and a [Google Gemini API key](https://aistudio.google.com/app/apikey) (or any OpenRouter-compatible key).
 
 ```bash
 git clone https://github.com/ericseandevlin/taste-engine.git
 cd taste-engine
 npm install
-cp .env.example .env        # then paste your ANTHROPIC_API_KEY into .env
+cp .env.example .env        # then paste your GEMINI_API_KEY into .env
 
 # Run the pipeline on the bundled neutral demo board:
 npm run pipeline            # import -> measure -> tag -> cluster -> directions -> thesis -> atlas -> fingerprint

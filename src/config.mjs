@@ -29,13 +29,13 @@ export function loadEnv() {
 
 // --- Model routing by stage (overridable per-script via --model) ---
 export const MODELS = {
-  tag: 'claude-haiku-4-5-20251001', // high-volume per-image vision
-  cluster: 'claude-sonnet-4-6', // analysis
-  directions: 'claude-sonnet-4-6', // deriving candidate directions from channels
-  thesis: 'claude-sonnet-4-6', // writing
-  generate: 'claude-opus-4-8', // hardest synthesis
-  critique: 'claude-sonnet-4-6',
-  score: 'claude-haiku-4-5-20251001', // re-tag pass on generated output (same tier as tag)
+  tag: 'gemini-3.1-flash-image', // high-volume per-image vision
+  cluster: 'gemini-3.5-flash', // analysis
+  directions: 'gemini-3.5-flash', // deriving candidate directions from channels
+  thesis: 'gemini-3.5-flash', // writing
+  generate: 'gemini-3.1-flash-image', // poster generation
+  critique: 'gemini-3.1-flash-image', // multi-image vision
+  score: 'gemini-3.1-flash-image', // re-tag pass on generated output (same tier as tag)
 };
 
 // --- Kind registry: a kind selects the measure strategy + tag rubric ---
@@ -77,15 +77,106 @@ export const KINDS = {
       'playful-3d',
     ],
   },
+  // Poster kind: taste extracted from poster references (not websites).
+  // The measure strategy stays `visual` (palette/contrast/density via Sharp
+  // runs on any image); the kind selects a poster-specific tag vocabulary and
+  // channel seeds. The vocabulary below is derived from the swiss-focus
+  // board's actual 44 references — see issue #3 for provenance — not invented.
+  poster: {
+    measure: 'visual',
+    // Poster taste axes: composition, type, color, image, density, surface/print.
+    // tag.mjs rejects anything outside this list, same discipline as visual-ui.
+    tagVocabulary: [
+      // Composition (asymmetric vs grid vs centered)
+      'asymmetric-bleed',
+      'grid-locked',
+      'single-focal-asymmetric',
+      'centered-forbidden',
+      // Type (one voice, hierarchy by scale, display vs body)
+      'one-grotesk-voice',
+      'hierarchy-by-scale',
+      'display-dominant',
+      'wordmark-as-art',
+      'typographic-grid',
+      // Color (ink-first, dark as home key, accent scarce and earned)
+      'ink-first',
+      'dark-home-key',
+      'warm-ground',
+      'spot-accent-on-neutral',
+      'full-field-color',
+      // Image
+      'documentary-photo',
+      'full-bleed',
+      'duotone-treated',
+      'illustration',
+      'no-image',
+      // Density (generous margin vs tabular index vs collage)
+      'generous-margin',
+      'tabular-index',
+      'dense-collage',
+      'single-element',
+      // Surface / print conventions
+      'flat-no-effects',
+      'hairline-structure',
+      'exposed-construction',
+      'bleed-to-edge',
+    ],
+    // Channel seeds from the swiss-focus channels.json (9 channels, real).
+    // cluster.mjs seeds with these and lets the data revise them.
+    channelSeeds: [
+      'ink-grid-editorial',
+      'warm-editorial',
+      'dark-editorial',
+      'grid-index-process',
+      'oversized-wordmark',
+      'type-as-image',
+      'bold-primary-block',
+      'dimensional-playful',
+      'raw-list-interface',
+    ],
+  },
 };
 
 // --- Board registry: maps a board name to its folder + kind ---
 // Add your own board by dropping images in boards/<name>/ and registering it here.
 export const BOARDS = {
-  demo: { kind: 'visual-ui', dir: 'boards/demo' },
+    demo: { kind: 'visual-ui', dir: 'boards/demo' },
+    'swiss-focus': { kind: 'poster', dir: 'boards/swiss-focus' },
+    'flat-layering': { kind: 'poster', dir: 'boards/flat-layering' },
+  };
+
+// --- Dependency graph: each stage's prerequisite output files ---
+// Used by status.mjs and by run-pipeline.mjs for flow control.
+const STAGE_DEPS = {
+  import:       { files: [] },
+  measure:      { files: ['manifest.json'] },
+  tag:          { files: ['manifest.json'] },
+  cluster:      { files: ['manifest.json'] },
+  directions:   { files: ['channels.json'] },
+  thesis:       { files: ['channels.json'] },
+  atlas:        { files: ['manifest.json'] },
+  fingerprint:  { files: ['channels.json'] },
+  generate:     { files: ['directions.json'] },
+  critique:     { files: ['directions.json'] },
+  score:        { files: ['directions.json'] },
 };
 
-// Resolve a board to its full config (board + kind merged + absolute dir).
+// File-level dependency: a file that must exist in the board directory for the
+// stage to have anything meaningful to do. Returns { ok: boolean, missing: string[] }.
+// The prereqs array in STAGE_DEPS is for dependency chains (e.g. cluster needs
+// tag to have run); the files array is the actual output files to check.
+export function checkDeps(stage, boardDir) {
+  const cfg = STAGE_DEPS[stage];
+  if (!cfg) return { ok: true, missing: [] };
+  const missing = cfg.files.filter((f) => !existsSync(join(boardDir, f)));
+  return missing.length > 0 ? { ok: false, missing } : { ok: true, missing: [] };
+}
+
+export function depsHint(stage, boardDir) {
+  const result = checkDeps(stage, boardDir);
+  if (result.ok) return null;
+  return `Missing input file(s): ${result.missing.join(', ')}. Run \`npm run status\` for the full picture.`;
+}
 // Throws a clear error on an unknown board or a board with an unknown kind.
 export function getBoard(name) {
   let board = BOARDS[name];

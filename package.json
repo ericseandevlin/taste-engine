@@ -38,7 +38,8 @@
     "score": "node src/score.mjs",
     "capture": "node scripts/capture.mjs",
     "critique": "node src/critique.mjs",
-    "pipeline": "node scripts/run-pipeline.mjs"
+    "pipeline": "node scripts/run-pipeline.mjs",
+    "status": "node src/status.mjs"
   },
   "dependencies": {
     "sharp": "^0.33.0"

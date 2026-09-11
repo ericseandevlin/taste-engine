@@ -15,7 +15,7 @@ import { join } from 'path';
 import { fileURLToPath } from 'url';
 import { getBoard, MODELS, loadEnv } from './config.mjs';
 import { readManifest, writeManifest } from './manifest.mjs';
-import { makeTextCaller } from './anthropic.mjs';
+import { resolveTextCaller } from './models.mjs';
 
 const MIN_CHANNELS = 6;
 const MAX_CHANNELS = 12;
@@ -117,9 +117,6 @@ export function reconcileMembership(manifest, channels) {
 async function main() {
   const args = parseArgs(process.argv.slice(2));
   loadEnv();
-  const apiKey = process.env.ANTHROPIC_API_KEY;
-  if (!apiKey) throw new Error('ANTHROPIC_API_KEY not set (.env)');
-
   const board = getBoard(args.board);
   const manifestPath = join(board.absDir, 'manifest.json');
   const channelsPath = join(board.absDir, 'channels.json');
@@ -129,13 +126,13 @@ async function main() {
   const input = buildClusterInput(manifest);
   const validIds = input.map((i) => i.id);
   const prompt = buildClusterPrompt(input, board.channelSeeds);
-  const call = makeTextCaller(args.model, apiKey);
+  const { caller: call } = resolveTextCaller(args.model, process.env);
 
   let channels;
   let lastErr;
   for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
     try {
-      const raw = await call({ prompt, maxTokens: 4000 });
+      const raw = await call({ prompt, maxTokens: 8192 });
       channels = parseClusterResponse(raw, validIds);
       break;
     } catch (err) {

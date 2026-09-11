@@ -18,6 +18,7 @@ import { extname } from 'path';
 import { getBoard, MODELS, loadEnv } from './config.mjs';
 import { readManifest, writeManifest } from './manifest.mjs';
 import { resolveDirection } from './generate.mjs';
+import { resolveMultiImageCaller } from './models.mjs';
 
 const VAGUE = /\b(cooler|nicer|prettier|more modern|pop|cleaner|better|sleek|fresh|polished)\b/i;
 
@@ -92,28 +93,10 @@ function mediaType(path) {
   throw new Error(`unsupported screenshot type: ${e}`);
 }
 
-// Multi-image vision call (critique needs desktop + mobile in one message).
-async function callVisionMulti({ model, apiKey, images, prompt }) {
-  const content = images.map((img) => ({
-    type: 'image',
-    source: { type: 'base64', media_type: img.mediaType, data: img.data },
-  }));
-  content.push({ type: 'text', text: prompt });
-  const res = await fetch('https://api.anthropic.com/v1/messages', {
-    method: 'POST',
-    headers: { 'x-api-key': apiKey, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
-    body: JSON.stringify({ model, max_tokens: 1500, messages: [{ role: 'user', content }] }),
-  });
-  if (!res.ok) throw new Error(`anthropic ${res.status}: ${await res.text()}`);
-  const j = await res.json();
-  return (j.content || []).map((c) => c.text || '').join('');
-}
-
 async function main() {
   const args = parseArgs(process.argv.slice(2));
   loadEnv();
-  const apiKey = process.env.ANTHROPIC_API_KEY;
-  if (!apiKey) throw new Error('ANTHROPIC_API_KEY not set (.env)');
+  const { caller: callVision, provider } = resolveMultiImageCaller(args.model, process.env);
 
   const board = getBoard(args.board);
   const channelsDoc = readManifest(join(board.absDir, 'channels.json'));
@@ -132,14 +115,14 @@ async function main() {
   if (!shots.length) throw new Error('no screenshots: pass --shots a,b or --slug with desktop.png/mobile.png');
 
   const images = shots.map((p) => ({ data: readFileSync(p).toString('base64'), mediaType: mediaType(p) }));
-  const raw = await callVisionMulti({ model: args.model, apiKey, images, prompt: buildCritiquePrompt(resolved) });
+  const raw = await callVision({ images, prompt: buildCritiquePrompt(resolved) });
   const rules = parseCritiqueResponse(raw);
 
   const rulesPath = join(board.absDir, 'critique-rules.json');
   const { doc, added } = appendRules(readManifest(rulesPath) || {}, args.direction, rules);
   writeManifest(rulesPath, doc);
 
-  console.log(`[critique] ${rules.length} concrete rules (${added} new) -> ${rulesPath}`);
+  console.log(`[critique] ${rules.length} concrete rules (${added} new) ${provider} -> ${rulesPath}`);
   for (const r of rules) console.log(`  - ${r}`);
 }
 
