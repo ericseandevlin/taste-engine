@@ -211,9 +211,82 @@ export function makeAnthropicMultiImageCaller(model, apiKey) {
   };
 }
 
+// ---------------------------------------------------------------
+// Claude Code CLI callers (keyless local path)
+// ---------------------------------------------------------------
+// Model names "claude-cli:<alias>" (e.g. "claude-cli:sonnet") shell out to
+// `claude -p --model <alias>` using whatever login the local Claude Code
+// install already has, so the pipeline runs with no API key in .env. Images
+// are written to a temp folder and the CLI is allowed exactly one tool, Read,
+// to look at them. Slower than the HTTP paths; meant for demos and local runs.
+
+const CLI_SYSTEM =
+  'You are one stage of a deterministic data pipeline. Answer only the request in the user message, ' +
+  'in exactly the output format it asks for. Ignore any unrelated memory or project context you may have been given.';
+
+export function parseCliModel(model) {
+  const m = /^claude-cli:([A-Za-z0-9._-]+)$/.exec(model);
+  return m ? m[1] : null;
+}
+
+async function runClaudeCli(alias, { system, prompt, images = [] }) {
+  const { spawn } = await import('child_process');
+  const { mkdtempSync, writeFileSync, rmSync } = await import('fs');
+  const { tmpdir } = await import('os');
+  const { join } = await import('path');
+  const dir = mkdtempSync(join(tmpdir(), 'taste-cli-'));
+  try {
+    const paths = images.map((img, i) => {
+      const ext = img.mediaType === 'image/png' ? 'png' : 'jpg';
+      const p = join(dir, `image-${i + 1}.${ext}`);
+      writeFileSync(p, Buffer.from(img.data, 'base64'));
+      return p;
+    });
+    let full = prompt;
+    if (paths.length) {
+      full =
+        `First use the Read tool to view ${paths.length === 1 ? 'this image file' : 'these image files, in order'}:\n` +
+        paths.map((p) => `- ${p}`).join('\n') +
+        `\n\nThen respond to the request below. Treat the image${paths.length === 1 ? '' : 's'} as the attached input.\n\n${prompt}`;
+    }
+    const args = ['-p', '--model', alias, '--system-prompt', [CLI_SYSTEM, system].filter(Boolean).join('\n\n'),
+      '--no-session-persistence', '--strict-mcp-config', '--output-format', 'text'];
+    if (paths.length) args.push('--tools', 'Read', '--allowedTools', 'Read', '--add-dir', dir);
+    else args.push('--tools', '');
+    return await new Promise((resolve, reject) => {
+      const child = spawn('claude', args, { cwd: dir, stdio: ['pipe', 'pipe', 'pipe'] });
+      let out = '';
+      let err = '';
+      child.stdout.on('data', (d) => (out += d));
+      child.stderr.on('data', (d) => (err += d));
+      child.on('error', reject);
+      child.on('close', (code) =>
+        code === 0 ? resolve(out) : reject(new Error(`claude-cli exit ${code}: ${(err || out).slice(0, 400)}`)),
+      );
+      child.stdin.end(full);
+    });
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+}
+
+export function makeClaudeCliTextCaller(alias) {
+  return ({ system, prompt }) => runClaudeCli(alias, { system, prompt });
+}
+
+export function makeClaudeCliVisionCaller(alias) {
+  return ({ image, mediaType, prompt }) => runClaudeCli(alias, { prompt, images: [{ data: image, mediaType }] });
+}
+
+export function makeClaudeCliMultiImageCaller(alias) {
+  return ({ images, prompt }) => runClaudeCli(alias, { prompt, images });
+}
+
 // Resolve a single-image vision caller for a model name.
 // Returns { caller, provider } — same pattern as resolveTextCaller.
 export function resolveVisionCaller(model, env) {
+  const cliAlias = parseCliModel(model);
+  if (cliAlias) return { caller: makeClaudeCliVisionCaller(cliAlias), provider: 'claude-cli' };
   if (model.startsWith('claude-')) {
     if (!env.ANTHROPIC_API_KEY) {
       throw new Error(
@@ -235,6 +308,8 @@ export function resolveVisionCaller(model, env) {
 
 // Resolve a multi-image vision caller. Same pattern, broader interface.
 export function resolveMultiImageCaller(model, env) {
+  const cliAlias = parseCliModel(model);
+  if (cliAlias) return { caller: makeClaudeCliMultiImageCaller(cliAlias), provider: 'claude-cli' };
   if (model.startsWith('claude-')) {
     if (!env.ANTHROPIC_API_KEY) {
       throw new Error(
@@ -257,6 +332,8 @@ export function resolveMultiImageCaller(model, env) {
 // Pick a text caller for a model name + env. Throws with a helpful message
 // when no provider is configured for the model. Exported pure for tests.
 export function resolveTextCaller(model, env) {
+  const cliAlias = parseCliModel(model);
+  if (cliAlias) return { caller: makeClaudeCliTextCaller(cliAlias), provider: 'claude-cli' };
   if (model.startsWith('claude-')) {
     if (!env.ANTHROPIC_API_KEY) {
       throw new Error(

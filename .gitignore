@@ -7,3 +7,6 @@ node_modules/
 # ignore ad-hoc captures elsewhere.
 boards/*/generated/**/*.png
 !boards/demo/generated/**/*.png
+
+# Scratch board the demo gallery was built from (re-creatable from boards/demo)
+/boards/gallery-run

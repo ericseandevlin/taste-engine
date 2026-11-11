@@ -1,0 +1,518 @@
+<!doctype html>
+<!--
+LINEAGE
+Direction: Swiss Index Grid x Functional Case Study
+Channels blended: swiss-index-grid, functional-case-study
+Key params:
+  grid = strict 12 columns, 16px gutters, 1px hairline rules (#cccccc)
+  type = system grotesk (display + row titles), system mono (index, meta, labels), 3 sizes: display / 16px / 12px
+  ground = #ffffff, ink = #000000, body = #333333, secondary = #cccccc / #999999
+  accent = #ff3300, hover only (index number, title underline, links)
+  motion = linear hover transitions at 120ms, fade-up on scroll, smooth anchor scroll, no parallax
+  radius = 0, shadows = none, text alignment = left only
+  images = uncropped, fixed 16:10 frames, captions below, schematic diagrams (no photos supplied)
+Content source: profile (Avery Quinn). Project year not supplied, so it is omitted.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Avery Quinn, Design Technologist</title>
+<meta name="description" content="Avery Quinn is a design technologist in Brooklyn, NY. Design systems, prototyping in code, and production components.">
+<style>
+:root{
+  --ground:#ffffff;
+  --ink:#000000;
+  --body:#333333;
+  --rule:#cccccc;
+  --mute:#999999;
+  --marker:#ff3300;
+  --gutter:16px;
+  --pad:24px;
+  --sans:"Helvetica Neue",Helvetica,"Arial Nova",Arial,"Liberation Sans",sans-serif;
+  --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+  --xl:clamp(32px,5vw,64px);
+  --m:16px;
+  --s:12px;
+}
+*{box-sizing:border-box;margin:0;padding:0;border-radius:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  background:var(--ground);
+  color:var(--body);
+  font-family:var(--sans);
+  font-size:var(--m);
+  line-height:1.5;
+  text-align:left;
+}
+a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px;transition:color .12s linear,text-decoration-color .12s linear}
+a:hover{color:var(--marker);text-decoration-color:var(--marker)}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.mono{font-family:var(--mono);font-size:var(--s);letter-spacing:.04em;text-transform:uppercase}
+.mute{color:var(--mute)}
+.wrap{max-width:1360px;margin:0 auto;padding:0 var(--pad)}
+.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gutter)}
+
+/* header */
+header{border-bottom:1px solid var(--rule);position:sticky;top:0;background:var(--ground);z-index:5}
+header .grid{align-items:baseline;padding:14px 0}
+.brand{grid-column:1 / span 6;color:var(--ink);font-weight:600;text-decoration:none;font-family:var(--mono);font-size:var(--s);letter-spacing:.04em;text-transform:uppercase}
+nav{grid-column:7 / span 6;display:flex;gap:24px}
+nav a{text-decoration:none;color:var(--ink)}
+nav a:hover{color:var(--marker)}
+
+/* hero */
+.hero{padding:72px 0 64px}
+.hero .grid{row-gap:24px}
+.hero .lab{grid-column:1 / span 3}
+h1{
+  grid-column:4 / span 9;
+  font-family:var(--sans);
+  font-weight:600;
+  font-size:var(--xl);
+  line-height:1.05;
+  letter-spacing:-.03em;
+  color:var(--ink);
+}
+.hero .meta{grid-column:4 / span 9;display:grid;grid-template-columns:repeat(9,minmax(0,1fr));column-gap:var(--gutter);row-gap:16px;margin-top:24px}
+.hero .meta div{grid-column:span 3}
+.hero .meta .k{display:block;color:var(--mute);margin-bottom:4px}
+.hero .meta .v{color:var(--ink)}
+
+/* sections */
+section{border-top:1px solid var(--rule)}
+.sec-head{padding:16px 0}
+.sec-head .t{grid-column:1 / span 6;color:var(--ink)}
+.sec-head .c{grid-column:7 / span 6;color:var(--mute)}
+
+/* index */
+.cols{border-top:1px solid var(--rule);padding:8px 0;color:var(--mute)}
+.c-idx{grid-column:1 / span 1}
+.c-title{grid-column:2 / span 4}
+.c-role{grid-column:6 / span 2}
+.c-stack{grid-column:8 / span 2}
+.c-out{grid-column:10 / span 2}
+.c-tog{grid-column:12 / span 1}
+
+details{border-top:1px solid var(--rule)}
+details:last-of-type{border-bottom:1px solid var(--rule)}
+summary{
+  list-style:none;
+  cursor:pointer;
+  display:grid;
+  grid-template-columns:repeat(12,minmax(0,1fr));
+  column-gap:var(--gutter);
+  padding:20px 0;
+  align-items:baseline;
+}
+summary::-webkit-details-marker{display:none}
+summary::marker{content:""}
+summary .idx{grid-column:1 / span 1;color:var(--mute);transition:color .12s linear}
+summary .ttl{
+  grid-column:2 / span 4;
+  font-weight:600;
+  color:var(--ink);
+  letter-spacing:-.01em;
+  text-decoration:underline;
+  text-decoration-color:transparent;
+  text-underline-offset:5px;
+  text-decoration-thickness:2px;
+  transition:text-decoration-color .12s linear;
+}
+summary .role{grid-column:6 / span 2}
+summary .stack{grid-column:8 / span 2}
+summary .out{grid-column:10 / span 2}
+summary .tog{grid-column:12 / span 1;color:var(--ink)}
+summary .tog::after{content:"Open"}
+details[open] summary .tog::after{content:"Close"}
+summary:hover .idx,
+summary:focus-visible .idx{color:var(--marker)}
+summary:hover .ttl,
+summary:focus-visible .ttl{text-decoration-color:var(--marker)}
+summary:hover .tog{color:var(--marker)}
+summary .role,summary .stack,summary .out{color:var(--body);font-size:var(--s);font-family:var(--mono);letter-spacing:.02em}
+
+/* case study */
+.case{padding:8px 0 64px;row-gap:0}
+.case > *{grid-column:2 / span 11}
+.case h3{
+  font-weight:600;
+  font-size:var(--xl);
+  line-height:1.05;
+  letter-spacing:-.03em;
+  color:var(--ink);
+  margin-bottom:32px;
+}
+.metarow{
+  display:grid;
+  grid-template-columns:repeat(11,minmax(0,1fr));
+  column-gap:var(--gutter);
+  border-top:1px solid var(--rule);
+  border-bottom:1px solid var(--rule);
+  padding:14px 0;
+  margin-bottom:32px;
+}
+.metarow div{grid-column:span 3}
+.metarow .k{display:block;color:var(--mute);margin-bottom:2px}
+.metarow .v{color:var(--ink)}
+.case .sum{max-width:62ch;margin-bottom:48px;grid-column:2 / span 8}
+figure{margin-bottom:40px}
+.frame{
+  aspect-ratio:16 / 10;
+  border:1px solid var(--rule);
+  background:var(--ground);
+}
+.frame svg{display:block;width:100%;height:100%}
+figcaption{
+  display:grid;
+  grid-template-columns:auto 1fr;
+  column-gap:var(--gutter);
+  padding-top:10px;
+  font-size:var(--s);
+  line-height:1.5;
+}
+figcaption .n{font-family:var(--mono);color:var(--mute);letter-spacing:.04em;text-transform:uppercase}
+svg text{font-family:var(--mono);fill:var(--body);font-size:4px}
+svg .s{fill:var(--mute)}
+svg .k{fill:var(--ink)}
+
+/* about + contact */
+.two .l{grid-column:1 / span 3;color:var(--mute);padding:20px 0}
+.two .r{grid-column:4 / span 6;padding:20px 0 64px}
+.two .r p{max-width:62ch}
+.contact-list{list-style:none}
+.contact-list li{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));column-gap:var(--gutter);border-top:1px solid var(--rule);padding:12px 0}
+.contact-list li:last-child{border-bottom:1px solid var(--rule)}
+.contact-list .k{grid-column:span 2;color:var(--mute)}
+.contact-list .v{grid-column:span 4}
+.contact-wrap{padding-bottom:64px}
+.contact-wrap .r{padding-bottom:0}
+
+footer{border-top:1px solid var(--rule);padding:16px 0 32px;color:var(--mute)}
+footer .a{grid-column:1 / span 6}
+footer .b{grid-column:7 / span 6}
+
+/* motion */
+.js .fade{opacity:0;transform:translateY(12px);transition:opacity .35s cubic-bezier(.2,.6,.2,1),transform .35s cubic-bezier(.2,.6,.2,1)}
+.js .fade.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .js .fade{opacity:1;transform:none;transition:none}
+  *{transition:none !important}
+}
+
+/* tablet and mobile */
+@media (max-width:860px){
+  :root{--pad:16px}
+  .hero{padding:48px 0 40px}
+  .hero .lab{grid-column:1 / span 12}
+  h1{grid-column:1 / span 12}
+  .hero .meta{grid-column:1 / span 12;grid-template-columns:repeat(12,minmax(0,1fr))}
+  .hero .meta div{grid-column:span 12}
+  .cols{display:none}
+  summary{row-gap:4px}
+  summary .idx{grid-column:1 / span 2}
+  summary .ttl{grid-column:3 / span 10}
+  summary .role,summary .stack,summary .out,summary .tog{grid-column:3 / span 10}
+  summary .tog{margin-top:6px}
+  .case > *{grid-column:1 / span 12}
+  .case .sum{grid-column:1 / span 12}
+  .metarow{grid-template-columns:repeat(12,minmax(0,1fr));row-gap:12px}
+  .metarow div{grid-column:span 12}
+  .two .l{grid-column:1 / span 12;padding-bottom:0}
+  .two .r{grid-column:1 / span 12}
+  .contact-list li{grid-template-columns:repeat(12,minmax(0,1fr))}
+  .contact-list .k{grid-column:span 4}
+  .contact-list .v{grid-column:span 8;overflow-wrap:anywhere}
+  .sec-head .t{grid-column:1 / span 6}
+  .sec-head .c{grid-column:7 / span 6}
+  nav{grid-column:5 / span 8;gap:16px;justify-content:flex-start}
+  .brand{grid-column:1 / span 4}
+  footer .a,footer .b{grid-column:1 / span 12}
+  footer .b{margin-top:4px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="grid">
+      <a class="brand" href="#top">Avery Quinn</a>
+      <nav aria-label="Primary">
+        <a class="mono" href="#work">Work</a>
+        <a class="mono" href="#about">About</a>
+        <a class="mono" href="#contact">Contact</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <div class="wrap">
+    <div class="hero">
+      <div class="grid">
+        <p class="lab mono mute">Design Technologist</p>
+        <h1 class="fade">I build the connective tissue between design systems and the code that ships them.</h1>
+        <div class="meta fade">
+          <div><span class="k mono">Location</span><span class="v">Brooklyn, NY</span></div>
+          <div><span class="k mono">Availability</span><span class="v">Open to select work from Q3 2026</span></div>
+          <div><span class="k mono">Contact</span><a class="v" href="mailto:hello@averyquinn.studio">hello@averyquinn.studio</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section id="work" aria-labelledby="work-h">
+    <div class="wrap">
+      <div class="grid sec-head">
+        <h2 id="work-h" class="t mono">Work</h2>
+        <p class="c mono">3 projects</p>
+      </div>
+
+      <div class="grid cols mono" aria-hidden="true">
+        <span class="c-idx">No.</span>
+        <span class="c-title">Project</span>
+        <span class="c-role">Role</span>
+        <span class="c-stack">Tools</span>
+        <span class="c-out">Output</span>
+        <span class="c-tog"></span>
+      </div>
+
+      <!-- 01 -->
+      <details id="lattice" open>
+        <summary>
+          <span class="idx mono">01</span>
+          <span class="ttl">Lattice Design System</span>
+          <span class="role">Lead</span>
+          <span class="stack">React, Style Dictionary</span>
+          <span class="out">140 components</span>
+          <span class="tog mono"></span>
+        </summary>
+        <div class="grid case">
+          <h3 class="fade">Lattice Design System</h3>
+          <div class="metarow fade">
+            <div><span class="k mono">Role</span><span class="v mono">Lead</span></div>
+            <div><span class="k mono">Tools</span><span class="v mono">React, Style Dictionary</span></div>
+            <div><span class="k mono">Output</span><span class="v mono">140 components</span></div>
+          </div>
+          <p class="sum fade">Component library and token pipeline for a multi-product platform. Cut design-to-production drift across nine teams.</p>
+
+          <figure class="fade">
+            <div class="frame">
+              <svg viewBox="0 0 160 100" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Diagram: tokens feed components, components feed nine teams">
+                <defs>
+                  <marker id="ah1" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L6 3 L0 6" fill="none" stroke="#333" stroke-width="1"/></marker>
+                </defs>
+                <rect x="8" y="32" width="40" height="36" fill="none" stroke="#333" stroke-width=".5"/>
+                <rect x="60" y="32" width="40" height="36" fill="none" stroke="#333" stroke-width=".5"/>
+                <rect x="112" y="32" width="40" height="36" fill="none" stroke="#333" stroke-width=".5"/>
+                <line x1="48" y1="50" x2="59" y2="50" stroke="#333" stroke-width=".5" marker-end="url(#ah1)"/>
+                <line x1="100" y1="50" x2="111" y2="50" stroke="#333" stroke-width=".5" marker-end="url(#ah1)"/>
+                <text class="k" x="12" y="46">Tokens</text>
+                <text class="s" x="12" y="56">Style Dictionary</text>
+                <text class="k" x="64" y="46">Components</text>
+                <text class="s" x="64" y="56">React, 140</text>
+                <text class="k" x="116" y="46">Teams</text>
+                <text class="s" x="116" y="56">Nine</text>
+                <text class="s" x="8" y="90">Source of truth to shipped code</text>
+              </svg>
+            </div>
+            <figcaption><span class="n">Fig. 01</span><span>Token pipeline, schematic. Tokens are built once and consumed by the component library, which nine teams use.</span></figcaption>
+          </figure>
+
+          <figure class="fade">
+            <div class="frame">
+              <svg viewBox="0 0 160 100" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Diagram: 140 cells, one per component">
+                <defs>
+                  <pattern id="cells" width="8.5" height="8.5" patternUnits="userSpaceOnUse"><rect width="6" height="6" fill="#333"/></pattern>
+                </defs>
+                <rect x="21.75" y="8.75" width="116.5" height="82.5" fill="url(#cells)"/>
+              </svg>
+            </div>
+            <figcaption><span class="n">Fig. 02</span><span>One cell per component, 14 by 10. 140 in total.</span></figcaption>
+          </figure>
+        </div>
+      </details>
+
+      <!-- 02 -->
+      <details id="signal">
+        <summary>
+          <span class="idx mono">02</span>
+          <span class="ttl">Signal Prototyping Kit</span>
+          <span class="role">Design technologist</span>
+          <span class="stack">TypeScript, Vite</span>
+          <span class="out">Internal tool</span>
+          <span class="tog mono"></span>
+        </summary>
+        <div class="grid case">
+          <h3 class="fade">Signal Prototyping Kit</h3>
+          <div class="metarow fade">
+            <div><span class="k mono">Role</span><span class="v mono">Design technologist</span></div>
+            <div><span class="k mono">Tools</span><span class="v mono">TypeScript, Vite</span></div>
+            <div><span class="k mono">Output</span><span class="v mono">Internal tool</span></div>
+          </div>
+          <p class="sum fade">A toolkit for building interactive prototypes against real API data, so reviews test behavior rather than static screens.</p>
+
+          <figure class="fade">
+            <div class="frame">
+              <svg viewBox="0 0 160 100" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Diagram: real API data feeds a prototype, which goes to review">
+                <defs>
+                  <marker id="ah2" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L6 3 L0 6" fill="none" stroke="#333" stroke-width="1"/></marker>
+                </defs>
+                <rect x="8" y="32" width="40" height="36" fill="none" stroke="#333" stroke-width=".5"/>
+                <rect x="60" y="32" width="40" height="36" fill="none" stroke="#333" stroke-width=".5"/>
+                <rect x="112" y="32" width="40" height="36" fill="none" stroke="#333" stroke-width=".5"/>
+                <line x1="48" y1="50" x2="59" y2="50" stroke="#333" stroke-width=".5" marker-end="url(#ah2)"/>
+                <line x1="100" y1="50" x2="111" y2="50" stroke="#333" stroke-width=".5" marker-end="url(#ah2)"/>
+                <text class="k" x="12" y="46">API data</text>
+                <text class="s" x="12" y="56">Real, not mocked</text>
+                <text class="k" x="64" y="46">Prototype</text>
+                <text class="s" x="64" y="56">TypeScript, Vite</text>
+                <text class="k" x="116" y="46">Review</text>
+                <text class="s" x="116" y="56">Tests behavior</text>
+              </svg>
+            </div>
+            <figcaption><span class="n">Fig. 01</span><span>Data flow, schematic. The prototype reads real API data, so the review exercises behavior.</span></figcaption>
+          </figure>
+
+          <figure class="fade">
+            <div class="frame">
+              <svg viewBox="0 0 160 100" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Diagram: static screen compared with a prototype on real data">
+                <rect x="8" y="14" width="68" height="72" fill="none" stroke="#999" stroke-width=".5" stroke-dasharray="2 2"/>
+                <rect x="84" y="14" width="68" height="72" fill="none" stroke="#333" stroke-width=".5"/>
+                <text class="s" x="12" y="24">Static screen</text>
+                <text class="k" x="88" y="24">Prototype on real data</text>
+                <text class="s" x="12" y="80">Shows one state</text>
+                <text class="k" x="88" y="80">Shows how it behaves</text>
+              </svg>
+            </div>
+            <figcaption><span class="n">Fig. 02</span><span>Review input compared, schematic. A static screen shows one state. A prototype on real data shows behavior.</span></figcaption>
+          </figure>
+        </div>
+      </details>
+
+      <!-- 03 -->
+      <details id="grid-audit">
+        <summary>
+          <span class="idx mono">03</span>
+          <span class="ttl">Grid Audit Tooling</span>
+          <span class="role">Author</span>
+          <span class="stack">JavaScript, PostCSS</span>
+          <span class="out">Open source</span>
+          <span class="tog mono"></span>
+        </summary>
+        <div class="grid case">
+          <h3 class="fade">Grid Audit Tooling</h3>
+          <div class="metarow fade">
+            <div><span class="k mono">Role</span><span class="v mono">Author</span></div>
+            <div><span class="k mono">Tools</span><span class="v mono">JavaScript, PostCSS</span></div>
+            <div><span class="k mono">Output</span><span class="v mono">Open source</span></div>
+          </div>
+          <p class="sum fade">A linter and visual overlay that checks layouts against a defined column grid in the browser, flagging spacing that falls off the baseline.</p>
+
+          <figure class="fade">
+            <div class="frame">
+              <svg viewBox="0 0 160 100" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Diagram: 12 column overlay with one block off the grid">
+                <defs>
+                  <pattern id="cols12" x="9.5" width="12" height="100" patternUnits="userSpaceOnUse"><rect width="9" height="100" fill="#ccc" fill-opacity=".5"/></pattern>
+                </defs>
+                <rect x="9.5" y="0" width="141" height="100" fill="url(#cols12)"/>
+                <rect x="9.5" y="16" width="21" height="18" fill="#333"/>
+                <rect x="45.5" y="16" width="21" height="18" fill="#333"/>
+                <rect x="81.5" y="42" width="21" height="18" fill="#333"/>
+                <rect x="117.5" y="42" width="21" height="18" fill="#333"/>
+                <rect x="84.5" y="70" width="21" height="18" fill="#ffffff" stroke="#000" stroke-width=".6" stroke-dasharray="1.5 1.5"/>
+                <text class="k" x="108" y="81">Off grid</text>
+              </svg>
+            </div>
+            <figcaption><span class="n">Fig. 01</span><span>Column overlay, schematic. Solid blocks sit on the 12 columns. The dashed block does not, and the check flags it.</span></figcaption>
+          </figure>
+
+          <figure class="fade">
+            <div class="frame">
+              <svg viewBox="0 0 160 100" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Diagram: baseline rows with one block off the baseline">
+                <defs>
+                  <pattern id="base" width="160" height="8" patternUnits="userSpaceOnUse"><line x1="0" y1="7.75" x2="160" y2="7.75" stroke="#ccc" stroke-width=".5"/></pattern>
+                </defs>
+                <rect width="160" height="100" fill="url(#base)"/>
+                <rect x="12" y="16" width="60" height="16" fill="#333"/>
+                <rect x="12" y="40" width="60" height="16" fill="#333"/>
+                <rect x="12" y="67" width="60" height="16" fill="#ffffff" stroke="#000" stroke-width=".6" stroke-dasharray="1.5 1.5"/>
+                <text class="k" x="80" y="77">Off baseline</text>
+              </svg>
+            </div>
+            <figcaption><span class="n">Fig. 02</span><span>Baseline check, schematic. Blocks on the 8 unit rows pass. The dashed block falls between rows and is flagged.</span></figcaption>
+          </figure>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <section id="about" aria-labelledby="about-h">
+    <div class="wrap">
+      <div class="grid two">
+        <h2 id="about-h" class="l mono">About</h2>
+        <div class="r fade">
+          <p>I work between design and engineering: design systems, prototyping in code, and the production components that keep teams consistent. Before consulting I led the design systems group at a payments company.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" aria-labelledby="contact-h">
+    <div class="wrap contact-wrap">
+      <div class="grid two">
+        <h2 id="contact-h" class="l mono">Contact</h2>
+        <div class="r fade">
+          <ul class="contact-list">
+            <li><span class="k mono">Email</span><span class="v"><a href="mailto:hello@averyquinn.studio">hello@averyquinn.studio</a></span></li>
+            <li><span class="k mono">GitHub</span><span class="v"><a href="https://github.com/averyq" rel="noopener">github.com/averyq</a></span></li>
+            <li><span class="k mono">read.cv</span><span class="v"><a href="https://read.cv/averyq" rel="noopener">read.cv/averyq</a></span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="grid mono">
+      <span class="a">Avery Quinn, Brooklyn, NY</span>
+      <span class="b">Open to select work from Q3 2026</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  document.documentElement.classList.add('js');
+  var els = document.querySelectorAll('.fade');
+  if (!('IntersectionObserver' in window)) {
+    els.forEach(function(e){ e.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+    els.forEach(function(e){ io.observe(e); });
+  }
+  function openFromHash(){
+    var id = location.hash.slice(1);
+    if (!id) return;
+    var t = document.getElementById(id);
+    if (t && t.tagName === 'DETAILS') {
+      t.open = true;
+      t.scrollIntoView();
+    }
+  }
+  window.addEventListener('hashchange', openFromHash);
+  openFromHash();
+})();
+</script>
+</body>
+</html>

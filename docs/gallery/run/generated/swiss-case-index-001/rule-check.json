@@ -1,0 +1,48 @@
+{
+  "slug": "swiss-case-index-001",
+  "direction": "swiss-case-index",
+  "model": "claude-cli:sonnet",
+  "checked": "2026-11-11T15:32:06.754Z",
+  "results": [
+    {
+      "rule": "The expanded Lattice panel must not leave a blank gap. On desktop, about 600px of empty white sits between the FIG. 01 caption and row 02. On mobile, about 950px of empty white sits below the 'Lattice Design System' h2. Set the expanded panel's height to its content (height:auto, no min-height). The space between the caption and the next row's hairline must be 48px or less.",
+      "pass": false,
+      "reason": "On desktop a gap of about 700px of blank white sits between the FIG. 01 caption and row 02. On mobile a gap of about 900px sits below the h2."
+    },
+    {
+      "rule": "On mobile, the expanded project must show its full content: meta row, description, figure and caption. Right now only the h2 renders. Never hide expanded content with opacity:0, a fixed height or a failed fade-up. The meta row must stack as label/value pairs, and the figure must fill the 12-column width at the same aspect ratio as on desktop.",
+      "pass": false,
+      "reason": "On mobile only the h2 shows for the expanded project. The meta row, description, figure and caption are missing."
+    },
+    {
+      "rule": "The figure diagram must not clip or overflow. In the 'Tokens' box, the text 'Style Dictionary' runs past the right border and under the arrow. Set the box text to 14px or smaller in mono, with padding of 16px or more. Add overflow-wrap:anywhere. Make the box wide enough that no text crosses a 1px border.",
+      "pass": false,
+      "reason": "In the Tokens box, the text 'Style Dictionary' runs past the right border and under the arrow."
+    },
+    {
+      "rule": "Remove the decorative diagram, or replace it with a real project image. The Tokens → Components → Teams boxes use 2px dark strokes and arrow icons. They break the rule 'no decorative illustration or icons' and the hairline-only rule. Use an uncropped image in a hairline frame at a fixed 16:9 ratio. Place a mono caption below it. Do not use 2px strokes or arrows.",
+      "pass": false,
+      "reason": "The diagram still has 2px dark strokes, arrow icons and boxes. It is not a real image in a hairline frame."
+    },
+    {
+      "rule": "The empty ABOUT and CONTACT sections must contain content, or they must be removed. Each has only a gray label above 100px or more of blank space. Put a body paragraph in ABOUT and the email in CONTACT, aligned to the same column as the hero text (column 4 on desktop). Alternatively, delete both sections and keep their nav links as anchors to real content.",
+      "pass": false,
+      "reason": "The ABOUT and CONTACT sections show only a gray label above blank space and have no content."
+    },
+    {
+      "rule": "Keep the column grid consistent. The hero headline starts at x≈316 (display scale), but the expanded h2 and figure start at x≈140. The row meta columns are at 492, 669, 845 and 1022. The expanded meta row uses 140, 404 and 669. Snap all blocks to the same 12-column lines. Meta cells in the expanded panel must start at the same x as the ROLE, TOOLS and OUTPUT columns in the row above.",
+      "pass": false,
+      "reason": "The hero starts at x≈316 but the expanded h2 and figure start at x≈140. The expanded meta cells at 140, 404 and 669 do not match the row columns at 492, 669, 845 and 1022."
+    },
+    {
+      "rule": "Fix the type scale and the contrast. Use at most three sizes: for example 56px for the hero, 32px for the project h2, and 12–14px for everything else. The mono meta text in the header and footer is about 11px at #999 on white (about 2.8:1 contrast). Use #666 or darker for text that is 14px or smaller. Keep #999 for hairlines and decorative labels only.",
+      "pass": false,
+      "reason": "The page uses many type sizes: hero, h2, body, mono and the large diagram text. The small gray mono header and footer text has low contrast on white."
+    },
+    {
+      "rule": "Make the nav and the toggles clear and aligned. On desktop the nav (WORK/ABOUT/CONTACT) is centered in the bar, and 'CLOSE'/'OPEN' sit loose at the end of each row. On mobile the nav is crammed next to the logo. Left-align the nav to a grid column. Label each toggle with a 44px-tall hit area. Use #ff3300 only on the active row's number marker or on hover, with a transition of 150ms or less (linear).",
+      "pass": false,
+      "reason": "On desktop the nav is centered and CLOSE/OPEN sit loose at the row ends. On mobile the nav is crammed next to the logo. The toggles show no clear 44px hit area."
+    }
+  ]
+}

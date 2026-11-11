@@ -1,0 +1,61 @@
+{
+  "board": "gallery-run",
+  "generated": "2026-11-11T15:28:00.394Z",
+  "directions": {
+    "swiss-case-index": {
+      "name": "Swiss Case Index",
+      "brief": "A work index built as a strict 12-column grid with hairline gray rules and numbered mono rows. Each row opens into a functional case study: grotesk title, mono meta row for role, year, and tools, then large uncropped images with captions below. The board's heaviest channels carry the site. Gray does most of the work. One hard marker color appears only on hover.",
+      "palette": "#ffffff ground, #000000 ink, #cccccc hairline rules and secondary text, #333333 body, #ff3300 as the single hover marker",
+      "channels": [
+        "swiss-index",
+        "case-study-functional"
+      ],
+      "notes": [
+        "No rounded corners, card shadows, or centered text blocks",
+        "Use one accent only (#ff3300), and only for a marker or hover state",
+        "Do not break the column grid for effect, and use no decorative icons or illustration"
+      ]
+    },
+    "warm-paper-journal": {
+      "name": "Warm Paper Journal",
+      "brief": "A printed-page reading site on warm cream. Serif headlines and body sit in a narrow column with wide margins. Photos are muted, thinly framed, and captioned. A pale pink band or rule is the only accent. Links get a gentle underline-draw. It is a quiet counterpoint to the grid-heavy directions.",
+      "palette": "#ffffcc ground, #ffcccc highlight band or rule, #cccccc secondary rules, #333333 text",
+      "channels": [
+        "warm-editorial"
+      ],
+      "notes": [
+        "No saturated or neon color, and no pink on text",
+        "No sans-serif display type and no dark mode",
+        "No heavy shadows, glass effects, or multi-column dashboards"
+      ]
+    },
+    "red-monolith-brutal": {
+      "name": "Red Monolith",
+      "brief": "A landing screen with one oversized grotesk wordmark filling the viewport width on a flat field of saturated red or hard black. A single small mono meta line is pinned to a corner. Hover inverts the colors instantly. Heavy blocks and thick rules appear on inner screens. Two colors only per screen.",
+      "palette": "#ff3300 ground, #000000 ink and blocks, #ffffff for inversion on hover",
+      "channels": [
+        "monolith-wordmark",
+        "bold-primary-brutalist"
+      ],
+      "notes": [
+        "No hero photo, gradient, or drop shadow behind or on the wordmark",
+        "Use only one display size on the first screen, and no centered wordmark with tagline and CTA stack",
+        "No pastels, rounded corners, thin light-weight type, or polite fades; use hard cuts only"
+      ]
+    },
+    "off-white-monolith": {
+      "name": "Cream Monolith Index",
+      "brief": "A cover screen with one oversized grotesk wordmark on warm off-white, anchored to one edge with mono meta in the corners. Scrolling reveals a sparse numbered index on hairline rules. It joins the board's heaviest channel to its wordmark signature in a calm, low-density form.",
+      "palette": "#ffffcc ground, #000000 wordmark and ink, #cccccc hairlines, #ff3300 as one hover marker",
+      "channels": [
+        "monolith-wordmark",
+        "swiss-index"
+      ],
+      "notes": [
+        "No nav bar taller than one line of mono text",
+        "No gradients on the wordmark, and no more than one display size on the first screen",
+        "No rounded corners, centered text, or second accent color"
+      ]
+    }
+  }
+}

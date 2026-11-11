@@ -1,0 +1,461 @@
+{
+  "board": "gallery-run",
+  "kind": "visual-ui",
+  "generated": "2026-11-11T15:27:47.812Z",
+  "items": [
+    {
+      "id": "w001",
+      "file": "bloom.png",
+      "title": "Bloom",
+      "source": {
+        "name": "Bloom",
+        "url": null,
+        "local": "boards/gallery-run/bloom.png",
+        "arena": null
+      },
+      "measured": {
+        "w": 1440,
+        "h": 1200,
+        "aspect": 1.2,
+        "palette": [
+          {
+            "hex": "#ff66cc",
+            "pct": 21
+          },
+          {
+            "hex": "#9966ff",
+            "pct": 15
+          },
+          {
+            "hex": "#cc66cc",
+            "pct": 14
+          },
+          {
+            "hex": "#ff9999",
+            "pct": 11
+          },
+          {
+            "hex": "#ffccff",
+            "pct": 11
+          }
+        ],
+        "contrast": 0.131,
+        "density": 0.016
+      },
+      "tags": [
+        "high-chroma",
+        "3d-playful",
+        "sculptural-object",
+        "low-density",
+        "grotesk-display"
+      ],
+      "channels": [
+        "playful-3d"
+      ],
+      "notes": {
+        "why": "A saturated yellow-to-pink-to-violet gradient fills the whole field. A soft glossy blob, a centered bold headline and three rounded cards on one axis give it a friendly hierarchy that reads in seconds.",
+        "avoid": "Do not copy the generic gradient-plus-emoji-card template. The emoji icons and identical frosted cards look stock and give the brand no distinct identity.",
+        "keep": "Keep the single glossy 3D blob above the headline. It gives the page one focal object and sets a playful tone with no extra decoration."
+      }
+    },
+    {
+      "id": "w002",
+      "file": "casebook.png",
+      "title": "Casebook",
+      "source": {
+        "name": "Casebook",
+        "url": null,
+        "local": "boards/gallery-run/casebook.png",
+        "arena": null
+      },
+      "measured": {
+        "w": 1440,
+        "h": 1200,
+        "aspect": 1.2,
+        "palette": [
+          {
+            "hex": "#ffffff",
+            "pct": 96
+          },
+          {
+            "hex": "#cccccc",
+            "pct": 2
+          },
+          {
+            "hex": "#999999",
+            "pct": 1
+          },
+          {
+            "hex": "#666666",
+            "pct": 0
+          },
+          {
+            "hex": "#ccccff",
+            "pct": 0
+          }
+        ],
+        "contrast": 0.068,
+        "density": 0.011
+      },
+      "tags": [
+        "muted-chroma",
+        "low-density",
+        "grotesk-display",
+        "case-study"
+      ],
+      "channels": [
+        "case-study-functional"
+      ],
+      "notes": {
+        "why": "A clear hierarchy of bold left-aligned headline, a single product-frame placeholder, a logo row and three equal feature cards keeps the page calm and easy to scan on a white ground.",
+        "avoid": "Do not copy the generic SaaS template of empty browser mockup, pale grey-blue palette and interchangeable card trio, because nothing about it is distinctive or memorable.",
+        "keep": "Keep the tight, bold sans headline paired with small colored uppercase category labels on the cards, which gives a quick scanning system at very little visual cost."
+      }
+    },
+    {
+      "id": "w003",
+      "file": "glyphlab.png",
+      "title": "Glyphlab",
+      "source": {
+        "name": "Glyphlab",
+        "url": null,
+        "local": "boards/gallery-run/glyphlab.png",
+        "arena": null
+      },
+      "measured": {
+        "w": 1440,
+        "h": 1200,
+        "aspect": 1.2,
+        "palette": [
+          {
+            "hex": "#000000",
+            "pct": 90
+          },
+          {
+            "hex": "#333300",
+            "pct": 7
+          },
+          {
+            "hex": "#ffff00",
+            "pct": 1
+          },
+          {
+            "hex": "#99cc00",
+            "pct": 0
+          },
+          {
+            "hex": "#cccc00",
+            "pct": 0
+          }
+        ],
+        "contrast": 0.116,
+        "density": 0.014
+      },
+      "tags": [
+        "dark-field",
+        "high-chroma",
+        "experimental-type",
+        "mono-meta",
+        "swiss-index",
+        "low-density",
+        "bold-primary"
+      ],
+      "channels": [
+        "swiss-index",
+        "bold-primary-brutalist",
+        "experimental-type"
+      ],
+      "notes": {
+        "why": "Oversized slab-serif glyphs in neon yellow and magenta sit scattered on a near-black field, and thin hairline rules plus tiny monospace labels give them a strict structure to play against.",
+        "avoid": "Do not copy the large empty areas and the very small meta text, because they leave the lower half dead and the labels hard to read.",
+        "keep": "Keep the scale contrast between huge specimen letters and tiny mono captions, held together by a hairline-ruled stat and nav grid in two accent colors."
+      }
+    },
+    {
+      "id": "w004",
+      "file": "gridwork.png",
+      "title": "Gridwork",
+      "source": {
+        "name": "Gridwork",
+        "url": null,
+        "local": "boards/gallery-run/gridwork.png",
+        "arena": null
+      },
+      "measured": {
+        "w": 1440,
+        "h": 1200,
+        "aspect": 1.2,
+        "palette": [
+          {
+            "hex": "#ffffff",
+            "pct": 94
+          },
+          {
+            "hex": "#cccccc",
+            "pct": 3
+          },
+          {
+            "hex": "#999999",
+            "pct": 2
+          },
+          {
+            "hex": "#666666",
+            "pct": 1
+          },
+          {
+            "hex": "#333333",
+            "pct": 0
+          }
+        ],
+        "contrast": 0.102,
+        "density": 0.018
+      },
+      "tags": [
+        "swiss-index",
+        "grotesk-display",
+        "low-density",
+        "mono-meta",
+        "muted-chroma"
+      ],
+      "channels": [
+        "swiss-index",
+        "case-study-functional"
+      ],
+      "notes": {
+        "why": "A strict column grid, hairline rules and one tight bold grotesk headline over small gray metadata rows give a clear hierarchy with almost no ornament.",
+        "avoid": "Do not copy the generic white-on-black-text minimalism without real content rigor, because the system only works when the index rows and column alignment are precise.",
+        "keep": "Keep the numbered index table with hairline dividers, where each row aligns project name, category and sector to fixed columns."
+      }
+    },
+    {
+      "id": "w005",
+      "file": "monolith.png",
+      "title": "Monolith",
+      "source": {
+        "name": "Monolith",
+        "url": null,
+        "local": "boards/gallery-run/monolith.png",
+        "arena": null
+      },
+      "measured": {
+        "w": 1440,
+        "h": 1200,
+        "aspect": 1.2,
+        "palette": [
+          {
+            "hex": "#ffffcc",
+            "pct": 89
+          },
+          {
+            "hex": "#cccccc",
+            "pct": 3
+          },
+          {
+            "hex": "#000000",
+            "pct": 2
+          },
+          {
+            "hex": "#333333",
+            "pct": 2
+          },
+          {
+            "hex": "#ffcccc",
+            "pct": 2
+          }
+        ],
+        "contrast": 0.157,
+        "density": 0.019
+      },
+      "tags": [
+        "monolith-wordmark",
+        "warm-ground",
+        "grotesk-display",
+        "low-density",
+        "muted-chroma",
+        "mono-meta",
+        "swiss-index"
+      ],
+      "channels": [
+        "monolith-wordmark",
+        "swiss-index",
+        "warm-editorial"
+      ],
+      "notes": {
+        "why": "One oversized black grotesk wordmark sits centered on a warm off-white field, and tiny corner meta text frames it, so the eye has one place to go.",
+        "avoid": "Do not copy the empty space without the scale contrast, because a small wordmark in this much space looks unfinished instead of confident.",
+        "keep": "Keep the single full-width heavy wordmark, paired with a tiny two-line descriptor and small corner navigation labels."
+      }
+    },
+    {
+      "id": "w006",
+      "file": "nocturne.png",
+      "title": "Nocturne",
+      "source": {
+        "name": "Nocturne",
+        "url": null,
+        "local": "boards/gallery-run/nocturne.png",
+        "arena": null
+      },
+      "measured": {
+        "w": 1440,
+        "h": 1200,
+        "aspect": 1.2,
+        "palette": [
+          {
+            "hex": "#000000",
+            "pct": 76
+          },
+          {
+            "hex": "#333333",
+            "pct": 21
+          },
+          {
+            "hex": "#666666",
+            "pct": 1
+          },
+          {
+            "hex": "#999999",
+            "pct": 1
+          },
+          {
+            "hex": "#666633",
+            "pct": 0
+          }
+        ],
+        "contrast": 0.077,
+        "density": 0.016
+      },
+      "tags": [
+        "dark-field",
+        "editorial-serif",
+        "mono-meta",
+        "low-density",
+        "muted-chroma",
+        "case-study"
+      ],
+      "channels": [
+        "dark-editorial",
+        "warm-editorial",
+        "case-study-functional"
+      ],
+      "notes": {
+        "why": "A near-black ground, one large serif headline with a single gold italic phrase, and small spaced-caps metadata create a clear hierarchy with a lot of empty space.",
+        "avoid": "Do not copy the empty gray placeholder cards, which look unfinished, or the very small low-contrast gray body and meta text, which is hard to read.",
+        "keep": "Use one accent color and one italic style on a few words of a large white serif headline, with everything else kept quiet."
+      }
+    },
+    {
+      "id": "w007",
+      "file": "paper-press.png",
+      "title": "Paper Press",
+      "source": {
+        "name": "Paper Press",
+        "url": null,
+        "local": "boards/gallery-run/paper-press.png",
+        "arena": null
+      },
+      "measured": {
+        "w": 1440,
+        "h": 1200,
+        "aspect": 1.2,
+        "palette": [
+          {
+            "hex": "#ffffcc",
+            "pct": 66
+          },
+          {
+            "hex": "#ffcccc",
+            "pct": 17
+          },
+          {
+            "hex": "#cccccc",
+            "pct": 8
+          },
+          {
+            "hex": "#cccc99",
+            "pct": 5
+          },
+          {
+            "hex": "#999999",
+            "pct": 2
+          }
+        ],
+        "contrast": 0.067,
+        "density": 0.016
+      },
+      "tags": [
+        "warm-ground",
+        "editorial-serif",
+        "muted-chroma",
+        "low-density"
+      ],
+      "channels": [
+        "warm-editorial"
+      ],
+      "notes": {
+        "why": "A cream ground, one serif family and a narrow centered column give the page a calm, print-like rhythm. Thin hairline rules and a small tracked eyebrow set the hierarchy without adding color or weight.",
+        "avoid": "The striped placeholder block stands in for real imagery, so copying it would make the feature card look empty and unfinished.",
+        "keep": "Keep the large centered serif headline, with a tiny uppercase eyebrow above it and a hairline rule below, on the warm cream ground."
+      }
+    },
+    {
+      "id": "w008",
+      "file": "voltage.png",
+      "title": "Voltage",
+      "source": {
+        "name": "Voltage",
+        "url": null,
+        "local": "boards/gallery-run/voltage.png",
+        "arena": null
+      },
+      "measured": {
+        "w": 1440,
+        "h": 1200,
+        "aspect": 1.2,
+        "palette": [
+          {
+            "hex": "#ff3300",
+            "pct": 64
+          },
+          {
+            "hex": "#000000",
+            "pct": 15
+          },
+          {
+            "hex": "#cc3300",
+            "pct": 5
+          },
+          {
+            "hex": "#ffff00",
+            "pct": 4
+          },
+          {
+            "hex": "#993300",
+            "pct": 3
+          }
+        ],
+        "contrast": 0.187,
+        "density": 0.028
+      },
+      "tags": [
+        "bold-primary",
+        "high-chroma",
+        "grotesk-display",
+        "monolith-wordmark",
+        "swiss-index",
+        "high-density",
+        "dark-field"
+      ],
+      "channels": [
+        "monolith-wordmark",
+        "swiss-index",
+        "bold-primary-brutalist"
+      ],
+      "notes": {
+        "why": "A saturated red-orange field, a huge black grotesk headline and hard-ruled index rows give a strict hierarchy, and the black and yellow blocks add contrast without breaking the grid.",
+        "avoid": "Do not copy the tiny low-contrast orange body text on the black card, because it is hard to read and weakens the loud tone.",
+        "keep": "Keep the oversized black heavy-grotesk headline on a single flat saturated ground, with one outlined letter 'O' as the only playful move."
+      }
+    }
+  ]
+}

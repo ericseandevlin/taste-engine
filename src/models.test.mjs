@@ -1,7 +1,7 @@
 // models.test.mjs — provider router tests. Run: bun test src/models.test.mjs
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { resolveTextCaller, resolveVisionCaller, resolveMultiImageCaller } from './models.mjs';
+import { resolveTextCaller, resolveVisionCaller, resolveMultiImageCaller, parseCliModel } from './models.mjs';
 
 test('resolveTextCaller routes claude models to anthropic and validates key', () => {
   const r = resolveTextCaller('claude-opus-4-8', { ANTHROPIC_API_KEY: 'k' });
@@ -49,4 +49,19 @@ test('resolveMultiImageCaller routes claude to anthropic, gemini to gemini', () 
   const r2 = resolveMultiImageCaller('gemini-3.1-flash-image', { GEMINI_API_KEY: 'k' });
   assert.equal(r2.provider, 'gemini');
   assert.throws(() => resolveMultiImageCaller('gemini-3.1-flash-image', {}), /GEMINI_API_KEY/);
+});
+
+// ---- Claude Code CLI path (keyless) ----
+
+test('claude-cli:<alias> routes to the local CLI with no key required', () => {
+  assert.equal(resolveTextCaller('claude-cli:sonnet', {}).provider, 'claude-cli');
+  assert.equal(resolveVisionCaller('claude-cli:sonnet', {}).provider, 'claude-cli');
+  assert.equal(resolveMultiImageCaller('claude-cli:haiku', {}).provider, 'claude-cli');
+});
+
+test('parseCliModel accepts only a plain alias', () => {
+  assert.equal(parseCliModel('claude-cli:sonnet'), 'sonnet');
+  assert.equal(parseCliModel('claude-cli:'), null);
+  assert.equal(parseCliModel('claude-cli:sonnet; rm -rf /'), null);
+  assert.equal(parseCliModel('claude-sonnet-4-6'), null);
 });

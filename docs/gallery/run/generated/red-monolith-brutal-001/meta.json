@@ -1,0 +1,12 @@
+{
+  "direction": "red-monolith-brutal",
+  "name": "Red Monolith",
+  "channels": [
+    "monolith-wordmark",
+    "bold-primary-brutalist"
+  ],
+  "model": "claude-cli:sonnet",
+  "rulesApplied": 0,
+  "content": "profile.json",
+  "generated": "2026-11-11T15:29:38.602Z"
+}
