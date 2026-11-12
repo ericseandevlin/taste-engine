@@ -1,0 +1,91 @@
+{
+  "slug": "swiss-mono-index-002",
+  "board": "demo",
+  "mode": "swiss-mono-index",
+  "modeName": "Swiss Mono Index",
+  "copy": [
+    "Open Studio",
+    "20 Nov 2026",
+    "Doors 7pm"
+  ],
+  "model": "gemini-3.1-flash-image",
+  "judge": "gemini-3.5-flash",
+  "made": "2026-11-12T17:26:51.958Z",
+  "best": "round-1.png",
+  "rounds": [
+    {
+      "round": 1,
+      "file": "round-1.png",
+      "passed": 13,
+      "total": 13,
+      "checked": true,
+      "results": [
+        {
+          "rule": "The poster does not use this: Decorative or display typefaces.",
+          "pass": true,
+          "reason": "The poster uses a clean sans-serif typeface, with no decorative or display styles visible."
+        },
+        {
+          "rule": "The poster does not use this: Asymmetric blob layouts.",
+          "pass": true,
+          "reason": "The layout consists of a structured grid with no asymmetric blob shapes."
+        },
+        {
+          "rule": "The poster does not use this: High-saturation color fields.",
+          "pass": true,
+          "reason": "The poster is completely monochrome with no colored elements."
+        },
+        {
+          "rule": "The poster does not use this: Overlapping or collaged elements.",
+          "pass": true,
+          "reason": "All text and grid lines are neatly arranged without overlapping or collage."
+        },
+        {
+          "rule": "The poster does not use this: Gradient backgrounds.",
+          "pass": true,
+          "reason": "The background is a solid off-white color with thin grid lines and no gradients."
+        },
+        {
+          "rule": "The poster does not use this: Centered hero compositions.",
+          "pass": true,
+          "reason": "The layout is left-aligned and structured on an asymmetric grid, not centered."
+        },
+        {
+          "rule": "The poster does not use this: Serif editorial typefaces.",
+          "pass": true,
+          "reason": "Only sans-serif typefaces are used throughout the poster."
+        },
+        {
+          "rule": "The poster does not use this: Warm or emotive color palettes.",
+          "pass": true,
+          "reason": "The color palette is strictly grayscale and neutral."
+        },
+        {
+          "rule": "The poster does not use this: Photography as atmosphere.",
+          "pass": true,
+          "reason": "The design is entirely typographic and geometric, without any photography."
+        },
+        {
+          "rule": "The poster does not use this: Organic or irregular shapes.",
+          "pass": true,
+          "reason": "The visual elements consist solely of straight lines and rectangular grid divisions."
+        },
+        {
+          "rule": "The poster does not use this: Expressive motion or easing.",
+          "pass": true,
+          "reason": "The composition is completely static and aligned to a rigid grid."
+        },
+        {
+          "rule": "The poster does not use this: High-density decorative elements.",
+          "pass": true,
+          "reason": "The poster is highly minimalist, featuring only text and a clean grid without any decorative embellishments."
+        },
+        {
+          "rule": "The copy is rendered exactly as given: every word spelled correctly, nothing added, nothing missing.",
+          "pass": true,
+          "reason": "The main copy is rendered exactly as provided: 'Open Studio', '20 Nov 2026', and 'Doors 7pm' are all spelled correctly."
+        }
+      ]
+    }
+  ]
+}

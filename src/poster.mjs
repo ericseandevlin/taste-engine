@@ -57,12 +57,13 @@ export function buildPosterPrompt({ mode, dos, donts, palette, copy, broken = []
   const out = [
     'Design one printed poster, portrait format. Return the image only.',
     '',
-    'COPY. Set exactly these lines and no other text:',
+    'COPY. Set exactly these lines:',
     ...copy.map((l) => `  ${l}`),
+    'These lines are the only text on the poster. No labels, no captions, no numbers, no grid coordinates, no color codes, no invented words.',
     '',
     `STYLE: ${mode.name}. ${mode.summary}`,
     '',
-    `PALETTE. Use only these colors: ${hexes.join(', ')}.`,
+    `PALETTE. Use only these colors: ${hexes.join(', ')}. The codes tell you the colors. Never print a color code on the poster.`,
     '',
     'DO:',
     ...dos.map((r) => `- ${r.rule}`),
@@ -70,7 +71,8 @@ export function buildPosterPrompt({ mode, dos, donts, palette, copy, broken = []
     'DO NOT. Each of these is a hard rule:',
     ...donts.map((r) => `- ${r.rule}`),
     '',
-    'This is a poster, not a web page: no navigation, no buttons, no browser frame, no device mockup. Flat artwork that fills the frame edge to edge.',
+    'This is a poster, not a web page: no navigation, no buttons, no browser frame, no device mockup.',
+    'The image IS the poster. The artwork runs to all four edges of the image. No paper sheet on a background, no border around it, no shadow under it.',
   ];
   if (broken.length) {
     out.push('', 'YOUR LAST ATTEMPT BROKE THESE RULES. Fix each one:', ...broken.map((b) => `- ${b.rule} (seen: ${b.reason})`));
@@ -78,11 +80,18 @@ export function buildPosterPrompt({ mode, dos, donts, palette, copy, broken = []
   return out.join('\n');
 }
 
+// Pure: a Don't rule names the forbidden thing ("Gradient backgrounds"). A judge
+// asked to PASS or FAIL that bare phrase answers whether the thing is present,
+// which inverts the verdict. State it as a claim that is true when obeyed.
+export function asClaim(dont) {
+  return `The poster does not use this: ${String(dont).replace(/\.$/, '')}.`;
+}
+
 // Pure: the prompt for the check, and the parser for its answer.
 export function buildCheckPrompt(rules, copy) {
   return (
     `The image is a poster. Its copy was meant to be exactly these lines:\n${copy.map((l) => `  ${l}`).join('\n')}\n\n` +
-    `Judge the poster against each rule. PASS only if the image shows the rule is obeyed. ` +
+    `Judge the poster against each statement. PASS if the statement is true of the image, FAIL if it is false. ` +
     `Judge strictly from what is visible. Reason: one short sentence naming what you see.\n\n` +
     rules.map((r, i) => `${i + 1}. ${r}`).join('\n') +
     `\n\nReturn only JSON: {"verdicts":[{"verdict":"PASS"|"FAIL","reason":"..."}]} with exactly ${rules.length} entries in order.`
@@ -132,8 +141,7 @@ async function main() {
   const root = join(board.absDir, 'posters');
   const slug = `${mode.id}-${String(nextIndex(root, mode.id)).padStart(3, '0')}`;
   const dir = join(root, slug);
-  mkdirSync(dir, { recursive: true });
-  const checked = [...donts.map((r) => r.rule), COPY_RULE];
+  const checked = [...donts.map((r) => asClaim(r.rule)), COPY_RULE];
   console.log(`[poster] ${board.name} / ${mode.name}: ${dos.length} do, ${donts.length} don't, copy "${copy.join(' | ')}"`);
 
   const rounds = [];
@@ -141,6 +149,7 @@ async function main() {
   for (let n = 1; n <= args.rounds; n++) {
     const img = await draw({ prompt: buildPosterPrompt({ mode, dos, donts, palette: brief.palette, copy, broken }), aspect: args.aspect });
     const file = `round-${n}.${extOf(img.mimeType)}`;
+    mkdirSync(dir, { recursive: true });
     writeFileSync(join(dir, file), Buffer.from(img.data, 'base64'));
     let results;
     try {

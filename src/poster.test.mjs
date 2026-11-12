@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { parseCopy, buildPosterPrompt, buildCheckPrompt, parseVerdicts, bestRound, DEFAULT_COPY } from './poster.mjs';
+import { asClaim, parseCopy, buildPosterPrompt, buildCheckPrompt, parseVerdicts, bestRound, DEFAULT_COPY } from './poster.mjs';
 import { imageOfGemini, imageOfOpenRouter } from './image-agent.mjs';
 import { routeModel, resolveVisionCaller, NO_KEY_MESSAGE } from './models.mjs';
 
@@ -59,4 +59,16 @@ test('routeModel sends a gemini name to whichever key exists', () => {
   assert.equal(routeModel('claude-cli:sonnet', {}), 'claude-cli:sonnet');
   assert.throws(() => routeModel('gemini-3.5-flash', {}), new RegExp(NO_KEY_MESSAGE.slice(0, 18)));
   assert.equal(resolveVisionCaller('gemini-3.5-flash', { OPENROUTER_API_KEY: 'k' }).provider, 'openrouter');
+});
+
+test('asClaim turns a forbidden move into a statement that is true when obeyed', () => {
+  assert.equal(asClaim('Gradient backgrounds'), 'The poster does not use this: Gradient backgrounds.');
+  assert.equal(asClaim('Drop shadows.'), 'The poster does not use this: Drop shadows.');
+});
+
+test('the prompt forbids printed color codes and a framed sheet', () => {
+  const p = buildPosterPrompt(base);
+  assert.match(p, /Never print a color code/);
+  assert.match(p, /runs to all four edges/);
+  assert.match(p, /only text on the poster/);
 });

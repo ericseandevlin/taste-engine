@@ -1,0 +1,91 @@
+{
+  "slug": "monolith-grid-001",
+  "board": "demo",
+  "mode": "monolith-grid",
+  "modeName": "Monolith Grid",
+  "copy": [
+    "Open Studio",
+    "20 Nov 2026",
+    "Doors 7pm"
+  ],
+  "model": "gemini-3.1-flash-image",
+  "judge": "gemini-3.5-flash",
+  "made": "2026-11-12T17:27:17.283Z",
+  "best": "round-1.png",
+  "rounds": [
+    {
+      "round": 1,
+      "file": "round-1.png",
+      "passed": 13,
+      "total": 13,
+      "checked": true,
+      "results": [
+        {
+          "rule": "The poster does not use this: Decorative or display typefaces.",
+          "pass": true,
+          "reason": "The poster uses clean, standard sans-serif and monospaced typefaces without any decorative elements."
+        },
+        {
+          "rule": "The poster does not use this: Asymmetric blob layouts.",
+          "pass": true,
+          "reason": "The layout is structured strictly within a rectangular grid with no organic or blob-like shapes."
+        },
+        {
+          "rule": "The poster does not use this: High-saturation color fields.",
+          "pass": true,
+          "reason": "The design uses flat, neutral cream, white, and black colors with no large high-saturation color fields."
+        },
+        {
+          "rule": "The poster does not use this: Overlapping or collaged elements.",
+          "pass": true,
+          "reason": "All text and grid elements are neatly separated within their own cells and do not overlap."
+        },
+        {
+          "rule": "The poster does not use this: Gradient backgrounds.",
+          "pass": true,
+          "reason": "The backgrounds in the grid compartments are solid cream and white colors without gradients."
+        },
+        {
+          "rule": "The poster does not use this: Centered hero compositions.",
+          "pass": true,
+          "reason": "The layout uses an asymmetrical, block-based grid structure rather than a centered hero layout."
+        },
+        {
+          "rule": "The poster does not use this: Multiple competing headlines.",
+          "pass": true,
+          "reason": "There is only one main headline ('Open Studio') on the poster."
+        },
+        {
+          "rule": "The poster does not use this: Busy grid of content modules.",
+          "pass": true,
+          "reason": "The grid structure is minimal and spacious, leaving several large modules entirely blank."
+        },
+        {
+          "rule": "The poster does not use this: High-density navigation bars.",
+          "pass": true,
+          "reason": "There are no navigation bars or high-density link structures present."
+        },
+        {
+          "rule": "The poster does not use this: Decorative background textures.",
+          "pass": true,
+          "reason": "The backgrounds are completely solid and free of any textures or patterns."
+        },
+        {
+          "rule": "The poster does not use this: Photography as hero.",
+          "pass": true,
+          "reason": "No photographic imagery is used anywhere on the poster."
+        },
+        {
+          "rule": "The poster does not use this: Rainbow or multi-hue palettes.",
+          "pass": true,
+          "reason": "The poster relies on a limited palette of black, white, cream, and a single red line accent."
+        },
+        {
+          "rule": "The copy is rendered exactly as given: every word spelled correctly, nothing added, nothing missing.",
+          "pass": true,
+          "reason": "The poster displays exactly the words 'Open Studio', '20 Nov 2026', and 'Doors 7pm' without additions or errors."
+        }
+      ]
+    }
+  ]
+}

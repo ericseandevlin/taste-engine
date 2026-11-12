@@ -54,7 +54,7 @@ export function renderResult({ board, manifest, brief, posters }) {
           ? `<div class="rounds">${p.rounds.map((r) => `<a href="posters/${esc(p.slug)}/${esc(r.file)}" title="Round ${r.round}: ${r.passed}/${r.total}"><img src="posters/${esc(p.slug)}/${esc(r.file)}" alt="Round ${r.round}"></a>`).join('')}</div>`
           : '';
         const trail = p.rounds.map((r) => (r.checked ? `round ${r.round}: ${r.passed}/${r.total}` : `round ${r.round}: not checked`)).join(' &rarr; ');
-        const checks = best.results.map((c) => `<li><span class="v ${c.pass ? 'pass' : 'fail'}">${c.pass ? 'PASS' : 'FAIL'}</span> ${esc(c.rule)}<br><span class="mute">${esc(c.reason)}</span></li>`).join('');
+        const checks = best.results.map((c) => `<li><span class="v ${c.pass ? 'pass' : 'fail'}">${c.pass ? 'PASS' : 'FAIL'}</span> ${esc(c.rule.replace(/^The poster does not use this: /, 'No: '))}<br><span class="mute">${esc(c.reason)}</span></li>`).join('');
         return `<div class="poster"><div><a href="posters/${esc(p.slug)}/${esc(best.file)}"><img src="posters/${esc(p.slug)}/${esc(best.file)}" alt="${esc(p.copy.join(', '))}"></a>${thumbs}</div>
 <div><h3>${esc(p.modeName)}</h3><p class="mute">${esc(p.copy.join(' | '))}<br>${trail}</p><ul class="checks">${checks}</ul></div></div>`;
       }).join('\n')

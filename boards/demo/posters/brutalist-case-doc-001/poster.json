@@ -1,0 +1,165 @@
+{
+  "slug": "brutalist-case-doc-001",
+  "board": "demo",
+  "mode": "brutalist-case-doc",
+  "modeName": "Brutalist Case Doc",
+  "copy": [
+    "Open Studio",
+    "20 Nov 2026",
+    "Doors 7pm"
+  ],
+  "model": "gemini-3.1-flash-image",
+  "judge": "gemini-3.5-flash",
+  "made": "2026-11-12T17:28:11.035Z",
+  "best": "round-2.png",
+  "rounds": [
+    {
+      "round": 1,
+      "file": "round-1.png",
+      "passed": 11,
+      "total": 13,
+      "checked": true,
+      "results": [
+        {
+          "rule": "The poster does not use this: Expressive or decorative typefaces.",
+          "pass": true,
+          "reason": "The poster uses clean, standard sans-serif typefaces rather than expressive or decorative ones."
+        },
+        {
+          "rule": "The poster does not use this: Atmospheric background treatments.",
+          "pass": true,
+          "reason": "The poster features a solid, plain light-gray background with no atmospheric treatments."
+        },
+        {
+          "rule": "The poster does not use this: 3D or sculptural elements.",
+          "pass": true,
+          "reason": "Only flat 2D text, shapes, and photographs are used in the poster's design."
+        },
+        {
+          "rule": "The poster does not use this: High-chroma color fields.",
+          "pass": true,
+          "reason": "The color scheme is almost entirely black and white, lacking any large high-chroma color fields."
+        },
+        {
+          "rule": "The poster does not use this: Collaged or overlapping layouts.",
+          "pass": true,
+          "reason": "All layout elements are arranged in a neat grid with clear separation and do not overlap."
+        },
+        {
+          "rule": "The poster does not use this: Ambient or looping motion.",
+          "pass": true,
+          "reason": "The poster is a completely static, non-animated image."
+        },
+        {
+          "rule": "The poster does not use this: Soft or warm palettes.",
+          "pass": true,
+          "reason": "The poster uses a high-contrast black-and-white palette rather than soft or warm colors."
+        },
+        {
+          "rule": "The poster does not use this: Serif typefaces.",
+          "pass": true,
+          "reason": "All visible text on the poster is rendered in sans-serif typefaces."
+        },
+        {
+          "rule": "The poster does not use this: Gradients of any kind.",
+          "pass": true,
+          "reason": "There are no digital color gradients used in any of the graphic layout elements."
+        },
+        {
+          "rule": "The poster does not use this: Rounded corners or soft UI.",
+          "pass": true,
+          "reason": "All layout frames, shapes, and borders have sharp 90-degree corners."
+        },
+        {
+          "rule": "The poster does not use this: Multi-column editorial grids.",
+          "pass": false,
+          "reason": "The poster incorporates a multi-column editorial layout for the small text on the right and the image arrangement."
+        },
+        {
+          "rule": "The poster does not use this: Smooth eased transitions.",
+          "pass": true,
+          "reason": "As a static image, the poster does not feature any motion-based eased transitions."
+        },
+        {
+          "rule": "The copy is rendered exactly as given: every word spelled correctly, nothing added, nothing missing.",
+          "pass": false,
+          "reason": "Additional text and numbers such as '-pa' and '126' have been added to the layout."
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "file": "round-2.png",
+      "passed": 13,
+      "total": 13,
+      "checked": true,
+      "results": [
+        {
+          "rule": "The poster does not use this: Expressive or decorative typefaces.",
+          "pass": true,
+          "reason": "The typography consists of a clean, standard condensed sans-serif font without decorative details."
+        },
+        {
+          "rule": "The poster does not use this: Atmospheric background treatments.",
+          "pass": true,
+          "reason": "The background is a flat, solid white with a solid black outer border."
+        },
+        {
+          "rule": "The poster does not use this: 3D or sculptural elements.",
+          "pass": true,
+          "reason": "The poster is entirely flat and composed of 2D text and photographic elements."
+        },
+        {
+          "rule": "The poster does not use this: High-chroma color fields.",
+          "pass": true,
+          "reason": "The color palette is strictly high-contrast black and white with no large areas of high-chroma color."
+        },
+        {
+          "rule": "The poster does not use this: Collaged or overlapping layouts.",
+          "pass": true,
+          "reason": "The images and text blocks are organized in a clean, non-overlapping grid layout."
+        },
+        {
+          "rule": "The poster does not use this: Ambient or looping motion.",
+          "pass": true,
+          "reason": "The image is a static print-style poster design."
+        },
+        {
+          "rule": "The poster does not use this: Soft or warm palettes.",
+          "pass": true,
+          "reason": "The poster uses a cold, high-contrast black and white color scheme."
+        },
+        {
+          "rule": "The poster does not use this: Serif typefaces.",
+          "pass": true,
+          "reason": "The main copy is set in a bold, condensed sans-serif typeface."
+        },
+        {
+          "rule": "The poster does not use this: Gradients of any kind.",
+          "pass": true,
+          "reason": "All graphic shapes, text, and background areas are solid and flat without gradients."
+        },
+        {
+          "rule": "The poster does not use this: Rounded corners or soft UI.",
+          "pass": true,
+          "reason": "All design elements, image boxes, and borders feature sharp, hard-angled corners."
+        },
+        {
+          "rule": "The poster does not use this: Multi-column editorial grids.",
+          "pass": true,
+          "reason": "The copy is aligned in a single centered vertical column rather than an editorial multi-column layout."
+        },
+        {
+          "rule": "The poster does not use this: Smooth eased transitions.",
+          "pass": true,
+          "reason": "The poster is a static image with no motion or animated transitions."
+        },
+        {
+          "rule": "The copy is rendered exactly as given: every word spelled correctly, nothing added, nothing missing.",
+          "pass": true,
+          "reason": "The text reads exactly 'Open Studio', '20 Nov 2026', and 'Doors 7pm' without any additions or omissions."
+        }
+      ]
+    }
+  ]
+}

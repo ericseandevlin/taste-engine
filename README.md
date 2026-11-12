@@ -18,7 +18,7 @@ npm run taste            # runs the bundled demo board
 
 Open `boards/demo/result.html`. That page is the whole run: the board, the measured palette, the rule sheet, and each poster with a PASS or FAIL per rule.
 
-No key yet? The demo board ships with its rule sheet already made, so `boards/demo/result.html` opens as it is.
+No key yet? The demo board ships with a finished run, so `boards/demo/result.html` opens as it is.
 
 ## Your own board
 
@@ -83,7 +83,7 @@ npm run result -- --board myboard                      # rebuild the page
 
 Text and vision steps use `gemini-3.5-flash`. Every image comes from one module, `src/image-agent.mjs`, and one model: `gemini-3.1-flash-image` (Nano Banana 2). With a Gemini key the calls go to Google. With only an OpenRouter key the same models run through OpenRouter. `--model` changes the text and vision model for a run.
 
-A run on a small board costs cents.
+One poster with its check and one repair round cost about $0.10 on OpenRouter in November 2026.
 
 ## What the check is and is not
 
