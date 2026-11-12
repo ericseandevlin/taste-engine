@@ -1,7 +1,7 @@
 {
   "name": "taste-engine",
   "version": "0.1.0",
-  "description": "Teach an AI your creative taste from a board of references. Extracts an inspectable taste thesis (with forbidden moves), not vague vibes, then generates and self-critiques against it.",
+  "description": "Drop in a folder of reference images. Get a rule sheet you can edit, and a poster that obeys it.",
   "type": "module",
   "license": "MIT",
   "author": "Eric Devlin",
@@ -15,33 +15,20 @@
     "design",
     "taste",
     "moodboard",
-    "claude",
-    "anthropic",
     "creative-direction",
-    "vision"
+    "vision",
+    "gemini",
+    "poster"
   ],
   "engines": {
     "node": ">=20"
   },
   "scripts": {
     "test": "node --test src/*.test.mjs",
-    "import": "node src/import.mjs",
-    "link": "node src/link.mjs",
-    "measure": "node src/measure.mjs",
-    "tag": "node src/tag.mjs",
-    "cluster": "node src/cluster.mjs",
-    "directions": "node src/directions.mjs",
-    "thesis": "node src/thesis.mjs",
-    "atlas": "node src/atlas.mjs",
-    "fingerprint": "node src/fingerprint.mjs",
-    "generate": "node src/generate.mjs",
-    "score": "node src/score.mjs",
-    "validate": "node src/validate.mjs",
-    "calibrate": "node src/calibrate.mjs",
-    "capture": "node scripts/capture.mjs",
-    "critique": "node src/critique.mjs",
-    "pipeline": "node scripts/run-pipeline.mjs",
-    "status": "node src/status.mjs"
+    "taste": "node scripts/taste.mjs",
+    "brief": "node src/brief.mjs",
+    "poster": "node src/poster.mjs",
+    "result": "node src/result.mjs"
   },
   "dependencies": {
     "sharp": "^0.33.0"

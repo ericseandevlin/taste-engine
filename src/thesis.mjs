@@ -12,6 +12,7 @@
 //   node thesis.mjs
 //   node thesis.mjs --board website --model claude-sonnet-4-6
 
+import { runMain } from './run.mjs';
 import { join } from 'path';
 import { fileURLToPath } from 'url';
 import { writeFileSync } from 'fs';
@@ -180,4 +181,4 @@ async function main() {
   console.log(`[thesis] wrote ${outPath} (${channels.length} channels, em-dash-clean)`);
 }
 
-if (process.argv[1] === fileURLToPath(import.meta.url)) main();
+if (process.argv[1] === fileURLToPath(import.meta.url)) runMain(main);

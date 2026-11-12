@@ -27,6 +27,7 @@
 //
 // Usage: npm run calibrate [-- --board-root boards/validation-t1 --votes 3]
 
+import { runMain } from './run.mjs';
 import { writeFileSync } from 'fs';
 import { basename, join, relative } from 'path';
 import { fileURLToPath } from 'url';
@@ -237,4 +238,4 @@ async function main() {
   console.log(`  -> ${outPath}`);
 }
 
-if (process.argv[1] === fileURLToPath(import.meta.url)) main();
+if (process.argv[1] === fileURLToPath(import.meta.url)) runMain(main);

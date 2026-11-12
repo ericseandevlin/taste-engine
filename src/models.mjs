@@ -23,6 +23,24 @@ const ANTHROPIC_VERSION = '2023-06-01';
 const GEMINI_ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models';
 const OPENROUTER_ENDPOINT = 'https://openrouter.ai/api/v1/chat/completions';
 
+export const NO_KEY_MESSAGE =
+  'No model key found. Copy .env.example to .env and set GEMINI_API_KEY or OPENROUTER_API_KEY. ' +
+  'The demo board ships finished: open boards/demo/result.html to see a run without a key.';
+
+// Route a model name to the provider the user has a key for. Stage defaults are
+// plain Gemini names. With no Gemini key but an OpenRouter key, the same model
+// runs through OpenRouter as google/<name>. An explicit vendor/model, claude-*
+// or claude-cli:* name is left alone.
+export function routeModel(model, env) {
+  if (/^claude-cli:/.test(model) || model.includes('/') || model.startsWith('claude-')) return model;
+  if (model.startsWith('gemini-')) {
+    if (env.GEMINI_API_KEY) return model;
+    if (env.OPENROUTER_API_KEY) return `google/${model}`;
+    throw new Error(NO_KEY_MESSAGE);
+  }
+  return model;
+}
+
 function textOfAnthropic(json) {
   return (json.content || []).map((c) => c.text || '').join('');
 }
@@ -58,7 +76,7 @@ export function makeAnthropicTextCaller(model, apiKey) {
 }
 
 // Make a Gemini generateContent text caller. Text-only callers; the image
-// caller used by the poster path lives in generate-poster.mjs.
+// caller lives in image-agent.mjs.
 export function makeGeminiTextCaller(model, apiKey) {
   return async ({ system, prompt, maxTokens = 2000 }) => {
     const url = `${GEMINI_ENDPOINT}/${model}:generateContent?key=${apiKey}`;
@@ -157,6 +175,43 @@ export function makeGeminiMultiImageCaller(model, apiKey) {
     }
     return textOfGemini(await res.json());
   };
+}
+
+// OpenRouter vision: images go in as data URLs on the chat-completions format.
+async function openRouterChat(model, apiKey, content, maxTokens, extra = {}) {
+  const res = await fetch(OPENROUTER_ENDPOINT, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      'Content-Type': 'application/json',
+      'HTTP-Referer': 'https://github.com/ericseandevlin/taste-engine',
+      'X-Title': 'taste-engine',
+    },
+    body: JSON.stringify({ model, max_tokens: maxTokens, messages: [{ role: 'user', content }], ...extra }),
+  });
+  if (!res.ok) throw new Error(`openrouter ${res.status}: ${(await res.text()).slice(0, 400)}`);
+  return res.json();
+}
+
+const asImagePart = (data, mediaType) => ({ type: 'image_url', image_url: { url: `data:${mediaType};base64,${data}` } });
+
+export function makeOpenRouterVisionCaller(model, apiKey) {
+  return async ({ image, mediaType, prompt, maxTokens = 600 }) =>
+    textOfOpenRouter(
+      await openRouterChat(model, apiKey, [asImagePart(image, mediaType), { type: 'text', text: prompt }], maxTokens),
+    );
+}
+
+export function makeOpenRouterMultiImageCaller(model, apiKey) {
+  return async ({ images, prompt, maxTokens = 1500 }) =>
+    textOfOpenRouter(
+      await openRouterChat(
+        model,
+        apiKey,
+        [...images.map((i) => asImagePart(i.data, i.mediaType)), { type: 'text', text: prompt }],
+        maxTokens,
+      ),
+    );
 }
 
 // Make an Anthropic vision caller (backward compat).
@@ -285,6 +340,7 @@ export function makeClaudeCliMultiImageCaller(alias) {
 // Resolve a single-image vision caller for a model name.
 // Returns { caller, provider } — same pattern as resolveTextCaller.
 export function resolveVisionCaller(model, env) {
+  model = routeModel(model, env);
   const cliAlias = parseCliModel(model);
   if (cliAlias) return { caller: makeClaudeCliVisionCaller(cliAlias), provider: 'claude-cli' };
   if (model.startsWith('claude-')) {
@@ -301,6 +357,10 @@ export function resolveVisionCaller(model, env) {
     }
     return { caller: makeGeminiVisionCaller(model, env.GEMINI_API_KEY), provider: 'gemini' };
   }
+  if (model.includes('/')) {
+    if (!env.OPENROUTER_API_KEY) throw new Error(`OpenRouter model "${model}" needs OPENROUTER_API_KEY (.env).`);
+    return { caller: makeOpenRouterVisionCaller(model, env.OPENROUTER_API_KEY), provider: 'openrouter' };
+  }
   throw new Error(
     `Vision model "${model}" not supported. Use a gemini-* (Google) or claude-* (Anthropic) model.`,
   );
@@ -308,6 +368,7 @@ export function resolveVisionCaller(model, env) {
 
 // Resolve a multi-image vision caller. Same pattern, broader interface.
 export function resolveMultiImageCaller(model, env) {
+  model = routeModel(model, env);
   const cliAlias = parseCliModel(model);
   if (cliAlias) return { caller: makeClaudeCliMultiImageCaller(cliAlias), provider: 'claude-cli' };
   if (model.startsWith('claude-')) {
@@ -324,6 +385,10 @@ export function resolveMultiImageCaller(model, env) {
     }
     return { caller: makeGeminiMultiImageCaller(model, env.GEMINI_API_KEY), provider: 'gemini' };
   }
+  if (model.includes('/')) {
+    if (!env.OPENROUTER_API_KEY) throw new Error(`OpenRouter model "${model}" needs OPENROUTER_API_KEY (.env).`);
+    return { caller: makeOpenRouterMultiImageCaller(model, env.OPENROUTER_API_KEY), provider: 'openrouter' };
+  }
   throw new Error(
     `Multi-image model "${model}" not supported. Use a gemini-* (Google) or claude-* (Anthropic) model.`,
   );
@@ -332,6 +397,7 @@ export function resolveMultiImageCaller(model, env) {
 // Pick a text caller for a model name + env. Throws with a helpful message
 // when no provider is configured for the model. Exported pure for tests.
 export function resolveTextCaller(model, env) {
+  model = routeModel(model, env);
   const cliAlias = parseCliModel(model);
   if (cliAlias) return { caller: makeClaudeCliTextCaller(cliAlias), provider: 'claude-cli' };
   if (model.startsWith('claude-')) {

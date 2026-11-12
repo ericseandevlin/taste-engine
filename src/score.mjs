@@ -17,6 +17,7 @@
 //   node score.mjs --shots path.png --channels swiss-index,mono-meta
 //   node score.mjs --slug <slug> --direction monolith-grid --scope board
 
+import { runMain } from './run.mjs';
 import { existsSync, mkdirSync, readdirSync, writeFileSync } from 'fs';
 import { tmpdir } from 'os';
 import { basename, dirname, extname, join } from 'path';
@@ -371,4 +372,4 @@ async function main() {
   console.log(`  -> ${scorePath}`);
 }
 
-if (process.argv[1] === fileURLToPath(import.meta.url)) main();
+if (process.argv[1] === fileURLToPath(import.meta.url)) runMain(main);

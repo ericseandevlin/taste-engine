@@ -16,6 +16,7 @@
 //   node fingerprint.mjs
 //   node fingerprint.mjs --board demo --exclude w004
 
+import { runMain } from './run.mjs';
 import { existsSync, mkdirSync, readdirSync } from 'fs';
 import { createHash } from 'crypto';
 import { join } from 'path';
@@ -105,4 +106,4 @@ async function main() {
   console.log(`[fingerprint] v${version} (${source.items} refs, ${Object.keys(fp.axes).length} axes) -> ${outPath}`);
 }
 
-if (process.argv[1] === fileURLToPath(import.meta.url)) main();
+if (process.argv[1] === fileURLToPath(import.meta.url)) runMain(main);

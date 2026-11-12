@@ -11,6 +11,7 @@
 //   node link.mjs
 //   node link.mjs --board demo
 
+import { runMain } from './run.mjs';
 import { join } from 'path';
 import { fileURLToPath } from 'url';
 import { getBoard } from './config.mjs';
@@ -71,4 +72,4 @@ function main() {
   if (unmatched.length) console.warn(`[link] unmatched files (no sites.json entry): ${unmatched.join(', ')}`);
 }
 
-if (process.argv[1] === fileURLToPath(import.meta.url)) main();
+if (process.argv[1] === fileURLToPath(import.meta.url)) runMain(main);

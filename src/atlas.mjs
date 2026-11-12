@@ -8,6 +8,7 @@
 //   node atlas.mjs
 //   node atlas.mjs --board demo
 
+import { runMain } from './run.mjs';
 import { mkdirSync, writeFileSync } from 'fs';
 import { join, relative } from 'path';
 import { fileURLToPath } from 'url';
@@ -127,4 +128,4 @@ function main() {
   console.log(`[atlas] ${manifest.items.length} items, ${channelsDoc.channels.length} channels -> ${outPath}`);
 }
 
-if (process.argv[1] === fileURLToPath(import.meta.url)) main();
+if (process.argv[1] === fileURLToPath(import.meta.url)) runMain(main);

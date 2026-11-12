@@ -49,6 +49,7 @@
 // boards/validation-t1/report.json. Exits nonzero when a build gate fails
 // (the build is not done), which still carries zero evidential weight.
 
+import { runMain } from './run.mjs';
 import { mkdirSync, writeFileSync } from 'fs';
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
@@ -631,4 +632,4 @@ function main() {
   }
 }
 
-if (process.argv[1] === fileURLToPath(import.meta.url)) main();
+if (process.argv[1] === fileURLToPath(import.meta.url)) runMain(main);

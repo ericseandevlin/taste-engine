@@ -11,6 +11,7 @@
 //   node critique.mjs --slug <id>-001                      # finds desktop.png + mobile.png in the slug dir
 //   node critique.mjs --direction <id> --shots a.png,b.png # or pass shot paths explicitly
 
+import { runMain } from './run.mjs';
 import { readFileSync, existsSync } from 'fs';
 import { join } from 'path';
 import { fileURLToPath } from 'url';
@@ -128,4 +129,4 @@ async function main() {
   for (const r of rules) console.log(`  - ${r}`);
 }
 
-if (process.argv[1] === fileURLToPath(import.meta.url)) main();
+if (process.argv[1] === fileURLToPath(import.meta.url)) runMain(main);

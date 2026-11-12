@@ -15,6 +15,7 @@
 //   node directions.mjs
 //   node directions.mjs --board demo --count 4
 
+import { runMain } from './run.mjs';
 import { join } from 'path';
 import { fileURLToPath } from 'url';
 import { getBoard, MODELS, loadEnv } from './config.mjs';
@@ -179,4 +180,4 @@ async function main() {
   for (const d of list) console.log(`  ${d.id} (${d.channels.join(' + ')}): ${d.name}`);
 }
 
-if (process.argv[1] === fileURLToPath(import.meta.url)) main();
+if (process.argv[1] === fileURLToPath(import.meta.url)) runMain(main);

@@ -17,3 +17,9 @@ boards/*/generated/**/*.png
 /boards/gothic-heraldry
 # Scratch board the demo gallery was built from (re-creatable from boards/demo)
 /boards/gallery-run
+
+# Posters and the result page are outputs of a run. Keep the demo's; ignore the rest.
+boards/*/posters/
+boards/*/result.html
+!boards/demo/posters/
+!boards/demo/result.html

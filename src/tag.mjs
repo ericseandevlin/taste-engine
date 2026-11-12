@@ -12,6 +12,7 @@
 //   node tag.mjs
 //   node tag.mjs --board website --force --concurrency 4
 
+import { runMain } from './run.mjs';
 import { join } from 'path';
 import { fileURLToPath } from 'url';
 import sharp from 'sharp';
@@ -137,8 +138,6 @@ async function pool(items, size, worker) {
 async function main() {
   const args = parseArgs(process.argv.slice(2));
   loadEnv();
-  const { caller: callModel, provider } = resolveVisionCaller(args.model, process.env);
-
   const board = getBoard(args.board);
   const manifestPath = join(board.absDir, 'manifest.json');
   const manifest = readManifest(manifestPath);
@@ -146,6 +145,11 @@ async function main() {
 
   let todo = manifest.items.filter((it) => args.force || !it.tags?.length);
   if (args.limit > 0) todo = todo.slice(0, args.limit);
+  if (!todo.length) {
+    console.log(`[tag] board=${board.name} nothing to tag (${manifest.items.length} done). Use --force to redo.`);
+    return;
+  }
+  const { caller: callModel, provider } = resolveVisionCaller(args.model, process.env);
   console.log(
     `[tag] board=${board.name} model=${args.model} (${provider}) to-tag=${todo.length} (skip ${manifest.items.length - todo.length})`,
   );
@@ -176,6 +180,9 @@ async function main() {
 
   writeManifest(manifestPath, manifest, { stamp: new Date().toISOString() });
   console.log(`[tag] done=${done} failed=${failed} -> ${manifestPath}`);
+  // A reference with no tags gives the next stages nothing to work from. Stop
+  // here; tagged references are saved, so the next run only retries the rest.
+  if (failed) throw new Error(`${failed} of ${todo.length} references could not be read. Run the same command again to retry them.`);
 }
 
-if (process.argv[1] === fileURLToPath(import.meta.url)) main();
+if (process.argv[1] === fileURLToPath(import.meta.url)) runMain(main);

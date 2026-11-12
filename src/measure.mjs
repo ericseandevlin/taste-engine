@@ -12,6 +12,7 @@
 //   node measure.mjs
 //   node measure.mjs --board website --force
 
+import { runMain } from './run.mjs';
 import { existsSync } from 'fs';
 import { join } from 'path';
 import { fileURLToPath } from 'url';
@@ -211,4 +212,4 @@ async function main() {
   );
 }
 
-if (process.argv[1] === fileURLToPath(import.meta.url)) main();
+if (process.argv[1] === fileURLToPath(import.meta.url)) runMain(main);

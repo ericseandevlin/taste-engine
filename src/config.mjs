@@ -25,17 +25,20 @@ export function loadEnv() {
       if (m && !process.env[m[1]]) process.env[m[1]] = m[2].trim();
     }
   }
+  // Google's own tools call the same key GOOGLE_API_KEY. Accept either name.
+  if (!process.env.GEMINI_API_KEY && process.env.GOOGLE_API_KEY) process.env.GEMINI_API_KEY = process.env.GOOGLE_API_KEY;
 }
 
 // --- Model routing by stage (overridable per-script via --model) ---
 export const MODELS = {
-  tag: 'gemini-3.1-flash-image', // high-volume per-image vision
+  tag: 'gemini-3.5-flash', // per-image vision read
   cluster: 'gemini-3.5-flash', // analysis
   directions: 'gemini-3.5-flash', // deriving candidate directions from channels
   thesis: 'gemini-3.5-flash', // writing
-  generate: 'gemini-3.1-flash-image', // poster generation
-  critique: 'gemini-3.1-flash-image', // multi-image vision
-  score: 'gemini-3.1-flash-image', // re-tag pass on generated output (same tier as tag)
+  generate: 'gemini-3.5-flash', // HTML page generation (experimental surface)
+  critique: 'gemini-3.5-flash', // multi-image vision
+  score: 'gemini-3.5-flash', // re-tag pass on generated output (same model as tag)
+  image: 'gemini-3.1-flash-image', // the image agent: every generated image comes from this model
 };
 
 // --- Kind registry: a kind selects the measure strategy + tag rubric ---
@@ -200,7 +203,7 @@ export const BOARDS = {
   };
 
 // --- Dependency graph: each stage's prerequisite output files ---
-// Used by status.mjs and by run-pipeline.mjs for flow control.
+// Each stage can ask what it still needs before it runs.
 const STAGE_DEPS = {
   import:       { files: [] },
   measure:      { files: ['manifest.json'] },
@@ -240,7 +243,11 @@ export function getBoard(name) {
     // enough. Registering in BOARDS is only needed for a different kind or path.
     const dir = join('boards', name);
     if (existsSync(join(REPO_ROOT, dir))) {
-      board = { kind: 'visual-ui', dir };
+      // An optional boards/<name>/board.json sets the kind: {"kind": "poster"}.
+      let kind = 'visual-ui';
+      const meta = join(REPO_ROOT, dir, 'board.json');
+      if (existsSync(meta)) kind = JSON.parse(readFileSync(meta, 'utf8')).kind || kind;
+      board = { kind, dir };
     } else {
       throw new Error(
         `Unknown board "${name}". Known boards: ${Object.keys(BOARDS).join(', ')}. ` +

@@ -9,6 +9,7 @@
 //   node generate.mjs                       # uses the board's first derived direction
 //   node generate.mjs --direction <id> --variants 2
 
+import { runMain } from './run.mjs';
 import { mkdirSync, writeFileSync, readdirSync, existsSync } from 'fs';
 import { join } from 'path';
 import { fileURLToPath } from 'url';
@@ -147,15 +148,7 @@ async function main() {
   const args = parseArgs(process.argv.slice(2));
   loadEnv();
 
-  // Resolve model provider from the environment. If no Anthropic key is set
-  // but a Gemini key is, fall back to a Gemini text model (planes ROADMAP v0.2:
-  // "OpenRouter-compatible model path" — any provider, not just Anthropic).
-  const env = { ANTHROPIC_API_KEY: process.env.ANTHROPIC_API_KEY, GEMINI_API_KEY: process.env.GEMINI_API_KEY, OPENROUTER_API_KEY: process.env.OPENROUTER_API_KEY };
-  let model = args.model;
-  if (model === MODELS.generate && !env.ANTHROPIC_API_KEY && env.GEMINI_API_KEY) {
-    model = 'gemini-3.5-flash'; // text model, verified available on the board's Gemini key
-  }
-  const { caller: call } = resolveTextCaller(model, env);
+  const { caller: call } = resolveTextCaller(args.model, process.env);
 
   // The complexity gate runs BEFORE anything is spent. A board fully specifies a
   // poster; it does not fully specify a website. When the request needs context
@@ -234,4 +227,4 @@ async function main() {
   }
 }
 
-if (process.argv[1] === fileURLToPath(import.meta.url)) main();
+if (process.argv[1] === fileURLToPath(import.meta.url)) runMain(main);

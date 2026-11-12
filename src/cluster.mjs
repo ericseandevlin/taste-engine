@@ -11,6 +11,7 @@
 //   node cluster.mjs
 //   node cluster.mjs --board website --model claude-sonnet-4-6
 
+import { runMain } from './run.mjs';
 import { join } from 'path';
 import { fileURLToPath } from 'url';
 import { getBoard, MODELS, loadEnv } from './config.mjs';
@@ -157,4 +158,4 @@ async function main() {
   for (const c of channels) console.log(`  ${c.id} (${c.members.length} members): ${c.name}`);
 }
 
-if (process.argv[1] === fileURLToPath(import.meta.url)) main();
+if (process.argv[1] === fileURLToPath(import.meta.url)) runMain(main);

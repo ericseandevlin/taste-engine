@@ -9,6 +9,7 @@
 //   node import.mjs --board website
 //   node import.mjs --dry-run        # report the diff, write nothing
 
+import { runMain } from './run.mjs';
 import { readdirSync, existsSync, readFileSync } from 'fs';
 import { join } from 'path';
 import { fileURLToPath } from 'url';
@@ -120,8 +121,10 @@ function main() {
     console.log('[import] --dry-run: no write');
     return;
   }
+  // Nothing new: leave the file alone, so a re-run makes no diff.
+  if (!added && !enriched && existsSync(manifestPath)) return;
   writeManifest(manifestPath, manifest, { stamp: new Date().toISOString() });
   console.log(`[import] wrote ${manifestPath}`);
 }
 
-if (process.argv[1] === fileURLToPath(import.meta.url)) main();
+if (process.argv[1] === fileURLToPath(import.meta.url)) runMain(main);
