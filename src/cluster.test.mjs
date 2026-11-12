@@ -4,6 +4,7 @@ import assert from 'node:assert/strict';
 import { emptyManifest, upsertItem } from './manifest.mjs';
 import {
   buildClusterInput,
+  buildClusterPrompt,
   parseClusterResponse,
   reconcileMembership,
 } from './cluster.mjs';
@@ -84,4 +85,13 @@ test('reconcileMembership writes back item.channels from membership', () => {
 
 test('malformed JSON throws', () => {
   assert.throws(() => parseClusterResponse('nope', IDS), /no JSON object/);
+});
+
+test('cluster prompt carries the behavior-not-brand hard rule', () => {
+  const m = emptyManifest('website', 'visual-ui');
+  upsertItem(m, { id: 'w001', title: 'Grafik', tags: ['dense-index'], channels: [], measured: { palette: [] } });
+  const p = buildClusterPrompt(buildClusterInput(m), ['seed-idea']);
+  assert.ok(p.includes('HARD RULE'));
+  assert.ok(p.includes('never a named style, movement, era, or brand'));
+  assert.ok(p.includes('display-layer metadata'));
 });

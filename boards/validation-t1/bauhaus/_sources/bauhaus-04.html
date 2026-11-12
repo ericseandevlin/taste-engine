@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Harrow Street Workshop: Evening Classes</title>
+<style>
+  :root{
+    --red:#E5231B;
+    --yellow:#FFD200;
+    --blue:#0047AB;
+    --black:#141414;
+    --paper:#F5F2E9;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{width:1440px;background:var(--black);}
+  body{
+    font-family:Futura, "Avenir Next", Avenir, sans-serif;
+    color:var(--paper);
+  }
+  .canvas{
+    position:relative;
+    width:1440px;
+    height:1000px;
+    background:var(--black);
+    overflow:hidden;
+  }
+  .bar{position:absolute;background:var(--red);}
+  .site-name{
+    position:absolute;
+    top:48px;
+    left:64px;
+    font-size:20px;
+    font-weight:700;
+    text-transform:lowercase;
+    letter-spacing:1px;
+    color:var(--paper);
+  }
+  .course-list{
+    position:absolute;
+    top:150px;
+    left:64px;
+    width:700px;
+    text-align:left;
+  }
+  .course{
+    margin-bottom:34px;
+  }
+  .course .name{
+    font-weight:700;
+    text-transform:lowercase;
+    color:var(--paper);
+  }
+  .course.big .name{color:var(--yellow);}
+  .course .logi{
+    font-size:14px;
+    color:#9a9a9a;
+    margin-top:4px;
+    text-transform:lowercase;
+  }
+  .course.big .name{font-size:64px;}
+  .course.mid .name{font-size:34px;}
+  .course.small .name{font-size:24px;}
+  .circle-red{
+    position:absolute;
+    top:80px;
+    left:1060px;
+    width:340px;
+    height:340px;
+    border-radius:50%;
+    background:var(--red);
+  }
+  .enroll-block{
+    position:absolute;
+    top:150px;
+    right:70px;
+    width:520px;
+    text-align:right;
+  }
+  .enroll-block .call{
+    font-size:130px;
+    font-weight:700;
+    line-height:0.85;
+    text-transform:uppercase;
+    letter-spacing:-2px;
+    color:var(--paper);
+  }
+  .enroll-block .call .dot{color:var(--yellow);}
+  .yellow-bar{
+    position:absolute;
+    background:var(--yellow);
+    width:460px;
+    height:26px;
+    top:430px;
+    right:70px;
+  }
+  .white-bar-diag{
+    position:absolute;
+    background:var(--paper);
+    width:460px;
+    height:26px;
+    top:480px;
+    right:200px;
+    transform:rotate(-20deg);
+    transform-origin:right center;
+  }
+  .square-white{
+    position:absolute;
+    top:540px;
+    left:64px;
+    width:120px;
+    height:120px;
+    background:var(--paper);
+  }
+  .triangle-blue{
+    position:absolute;
+    width:0;
+    height:0;
+    border-left:120px solid transparent;
+    border-right:120px solid transparent;
+    border-bottom:210px solid var(--blue);
+    top:720px;
+    left:1080px;
+  }
+  .cta{
+    position:absolute;
+    top:600px;
+    right:70px;
+    width:340px;
+    text-align:left;
+    padding:22px 24px;
+    background:var(--red);
+    color:#fff;
+  }
+  .cta .line1{
+    font-size:15px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+  }
+  .cta .line2{
+    font-size:26px;
+    font-weight:700;
+    margin-top:6px;
+  }
+  .supply{
+    position:absolute;
+    top:720px;
+    left:64px;
+    width:900px;
+    text-align:left;
+  }
+  .supply .heading{
+    font-size:16px;
+    text-transform:uppercase;
+    letter-spacing:2px;
+    font-weight:700;
+    margin-bottom:14px;
+    color:var(--yellow);
+  }
+  .supply-cols{
+    display:flex;
+    gap:80px;
+  }
+  .supply-cols ul{
+    list-style:none;
+    font-size:16px;
+    line-height:1.9;
+    color:var(--paper);
+  }
+</style>
+</head>
+<body>
+<div class="canvas">
+
+  <div class="bar" style="top:0; left:0; width:100%; height:14px;"></div>
+  <div class="site-name">harrow street workshop</div>
+
+  <div class="circle-red"></div>
+
+  <div class="course-list">
+    <div class="course big">
+      <div class="name">bookbinding</div>
+      <div class="logi">tuesdays, 6 sessions, starts sept 8, $180</div>
+    </div>
+    <div class="course mid">
+      <div class="name">screenprinting</div>
+      <div class="logi">thursdays, 5 sessions, starts sept 10, $150</div>
+    </div>
+    <div class="course small">
+      <div class="name">welding basics</div>
+      <div class="logi">saturdays, 4 sessions, starts sept 12, $210</div>
+    </div>
+  </div>
+
+  <div class="enroll-block">
+    <div class="call">enroll<br>now<span class="dot">.</span></div>
+  </div>
+
+  <div class="yellow-bar"></div>
+  <div class="white-bar-diag"></div>
+
+  <div class="square-white"></div>
+  <div class="triangle-blue"></div>
+
+  <div class="cta">
+    <div class="line1">Fall session</div>
+    <div class="line2">Seats open through August 30</div>
+  </div>
+
+  <div class="supply">
+    <div class="heading">what to bring</div>
+    <div class="supply-cols">
+      <ul>
+        <li>closed-toe shoes</li>
+        <li>an apron or old shirt</li>
+        <li>a notebook</li>
+      </ul>
+      <ul>
+        <li>safety glasses, welding class only</li>
+        <li>bone folder, bookbinding class only</li>
+        <li>a design to print, screenprinting class only</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

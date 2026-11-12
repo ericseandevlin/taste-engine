@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1440">
+<title>Grid &amp; Sign, Issue No. 14</title>
+<style>
+  :root {
+    --ink: #111111;
+    --grey: #6b6b6b;
+    --line: #d9d9d9;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    width: 1440px;
+    background: #cfcfcf;
+    color: var(--ink);
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page { width: 1440px; padding: 48px 64px 40px 64px; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: 24px;
+  }
+  .masthead {
+    grid-column: 2 / 8;
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .meta {
+    grid-column: 9 / 13;
+    font-size: 12px;
+    color: var(--grey);
+    line-height: 1.6;
+    text-align: left;
+  }
+  .rule-top { grid-column: 2 / 13; height: 1px; background: var(--ink); margin: 20px 0 0 0; }
+  .issue-num {
+    grid-column: 2 / 9;
+    font-size: 132px;
+    font-weight: 700;
+    line-height: 0.85;
+    letter-spacing: -0.02em;
+    text-transform: lowercase;
+    margin-top: 24px;
+  }
+  .issue-block {
+    grid-column: 9 / 13;
+    height: 660px;
+    background: var(--ink);
+    margin-top: 24px;
+  }
+  .issue-label {
+    grid-column: 9 / 13;
+    align-self: end;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--grey);
+    margin-top: 24px;
+  }
+  .issue-label strong { display: block; color: var(--ink); font-size: 15px; font-weight: 700; }
+  .rule { grid-column: 2 / 13; height: 1px; background: var(--ink); margin: 24px 0 0 0; }
+  .section-label {
+    grid-column: 2 / 13;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--grey);
+    margin: 20px 0 8px 0;
+  }
+  .toc { grid-column: 2 / 11; }
+  .row {
+    display: grid;
+    grid-template-columns: 60px 1fr 90px;
+    column-gap: 24px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+    align-items: baseline;
+  }
+  .row .num { font-size: 14px; color: var(--grey); }
+  .row .title { font-size: 18px; font-weight: 700; }
+  .row .byline { font-size: 12px; color: var(--grey); margin-top: 4px; }
+  .row .page { font-size: 14px; color: var(--grey); text-align: left; }
+  .colophon {
+    grid-column: 2 / 7;
+    font-size: 11px;
+    line-height: 1.7;
+    color: var(--grey);
+    margin-top: 24px;
+  }
+  .colophon .lead { color: var(--ink); font-weight: 700; font-size: 12px; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.08em; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="grid">
+    <div class="masthead">Grid &amp; Sign</div>
+    <div class="meta">
+      A quarterly journal of typographic<br>and identity design practice
+    </div>
+    <div class="rule-top"></div>
+
+    <div class="issue-num">no. 14</div>
+    <div class="issue-block"></div>
+    <div class="issue-label">
+      <strong>Winter</strong>
+      Eighty-eight pages<br>
+      Printed in an edition of 3,000
+    </div>
+
+    <div class="rule"></div>
+    <div class="section-label">Contents</div>
+
+    <div class="toc">
+      <div class="row">
+        <div class="num">01</div>
+        <div>
+          <div class="title">The Column as Argument</div>
+          <div class="byline">On the grid as a claim about objectivity, not just a layout tool</div>
+        </div>
+        <div class="page">p. 6</div>
+      </div>
+      <div class="row">
+        <div class="num">02</div>
+        <div>
+          <div class="title">Zurich After the Posters</div>
+          <div class="byline">Interview with three designers still working the modular armature</div>
+        </div>
+        <div class="page">p. 18</div>
+      </div>
+      <div class="row">
+        <div class="num">03</div>
+        <div>
+          <div class="title">What Survives the Scroll</div>
+          <div class="byline">A survey of print-grid systems ported to responsive web layout</div>
+        </div>
+        <div class="page">p. 34</div>
+      </div>
+      <div class="row">
+        <div class="num">04</div>
+        <div>
+          <div class="title">Identity Manuals as Literature</div>
+          <div class="byline">Reading corporate standards documents as a design genre</div>
+        </div>
+        <div class="page">p. 52</div>
+      </div>
+    </div>
+
+    <div class="colophon">
+      <div class="lead">Colophon</div>
+      Set entirely in a single neutral grotesque, printed on uncoated stock.
+      Editorial and design inquiries may be sent to the address on the
+      inside back cover. No unsolicited manuscripts, please query first.
+    </div>
+  </div>
+</div>
+</body>
+</html>

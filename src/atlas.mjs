@@ -8,6 +8,7 @@
 //   node atlas.mjs
 //   node atlas.mjs --board demo
 
+import { runMain } from './run.mjs';
 import { mkdirSync, writeFileSync } from 'fs';
 import { join, relative } from 'path';
 import { fileURLToPath } from 'url';
@@ -74,6 +75,7 @@ export function renderAtlas(manifest, channelsDoc, imgBase = '..') {
   h1 { font-size:28px; margin:0 0 4px; letter-spacing:-0.02em; }
   .sub { color:#8a8780; font-family:ui-monospace,monospace; font-size:12px; }
   h2 { font-size:12px; text-transform:uppercase; letter-spacing:0.12em; color:#8a8780; margin:32px 24px 12px; font-family:ui-monospace,monospace; }
+  .note { text-transform:none; letter-spacing:0; color:#55534e; }
   .channels { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:16px; padding:0 24px; }
   .channel { border:1px solid #232325; border-radius:10px; padding:16px; background:#141415; }
   .channel h3 { margin:0 0 10px; font-size:16px; display:flex; align-items:center; gap:8px; }
@@ -103,7 +105,7 @@ export function renderAtlas(manifest, channelsDoc, imgBase = '..') {
 </style></head>
 <body>
 <header><h1>Taste Atlas</h1><div class="sub">board: ${esc(manifest.board)} · ${items.length} items · ${channels.length} channels · generated ${esc(manifest.generated || '')}</div></header>
-<h2>DNA Channels</h2>
+<h2>DNA Channels <span class="note">· names are interpretive display labels, not measurements</span></h2>
 <div class="channels">${channels.map((c) => channelBlock(c, manifest, imgBase)).join('')}</div>
 <h2>Index — every item</h2>
 <div class="grid">${items.map((it) => card(it, imgBase)).join('')}</div>
@@ -126,4 +128,4 @@ function main() {
   console.log(`[atlas] ${manifest.items.length} items, ${channelsDoc.channels.length} channels -> ${outPath}`);
 }
 
-if (process.argv[1] === fileURLToPath(import.meta.url)) main();
+if (process.argv[1] === fileURLToPath(import.meta.url)) runMain(main);

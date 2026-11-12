@@ -1,0 +1,165 @@
+{
+  "slug": "warm-editorial-meta-001",
+  "board": "demo",
+  "mode": "warm-editorial-meta",
+  "modeName": "Warm Meta Editorial",
+  "copy": [
+    "Open Studio",
+    "20 Nov 2026",
+    "Doors 7pm"
+  ],
+  "model": "gemini-3.1-flash-image",
+  "judge": "gemini-3.5-flash",
+  "made": "2026-11-12T17:28:53.741Z",
+  "best": "round-2.png",
+  "rounds": [
+    {
+      "round": 1,
+      "file": "round-1.png",
+      "passed": 10,
+      "total": 13,
+      "checked": true,
+      "results": [
+        {
+          "rule": "The poster does not use this: Serif editorial typefaces.",
+          "pass": true,
+          "reason": "The poster uses a clean sans-serif typeface, not an editorial serif one."
+        },
+        {
+          "rule": "The poster does not use this: Warm or emotive color palettes.",
+          "pass": false,
+          "reason": "The poster features a warm cream background and light pink text accents."
+        },
+        {
+          "rule": "The poster does not use this: Photography as atmosphere.",
+          "pass": true,
+          "reason": "There are no photographic elements or atmospheric imagery in the poster."
+        },
+        {
+          "rule": "The poster does not use this: Organic or irregular shapes.",
+          "pass": true,
+          "reason": "The layout contains only text and simple registration lines without any organic shapes."
+        },
+        {
+          "rule": "The poster does not use this: Expressive motion or easing.",
+          "pass": true,
+          "reason": "The poster is a static graphic and contains no motion or animation."
+        },
+        {
+          "rule": "The poster does not use this: High-density decorative elements.",
+          "pass": true,
+          "reason": "The design is highly minimalist, featuring ample whitespace and very few elements."
+        },
+        {
+          "rule": "The poster does not use this: Cold white or dark backgrounds.",
+          "pass": true,
+          "reason": "The background color is a warm, soft cream-beige tone rather than cold white or black."
+        },
+        {
+          "rule": "The poster does not use this: High-chroma neon accents.",
+          "pass": true,
+          "reason": "The colors are muted and pastel, with no high-chroma neon accents."
+        },
+        {
+          "rule": "The poster does not use this: Dense information grids.",
+          "pass": true,
+          "reason": "The text is sparsely arranged with a large amount of empty space."
+        },
+        {
+          "rule": "The poster does not use this: Hard geometric shapes.",
+          "pass": true,
+          "reason": "No solid geometric shapes like circles, triangles, or squares are present."
+        },
+        {
+          "rule": "The poster does not use this: Bold sans-serif display type.",
+          "pass": false,
+          "reason": "The design prominently features bold sans-serif typefaces for the main text."
+        },
+        {
+          "rule": "The poster does not use this: Fast or bouncy motion.",
+          "pass": true,
+          "reason": "The poster is completely static and has no motion."
+        },
+        {
+          "rule": "The copy is rendered exactly as given: every word spelled correctly, nothing added, nothing missing.",
+          "pass": false,
+          "reason": "The poster contains extra text such as hex color codes and repeated lines not in the original copy."
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "file": "round-2.png",
+      "passed": 10,
+      "total": 13,
+      "checked": true,
+      "results": [
+        {
+          "rule": "The poster does not use this: Serif editorial typefaces.",
+          "pass": true,
+          "reason": "The poster uses a clean sans-serif typeface instead of a serif typeface."
+        },
+        {
+          "rule": "The poster does not use this: Warm or emotive color palettes.",
+          "pass": true,
+          "reason": "The poster has a minimalist, neutral cream and black color palette."
+        },
+        {
+          "rule": "The poster does not use this: Photography as atmosphere.",
+          "pass": true,
+          "reason": "There are no photographic elements on the poster."
+        },
+        {
+          "rule": "The poster does not use this: Organic or irregular shapes.",
+          "pass": true,
+          "reason": "The design consists of clean typographic and strict geometric forms with no organic shapes."
+        },
+        {
+          "rule": "The poster does not use this: Expressive motion or easing.",
+          "pass": true,
+          "reason": "This is a static image with no movement or animation."
+        },
+        {
+          "rule": "The poster does not use this: High-density decorative elements.",
+          "pass": true,
+          "reason": "The design is highly minimalist with very few graphical elements."
+        },
+        {
+          "rule": "The poster does not use this: Cold white or dark backgrounds.",
+          "pass": true,
+          "reason": "The background is a warm cream off-white color."
+        },
+        {
+          "rule": "The poster does not use this: High-chroma neon accents.",
+          "pass": true,
+          "reason": "The color scheme is strictly black and off-white with no neon colors."
+        },
+        {
+          "rule": "The poster does not use this: Dense information grids.",
+          "pass": true,
+          "reason": "The text is sparsely arranged with plenty of empty space."
+        },
+        {
+          "rule": "The poster does not use this: Hard geometric shapes.",
+          "pass": false,
+          "reason": "There is a prominent square with a diagonal cross on the right side."
+        },
+        {
+          "rule": "The poster does not use this: Bold sans-serif display type.",
+          "pass": false,
+          "reason": "The poster uses a large, prominent sans-serif typeface as its primary design element."
+        },
+        {
+          "rule": "The poster does not use this: Fast or bouncy motion.",
+          "pass": true,
+          "reason": "The image is a static printed poster."
+        },
+        {
+          "rule": "The copy is rendered exactly as given: every word spelled correctly, nothing added, nothing missing.",
+          "pass": false,
+          "reason": "An extra letter 'K' and symbol graphics have been added to the layout."
+        }
+      ]
+    }
+  ]
+}

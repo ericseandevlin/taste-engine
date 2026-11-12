@@ -1,7 +1,7 @@
 // score.test.mjs — run: node --test
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { buildRows, cropGeometry, fingerprintCandidates, majorityTags, resolveScope } from './score.mjs';
+import { assertFingerprintAxes, buildRows, cropGeometry, fingerprintCandidates, majorityTags, resolveScope } from './score.mjs';
 import { aggregateAxes, alignmentScore, buildFingerprint } from './features.mjs';
 
 const directionsDoc = {
@@ -67,6 +67,7 @@ function fixtureFingerprint() {
       w: 1440, h: 1200, aspect: 1.2,
       palette: [{ hex, pct: 85 }, { hex: '#ff3300', pct: 15 }],
       contrast, density: 0.02,
+      accentCoverage: 0.15, accentHueCount: 1,
     },
     tags,
     channels,
@@ -85,24 +86,32 @@ function fixtureFingerprint() {
   });
 }
 
-test('buildRows: seven axes with weight = salience x confidence', () => {
+test('buildRows: eight axes with weight = salience x confidence', () => {
   const fp = fixtureFingerprint();
   const output = {
     contrast: 0.1,
     density: 0.02,
     chroma: 0.05,
     groundLightness: 0.98,
-    accentCount: 1,
+    accentCoverage: 0.15,
+    accentHueCount: 1,
     palette: [{ hex: '#ffffff', pct: 90 }, { hex: '#ff3300', pct: 10 }],
     tags: ['swiss-index', 'mono-meta'],
   };
   const rows = buildRows(output, fp.axes);
-  assert.equal(rows.length, 7);
+  assert.equal(rows.length, 8);
   for (const r of rows) {
     assert.ok(Math.abs(r.weight - +(r.salience * r.confidence).toFixed(4)) < 0.001);
   }
   const tagRow = rows.find((r) => r.id === 'tags');
   assert.ok(Array.isArray(tagRow.detail.missing));
+});
+
+test('schema guard: a pre-v2 fingerprint fails with re-run instructions, a v2 one passes', () => {
+  const fp = fixtureFingerprint();
+  assert.doesNotThrow(() => assertFingerprintAxes(fp));
+  const legacy = { axes: { contrast: {}, density: {}, chroma: {}, groundLightness: {}, accentCount: {}, palette: {}, tags: {} } };
+  assert.throws(() => assertFingerprintAxes(legacy), /predates the v2 axis set/);
 });
 
 test('an on-scope output scores closer under the direction scope than an off-scope one', () => {
@@ -115,7 +124,8 @@ test('an on-scope output scores closer under the direction scope than an off-sco
     density: 0.02,
     chroma: 0.15,
     groundLightness: 1,
-    accentCount: 1,
+    accentCoverage: 0.15,
+    accentHueCount: 1,
     palette: [{ hex: '#ffffff', pct: 85 }, { hex: '#ff3300', pct: 15 }],
     tags: ['swiss-index', 'mono-meta'],
   };
@@ -124,7 +134,8 @@ test('an on-scope output scores closer under the direction scope than an off-sco
     density: 0.1,
     chroma: 0.9,
     groundLightness: 0.5,
-    accentCount: 4,
+    accentCoverage: 0.45,
+    accentHueCount: 4,
     palette: [{ hex: '#00ff88', pct: 60 }, { hex: '#8800ff', pct: 40 }],
     tags: ['3d-playful', 'high-chroma'],
   };

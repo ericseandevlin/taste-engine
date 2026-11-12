@@ -1,0 +1,1624 @@
+{
+  "board": "demo",
+  "references": 8,
+  "palette": [
+    {
+      "hex": "#ffffff",
+      "share": 25
+    },
+    {
+      "hex": "#000000",
+      "share": 24
+    },
+    {
+      "hex": "#ffffcc",
+      "share": 21
+    },
+    {
+      "hex": "#ff3300",
+      "share": 8
+    },
+    {
+      "hex": "#333333",
+      "share": 3
+    },
+    {
+      "hex": "#ff66cc",
+      "share": 3
+    }
+  ],
+  "lanes": [
+    {
+      "id": "monolith-wordmark",
+      "name": "Monolith Wordmark",
+      "refs": 4
+    },
+    {
+      "id": "swiss-index",
+      "name": "Swiss Index",
+      "refs": 6
+    },
+    {
+      "id": "dark-editorial",
+      "name": "Dark Editorial",
+      "refs": 2
+    },
+    {
+      "id": "warm-editorial",
+      "name": "Warm Editorial",
+      "refs": 2
+    },
+    {
+      "id": "bold-primary-brutalist",
+      "name": "Bold Primary Brutalist",
+      "refs": 2
+    },
+    {
+      "id": "playful-3d",
+      "name": "Playful 3D",
+      "refs": 1
+    },
+    {
+      "id": "case-study-functional",
+      "name": "Case Study Functional",
+      "refs": 3
+    },
+    {
+      "id": "mono-meta",
+      "name": "Mono Meta",
+      "refs": 4
+    }
+  ],
+  "modes": [
+    {
+      "id": "swiss-mono-index",
+      "name": "Swiss Mono Index",
+      "summary": "A precision-indexed portfolio or catalog site where strict column grids and monospaced type work together, labels, metadata, and category markers feel like a living specification document. The board's heaviest channels combine into a site that is rigorous, cold, and quietly authoritative. White fields, hairline rules, and character-grid spacing leave no room for decoration.",
+      "lanes": [
+        "swiss-index",
+        "mono-meta"
+      ],
+      "palette": [
+        "#ffffff",
+        "#000000",
+        "#333333",
+        "#cccccc"
+      ]
+    },
+    {
+      "id": "monolith-grid",
+      "name": "Monolith Grid",
+      "summary": "A brand or studio landing page where a single dominant wordmark commands the white field, supported by a strict underlying grid that keeps any secondary content, metadata, a navigation index, a tagline, tightly ordered and subordinate. The board's cream-to-white ground and black type mass anchor the identity; red appears as one restrained accent at most.",
+      "lanes": [
+        "monolith-wordmark",
+        "swiss-index"
+      ],
+      "palette": [
+        "#ffffff",
+        "#ffffcc",
+        "#000000",
+        "#ff3300"
+      ]
+    },
+    {
+      "id": "brutalist-case-doc",
+      "name": "Brutalist Case Doc",
+      "summary": "A work or process showcase that presents documentation with aggressive graphic weight, heavy grotesk at large scale structures each section while underlying logic is strictly evidentiary: process screens, artifacts, and sequenced content blocks. The board's black-and-white ground with a single maximum-chroma red hit makes the site feel like a zine and a report simultaneously.",
+      "lanes": [
+        "bold-primary-brutalist",
+        "case-study-functional"
+      ],
+      "palette": [
+        "#000000",
+        "#ffffff",
+        "#ff3300",
+        "#333333"
+      ]
+    },
+    {
+      "id": "warm-editorial-meta",
+      "name": "Warm Meta Editorial",
+      "summary": "A writing-forward or studio journal site where cream and blush grounds carry literary-spaced editorial type, while monospaced labels, datestamps, and category tags introduce a quiet system layer, warmth and precision held in careful tension. The board's pale yellow (#ffffcc), pink tones (#ffcccc, #ff66cc), and off-white palette ground this in softness without tipping into generic pastel.",
+      "lanes": [
+        "warm-editorial",
+        "mono-meta"
+      ],
+      "palette": [
+        "#ffffcc",
+        "#ffffff",
+        "#ffcccc",
+        "#333333"
+      ]
+    }
+  ],
+  "rules": [
+    {
+      "id": "swiss-index.do.ground",
+      "lane": "swiss-index",
+      "kind": "do",
+      "aspect": "ground",
+      "rule": "White or light neutral; clean field with no atmospheric treatment",
+      "evidence": {
+        "lane": "swiss-index",
+        "refs": [
+          "w002",
+          "w003",
+          "w004",
+          "w005",
+          "w007",
+          "w008"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "swiss-index.do.type",
+      "lane": "swiss-index",
+      "kind": "do",
+      "aspect": "type",
+      "rule": "Grotesk or mono typeface; type set on strict baseline/column grid; hierarchy via size and weight alone",
+      "evidence": {
+        "lane": "swiss-index",
+        "refs": [
+          "w002",
+          "w003",
+          "w004",
+          "w005",
+          "w007",
+          "w008"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "swiss-index.do.accent",
+      "lane": "swiss-index",
+      "kind": "do",
+      "aspect": "accent",
+      "rule": "Minimal, hairline rules, small numerals, metadata labels; color used sparingly if at all",
+      "evidence": {
+        "lane": "swiss-index",
+        "refs": [
+          "w002",
+          "w003",
+          "w004",
+          "w005",
+          "w007",
+          "w008"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "swiss-index.do.photo",
+      "lane": "swiss-index",
+      "kind": "do",
+      "aspect": "photo",
+      "rule": "Documentary or object photography cropped flush to grid; no bleed chaos",
+      "evidence": {
+        "lane": "swiss-index",
+        "refs": [
+          "w002",
+          "w003",
+          "w004",
+          "w005",
+          "w007",
+          "w008"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "swiss-index.do.space",
+      "lane": "swiss-index",
+      "kind": "do",
+      "aspect": "space",
+      "rule": "Structured negative space driven by column math; breathing room is deliberate not accidental",
+      "evidence": {
+        "lane": "swiss-index",
+        "refs": [
+          "w002",
+          "w003",
+          "w004",
+          "w005",
+          "w007",
+          "w008"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "swiss-index.do.motion",
+      "lane": "swiss-index",
+      "kind": "do",
+      "aspect": "motion",
+      "rule": "Functional transitions, fade or slide on axis; no expressive animation",
+      "evidence": {
+        "lane": "swiss-index",
+        "refs": [
+          "w002",
+          "w003",
+          "w004",
+          "w005",
+          "w007",
+          "w008"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "swiss-index.dont.decorative-or-display-typefaces",
+      "lane": "swiss-index",
+      "kind": "dont",
+      "rule": "Decorative or display typefaces",
+      "evidence": {
+        "lane": "swiss-index",
+        "refs": [
+          "w002",
+          "w003",
+          "w004",
+          "w005",
+          "w007",
+          "w008"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "swiss-index.dont.asymmetric-blob-layouts",
+      "lane": "swiss-index",
+      "kind": "dont",
+      "rule": "Asymmetric blob layouts",
+      "evidence": {
+        "lane": "swiss-index",
+        "refs": [
+          "w002",
+          "w003",
+          "w004",
+          "w005",
+          "w007",
+          "w008"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "swiss-index.dont.high-saturation-color-fields",
+      "lane": "swiss-index",
+      "kind": "dont",
+      "rule": "High-saturation color fields",
+      "evidence": {
+        "lane": "swiss-index",
+        "refs": [
+          "w002",
+          "w003",
+          "w004",
+          "w005",
+          "w007",
+          "w008"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "swiss-index.dont.overlapping-or-collaged-elements",
+      "lane": "swiss-index",
+      "kind": "dont",
+      "rule": "Overlapping or collaged elements",
+      "evidence": {
+        "lane": "swiss-index",
+        "refs": [
+          "w002",
+          "w003",
+          "w004",
+          "w005",
+          "w007",
+          "w008"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "swiss-index.dont.gradient-backgrounds",
+      "lane": "swiss-index",
+      "kind": "dont",
+      "rule": "Gradient backgrounds",
+      "evidence": {
+        "lane": "swiss-index",
+        "refs": [
+          "w002",
+          "w003",
+          "w004",
+          "w005",
+          "w007",
+          "w008"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "swiss-index.dont.centered-hero-compositions",
+      "lane": "swiss-index",
+      "kind": "dont",
+      "rule": "Centered hero compositions",
+      "evidence": {
+        "lane": "swiss-index",
+        "refs": [
+          "w002",
+          "w003",
+          "w004",
+          "w005",
+          "w007",
+          "w008"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "monolith-wordmark.do.ground",
+      "lane": "monolith-wordmark",
+      "kind": "do",
+      "aspect": "ground",
+      "rule": "Single dominant ground color, warm off-white, cream, or deep black; no gradients",
+      "evidence": {
+        "lane": "monolith-wordmark",
+        "refs": [
+          "w002",
+          "w003",
+          "w005",
+          "w008"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "monolith-wordmark.do.type",
+      "lane": "monolith-wordmark",
+      "kind": "do",
+      "aspect": "type",
+      "rule": "Oversized wordmark or logotype as primary visual element; type IS the layout",
+      "evidence": {
+        "lane": "monolith-wordmark",
+        "refs": [
+          "w002",
+          "w003",
+          "w005",
+          "w008"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "monolith-wordmark.do.accent",
+      "lane": "monolith-wordmark",
+      "kind": "do",
+      "aspect": "accent",
+      "rule": "One restrained accent or none; palette stays 2-3 tones max",
+      "evidence": {
+        "lane": "monolith-wordmark",
+        "refs": [
+          "w002",
+          "w003",
+          "w005",
+          "w008"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "monolith-wordmark.do.photo",
+      "lane": "monolith-wordmark",
+      "kind": "do",
+      "aspect": "photo",
+      "rule": "No photography; illustration or 3D only if subordinate to type mass",
+      "evidence": {
+        "lane": "monolith-wordmark",
+        "refs": [
+          "w002",
+          "w003",
+          "w005",
+          "w008"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "monolith-wordmark.do.space",
+      "lane": "monolith-wordmark",
+      "kind": "do",
+      "aspect": "space",
+      "rule": "Extreme negative space; generous margins; nothing competes with the wordmark",
+      "evidence": {
+        "lane": "monolith-wordmark",
+        "refs": [
+          "w002",
+          "w003",
+          "w005",
+          "w008"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "monolith-wordmark.do.motion",
+      "lane": "monolith-wordmark",
+      "kind": "do",
+      "aspect": "motion",
+      "rule": "Slow, weighted reveal, letterforms settle or scale in; no kinetic distraction",
+      "evidence": {
+        "lane": "monolith-wordmark",
+        "refs": [
+          "w002",
+          "w003",
+          "w005",
+          "w008"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "monolith-wordmark.dont.multiple-competing-headlines",
+      "lane": "monolith-wordmark",
+      "kind": "dont",
+      "rule": "Multiple competing headlines",
+      "evidence": {
+        "lane": "monolith-wordmark",
+        "refs": [
+          "w002",
+          "w003",
+          "w005",
+          "w008"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "monolith-wordmark.dont.busy-grid-of-content-modules",
+      "lane": "monolith-wordmark",
+      "kind": "dont",
+      "rule": "Busy grid of content modules",
+      "evidence": {
+        "lane": "monolith-wordmark",
+        "refs": [
+          "w002",
+          "w003",
+          "w005",
+          "w008"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "monolith-wordmark.dont.high-density-navigation-bars",
+      "lane": "monolith-wordmark",
+      "kind": "dont",
+      "rule": "High-density navigation bars",
+      "evidence": {
+        "lane": "monolith-wordmark",
+        "refs": [
+          "w002",
+          "w003",
+          "w005",
+          "w008"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "monolith-wordmark.dont.decorative-background-textures",
+      "lane": "monolith-wordmark",
+      "kind": "dont",
+      "rule": "Decorative background textures",
+      "evidence": {
+        "lane": "monolith-wordmark",
+        "refs": [
+          "w002",
+          "w003",
+          "w005",
+          "w008"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "monolith-wordmark.dont.photography-as-hero",
+      "lane": "monolith-wordmark",
+      "kind": "dont",
+      "rule": "Photography as hero",
+      "evidence": {
+        "lane": "monolith-wordmark",
+        "refs": [
+          "w002",
+          "w003",
+          "w005",
+          "w008"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "monolith-wordmark.dont.rainbow-or-multi-hue-palettes",
+      "lane": "monolith-wordmark",
+      "kind": "dont",
+      "rule": "Rainbow or multi-hue palettes",
+      "evidence": {
+        "lane": "monolith-wordmark",
+        "refs": [
+          "w002",
+          "w003",
+          "w005",
+          "w008"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "mono-meta.do.ground",
+      "lane": "mono-meta",
+      "kind": "do",
+      "aspect": "ground",
+      "rule": "White, light gray, or cream; ground is neutral enough to disappear behind structured data",
+      "evidence": {
+        "lane": "mono-meta",
+        "refs": [
+          "w002",
+          "w004",
+          "w005",
+          "w007"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "mono-meta.do.type",
+      "lane": "mono-meta",
+      "kind": "do",
+      "aspect": "type",
+      "rule": "Monospaced typeface throughout or as primary voice; type signals system, code, precision",
+      "evidence": {
+        "lane": "mono-meta",
+        "refs": [
+          "w002",
+          "w004",
+          "w005",
+          "w007"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "mono-meta.do.accent",
+      "lane": "mono-meta",
+      "kind": "do",
+      "aspect": "accent",
+      "rule": "Gray scale with one functional highlight; restraint is the aesthetic",
+      "evidence": {
+        "lane": "mono-meta",
+        "refs": [
+          "w002",
+          "w004",
+          "w005",
+          "w007"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "mono-meta.do.photo",
+      "lane": "mono-meta",
+      "kind": "do",
+      "aspect": "photo",
+      "rule": "None or minimal; iconography is geometric and constructed",
+      "evidence": {
+        "lane": "mono-meta",
+        "refs": [
+          "w002",
+          "w004",
+          "w005",
+          "w007"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "mono-meta.do.space",
+      "lane": "mono-meta",
+      "kind": "do",
+      "aspect": "space",
+      "rule": "Character-grid aligned spacing; space feels measured in ems not pixels",
+      "evidence": {
+        "lane": "mono-meta",
+        "refs": [
+          "w002",
+          "w004",
+          "w005",
+          "w007"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "mono-meta.do.motion",
+      "lane": "mono-meta",
+      "kind": "do",
+      "aspect": "motion",
+      "rule": "Terminal-style text rendering; cursor blinks; data appears not animates",
+      "evidence": {
+        "lane": "mono-meta",
+        "refs": [
+          "w002",
+          "w004",
+          "w005",
+          "w007"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "mono-meta.dont.serif-editorial-typefaces",
+      "lane": "mono-meta",
+      "kind": "dont",
+      "rule": "Serif editorial typefaces",
+      "evidence": {
+        "lane": "mono-meta",
+        "refs": [
+          "w002",
+          "w004",
+          "w005",
+          "w007"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "mono-meta.dont.warm-or-emotive-color-palettes",
+      "lane": "mono-meta",
+      "kind": "dont",
+      "rule": "Warm or emotive color palettes",
+      "evidence": {
+        "lane": "mono-meta",
+        "refs": [
+          "w002",
+          "w004",
+          "w005",
+          "w007"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "mono-meta.dont.photography-as-atmosphere",
+      "lane": "mono-meta",
+      "kind": "dont",
+      "rule": "Photography as atmosphere",
+      "evidence": {
+        "lane": "mono-meta",
+        "refs": [
+          "w002",
+          "w004",
+          "w005",
+          "w007"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "mono-meta.dont.organic-or-irregular-shapes",
+      "lane": "mono-meta",
+      "kind": "dont",
+      "rule": "Organic or irregular shapes",
+      "evidence": {
+        "lane": "mono-meta",
+        "refs": [
+          "w002",
+          "w004",
+          "w005",
+          "w007"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "mono-meta.dont.expressive-motion-or-easing",
+      "lane": "mono-meta",
+      "kind": "dont",
+      "rule": "Expressive motion or easing",
+      "evidence": {
+        "lane": "mono-meta",
+        "refs": [
+          "w002",
+          "w004",
+          "w005",
+          "w007"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "mono-meta.dont.high-density-decorative-elements",
+      "lane": "mono-meta",
+      "kind": "dont",
+      "rule": "High-density decorative elements",
+      "evidence": {
+        "lane": "mono-meta",
+        "refs": [
+          "w002",
+          "w004",
+          "w005",
+          "w007"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "case-study-functional.do.ground",
+      "lane": "case-study-functional",
+      "kind": "do",
+      "aspect": "ground",
+      "rule": "White or very light neutral; ground disappears, content is foreground",
+      "evidence": {
+        "lane": "case-study-functional",
+        "refs": [
+          "w002",
+          "w006",
+          "w007"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "case-study-functional.do.type",
+      "lane": "case-study-functional",
+      "kind": "do",
+      "aspect": "type",
+      "rule": "Mono or grotesk for metadata, labels, captions; type serves wayfinding not expression",
+      "evidence": {
+        "lane": "case-study-functional",
+        "refs": [
+          "w002",
+          "w006",
+          "w007"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "case-study-functional.do.accent",
+      "lane": "case-study-functional",
+      "kind": "do",
+      "aspect": "accent",
+      "rule": "Sparse and semantic, accent marks state or category, not decoration",
+      "evidence": {
+        "lane": "case-study-functional",
+        "refs": [
+          "w002",
+          "w006",
+          "w007"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "case-study-functional.do.photo",
+      "lane": "case-study-functional",
+      "kind": "do",
+      "aspect": "photo",
+      "rule": "Process screens, artifacts, documentation; imagery is evidentiary not atmospheric",
+      "evidence": {
+        "lane": "case-study-functional",
+        "refs": [
+          "w002",
+          "w006",
+          "w007"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "case-study-functional.do.space",
+      "lane": "case-study-functional",
+      "kind": "do",
+      "aspect": "space",
+      "rule": "Structured breathing room between content blocks; layout sequences like a report",
+      "evidence": {
+        "lane": "case-study-functional",
+        "refs": [
+          "w002",
+          "w006",
+          "w007"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "case-study-functional.do.motion",
+      "lane": "case-study-functional",
+      "kind": "do",
+      "aspect": "motion",
+      "rule": "Scroll-driven reveals; content loads in reading order; no theatrical entrance",
+      "evidence": {
+        "lane": "case-study-functional",
+        "refs": [
+          "w002",
+          "w006",
+          "w007"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "case-study-functional.dont.expressive-or-decorative-typefaces",
+      "lane": "case-study-functional",
+      "kind": "dont",
+      "rule": "Expressive or decorative typefaces",
+      "evidence": {
+        "lane": "case-study-functional",
+        "refs": [
+          "w002",
+          "w006",
+          "w007"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "case-study-functional.dont.atmospheric-background-treatments",
+      "lane": "case-study-functional",
+      "kind": "dont",
+      "rule": "Atmospheric background treatments",
+      "evidence": {
+        "lane": "case-study-functional",
+        "refs": [
+          "w002",
+          "w006",
+          "w007"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "case-study-functional.dont.3d-or-sculptural-elements",
+      "lane": "case-study-functional",
+      "kind": "dont",
+      "rule": "3D or sculptural elements",
+      "evidence": {
+        "lane": "case-study-functional",
+        "refs": [
+          "w002",
+          "w006",
+          "w007"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "case-study-functional.dont.high-chroma-color-fields",
+      "lane": "case-study-functional",
+      "kind": "dont",
+      "rule": "High-chroma color fields",
+      "evidence": {
+        "lane": "case-study-functional",
+        "refs": [
+          "w002",
+          "w006",
+          "w007"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "case-study-functional.dont.collaged-or-overlapping-layouts",
+      "lane": "case-study-functional",
+      "kind": "dont",
+      "rule": "Collaged or overlapping layouts",
+      "evidence": {
+        "lane": "case-study-functional",
+        "refs": [
+          "w002",
+          "w006",
+          "w007"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "case-study-functional.dont.ambient-or-looping-motion",
+      "lane": "case-study-functional",
+      "kind": "dont",
+      "rule": "Ambient or looping motion",
+      "evidence": {
+        "lane": "case-study-functional",
+        "refs": [
+          "w002",
+          "w006",
+          "w007"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "dark-editorial.do.ground",
+      "lane": "dark-editorial",
+      "kind": "do",
+      "aspect": "ground",
+      "rule": "Near-black or deep charcoal field; darkness is the canvas, not a mood overlay",
+      "evidence": {
+        "lane": "dark-editorial",
+        "refs": [
+          "w003",
+          "w006"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "dark-editorial.do.type",
+      "lane": "dark-editorial",
+      "kind": "do",
+      "aspect": "type",
+      "rule": "Editorial serif for headlines; grotesk for metadata; contrast achieved through lightness not hue",
+      "evidence": {
+        "lane": "dark-editorial",
+        "refs": [
+          "w003",
+          "w006"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "dark-editorial.do.accent",
+      "lane": "dark-editorial",
+      "kind": "do",
+      "aspect": "accent",
+      "rule": "Muted or zero chroma accents, no neon pops; let type and space carry hierarchy",
+      "evidence": {
+        "lane": "dark-editorial",
+        "refs": [
+          "w003",
+          "w006"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "dark-editorial.do.photo",
+      "lane": "dark-editorial",
+      "kind": "do",
+      "aspect": "photo",
+      "rule": "High-contrast or duotone imagery integrated into dark field; edges dissolve into ground",
+      "evidence": {
+        "lane": "dark-editorial",
+        "refs": [
+          "w003",
+          "w006"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "dark-editorial.do.space",
+      "lane": "dark-editorial",
+      "kind": "do",
+      "aspect": "space",
+      "rule": "Generous, cinematic spacing; sections breathe like magazine spreads",
+      "evidence": {
+        "lane": "dark-editorial",
+        "refs": [
+          "w003",
+          "w006"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "dark-editorial.do.motion",
+      "lane": "dark-editorial",
+      "kind": "do",
+      "aspect": "motion",
+      "rule": "Slow dissolves, parallax scrolling; contemplative not energetic",
+      "evidence": {
+        "lane": "dark-editorial",
+        "refs": [
+          "w003",
+          "w006"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "dark-editorial.dont.warm-or-cream-background-tones",
+      "lane": "dark-editorial",
+      "kind": "dont",
+      "rule": "Warm or cream background tones",
+      "evidence": {
+        "lane": "dark-editorial",
+        "refs": [
+          "w003",
+          "w006"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "dark-editorial.dont.bright-primary-color-accents",
+      "lane": "dark-editorial",
+      "kind": "dont",
+      "rule": "Bright primary color accents",
+      "evidence": {
+        "lane": "dark-editorial",
+        "refs": [
+          "w003",
+          "w006"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "dark-editorial.dont.playful-or-rounded-typefaces",
+      "lane": "dark-editorial",
+      "kind": "dont",
+      "rule": "Playful or rounded typefaces",
+      "evidence": {
+        "lane": "dark-editorial",
+        "refs": [
+          "w003",
+          "w006"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "dark-editorial.dont.dense-card-grids",
+      "lane": "dark-editorial",
+      "kind": "dont",
+      "rule": "Dense card grids",
+      "evidence": {
+        "lane": "dark-editorial",
+        "refs": [
+          "w003",
+          "w006"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "dark-editorial.dont.hard-edged-light-ui-components",
+      "lane": "dark-editorial",
+      "kind": "dont",
+      "rule": "Hard-edged light UI components",
+      "evidence": {
+        "lane": "dark-editorial",
+        "refs": [
+          "w003",
+          "w006"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "dark-editorial.dont.flat-or-illustrative-iconography",
+      "lane": "dark-editorial",
+      "kind": "dont",
+      "rule": "Flat or illustrative iconography",
+      "evidence": {
+        "lane": "dark-editorial",
+        "refs": [
+          "w003",
+          "w006"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "warm-editorial.do.ground",
+      "lane": "warm-editorial",
+      "kind": "do",
+      "aspect": "ground",
+      "rule": "Cream, blush, or warm off-white base; ground radiates softness without being pastel-generic",
+      "evidence": {
+        "lane": "warm-editorial",
+        "refs": [
+          "w001",
+          "w007"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "warm-editorial.do.type",
+      "lane": "warm-editorial",
+      "kind": "do",
+      "aspect": "type",
+      "rule": "Editorial serif or refined grotesk; type set with literary spacing; unhurried reading rhythm",
+      "evidence": {
+        "lane": "warm-editorial",
+        "refs": [
+          "w001",
+          "w007"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "warm-editorial.do.accent",
+      "lane": "warm-editorial",
+      "kind": "do",
+      "aspect": "accent",
+      "rule": "Warm low-saturation tones; color suggests paper and ink, not screen primaries",
+      "evidence": {
+        "lane": "warm-editorial",
+        "refs": [
+          "w001",
+          "w007"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "warm-editorial.do.photo",
+      "lane": "warm-editorial",
+      "kind": "do",
+      "aspect": "photo",
+      "rule": "Soft, warm-lit photography or none; images feel tactile, print-adjacent",
+      "evidence": {
+        "lane": "warm-editorial",
+        "refs": [
+          "w001",
+          "w007"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "warm-editorial.do.space",
+      "lane": "warm-editorial",
+      "kind": "do",
+      "aspect": "space",
+      "rule": "Generous margins; whitespace is warmth; layout feels handset not automated",
+      "evidence": {
+        "lane": "warm-editorial",
+        "refs": [
+          "w001",
+          "w007"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "warm-editorial.do.motion",
+      "lane": "warm-editorial",
+      "kind": "do",
+      "aspect": "motion",
+      "rule": "Gentle fade-ins; no aggressive entrance animations; content arrives calmly",
+      "evidence": {
+        "lane": "warm-editorial",
+        "refs": [
+          "w001",
+          "w007"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "warm-editorial.dont.cold-white-or-dark-backgrounds",
+      "lane": "warm-editorial",
+      "kind": "dont",
+      "rule": "Cold white or dark backgrounds",
+      "evidence": {
+        "lane": "warm-editorial",
+        "refs": [
+          "w001",
+          "w007"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "warm-editorial.dont.high-chroma-neon-accents",
+      "lane": "warm-editorial",
+      "kind": "dont",
+      "rule": "High-chroma neon accents",
+      "evidence": {
+        "lane": "warm-editorial",
+        "refs": [
+          "w001",
+          "w007"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "warm-editorial.dont.dense-information-grids",
+      "lane": "warm-editorial",
+      "kind": "dont",
+      "rule": "Dense information grids",
+      "evidence": {
+        "lane": "warm-editorial",
+        "refs": [
+          "w001",
+          "w007"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "warm-editorial.dont.hard-geometric-shapes",
+      "lane": "warm-editorial",
+      "kind": "dont",
+      "rule": "Hard geometric shapes",
+      "evidence": {
+        "lane": "warm-editorial",
+        "refs": [
+          "w001",
+          "w007"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "warm-editorial.dont.bold-sans-serif-display-type",
+      "lane": "warm-editorial",
+      "kind": "dont",
+      "rule": "Bold sans-serif display type",
+      "evidence": {
+        "lane": "warm-editorial",
+        "refs": [
+          "w001",
+          "w007"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "warm-editorial.dont.fast-or-bouncy-motion",
+      "lane": "warm-editorial",
+      "kind": "dont",
+      "rule": "Fast or bouncy motion",
+      "evidence": {
+        "lane": "warm-editorial",
+        "refs": [
+          "w001",
+          "w007"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "bold-primary-brutalist.do.ground",
+      "lane": "bold-primary-brutalist",
+      "kind": "do",
+      "aspect": "ground",
+      "rule": "Pure black or raw white; no atmospheric treatment, ground is a blank wall",
+      "evidence": {
+        "lane": "bold-primary-brutalist",
+        "refs": [
+          "w003",
+          "w008"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "bold-primary-brutalist.do.type",
+      "lane": "bold-primary-brutalist",
+      "kind": "do",
+      "aspect": "type",
+      "rule": "Heavy grotesk or display sans at aggressive scale; type used as graphic mass",
+      "evidence": {
+        "lane": "bold-primary-brutalist",
+        "refs": [
+          "w003",
+          "w008"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "bold-primary-brutalist.do.accent",
+      "lane": "bold-primary-brutalist",
+      "kind": "do",
+      "aspect": "accent",
+      "rule": "Single maximum-chroma primary or secondary, red, yellow, electric blue; one color, full commitment",
+      "evidence": {
+        "lane": "bold-primary-brutalist",
+        "refs": [
+          "w003",
+          "w008"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "bold-primary-brutalist.do.photo",
+      "lane": "bold-primary-brutalist",
+      "kind": "do",
+      "aspect": "photo",
+      "rule": "Avoided or used as raw document; no retouching aesthetic",
+      "evidence": {
+        "lane": "bold-primary-brutalist",
+        "refs": [
+          "w003",
+          "w008"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "bold-primary-brutalist.do.space",
+      "lane": "bold-primary-brutalist",
+      "kind": "do",
+      "aspect": "space",
+      "rule": "Tight or intentionally crowded; space is earned not given; OR extreme emptiness as provocation",
+      "evidence": {
+        "lane": "bold-primary-brutalist",
+        "refs": [
+          "w003",
+          "w008"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "bold-primary-brutalist.do.motion",
+      "lane": "bold-primary-brutalist",
+      "kind": "do",
+      "aspect": "motion",
+      "rule": "Abrupt cuts, instant state changes, no easing; motion is structural not decorative",
+      "evidence": {
+        "lane": "bold-primary-brutalist",
+        "refs": [
+          "w003",
+          "w008"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "bold-primary-brutalist.dont.soft-or-warm-palettes",
+      "lane": "bold-primary-brutalist",
+      "kind": "dont",
+      "rule": "Soft or warm palettes",
+      "evidence": {
+        "lane": "bold-primary-brutalist",
+        "refs": [
+          "w003",
+          "w008"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "bold-primary-brutalist.dont.serif-typefaces",
+      "lane": "bold-primary-brutalist",
+      "kind": "dont",
+      "rule": "Serif typefaces",
+      "evidence": {
+        "lane": "bold-primary-brutalist",
+        "refs": [
+          "w003",
+          "w008"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "bold-primary-brutalist.dont.gradients-of-any-kind",
+      "lane": "bold-primary-brutalist",
+      "kind": "dont",
+      "rule": "Gradients of any kind",
+      "evidence": {
+        "lane": "bold-primary-brutalist",
+        "refs": [
+          "w003",
+          "w008"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "bold-primary-brutalist.dont.rounded-corners-or-soft-ui",
+      "lane": "bold-primary-brutalist",
+      "kind": "dont",
+      "rule": "Rounded corners or soft UI",
+      "evidence": {
+        "lane": "bold-primary-brutalist",
+        "refs": [
+          "w003",
+          "w008"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "bold-primary-brutalist.dont.multi-column-editorial-grids",
+      "lane": "bold-primary-brutalist",
+      "kind": "dont",
+      "rule": "Multi-column editorial grids",
+      "evidence": {
+        "lane": "bold-primary-brutalist",
+        "refs": [
+          "w003",
+          "w008"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "bold-primary-brutalist.dont.smooth-eased-transitions",
+      "lane": "bold-primary-brutalist",
+      "kind": "dont",
+      "rule": "Smooth eased transitions",
+      "evidence": {
+        "lane": "bold-primary-brutalist",
+        "refs": [
+          "w003",
+          "w008"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "playful-3d.do.ground",
+      "lane": "playful-3d",
+      "kind": "do",
+      "aspect": "ground",
+      "rule": "High-chroma warm or saturated color field; ground is energized not neutral",
+      "evidence": {
+        "lane": "playful-3d",
+        "refs": [
+          "w001"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "playful-3d.do.type",
+      "lane": "playful-3d",
+      "kind": "do",
+      "aspect": "type",
+      "rule": "Rounded or friendly display type; type may be extruded, inflated, or sculpted",
+      "evidence": {
+        "lane": "playful-3d",
+        "refs": [
+          "w001"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "playful-3d.do.accent",
+      "lane": "playful-3d",
+      "kind": "do",
+      "aspect": "accent",
+      "rule": "Multiple high-chroma hues coexist; harmony via saturation consistency not hue restriction",
+      "evidence": {
+        "lane": "playful-3d",
+        "refs": [
+          "w001"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "playful-3d.do.photo",
+      "lane": "playful-3d",
+      "kind": "do",
+      "aspect": "photo",
+      "rule": "3D rendered sculptural objects as hero; soft studio lighting; objects have material weight",
+      "evidence": {
+        "lane": "playful-3d",
+        "refs": [
+          "w001"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "playful-3d.do.space",
+      "lane": "playful-3d",
+      "kind": "do",
+      "aspect": "space",
+      "rule": "Objects float in space; negative space is active, it gives objects room to breathe and cast",
+      "evidence": {
+        "lane": "playful-3d",
+        "refs": [
+          "w001"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "playful-3d.do.motion",
+      "lane": "playful-3d",
+      "kind": "do",
+      "aspect": "motion",
+      "rule": "Rotation, inflation, gentle float loops; physics-adjacent, objects have implied mass",
+      "evidence": {
+        "lane": "playful-3d",
+        "refs": [
+          "w001"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "playful-3d.dont.flat-2d-illustration",
+      "lane": "playful-3d",
+      "kind": "dont",
+      "rule": "Flat 2D illustration",
+      "evidence": {
+        "lane": "playful-3d",
+        "refs": [
+          "w001"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "playful-3d.dont.monochrome-or-desaturated-palettes",
+      "lane": "playful-3d",
+      "kind": "dont",
+      "rule": "Monochrome or desaturated palettes",
+      "evidence": {
+        "lane": "playful-3d",
+        "refs": [
+          "w001"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "playful-3d.dont.hard-grid-locked-layouts",
+      "lane": "playful-3d",
+      "kind": "dont",
+      "rule": "Hard grid-locked layouts",
+      "evidence": {
+        "lane": "playful-3d",
+        "refs": [
+          "w001"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "playful-3d.dont.small-or-condensed-typefaces",
+      "lane": "playful-3d",
+      "kind": "dont",
+      "rule": "Small or condensed typefaces",
+      "evidence": {
+        "lane": "playful-3d",
+        "refs": [
+          "w001"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "playful-3d.dont.dark-brooding-backgrounds",
+      "lane": "playful-3d",
+      "kind": "dont",
+      "rule": "Dark brooding backgrounds",
+      "evidence": {
+        "lane": "playful-3d",
+        "refs": [
+          "w001"
+        ]
+      },
+      "status": "extracted"
+    },
+    {
+      "id": "playful-3d.dont.static-or-motion-free-compositions",
+      "lane": "playful-3d",
+      "kind": "dont",
+      "rule": "Static or motion-free compositions",
+      "evidence": {
+        "lane": "playful-3d",
+        "refs": [
+          "w001"
+        ]
+      },
+      "status": "extracted"
+    }
+  ]
+}

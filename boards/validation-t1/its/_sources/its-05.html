@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1440">
+<title>Halvorsen Struck: Structural Engineering Profile</title>
+<style>
+  :root {
+    --accent: #1f7a3d;
+    --ink: #111111;
+    --grey: #6b6b6b;
+    --line: #d9d9d9;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    width: 1440px;
+    background: #d2cfc8;
+    color: var(--ink);
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page { width: 1440px; padding: 96px 64px 88px 64px; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: 24px;
+  }
+  .kicker {
+    grid-column: 2 / 6;
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  h1 {
+    grid-column: 2 / 9;
+    font-size: 80px;
+    line-height: 0.96;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .lede {
+    grid-column: 2 / 7;
+    font-size: 16px;
+    line-height: 1.6;
+    margin-top: 32px;
+  }
+  .truss {
+    grid-column: 8 / 13;
+    height: 220px;
+    position: relative;
+    margin-top: 8px;
+  }
+  .truss .h { position: absolute; left: 0; right: 0; height: 1px; background: var(--ink); }
+  .truss .v { position: absolute; top: 0; bottom: 0; width: 1px; background: var(--ink); }
+  .truss .d { position: absolute; height: 1px; background: var(--ink); transform-origin: left center; }
+  .rule { grid-column: 2 / 13; height: 1px; background: var(--ink); margin: 64px 0 0 0; }
+  .stats {
+    grid-column: 2 / 13;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 24px;
+    margin-top: 48px;
+  }
+  .stat .num { font-size: 68px; font-weight: 700; line-height: 1; }
+  .stat .num span { color: var(--ink); }
+  .stat .label { font-size: 13px; color: var(--grey); margin-top: 16px; line-height: 1.4; }
+  .rule2 { grid-column: 2 / 13; height: 1px; background: var(--line); margin: 64px 0 0 0; }
+  .section-label {
+    grid-column: 2 / 13;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--grey);
+    margin: 40px 0 16px 0;
+  }
+  .practices {
+    grid-column: 2 / 13;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 24px;
+  }
+  .practice { border-top: 1px solid var(--ink); padding-top: 16px; }
+  .practice .n { font-size: 13px; color: var(--ink); margin-bottom: 8px; font-weight: 700; }
+  .practice .t { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+  .practice .d { font-size: 13px; color: var(--grey); line-height: 1.6; }
+  .footer {
+    grid-column: 2 / 6;
+    font-size: 12px;
+    color: var(--grey);
+    line-height: 1.6;
+    margin-top: 40px;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="grid">
+    <div class="kicker">Firm Profile</div>
+    <h1>Halvorsen Struck</h1>
+    <div class="lede">
+      A structural engineering practice working on long-span, high-load, and
+      seismic-retrofit projects across the region since 1988.
+    </div>
+
+    <div class="truss">
+      <div class="h" style="top: 0; left: 0; right: 0;"></div>
+      <div class="h" style="bottom: 0; left: 0; right: 0;"></div>
+      <div class="v" style="left: 0;"></div>
+      <div class="v" style="left: 50%;"></div>
+      <div class="v" style="left: 100%;"></div>
+      <div class="d" style="left: 0; top: 100%; width: 58%; transform: rotate(-22deg);"></div>
+      <div class="d" style="left: 50%; top: 0; width: 58%; transform: rotate(22deg);"></div>
+    </div>
+
+    <div class="rule"></div>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="num"><span>37</span></div>
+        <div class="label">Years in continuous practice</div>
+      </div>
+      <div class="stat">
+        <div class="num">340<span style="font-size: 32px;">ft</span></div>
+        <div class="label">Longest clear span engineered to date</div>
+      </div>
+    </div>
+
+    <div class="rule2"></div>
+    <div class="section-label">Practice Areas</div>
+
+    <div class="practices">
+      <div class="practice">
+        <div class="n">01</div>
+        <div class="t">Long-Span Structures</div>
+        <div class="d">Arenas, transit sheds, and industrial buildings where the roof is the engineering problem.</div>
+      </div>
+      <div class="practice">
+        <div class="n">02</div>
+        <div class="t">Seismic Retrofit</div>
+        <div class="d">Bringing pre-1975 masonry and concrete buildings up to current life-safety standards.</div>
+      </div>
+    </div>
+
+    <div class="footer">
+      Licensed to practice structural engineering in this state and four
+      neighboring jurisdictions. References available on request.
+    </div>
+  </div>
+</div>
+</body>
+</html>

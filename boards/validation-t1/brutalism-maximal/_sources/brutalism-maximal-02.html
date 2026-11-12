@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440, initial-scale=1">
+<title>AGGRO SEASON 04</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; border-radius: 0; }
+  html, body { width: 1440px; background: #FFFFFF; overflow-x: hidden; }
+  body { font-family: Arial, sans-serif; color: #000000; }
+
+  .hero {
+    position: relative;
+    width: 1440px;
+    height: 300px;
+    background: #FFFFFF;
+    overflow: hidden;
+    border-bottom: 5px solid #000000;
+  }
+  .hero h1 {
+    position: absolute;
+    top: -30px;
+    left: -30px;
+    font-family: "Arial Black", "Arial Narrow Bold", Impact, Arial, sans-serif;
+    font-weight: 900;
+    font-size: 340px;
+    line-height: 0.8;
+    letter-spacing: -10px;
+    color: #FF0000;
+    white-space: nowrap;
+  }
+
+  .strapline {
+    background: #00FFFF;
+    border-top: 5px solid #000000;
+    border-bottom: 5px solid #000000;
+    padding: 12px 20px;
+    font-family: "Courier New", monospace;
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  nav.main {
+    background: #00FFFF;
+    padding: 14px 20px;
+    border-bottom: 5px solid #000000;
+  }
+  nav.main ul { list-style: none; display: flex; gap: 30px; }
+  nav.main a {
+    color: #0000EE;
+    text-decoration: underline;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    font-size: 16px;
+  }
+
+  .panel-black {
+    background: #FFFFFF;
+    color: #000000;
+    padding: 40px 20px;
+    position: relative;
+  }
+  .panel-yellow {
+    background: #00FFFF;
+    color: #000000;
+    padding: 40px 20px;
+    border-top: 6px solid #000000;
+  }
+
+  .panel-black h2, .panel-yellow h2 {
+    font-family: "Arial Black", Arial, sans-serif;
+    font-size: 44px;
+    margin-bottom: 24px;
+  }
+
+  .product-grid {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .product {
+    width: 300px;
+    background: #FFFFFF;
+    border: 4px solid #000000;
+  }
+  .product svg { display: block; width: 100%; height: 220px; }
+  .product .info {
+    padding: 12px;
+    font-family: "Courier New", monospace;
+    font-size: 13px;
+  }
+  .product .info .name {
+    font-family: "Arial Black", Arial, sans-serif;
+    font-size: 18px;
+    margin-bottom: 6px;
+  }
+  .product button {
+    margin-top: 10px;
+    width: 100%;
+    padding: 10px;
+    font-family: "Courier New", monospace;
+    font-weight: bold;
+    font-size: 14px;
+    background: #FF0000;
+    color: #FFFFFF;
+    border: 3px solid #000000;
+  }
+  .product button:hover { background: #FFFFFF; color: #FF0000; }
+
+  .drop-details {
+    background: #FF0000;
+    color: #000000;
+    padding: 30px 20px;
+    border-top: 6px solid #000000;
+    border-bottom: 6px solid #000000;
+  }
+  .drop-details table {
+    border-collapse: collapse;
+    font-family: "Courier New", monospace;
+    font-size: 14px;
+    width: 100%;
+  }
+  .drop-details th, .drop-details td {
+    border: 3px solid #000000;
+    padding: 8px 12px;
+    text-align: left;
+  }
+  .drop-details thead th { background: #000000; color: #FF0000; }
+  .drop-details tbody td { background: #FFFFFF; }
+
+  footer {
+    background: #00FFFF;
+    padding: 20px;
+    font-family: "Courier New", monospace;
+    font-size: 12px;
+    border-top: 5px solid #000000;
+  }
+  footer a { color: #0000EE; text-decoration: underline; }
+
+  .collision-slab {
+    position: absolute;
+    z-index: 60;
+    font-family: "Arial Black", Arial, sans-serif;
+    font-weight: 900;
+    border: 5px solid #000000;
+    padding: 16px 24px;
+    line-height: 1.05;
+  }
+  .slab-a {
+    top: 236px;
+    left: 620px;
+    width: 520px;
+    background: #000000;
+    color: #FF0000;
+    font-size: 34px;
+    transform: rotate(-8deg);
+  }
+  .slab-b {
+    top: 560px;
+    left: 240px;
+    width: 420px;
+    background: #FF0000;
+    color: #FFFFFF;
+    font-size: 44px;
+    transform: rotate(9deg);
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <h1>AGGRO 04</h1>
+</header>
+
+<div class="collision-slab slab-a">DROPS FRIDAY 00:00, THEN NEVER AGAIN</div>
+<div class="collision-slab slab-b">NO RESTOCK</div>
+
+<p class="strapline">CAPSULE DROP 04, SIX PIECES, NO RESTOCK, LIVE NOW</p>
+
+<nav class="main">
+  <ul>
+    <li><a href="#grid">PRODUCT</a></li>
+    <li><a href="#details">DROP DETAILS</a></li>
+    <li><a href="#size">SIZE CHART</a></li>
+  </ul>
+</nav>
+
+<section class="panel-black" id="grid">
+  <h2>PRODUCT, UNRETOUCHED SCANS</h2>
+  <div class="product-grid">
+
+    <div class="product">
+      <svg viewBox="0 0 6 6" preserveAspectRatio="none" style="shape-rendering: crispEdges;" aria-label="pixelated render of jacket 01">
+        <rect width="6" height="6" fill="#000000"/>
+        <rect x="0" y="0" width="1" height="1" fill="#FF0000"/><rect x="1" y="0" width="1" height="1" fill="#FFFFFF"/><rect x="2" y="0" width="1" height="1" fill="#000000"/><rect x="3" y="0" width="1" height="1" fill="#00FFFF"/><rect x="4" y="0" width="1" height="1" fill="#FF0000"/><rect x="5" y="0" width="1" height="1" fill="#000000"/>
+        <rect x="0" y="1" width="1" height="1" fill="#000000"/><rect x="1" y="1" width="1" height="1" fill="#00FFFF"/><rect x="2" y="1" width="1" height="1" fill="#FF0000"/><rect x="3" y="1" width="1" height="1" fill="#FFFFFF"/><rect x="4" y="1" width="1" height="1" fill="#000000"/><rect x="5" y="1" width="1" height="1" fill="#00FFFF"/>
+        <rect x="0" y="2" width="1" height="1" fill="#FFFFFF"/><rect x="1" y="2" width="1" height="1" fill="#000000"/><rect x="2" y="2" width="1" height="1" fill="#00FFFF"/><rect x="3" y="2" width="1" height="1" fill="#000000"/><rect x="4" y="2" width="1" height="1" fill="#FFFFFF"/><rect x="5" y="2" width="1" height="1" fill="#FF0000"/>
+        <rect x="0" y="3" width="1" height="1" fill="#FF0000"/><rect x="1" y="3" width="1" height="1" fill="#00FFFF"/><rect x="2" y="3" width="1" height="1" fill="#000000"/><rect x="3" y="3" width="1" height="1" fill="#00FFFF"/><rect x="4" y="3" width="1" height="1" fill="#000000"/><rect x="5" y="3" width="1" height="1" fill="#FFFFFF"/>
+        <rect x="0" y="4" width="1" height="1" fill="#000000"/><rect x="1" y="4" width="1" height="1" fill="#FF0000"/><rect x="2" y="4" width="1" height="1" fill="#FFFFFF"/><rect x="3" y="4" width="1" height="1" fill="#000000"/><rect x="4" y="4" width="1" height="1" fill="#00FFFF"/><rect x="5" y="4" width="1" height="1" fill="#000000"/>
+        <rect x="0" y="5" width="1" height="1" fill="#00FFFF"/><rect x="1" y="5" width="1" height="1" fill="#000000"/><rect x="2" y="5" width="1" height="1" fill="#FF0000"/><rect x="3" y="5" width="1" height="1" fill="#FFFFFF"/><rect x="4" y="5" width="1" height="1" fill="#FF0000"/><rect x="5" y="5" width="1" height="1" fill="#000000"/>
+      </svg>
+      <div class="info">
+        <p class="name">SHELL JACKET 01</p>
+        <p>COLOR: RIOT / SIZE RUN: S TO XL / SHOT AT DEFAULT CAMERA RESOLUTION</p>
+        <button type="button">ADD TO CART</button>
+      </div>
+    </div>
+
+    <div class="product">
+      <svg viewBox="0 0 6 6" preserveAspectRatio="none" style="shape-rendering: crispEdges;" aria-label="pixelated render of cargo pant 02">
+        <rect width="6" height="6" fill="#FFFFFF"/>
+        <rect x="0" y="0" width="2" height="2" fill="#000000"/><rect x="2" y="0" width="2" height="2" fill="#FF0000"/><rect x="4" y="0" width="2" height="2" fill="#00FFFF"/>
+        <rect x="0" y="2" width="2" height="2" fill="#FF0000"/><rect x="2" y="2" width="2" height="2" fill="#000000"/><rect x="4" y="2" width="2" height="2" fill="#00FFFF"/>
+        <rect x="0" y="4" width="2" height="2" fill="#00FFFF"/><rect x="2" y="4" width="2" height="2" fill="#FFFFFF"/><rect x="4" y="4" width="2" height="2" fill="#000000"/>
+      </svg>
+      <div class="info">
+        <p class="name">CARGO PANT 02</p>
+        <p>COLOR: ACID / SIZE RUN: 28 TO 38 / SHOT AT DEFAULT CAMERA RESOLUTION</p>
+        <button type="button">ADD TO CART</button>
+      </div>
+    </div>
+
+    <div class="product">
+      <svg viewBox="0 0 6 6" preserveAspectRatio="none" style="shape-rendering: crispEdges;" aria-label="pixelated render of graphic tee 03">
+        <rect width="6" height="6" fill="#00FFFF"/>
+        <rect x="0" y="0" width="3" height="3" fill="#000000"/><rect x="3" y="0" width="3" height="3" fill="#FF0000"/>
+        <rect x="0" y="3" width="3" height="3" fill="#FFFFFF"/><rect x="3" y="3" width="3" height="3" fill="#000000"/>
+      </svg>
+      <div class="info">
+        <p class="name">GRAPHIC TEE 03</p>
+        <p>COLOR: STATIC / SIZE RUN: XS TO XXL / SHOT AT DEFAULT CAMERA RESOLUTION</p>
+        <button type="button">ADD TO CART</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="drop-details" id="details">
+  <table>
+    <thead><tr><th>PIECE</th><th>MATERIAL</th><th>PRICE</th><th>STOCK</th></tr></thead>
+    <tbody>
+      <tr><td>SHELL JACKET 01</td><td>RIPSTOP NYLON</td><td>$210</td><td>LOW</td></tr>
+      <tr><td>CARGO PANT 02</td><td>COTTON RIPSTOP</td><td>$160</td><td>LOW</td></tr>
+      <tr><td>GRAPHIC TEE 03</td><td>COTTON JERSEY</td><td>$65</td><td>MEDIUM</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="panel-yellow" id="size">
+  <h2>SIZE CHART</h2>
+  <table>
+    <thead><tr><th>SIZE</th><th>CHEST</th><th>LENGTH</th></tr></thead>
+    <tbody>
+      <tr><td>S</td><td>36 IN</td><td>27 IN</td></tr>
+      <tr><td>M</td><td>40 IN</td><td>28 IN</td></tr>
+      <tr><td>L</td><td>44 IN</td><td>29 IN</td></tr>
+      <tr><td>XL</td><td>48 IN</td><td>30 IN</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<footer>
+  <p>AGGRO SEASON 04 IS A LIMITED CAPSULE. NO REPRODUCTIONS, NO RESTOCK. QUESTIONS TO <a href="mailto:orders@aggrocapsule.example">orders@aggrocapsule.example</a>.</p>
+</footer>
+
+</body>
+</html>

@@ -31,6 +31,29 @@ test('hasEmDash / stripEmDash', () => {
   assert.equal(hasEmDash(stripEmDash('a — b – c')), false);
 });
 
+test('numeric ranges keep their en dash: a date range is typography, not an AI tell', () => {
+  // Found by the poster run: "14–15 Nov 2025" was being mangled to "14, 15 Nov 2025".
+  assert.equal(stripEmDash('14–15 Nov 2025'), '14–15 Nov 2025');
+  assert.equal(stripEmDash('2024–2025'), '2024–2025');
+  assert.equal(stripEmDash('pp. 30–42'), 'pp. 30–42');
+  assert.equal(stripEmDash('09:00–16:30'), '09:00–16:30');
+  // Spaced ranges normalize to a tight en dash rather than a comma.
+  assert.equal(stripEmDash('14 – 15 Nov'), '14–15 Nov');
+  // And a protected range must not trip the lint gate.
+  assert.equal(hasEmDash('14–15 Nov 2025'), false);
+  assert.equal(hasEmDash('Sessions run 09:00–16:30 daily'), false);
+});
+
+test('a dash used as a sentence break is still stripped, even near numbers', () => {
+  assert.equal(stripEmDash('six sessions — all in Hall B'), 'six sessions, all in Hall B');
+  // Number on one side only is not a range.
+  assert.equal(stripEmDash('2025 — the year of'), '2025, the year of');
+  assert.equal(stripEmDash('a — 15 minutes later'), 'a, 15 minutes later');
+  assert.equal(hasEmDash('six sessions — all in Hall B'), true);
+  // An em dash between digits is still an em dash, never a range.
+  assert.equal(stripEmDash('14—15'), '14, 15');
+});
+
 test('claimedTasteHits flags credential phrasing', () => {
   assert.deepEqual(claimedTasteHits('We have an eye for detail'), ['an eye for']);
   assert.deepEqual(claimedTasteHits('clean grids and bold type'), []);

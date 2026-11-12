@@ -4,7 +4,7 @@ This started as a personal tool and is shared in the open because the method is 
 
 ## Good first contributions
 
-- **A new `kind`.** The engine ships with `visual-ui`. A new kind (photography, type specimens, voice and tone, motion) means a measure strategy + a controlled tag vocabulary registered in `src/config.mjs`. This is the highest-leverage place to extend.
+- **A new `kind`.** The engine ships with `visual-ui` and `poster`. A new kind (photography, type specimens, voice and tone, motion) means a measure strategy + a controlled tag vocabulary registered in `src/config.mjs`. This is the highest-leverage place to extend.
 - **Measure strategies.** Better palette extraction, layout-grid detection, type-scale detection.
 - **A real browser capture helper** for the critique step (kept out of the core on purpose, but a optional script would help).
 - **Docs and examples.** More worked example boards (neutral / shareable only, see below).
@@ -20,6 +20,6 @@ This started as a personal tool and is shared in the open because the method is 
 
 ```bash
 npm install
-cp .env.example .env   # add your ANTHROPIC_API_KEY for the model stages
+cp .env.example .env   # set GEMINI_API_KEY or OPENROUTER_API_KEY for the model steps
 npm test
 ```

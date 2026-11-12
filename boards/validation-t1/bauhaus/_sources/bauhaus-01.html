@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Concrete Civic: Kestrel Municipal Gallery</title>
+<style>
+  :root{
+    --red:#E5231B;
+    --yellow:#FFD200;
+    --blue:#0047AB;
+    --black:#141414;
+    --paper:#F4F1E7;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{width:1440px;background:var(--paper);}
+  body{
+    font-family:Futura, "Avenir Next", Avenir, sans-serif;
+    color:var(--black);
+  }
+  .canvas{
+    position:relative;
+    width:1440px;
+    height:1220px;
+    background:var(--paper);
+    overflow:hidden;
+  }
+  .rule-thick{
+    position:absolute;
+    background:var(--black);
+  }
+  .headline{
+    position:absolute;
+    top:100px;
+    left:70px;
+    width:760px;
+    font-size:118px;
+    line-height:1;
+    font-weight:700;
+    letter-spacing:-2px;
+    text-transform:lowercase;
+    color:var(--black);
+  }
+  .headline .accent{color:var(--red);}
+  .subhead{
+    position:absolute;
+    top:400px;
+    left:74px;
+    width:520px;
+    font-size:19px;
+    line-height:1.5;
+    text-align:left;
+  }
+  .curator-quote{
+    position:absolute;
+    top:600px;
+    left:74px;
+    width:470px;
+    font-size:25px;
+    line-height:1.35;
+    font-weight:700;
+    text-align:left;
+  }
+  .curator-name{
+    margin-top:18px;
+    font-size:15px;
+    font-weight:400;
+    text-transform:uppercase;
+    letter-spacing:1px;
+  }
+  .field-blue{
+    position:absolute;
+    top:0;
+    right:0;
+    width:830px;
+    height:1040px;
+    background:var(--blue);
+  }
+  .shape-circle{
+    position:absolute;
+    width:390px;
+    height:390px;
+    border-radius:50%;
+    background:var(--red);
+    top:45px;
+    left:910px;
+  }
+  .shape-triangle{
+    position:absolute;
+    width:0;
+    height:0;
+    border-left:190px solid transparent;
+    border-right:190px solid transparent;
+    border-bottom:320px solid var(--yellow);
+    top:300px;
+    left:1040px;
+  }
+  .shape-square{
+    position:absolute;
+    width:150px;
+    height:150px;
+    background:var(--paper);
+    top:600px;
+    left:940px;
+  }
+  .photo-block{
+    position:absolute;
+    background:var(--black);
+    overflow:hidden;
+  }
+  .photo-block .half{
+    position:absolute;
+    top:0;
+    bottom:0;
+    width:50%;
+  }
+  .photo-block .half.a{left:0;background:#3a3a3a;}
+  .photo-block .half.b{right:0;background:#7a7a7a;}
+  .photo-label{
+    position:absolute;
+    bottom:10px;
+    left:12px;
+    font-size:13px;
+    color:var(--paper);
+    letter-spacing:1px;
+    text-transform:uppercase;
+  }
+  .photo-1{
+    top:500px;
+    left:660px;
+    width:380px;
+    height:280px;
+    transform:rotate(-4deg);
+  }
+  .photo-2{
+    top:520px;
+    left:1080px;
+    width:260px;
+    height:280px;
+  }
+  .diag-bar{
+    position:absolute;
+    background:var(--red);
+    width:860px;
+    height:95px;
+    top:790px;
+    left:-60px;
+    transform:rotate(-18deg);
+  }
+  .list-wrap{
+    position:absolute;
+    top:960px;
+    left:74px;
+    width:900px;
+  }
+  .list-title{
+    font-size:17px;
+    text-transform:uppercase;
+    letter-spacing:2px;
+    font-weight:700;
+    margin-bottom:16px;
+  }
+  .photog-list{
+    list-style:none;
+    display:flex;
+    flex-wrap:wrap;
+    column-gap:44px;
+    row-gap:10px;
+    font-size:19px;
+    text-align:left;
+    width:900px;
+  }
+  .info-block{
+    position:absolute;
+    top:870px;
+    left:1080px;
+    width:280px;
+    text-align:left;
+    font-size:15px;
+    line-height:1.6;
+  }
+  .info-block .label{
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    font-size:12px;
+    color:var(--red);
+    margin-top:12px;
+  }
+  .venue-square{
+    position:absolute;
+    top:36px;
+    right:80px;
+    width:74px;
+    height:74px;
+    background:var(--paper);
+  }
+</style>
+</head>
+<body>
+<div class="canvas">
+
+  <div class="rule-thick" style="top:0; left:0; width:100%; height:14px;"></div>
+  <div class="rule-thick" style="top:340px; left:0; width:1000px; height:22px;"></div>
+
+  <div class="field-blue"></div>
+
+  <div class="venue-square"></div>
+
+  <div class="headline">concrete<br>civic<span class="accent">.</span></div>
+
+  <div class="subhead">
+    Photographs of postwar public architecture, 1955 to 1975. Municipal
+    buildings, transit stations, and housing blocks documented across
+    eleven cities before their materials had names for what they were.
+  </div>
+
+  <div class="shape-square"></div>
+  <div class="shape-circle"></div>
+  <div class="shape-triangle"></div>
+
+  <div class="curator-quote">
+    &ldquo;We kept asking photographers to skip the hero shot. The buildings
+    were never trying to be heroic. They were trying to work.&rdquo;
+    <div class="curator-name">Reyna Aldous, curator</div>
+  </div>
+
+  <div class="photo-block photo-1">
+    <div class="half a"></div>
+    <div class="half b"></div>
+    <div class="photo-label">fig. 04, transit deck, north end</div>
+  </div>
+
+  <div class="photo-block photo-2">
+    <div class="half a"></div>
+    <div class="half b"></div>
+    <div class="photo-label">fig. 11, housing block stair</div>
+  </div>
+
+  <div class="info-block">
+    <div>Kestrel Municipal Gallery, 4th floor</div>
+    <div class="label">Dates</div>
+    <div>September 12 through November 30</div>
+    <div class="label">Hours</div>
+    <div>Tuesday to Sunday, 11am to 6pm</div>
+    <div class="label">Admission</div>
+    <div>12 dollars. Free Thursdays after 5pm.</div>
+  </div>
+
+  <div class="diag-bar"></div>
+
+  <div class="list-wrap">
+    <div class="list-title">Featured photographers</div>
+    <ul class="photog-list">
+      <li>Mara Holt</li>
+      <li>Denis Okafor</li>
+      <li>Yuki Tanaka</li>
+      <li>Priya Chandrasekhar</li>
+      <li>Tomas Vrba</li>
+      <li>Ingrid Sæther</li>
+    </ul>
+  </div>
+
+</div>
+</body>
+</html>

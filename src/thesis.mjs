@@ -12,6 +12,7 @@
 //   node thesis.mjs
 //   node thesis.mjs --board website --model claude-sonnet-4-6
 
+import { runMain } from './run.mjs';
 import { join } from 'path';
 import { fileURLToPath } from 'url';
 import { writeFileSync } from 'fs';
@@ -33,14 +34,23 @@ function parseArgs(argv) {
   return args;
 }
 
+// An en dash sitting between two numbers is a RANGE (14–15 Nov, 2024–2025,
+// pp. 30–42). That is correct typography, not an AI tell, and killing it turns
+// a poster's date range into "14, 15 Nov". The tell we actually care about is a
+// dash used as a sentence break. So ranges are protected everywhere below.
+const NUMERIC_RANGE = /(\d)\s*–\s*(?=\d)/g;
+const RANGE_HOLD = '\u0000';
+
 export function hasEmDash(s) {
-  return /[—–]/.test(String(s)); // em dash and en dash
+  return /[—–]/.test(String(s).replace(NUMERIC_RANGE, '$1'));
 }
 
 export function stripEmDash(s) {
   return String(s)
+    .replace(NUMERIC_RANGE, `$1${RANGE_HOLD}`)
     .replace(/\s+[—–]\s+/g, ', ')
-    .replace(/[—–]/g, ', ');
+    .replace(/[—–]/g, ', ')
+    .replace(new RegExp(RANGE_HOLD, 'g'), '–');
 }
 
 export function claimedTasteHits(s, list = CLAIMED_TASTE) {
@@ -171,4 +181,4 @@ async function main() {
   console.log(`[thesis] wrote ${outPath} (${channels.length} channels, em-dash-clean)`);
 }
 
-if (process.argv[1] === fileURLToPath(import.meta.url)) main();
+if (process.argv[1] === fileURLToPath(import.meta.url)) runMain(main);

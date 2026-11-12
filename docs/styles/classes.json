@@ -1,0 +1,88 @@
+{
+  "$comment": "Validation classes + determinant-to-instrument map (v2 design, section 5). Each class's DEFINING determinants map to exactly one instrument: a vocabulary tag id (detection threshold: present in >= 2/3 of the class's exemplars) or a measured scalar (predicted raw-scale range). Defining determinants with no instrument are excluded ex ante as named blind spots and the per-class denominator is recomputed. This file is the naming vocabulary source and the validation spec; it is scaffolding for grounding and validation, never a dictionary a board must fit. FROZEN at the freeze commit.",
+  "version": "v2",
+  "frozen": false,
+  "tagDetectionThreshold": 0.667,
+  "definingListFloor": 4,
+  "namedBlindSpots": [
+    "true-grid-geometry: strict-column-grid and asymmetric-composition are checked by vision tag, not geometric extraction; measuring actual column alignment is v3+ if vision tags prove insufficient",
+    "pattern-adjacency-geometry: accentHueCount counts hue families but cannot verify that clashing colors sit ADJACENT with no mediation; adjacency is carried by the pattern-clash-adjacency vision tag where applicable",
+    "spacing-module-rhythm: repeated-spacing-module (ITS common) has no instrument; common-strength only, so no denominator impact"
+  ],
+  "classes": {
+    "its": {
+      "label": "International Typographic Style",
+      "styleDoc": "international-typographic-style.md",
+      "exemplarDir": "boards/validation-t1/its",
+      "defining": [
+        { "determinant": "modular-column-grid", "instrument": { "type": "tag", "id": "strict-column-grid" } },
+        { "determinant": "single-sans-serif-family", "instrument": { "type": "tag", "id": "single-sans-family" } },
+        { "determinant": "flush-left-ragged-right", "instrument": { "type": "tag", "id": "flush-left-ragged-right" } },
+        { "determinant": "asymmetric-composition", "instrument": { "type": "tag", "id": "asymmetric-composition" } },
+        { "determinant": "size-weight-position-hierarchy", "instrument": { "type": "tag", "id": "size-weight-position-hierarchy" } },
+        { "determinant": "photographic-or-geometric-imagery", "instrument": { "type": "tag", "id": "objective-documentary-imagery" } },
+        { "determinant": "flat-unmodulated-color-fields", "instrument": { "type": "tag", "id": "flat-unmodulated-color-fields" } }
+      ],
+      "checkable": "7/7",
+      "notes": "Board-owner cross-check (2026-07-11): layout is primary, color secondary. The defining list is all structure, typography, and imagery; palette enters only at common strength (restricted-palette-single-accent, predicted accentHueCount 0-2). A strict grid in other colors still reads as this style; a loose grid in black-and-white does not."
+    },
+    "bauhaus": {
+      "label": "Bauhaus / New Typography",
+      "styleDoc": "bauhaus-new-typography.md",
+      "exemplarDir": "boards/validation-t1/bauhaus",
+      "defining": [
+        { "determinant": "asymmetric-composition", "instrument": { "type": "tag", "id": "asymmetric-composition" } },
+        { "determinant": "geometric-sans-only", "excluded": true, "blindSpotNote": "no reliable vision instrument: the tagger cannot classify geometric vs neutral-grotesque letterforms from a 512px screenshot (0/6 detection on two exemplar generations); excluded ex ante, denominator recomputed" },
+        { "determinant": "primary-triad-plus-black-palette", "instrument": { "type": "tag", "id": "bold-primary" }, "secondary": { "type": "scalar", "id": "accentHueCount", "range": [1, 3] } },
+        { "determinant": "flat-geometric-primitives", "instrument": { "type": "tag", "id": "flat-geometric-primitives" } },
+        { "determinant": "extreme-scale-hierarchy", "instrument": { "type": "tag", "id": "extreme-type-scale-contrast" } },
+        { "determinant": "active-whitespace-counterweight", "instrument": { "type": "tag", "id": "active-negative-space" } },
+        { "determinant": "flush-left-ragged-right", "instrument": { "type": "tag", "id": "flush-left-ragged-right" } },
+        { "determinant": "hard-edge-flat-fill", "instrument": { "type": "tag", "id": "flat-unmodulated-color-fields" } }
+      ],
+      "checkable": "7/8"
+    },
+    "brutalism-minimal": {
+      "label": "Web brutalism, minimalist raw-HTML strand",
+      "styleDoc": "web-brutalism.md",
+      "exemplarDir": "boards/validation-t1/brutalism-minimal",
+      "defining": [
+        { "determinant": "undisguised-construction", "instrument": { "type": "tag", "id": "undisguised-construction" } },
+        { "determinant": "hard-edged-zero-effects", "instrument": { "type": "tag", "id": "hard-edged-zero-effects" } },
+        { "determinant": "browser-default-styling", "instrument": { "type": "tag", "id": "browser-default-styling" } },
+        { "determinant": "dense-utilitarian-lists", "instrument": { "type": "tag", "id": "dense-utilitarian-lists" } }
+      ],
+      "checkable": "4/4",
+      "notes": "Strand-level defining list per the v2 design: the two umbrella determinants plus browser-default-styling and dense-utilitarian-lists promoted (Craigslist/Copeland lineage)."
+    },
+    "brutalism-maximal": {
+      "label": "Web brutalism, maximalist anti-design strand",
+      "styleDoc": "web-brutalism.md",
+      "exemplarDir": "boards/validation-t1/brutalism-maximal",
+      "defining": [
+        { "determinant": "undisguised-construction", "instrument": { "type": "tag", "id": "undisguised-construction" } },
+        { "determinant": "hard-edged-zero-effects", "instrument": { "type": "tag", "id": "hard-edged-zero-effects" } },
+        { "determinant": "harsh-unharmonized-color-clash", "instrument": { "type": "scalar", "id": "accentHueCount", "range": [2, 8] }, "blindSpotNote": "adjacency without mediation is not verified, only hue-family count" },
+        { "determinant": "oversized-load-bearing-type", "excluded": true, "blindSpotNote": "instrument pruned by the binding jitter calibration (flip rate 6/30 exemplars at majority-of-3, >= 20% registered bar); excluded ex ante, denominator recomputed" },
+        { "determinant": "deliberate-misalignment-or-overlap", "instrument": { "type": "tag", "id": "deliberate-misalignment-or-overlap" } }
+      ],
+      "checkable": "4/5",
+      "notes": "Strand-level defining list per the v2 design: umbrella plus harsh-unharmonized-color-clash, oversized-load-bearing-type, deliberate-misalignment-or-overlap promoted (Deville catalog lineage). oversized-load-bearing-type lost its instrument to the binding calibration prune."
+    },
+    "memphis-revival": {
+      "label": "Memphis / postmodern revival",
+      "styleDoc": "memphis-revival.md",
+      "exemplarDir": "boards/validation-t1/memphis-revival",
+      "defining": [
+        { "determinant": "clashing-pastel-primary-palette", "instrument": { "type": "scalar", "id": "accentHueCount", "range": [3, 8] } },
+        { "determinant": "squiggle-motif", "instrument": { "type": "tag", "id": "squiggle-motif" } },
+        { "determinant": "scattered-geometric-primitives", "instrument": { "type": "tag", "id": "scattered-geometric-primitives" } },
+        { "determinant": "ornament-without-function", "instrument": { "type": "tag", "id": "ornament-without-function" } },
+        { "determinant": "pattern-clash-adjacency", "instrument": { "type": "tag", "id": "pattern-clash-adjacency" } },
+        { "determinant": "flat-unmodeled-color", "instrument": { "type": "tag", "id": "flat-unmodulated-color-fields" } },
+        { "determinant": "asymmetric-scatter-composition", "instrument": { "type": "tag", "id": "asymmetric-composition" }, "blindSpotNote": "the scatter half is corroborated by scattered-geometric-primitives; the instrument checks the asymmetry half" }
+      ],
+      "checkable": "7/7"
+    }
+  }
+}

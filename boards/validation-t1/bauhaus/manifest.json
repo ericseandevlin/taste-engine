@@ -1,0 +1,453 @@
+{
+  "board": "validation-t1/bauhaus",
+  "kind": "visual-ui",
+  "generated": "2026-07-12T16:26:49.441Z",
+  "items": [
+    {
+      "id": "w001",
+      "file": "bauhaus-01.png",
+      "title": "Bauhaus",
+      "source": {
+        "name": "Bauhaus",
+        "url": null,
+        "local": "boards/validation-t1/bauhaus/bauhaus-01.png",
+        "arena": null
+      },
+      "measured": {
+        "w": 1440,
+        "h": 1200,
+        "aspect": 1.2,
+        "palette": [
+          {
+            "hex": "#ffffff",
+            "pct": 31
+          },
+          {
+            "hex": "#003399",
+            "pct": 27
+          },
+          {
+            "hex": "#cc3333",
+            "pct": 9
+          },
+          {
+            "hex": "#666666",
+            "pct": 6
+          },
+          {
+            "hex": "#cccccc",
+            "pct": 5
+          }
+        ],
+        "contrast": 0.319,
+        "density": 0.048,
+        "accentCoverage": 0.7839,
+        "accentHueCount": 4
+      },
+      "tags": [
+        "active-negative-space",
+        "asymmetric-composition",
+        "bold-primary",
+        "deliberate-misalignment-or-overlap",
+        "extreme-type-scale-contrast",
+        "flat-geometric-primitives",
+        "flat-unmodulated-color-fields",
+        "flush-left-ragged-right",
+        "full-bleed-imagery",
+        "grotesk-display",
+        "hard-edged-zero-effects",
+        "heavy-rule-scaffolding",
+        "high-chroma",
+        "low-density",
+        "objective-documentary-imagery",
+        "process-documentation",
+        "restricted-palette-single-accent",
+        "single-sans-family",
+        "size-weight-position-hierarchy",
+        "tilted-rotated-elements",
+        "undisguised-construction",
+        "warm-ground"
+      ],
+      "channels": [
+        "process-documentation",
+        "oversized-wordmark",
+        "bold-primary-block"
+      ],
+      "notes": {
+        "why": "Rotated red bar and bold primary color blocks anchor an asymmetric layout of documentary photography and sans-serif type, creating dynamic tension between ordered grid alignment and purposeful collision.",
+        "avoid": "Do not treat the geometric shapes as decorative ornament—they are structural anchors that organize and frame the photographic content; avoid softening their hard edges or adding effects.",
+        "keep": "The tilted red bar crossing through the composition and the restricted primary color palette (blue, red, yellow) on warm ground create visual momentum while maintaining documentary clarity."
+      }
+    },
+    {
+      "id": "w002",
+      "file": "bauhaus-02.png",
+      "title": "Bauhaus",
+      "source": {
+        "name": "Bauhaus",
+        "url": null,
+        "local": "boards/validation-t1/bauhaus/bauhaus-02.png",
+        "arena": null
+      },
+      "measured": {
+        "w": 1440,
+        "h": 1200,
+        "aspect": 1.2,
+        "palette": [
+          {
+            "hex": "#ffffff",
+            "pct": 64
+          },
+          {
+            "hex": "#cc3333",
+            "pct": 8
+          },
+          {
+            "hex": "#cccccc",
+            "pct": 7
+          },
+          {
+            "hex": "#000000",
+            "pct": 4
+          },
+          {
+            "hex": "#999999",
+            "pct": 4
+          }
+        ],
+        "contrast": 0.29,
+        "density": 0.059,
+        "accentCoverage": 0.191,
+        "accentHueCount": 1
+      },
+      "tags": [
+        "active-negative-space",
+        "asymmetric-composition",
+        "bold-primary",
+        "extreme-type-scale-contrast",
+        "flat-geometric-primitives",
+        "flat-unmodulated-color-fields",
+        "flush-left-ragged-right",
+        "grotesk-display",
+        "hairline-dividers",
+        "hard-edged-zero-effects",
+        "heavy-rule-scaffolding",
+        "high-density",
+        "index-table-listing",
+        "objective-documentary-imagery",
+        "restricted-palette-single-accent",
+        "single-sans-family",
+        "size-weight-position-hierarchy",
+        "undisguised-construction"
+      ],
+      "channels": [
+        "grid-index",
+        "process-documentation",
+        "bold-primary-block"
+      ],
+      "notes": {
+        "why": "A simple, functional price list uses stark red bars and hairline rules to anchor a dense information hierarchy built entirely from sans-serif weight and size shifts, with deliberate geometric shapes breaking the grid for visual punctuation.",
+        "avoid": "Attempting to soften the aesthetic with rounded corners, shadows, or intermediate accent colors would undermine the utilitarian directness and information-first logic.",
+        "keep": "The red bar and geometric triangle and diagonal rule as pure compositional mass—they carry no data but anchor the eye and inject energy into an otherwise type-driven layout."
+      }
+    },
+    {
+      "id": "w003",
+      "file": "bauhaus-03.png",
+      "title": "Bauhaus",
+      "source": {
+        "name": "Bauhaus",
+        "url": null,
+        "local": "boards/validation-t1/bauhaus/bauhaus-03.png",
+        "arena": null
+      },
+      "measured": {
+        "w": 1440,
+        "h": 1200,
+        "aspect": 1.2,
+        "palette": [
+          {
+            "hex": "#cccccc",
+            "pct": 74
+          },
+          {
+            "hex": "#999999",
+            "pct": 7
+          },
+          {
+            "hex": "#003399",
+            "pct": 5
+          },
+          {
+            "hex": "#666666",
+            "pct": 2
+          },
+          {
+            "hex": "#cc3333",
+            "pct": 2
+          }
+        ],
+        "contrast": 0.205,
+        "density": 0.048,
+        "accentCoverage": 0.137,
+        "accentHueCount": 3
+      },
+      "tags": [
+        "active-negative-space",
+        "asymmetric-composition",
+        "bold-primary",
+        "deliberate-misalignment-or-overlap",
+        "extreme-type-scale-contrast",
+        "flat-geometric-primitives",
+        "flat-unmodulated-color-fields",
+        "flush-left-ragged-right",
+        "grotesk-display",
+        "hard-edged-zero-effects",
+        "heavy-rule-scaffolding",
+        "low-density",
+        "ornament-without-function",
+        "restricted-palette-single-accent",
+        "scattered-geometric-primitives",
+        "single-sans-family",
+        "size-weight-position-hierarchy",
+        "tilted-rotated-elements",
+        "warm-ground"
+      ],
+      "channels": [
+        "oversized-wordmark",
+        "warm-editorial",
+        "bold-primary-block"
+      ],
+      "notes": {
+        "why": "Oversized 'public lectures' headline anchors the page while rotated primary-color shapes and carefully spaced speaker entries create dynamic asymmetry within a disciplined sans-serif grid.",
+        "avoid": "Do not add decorative refinement (shadows, gradients, rounded corners) or center the composition; the power comes from stark geometric contrast and deliberate off-axis placement.",
+        "keep": "The collision between the bold primary-color shapes (red diagonal, blue circle, yellow triangle) and the austere flush-left typography—each element occupying its own spatial zone with no overlap or decoration—produces modernist tension without fussiness."
+      }
+    },
+    {
+      "id": "w004",
+      "file": "bauhaus-04.png",
+      "title": "Bauhaus",
+      "source": {
+        "name": "Bauhaus",
+        "url": null,
+        "local": "boards/validation-t1/bauhaus/bauhaus-04.png",
+        "arena": null
+      },
+      "measured": {
+        "w": 1440,
+        "h": 1200,
+        "aspect": 1.2,
+        "palette": [
+          {
+            "hex": "#000000",
+            "pct": 77
+          },
+          {
+            "hex": "#333333",
+            "pct": 3
+          },
+          {
+            "hex": "#cc3333",
+            "pct": 3
+          },
+          {
+            "hex": "#ffffff",
+            "pct": 2
+          },
+          {
+            "hex": "#330000",
+            "pct": 2
+          }
+        ],
+        "contrast": 0.201,
+        "density": 0.039,
+        "accentCoverage": 0.1779,
+        "accentHueCount": 3
+      },
+      "tags": [
+        "active-negative-space",
+        "asymmetric-composition",
+        "bold-primary",
+        "dark-field",
+        "deliberate-misalignment-or-overlap",
+        "extreme-type-scale-contrast",
+        "flat-geometric-primitives",
+        "flat-unmodulated-color-fields",
+        "flush-left-ragged-right",
+        "grotesk-display",
+        "hard-edged-zero-effects",
+        "heavy-rule-scaffolding",
+        "high-chroma",
+        "low-density",
+        "objective-documentary-imagery",
+        "ornament-without-function",
+        "oversized-wordmark",
+        "process-documentation",
+        "restricted-palette-single-accent",
+        "scattered-geometric-primitives",
+        "single-sans-family",
+        "size-weight-position-hierarchy",
+        "tilted-rotated-elements"
+      ],
+      "channels": [
+        "oversized-wordmark",
+        "process-documentation",
+        "bold-primary-block"
+      ],
+      "notes": {
+        "why": "Bold primary color blocks and geometric shapes anchor asymmetric composition around a dominant oversized wordmark, while dark field and sparse layout prioritize legibility and workshop-document clarity.",
+        "avoid": "Do not center content or add decorative complexity; avoid soft shadows, rounded corners, or gradients that would soften the utilitarian workshop register.",
+        "keep": "The interplay of flat geometric primitives (triangle, square, diagonal line) scattered without function alongside utilitarian type creates visual energy without sacrificing clarity."
+      }
+    },
+    {
+      "id": "w005",
+      "file": "bauhaus-05.png",
+      "title": "Bauhaus",
+      "source": {
+        "name": "Bauhaus",
+        "url": null,
+        "local": "boards/validation-t1/bauhaus/bauhaus-05.png",
+        "arena": null
+      },
+      "measured": {
+        "w": 1440,
+        "h": 1200,
+        "aspect": 1.2,
+        "palette": [
+          {
+            "hex": "#ffffcc",
+            "pct": 39
+          },
+          {
+            "hex": "#333333",
+            "pct": 23
+          },
+          {
+            "hex": "#003399",
+            "pct": 9
+          },
+          {
+            "hex": "#ffffff",
+            "pct": 4
+          },
+          {
+            "hex": "#cccccc",
+            "pct": 3
+          }
+        ],
+        "contrast": 0.33,
+        "density": 0.064,
+        "accentCoverage": 0.2126,
+        "accentHueCount": 2
+      },
+      "tags": [
+        "active-negative-space",
+        "asymmetric-composition",
+        "bold-primary",
+        "extreme-type-scale-contrast",
+        "flat-geometric-primitives",
+        "flat-unmodulated-color-fields",
+        "flush-left-ragged-right",
+        "grotesk-display",
+        "hard-edged-zero-effects",
+        "heavy-rule-scaffolding",
+        "high-chroma",
+        "index-table-listing",
+        "low-density",
+        "objective-documentary-imagery",
+        "process-documentation",
+        "restricted-palette-single-accent",
+        "scattered-geometric-primitives",
+        "single-sans-family",
+        "size-weight-position-hierarchy",
+        "type-as-image",
+        "undisguised-construction",
+        "warm-ground"
+      ],
+      "channels": [
+        "oversized-wordmark",
+        "process-documentation",
+        "grid-index"
+      ],
+      "notes": {
+        "why": "A bold red wordmark and geometric shapes dominate a sparse warm ground, anchored by a heavy horizontal rule and a systematic grid of documentary project cards below.",
+        "avoid": "Avoid centering the composition or adding decorative detail to the geometric shapes—their crude flatness and off-center placement is what makes the asymmetry work.",
+        "keep": "The juxtaposition of an oversized playful word-image against a rigorous indexing structure below, held together by a single heavy line and a two-color palette."
+      }
+    },
+    {
+      "id": "w006",
+      "file": "bauhaus-06.png",
+      "title": "Bauhaus",
+      "source": {
+        "name": "Bauhaus",
+        "url": null,
+        "local": "boards/validation-t1/bauhaus/bauhaus-06.png",
+        "arena": null
+      },
+      "measured": {
+        "w": 1440,
+        "h": 1200,
+        "aspect": 1.2,
+        "palette": [
+          {
+            "hex": "#999999",
+            "pct": 81
+          },
+          {
+            "hex": "#666666",
+            "pct": 6
+          },
+          {
+            "hex": "#000000",
+            "pct": 5
+          },
+          {
+            "hex": "#cc3333",
+            "pct": 4
+          },
+          {
+            "hex": "#333333",
+            "pct": 2
+          }
+        ],
+        "contrast": 0.144,
+        "density": 0.033,
+        "accentCoverage": 0.0644,
+        "accentHueCount": 1
+      },
+      "tags": [
+        "active-negative-space",
+        "asymmetric-composition",
+        "bold-primary",
+        "extreme-type-scale-contrast",
+        "flat-geometric-primitives",
+        "flat-unmodulated-color-fields",
+        "grotesk-display",
+        "hard-edged-zero-effects",
+        "heavy-rule-scaffolding",
+        "low-density",
+        "objective-documentary-imagery",
+        "ornament-without-function",
+        "process-documentation",
+        "restricted-palette-single-accent",
+        "scattered-geometric-primitives",
+        "single-sans-family",
+        "size-weight-position-hierarchy",
+        "type-as-image"
+      ],
+      "channels": [
+        "process-documentation",
+        "type-as-image",
+        "bold-primary-block"
+      ],
+      "notes": {
+        "why": "Oversized numbered type anchors a sparse layout where flat geometric shapes and documentary text about workshop process balance unequally around negative space.",
+        "avoid": "Do not add decorative depth, shadows, or rounded corners; the stark flatness and orthogonal geometry are essential to the utilitarian register.",
+        "keep": "The giant red numeral as compositional anchor paired with geometric primitives (circle, diamond, bar) and flush-left documentary text establishes a repeatable system for multi-page workshop documentation."
+      }
+    }
+  ]
+}

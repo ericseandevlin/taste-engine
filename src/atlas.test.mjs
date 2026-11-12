@@ -40,6 +40,12 @@ test('renders one section per channel with its recipe', () => {
   assert.ok(html.includes('forbidden'));
 });
 
+test('channel names are labeled as interpretive display metadata', () => {
+  const { m, channels } = fixture();
+  const html = renderAtlas(m, channels);
+  assert.ok(html.includes('interpretive display labels, not measurements'));
+});
+
 test('palette swatches carry the recorded hex', () => {
   const { m, channels } = fixture();
   const html = renderAtlas(m, channels);

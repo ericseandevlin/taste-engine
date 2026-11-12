@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Fizz - Small Batch Sparkling Water</title>
+<meta name="viewport" content="width=1440">
+<style>
+  :root{
+    --ink:#121212;
+    --paper:#fbf3e7;
+    --red:#e83e2f;
+    --cobalt:#2748d8;
+    --yellow:#ffcf3f;
+    --peach:#ffc9a8;
+    --mint:#a3e8cb;
+    --lav:#c3b2f2;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:var(--paper);}
+  body{
+    width:1440px;
+    font-family:-apple-system, "Helvetica Neue", Arial, sans-serif;
+    color:var(--ink);
+    position:relative;
+  }
+  .page{width:1440px;position:relative;}
+  .ornament{position:absolute; pointer-events:none;}
+
+  header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:32px 74px;
+    background:var(--mint);
+    border-bottom:2px solid var(--ink);
+  }
+  .logo{
+    font-weight:900;
+    font-size:30px;
+    letter-spacing:-1px;
+    transform:rotate(-4deg);
+    display:inline-block;
+    color:var(--red);
+    -webkit-text-stroke:1.5px var(--ink);
+  }
+  nav a{
+    color:var(--ink);
+    text-decoration:none;
+    font-weight:700;
+    margin-left:28px;
+    font-size:15px;
+  }
+  .buy-btn{
+    background:var(--yellow);
+    border:2px solid var(--ink);
+    padding:10px 20px;
+    font-weight:900;
+    box-shadow:3px 3px 0 var(--ink);
+  }
+
+  .hero{
+    position:relative;
+    padding:20px 74px 100px;
+    display:flex;
+    align-items:center;
+    gap:60px;
+    overflow:hidden;
+  }
+  .hero-copy{
+    flex:1;
+    position:relative;
+    z-index:5;
+  }
+  .hero-copy h1{
+    font-size:76px;
+    font-weight:900;
+    line-height:0.95;
+    letter-spacing:-1px;
+    margin:0;
+  }
+  .hero-copy p{
+    font-size:18px;
+    font-weight:600;
+    max-width:420px;
+    margin-top:22px;
+  }
+
+  .can-stage{
+    flex:1;
+    position:relative;
+    height:520px;
+    display:flex;
+    align-items:flex-end;
+    justify-content:center;
+  }
+  .pedestal{
+    position:absolute;
+    bottom:0;
+    left:50%;
+    transform:translateX(-50%);
+    width:380px;
+    height:110px;
+    border:2px solid var(--ink);
+    background-color:var(--paper);
+    background-image:
+      radial-gradient(circle at 15% 30%, var(--red) 0 7px, transparent 7px),
+      radial-gradient(circle at 35% 70%, var(--cobalt) 0 6px, transparent 6px),
+      radial-gradient(circle at 55% 25%, var(--yellow) 0 8px, transparent 8px),
+      radial-gradient(circle at 75% 60%, var(--mint) 0 6px, transparent 6px),
+      radial-gradient(circle at 90% 35%, var(--ink) 0 4px, transparent 4px),
+      radial-gradient(circle at 22% 55%, var(--lav) 0 5px, transparent 5px);
+    background-size:120px 120px;
+  }
+  .can{
+    position:relative;
+    width:150px;
+    height:340px;
+    background:var(--cobalt);
+    border:2px solid var(--ink);
+    border-radius:16px 16px 26px 26px;
+    z-index:4;
+    margin-bottom:100px;
+    box-shadow:10px 10px 0 var(--red);
+  }
+  .can .can-label{
+    position:absolute;
+    top:110px;
+    left:0;
+    right:0;
+    text-align:center;
+    color:var(--paper);
+    font-weight:900;
+    font-size:22px;
+    letter-spacing:1px;
+  }
+  .can .can-ring{
+    position:absolute;
+    left:0;
+    right:0;
+    height:16px;
+    background:var(--paper);
+    border-top:1px solid var(--ink);
+    border-bottom:1px solid var(--ink);
+  }
+  .can .ring-top{top:60px;}
+  .can .ring-bottom{bottom:60px;}
+  .fizz-dot{
+    position:absolute;
+    border-radius:50%;
+    background:var(--paper);
+    border:2px solid var(--ink);
+  }
+
+  .squiggle-field{
+    background-color:var(--paper);
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='32'><path d='M0 8 Q 8 0 16 8 T 32 8 T 48 8 T 64 8' fill='none' stroke='%23121212' stroke-width='1.5'/><path d='M0 24 Q 8 16 16 24 T 32 24 T 48 24 T 64 24' fill='none' stroke='%23121212' stroke-width='1.5'/></svg>");
+    background-size:64px 32px;
+  }
+  .speckle-half{
+    background-color:var(--peach);
+    background-image:
+      radial-gradient(circle at 15% 30%, var(--red) 0 7px, transparent 7px),
+      radial-gradient(circle at 35% 70%, var(--cobalt) 0 6px, transparent 6px),
+      radial-gradient(circle at 55% 25%, var(--yellow) 0 8px, transparent 8px),
+      radial-gradient(circle at 75% 60%, var(--mint) 0 6px, transparent 6px),
+      radial-gradient(circle at 90% 35%, var(--ink) 0 4px, transparent 4px),
+      radial-gradient(circle at 22% 55%, var(--lav) 0 5px, transparent 5px);
+    background-size:140px 140px;
+  }
+  .clash-band{
+    display:flex;
+    height:140px;
+    border-top:2px solid var(--ink);
+    border-bottom:2px solid var(--ink);
+  }
+  .clash-band .half{flex:1;}
+
+  section.flavors{
+    padding:70px 74px 100px;
+    background:var(--mint);
+    border-top:2px solid var(--ink);
+    border-bottom:2px solid var(--ink);
+    position:relative;
+    overflow:hidden;
+  }
+  section.flavors h2{
+    font-size:42px;
+    font-weight:900;
+    margin:0 0 44px;
+    position:relative;
+    z-index:4;
+  }
+  .flavor-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:32px;
+    position:relative;
+    z-index:4;
+  }
+  .flavor-card{
+    background:var(--paper);
+    border:2px solid var(--ink);
+    padding:26px;
+    box-shadow:7px 7px 0 var(--red);
+    position:relative;
+  }
+  .flavor-card:nth-child(1){transform:rotate(-3deg);}
+  .flavor-card:nth-child(2){transform:rotate(2deg); box-shadow:7px 7px 0 var(--cobalt);}
+  .flavor-card:nth-child(3){transform:rotate(-2deg); box-shadow:7px 7px 0 var(--yellow);}
+  .flavor-swatch{
+    width:56px;
+    height:56px;
+    border:3px solid var(--ink);
+    margin-bottom:14px;
+  }
+  .flavor-card h3{
+    font-size:22px;
+    font-weight:900;
+    margin:0 0 6px;
+  }
+  .flavor-card p{
+    font-size:14px;
+    font-weight:600;
+    margin:0;
+  }
+
+  section.retailers{
+    padding:70px 74px 100px;
+  }
+  section.retailers h2{
+    font-size:38px;
+    font-weight:900;
+    margin:0 0 30px;
+  }
+  .retailer-row{
+    display:flex;
+    gap:24px;
+    flex-wrap:wrap;
+  }
+  .retailer-chip{
+    border:2px solid var(--ink);
+    padding:14px 24px;
+    font-weight:800;
+    font-size:15px;
+    background:var(--peach);
+  }
+  .retailer-chip:nth-child(3n+1){transform:rotate(-3deg); background:var(--lav);}
+  .retailer-chip:nth-child(3n+2){transform:rotate(2deg); background:var(--yellow);}
+
+  footer{
+    padding:18px 74px;
+    background:var(--ink);
+    color:var(--paper);
+    display:flex;
+    justify-content:space-between;
+    font-size:14px;
+    font-weight:700;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="logo">FIZZ</div>
+    <nav>
+      <a href="#">Flavors</a>
+      <a href="#">Find Us</a>
+      <a href="#">Our Story</a>
+      <a href="#" class="buy-btn">Shop Now</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <svg class="ornament" style="top:20px; left:-60px; width:380px; height:380px;" viewBox="0 0 100 100">
+      <rect x="8" y="8" width="84" height="84" fill="#ffc9a8" stroke="#121212" stroke-width="1.5" transform="rotate(12 50 50)"/>
+    </svg>
+    <svg class="ornament" style="top:410px; left:60px; width:440px; height:66px;" viewBox="0 0 440 66">
+      <path d="M10 38 Q 36 4, 62 38 T 114 38 T 166 38 T 218 38 T 270 38 T 322 38 T 374 38 T 430 38" fill="none" stroke="#2748d8" stroke-width="10" stroke-linecap="round"/>
+    </svg>
+    <svg class="ornament" style="top:490px; left:220px; width:360px; height:58px;" viewBox="0 0 360 58">
+      <path d="M8 32 Q 31 2, 54 32 T 100 32 T 146 32 T 192 32 T 238 32 T 284 32 T 330 32 T 352 32" fill="none" stroke="#e83e2f" stroke-width="9" stroke-linecap="round"/>
+    </svg>
+    <svg class="ornament" style="top:16px; left:560px; width:64px; height:64px;" viewBox="0 0 100 100">
+      <polygon points="50,5 95,95 5,95" fill="#a3e8cb" stroke="#121212" stroke-width="2"/>
+    </svg>
+    <svg class="ornament" style="top:470px; left:560px; width:54px; height:54px;" viewBox="0 0 100 100">
+      <rect x="30" y="10" width="14" height="80" fill="#2748d8"/>
+      <rect x="10" y="30" width="80" height="14" fill="#2748d8"/>
+    </svg>
+    <div class="hero-copy">
+      <h1>Sparkling water with an actual opinion.</h1>
+      <p>Small batch, three flavors, zero sugar. Yuzu, hibiscus, cucumber-mint. Carbonated
+      hard enough to notice.</p>
+    </div>
+    <div class="can-stage">
+      <svg class="ornament" style="top:40px; left:8%; width:300px; height:300px;" viewBox="0 0 100 100"><circle cx="50" cy="50" r="47" fill="#c3b2f2" stroke="#121212" stroke-width="1.5"/></svg>
+      <svg class="ornament" style="top:10px; left:40%; width:26px; height:26px;" viewBox="0 0 20 20"><circle cx="10" cy="10" r="9" fill="none" stroke="#121212" stroke-width="2"/></svg>
+      <svg class="ornament" style="top:60px; left:60%; width:18px; height:18px;" viewBox="0 0 20 20"><circle cx="10" cy="10" r="9" fill="#e83e2f"/></svg>
+      <svg class="ornament" style="top:110px; left:35%; width:14px; height:14px;" viewBox="0 0 20 20"><circle cx="10" cy="10" r="9" fill="#ffcf3f"/></svg>
+      <svg class="ornament" style="top:20px; left:52%; width:12px; height:12px;" viewBox="0 0 20 20"><circle cx="10" cy="10" r="9" fill="none" stroke="#2748d8" stroke-width="2"/></svg>
+      <div class="pedestal"></div>
+      <div class="can">
+        <div class="can-ring ring-top"></div>
+        <div class="can-label">YUZU</div>
+        <div class="can-ring ring-bottom"></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="clash-band">
+    <div class="half squiggle-field"></div>
+    <div class="half speckle-half"></div>
+  </div>
+
+  <section class="flavors">
+    <svg class="ornament" style="top:-30px; left:-30px; width:160px; height:160px;" viewBox="0 0 100 100">
+      <path d="M10 50 Q 25 20, 40 50 T 70 50 T 100 50" fill="none" stroke="#e83e2f" stroke-width="6" stroke-linecap="round"/>
+    </svg>
+    <h2>Three flavors, no fillers</h2>
+    <div class="flavor-grid">
+      <div class="flavor-card">
+        <div class="flavor-swatch" style="background:var(--yellow);"></div>
+        <h3>Yuzu</h3>
+        <p>Bright citrus, sharp on the front end, no sweetener aftertaste.</p>
+      </div>
+      <div class="flavor-card">
+        <div class="flavor-swatch" style="background:var(--lav);"></div>
+        <h3>Hibiscus</h3>
+        <p>Tart and floral, steeped in-house before carbonation.</p>
+      </div>
+      <div class="flavor-card">
+        <div class="flavor-swatch" style="background:var(--mint);"></div>
+        <h3>Cucumber Mint</h3>
+        <p>Cool and green, the one people grab in July.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="retailers">
+    <h2>Find Fizz nearby</h2>
+    <div class="retailer-row">
+      <div class="retailer-chip">Green Aisle Market</div>
+      <div class="retailer-chip">Corner Provisions</div>
+      <div class="retailer-chip">Fielding Co-op</div>
+      <div class="retailer-chip">Union Grocer</div>
+      <div class="retailer-chip">Bramblewood Foods</div>
+    </div>
+  </section>
+
+  <footer>
+    <div>FIZZ BEVERAGE CO.</div>
+    <div>Made in small batches, Portland OR</div>
+  </footer>
+
+</div>
+</body>
+</html>
