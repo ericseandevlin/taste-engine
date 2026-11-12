@@ -7,3 +7,11 @@ node_modules/
 # ignore ad-hoc captures elsewhere.
 boards/*/generated/**/*.png
 !boards/demo/generated/**/*.png
+
+# Eric's private focused board: real designers' screenshots, NEVER committed (symlink into Life-OS)
+/boards/swiss-focus
+/boards/face-treatments
+/boards/flat-layering
+/boards/negative-space
+/boards/experimental-type
+/boards/gothic-heraldry

@@ -41,11 +41,16 @@ export function buildClusterInput(manifest) {
   }));
 }
 
-function buildClusterPrompt(input, channelSeeds) {
+export function buildClusterPrompt(input, channelSeeds) {
   return [
     `You are clustering ${input.length} website/UI references into visual DNA channels.`,
     'Group by shared BEHAVIOR (how they compose), not by subject. Aim for 6-12 channels.',
     'Each channel is a generative recipe an agent can build from — not an adjective.',
+    '',
+    'HARD RULE: channel ids and names must describe visible BEHAVIOR (what the layout, type,',
+    'or color DOES), never a named style, movement, era, or brand. Ids like "swiss", "bauhaus",',
+    '"brutalist", "memphis", or "art deco" are forbidden. Names are display-layer metadata,',
+    'not measurements.',
     '',
     `Prior channel ideas to use as seeds (revise freely based on the data): ${channelSeeds.join(', ')}.`,
     '',

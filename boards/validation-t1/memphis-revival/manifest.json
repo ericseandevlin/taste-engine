@@ -1,0 +1,472 @@
+{
+  "board": "validation-t1/memphis-revival",
+  "kind": "visual-ui",
+  "generated": "2026-07-12T16:28:07.199Z",
+  "items": [
+    {
+      "id": "w001",
+      "file": "memphis-revival-01.png",
+      "title": "Memphis Revival",
+      "source": {
+        "name": "Memphis Revival",
+        "url": null,
+        "local": "boards/validation-t1/memphis-revival/memphis-revival-01.png",
+        "arena": null
+      },
+      "measured": {
+        "w": 1440,
+        "h": 1200,
+        "aspect": 1.2,
+        "palette": [
+          {
+            "hex": "#ffcc66",
+            "pct": 38
+          },
+          {
+            "hex": "#ffccff",
+            "pct": 9
+          },
+          {
+            "hex": "#ffffff",
+            "pct": 7
+          },
+          {
+            "hex": "#99ffcc",
+            "pct": 7
+          },
+          {
+            "hex": "#cc9999",
+            "pct": 4
+          }
+        ],
+        "contrast": 0.19,
+        "density": 0.072,
+        "accentCoverage": 0.3142,
+        "accentHueCount": 5
+      },
+      "tags": [
+        "active-negative-space",
+        "asymmetric-composition",
+        "black-keyline-outlines",
+        "black-white-counterchange-pattern",
+        "bold-primary",
+        "deliberate-misalignment-or-overlap",
+        "extreme-type-scale-contrast",
+        "flat-geometric-primitives",
+        "flat-unmodulated-color-fields",
+        "grotesk-display",
+        "hard-edged-zero-effects",
+        "heavy-rule-scaffolding",
+        "high-chroma",
+        "low-density",
+        "ornament-without-function",
+        "pattern-clash-adjacency",
+        "restricted-palette-single-accent",
+        "scattered-geometric-primitives",
+        "single-sans-family",
+        "size-weight-position-hierarchy",
+        "squiggle-motif",
+        "tilted-rotated-elements",
+        "undisguised-construction",
+        "warm-ground"
+      ],
+      "channels": [
+        "process-documentation",
+        "bold-primary-block",
+        "type-as-image"
+      ],
+      "notes": {
+        "why": "Playful typographic hierarchy and geometric abstraction on a warm ground create energy without visual fussiness, using color, scale, and compositional offset to organize event information.",
+        "avoid": "Don't apply effects, shadows, or rounded corners to the geometric elements; the flatness and hard edges are essential to the craft.",
+        "keep": "The tilted squiggle lines and scattered geometric shapes floating above and around the structured text blocks—they signal informality while the rigid sans-serif typography and color-blocked info boxes keep the practical details scannable."
+      }
+    },
+    {
+      "id": "w002",
+      "file": "memphis-revival-02.png",
+      "title": "Memphis Revival",
+      "source": {
+        "name": "Memphis Revival",
+        "url": null,
+        "local": "boards/validation-t1/memphis-revival/memphis-revival-02.png",
+        "arena": null
+      },
+      "measured": {
+        "w": 1440,
+        "h": 1200,
+        "aspect": 1.2,
+        "palette": [
+          {
+            "hex": "#ffccff",
+            "pct": 38
+          },
+          {
+            "hex": "#99ffcc",
+            "pct": 13
+          },
+          {
+            "hex": "#ffffff",
+            "pct": 8
+          },
+          {
+            "hex": "#3333cc",
+            "pct": 6
+          },
+          {
+            "hex": "#cccccc",
+            "pct": 5
+          }
+        ],
+        "contrast": 0.195,
+        "density": 0.051,
+        "accentCoverage": 0.7988,
+        "accentHueCount": 7
+      },
+      "tags": [
+        "active-negative-space",
+        "asymmetric-composition",
+        "black-keyline-outlines",
+        "bold-primary",
+        "deliberate-misalignment-or-overlap",
+        "extreme-type-scale-contrast",
+        "flat-geometric-primitives",
+        "flat-unmodulated-color-fields",
+        "flush-left-ragged-right",
+        "grotesk-display",
+        "hard-edged-zero-effects",
+        "heavy-rule-scaffolding",
+        "high-chroma",
+        "low-density",
+        "ornament-without-function",
+        "pattern-clash-adjacency",
+        "playful-geometry",
+        "restricted-palette-single-accent",
+        "scattered-geometric-primitives",
+        "single-sans-family",
+        "size-weight-position-hierarchy",
+        "speckle-chip-pattern",
+        "squiggle-motif",
+        "tilted-rotated-elements",
+        "warm-ground"
+      ],
+      "channels": [
+        "bold-primary-block",
+        "type-as-image",
+        "dimensional-playful"
+      ],
+      "notes": {
+        "why": "Large primary-color blocks and scattered geometric ornament create visual energy while maintaining legibility through clear typographic hierarchy and generous negative space.",
+        "avoid": "Do not overload the composition with additional pattern or imagery; the page works because ornament is sparse and shapes are elementary, leaving room for the content to breathe.",
+        "keep": "The combination of bold saturated color fields (mint green, pink, yellow) with flat geometric shapes and hand-drawn squiggle lines as pure decoration, placed asymmetrically around a clean typographic core."
+      }
+    },
+    {
+      "id": "w003",
+      "file": "memphis-revival-03.png",
+      "title": "Memphis Revival",
+      "source": {
+        "name": "Memphis Revival",
+        "url": null,
+        "local": "boards/validation-t1/memphis-revival/memphis-revival-03.png",
+        "arena": null
+      },
+      "measured": {
+        "w": 1440,
+        "h": 1200,
+        "aspect": 1.2,
+        "palette": [
+          {
+            "hex": "#ffffcc",
+            "pct": 34
+          },
+          {
+            "hex": "#3333cc",
+            "pct": 28
+          },
+          {
+            "hex": "#9999cc",
+            "pct": 11
+          },
+          {
+            "hex": "#669999",
+            "pct": 7
+          },
+          {
+            "hex": "#cccc99",
+            "pct": 3
+          }
+        ],
+        "contrast": 0.279,
+        "density": 0.05,
+        "accentCoverage": 0.4575,
+        "accentHueCount": 2
+      },
+      "tags": [
+        "active-negative-space",
+        "asymmetric-composition",
+        "black-white-counterchange-pattern",
+        "bold-primary",
+        "deliberate-misalignment-or-overlap",
+        "extreme-type-scale-contrast",
+        "flat-geometric-primitives",
+        "flat-unmodulated-color-fields",
+        "flush-left-ragged-right",
+        "full-bleed-imagery",
+        "grotesk-display",
+        "hard-edged-zero-effects",
+        "high-chroma",
+        "low-density",
+        "ornament-without-function",
+        "pattern-clash-adjacency",
+        "restricted-palette-single-accent",
+        "scattered-geometric-primitives",
+        "single-sans-family",
+        "size-weight-position-hierarchy",
+        "squiggle-motif",
+        "tilted-rotated-elements",
+        "undisguised-construction",
+        "warm-ground"
+      ],
+      "channels": [
+        "oversized-wordmark",
+        "warm-editorial",
+        "bold-primary-block"
+      ],
+      "notes": {
+        "why": "Oversized bold headlines anchored by warm cream ground and primary blue block create immediate visual hierarchy; scattered geometric shapes and pattern clash energize without competing with type.",
+        "avoid": "Do not apply consistent padding or centered symmetry; the roughness and collisions are intentional and would be lost with refinement.",
+        "keep": "The pattern clash between wavy lines and checkerboard zones—abrupt, unmodulated, adjacent—delivers visual energy without decoration that serves no purpose beyond stimulation."
+      }
+    },
+    {
+      "id": "w004",
+      "file": "memphis-revival-04.png",
+      "title": "Memphis Revival",
+      "source": {
+        "name": "Memphis Revival",
+        "url": null,
+        "local": "boards/validation-t1/memphis-revival/memphis-revival-04.png",
+        "arena": null
+      },
+      "measured": {
+        "w": 1440,
+        "h": 1200,
+        "aspect": 1.2,
+        "palette": [
+          {
+            "hex": "#ffffff",
+            "pct": 39
+          },
+          {
+            "hex": "#99ffcc",
+            "pct": 18
+          },
+          {
+            "hex": "#cccccc",
+            "pct": 10
+          },
+          {
+            "hex": "#ffcc99",
+            "pct": 8
+          },
+          {
+            "hex": "#99cccc",
+            "pct": 4
+          }
+        ],
+        "contrast": 0.159,
+        "density": 0.044,
+        "accentCoverage": 0.843,
+        "accentHueCount": 6
+      },
+      "tags": [
+        "active-negative-space",
+        "asymmetric-composition",
+        "bold-primary",
+        "extreme-type-scale-contrast",
+        "flat-geometric-primitives",
+        "flat-unmodulated-color-fields",
+        "flush-left-ragged-right",
+        "full-bleed-imagery",
+        "grotesk-display",
+        "hard-edged-zero-effects",
+        "high-chroma",
+        "low-density",
+        "ornament-without-function",
+        "restricted-palette-single-accent",
+        "scattered-geometric-primitives",
+        "size-weight-position-hierarchy",
+        "speckle-chip-pattern",
+        "squiggle-motif",
+        "tilted-rotated-elements",
+        "warm-ground"
+      ],
+      "channels": [
+        "dimensional-playful",
+        "bold-primary-block",
+        "warm-editorial"
+      ],
+      "notes": {
+        "why": "Asymmetric composition balances a bold oversized headline against a sculptural product hero and abstract geometric ornament (wavy lines, triangles, speckles), creating visual energy through deliberate misalignment and pattern collision rather than symmetry.",
+        "avoid": "Do not add drop shadows, gradients, or rounded corners—the flat hard-edged palette and playful geometry already carry the energy; embellishment would clutter.",
+        "keep": "The collision of multiple pattern types (squiggles, speckles, geometric shapes) placed as pure ornament around the product and headline, creating visual excitement without competing with the message."
+      }
+    },
+    {
+      "id": "w005",
+      "file": "memphis-revival-05.png",
+      "title": "Memphis Revival",
+      "source": {
+        "name": "Memphis Revival",
+        "url": null,
+        "local": "boards/validation-t1/memphis-revival/memphis-revival-05.png",
+        "arena": null
+      },
+      "measured": {
+        "w": 1440,
+        "h": 1200,
+        "aspect": 1.2,
+        "palette": [
+          {
+            "hex": "#000000",
+            "pct": 51
+          },
+          {
+            "hex": "#333333",
+            "pct": 7
+          },
+          {
+            "hex": "#666666",
+            "pct": 6
+          },
+          {
+            "hex": "#cc9999",
+            "pct": 5
+          },
+          {
+            "hex": "#999999",
+            "pct": 4
+          }
+        ],
+        "contrast": 0.284,
+        "density": 0.124,
+        "accentCoverage": 0.2403,
+        "accentHueCount": 7
+      },
+      "tags": [
+        "active-negative-space",
+        "asymmetric-composition",
+        "black-white-counterchange-pattern",
+        "bold-primary",
+        "dark-field",
+        "deliberate-misalignment-or-overlap",
+        "extreme-type-scale-contrast",
+        "flat-geometric-primitives",
+        "flat-unmodulated-color-fields",
+        "grotesk-display",
+        "hard-edged-zero-effects",
+        "heavy-rule-scaffolding",
+        "high-chroma",
+        "high-density",
+        "ornament-without-function",
+        "oversized-wordmark",
+        "pattern-clash-adjacency",
+        "restricted-palette-single-accent",
+        "scattered-geometric-primitives",
+        "single-sans-family",
+        "size-weight-position-hierarchy",
+        "squiggle-motif",
+        "tilted-rotated-elements",
+        "type-as-image",
+        "undisguised-construction"
+      ],
+      "channels": [
+        "oversized-wordmark",
+        "bold-primary-block",
+        "type-as-image"
+      ],
+      "notes": {
+        "why": "Massive stacked headlines and scattered primary-color label blocks compete for visual dominance over a dark ground, anchored by orthogonal structure (heavy wavy divider, checkerboard grid) that frames chaos.",
+        "avoid": "Do not soften the edges, add gradients, or center the composition—the off-kilter clash and hard blacks/yellows/pinks are essential to the energy; prettifying it kills the raw festival poster register.",
+        "keep": "The stacked multicolor label blocks (Marigold Static, The Cold Foxes, DJ Perimeter) sitting on a structured checkerboard grid—this marries playful typography hierarchy with utilitarian indexing, making artist names both readable and visual."
+      }
+    },
+    {
+      "id": "w006",
+      "file": "memphis-revival-06.png",
+      "title": "Memphis Revival",
+      "source": {
+        "name": "Memphis Revival",
+        "url": null,
+        "local": "boards/validation-t1/memphis-revival/memphis-revival-06.png",
+        "arena": null
+      },
+      "measured": {
+        "w": 1440,
+        "h": 1200,
+        "aspect": 1.2,
+        "palette": [
+          {
+            "hex": "#ccffff",
+            "pct": 18
+          },
+          {
+            "hex": "#ccccff",
+            "pct": 11
+          },
+          {
+            "hex": "#ffcc33",
+            "pct": 11
+          },
+          {
+            "hex": "#669999",
+            "pct": 7
+          },
+          {
+            "hex": "#ffcccc",
+            "pct": 6
+          }
+        ],
+        "contrast": 0.183,
+        "density": 0.074,
+        "accentCoverage": 0.6602,
+        "accentHueCount": 8
+      },
+      "tags": [
+        "active-negative-space",
+        "asymmetric-composition",
+        "black-keyline-outlines",
+        "bold-primary",
+        "extreme-type-scale-contrast",
+        "flat-geometric-primitives",
+        "flat-unmodulated-color-fields",
+        "grotesk-display",
+        "hard-edged-zero-effects",
+        "high-chroma",
+        "high-density",
+        "index-table-listing",
+        "ornament-without-function",
+        "pattern-clash-adjacency",
+        "playful-geometry",
+        "restricted-palette-single-accent",
+        "scattered-geometric-primitives",
+        "single-sans-family",
+        "size-weight-position-hierarchy",
+        "speckle-chip-pattern",
+        "squiggle-motif",
+        "strict-column-grid",
+        "warm-ground"
+      ],
+      "channels": [
+        "grid-index",
+        "dimensional-playful",
+        "bold-primary-block"
+      ],
+      "notes": {
+        "why": "A product grid with consistent column alignment and bright solid colors creates visual rhythm while decorative geometric patterns and squiggles scattered across the header reinforce playful, mail-centric brand identity.",
+        "avoid": "Do not add shadows, gradients, or rounded corners to the cards—the hard edges and flat fills are essential to the direct, utilitarian aesthetic.",
+        "keep": "The four-column product card grid with black-outlined boxes and saturated spot colors (mint, lavender, pink, yellow) paired with a pattern-clash header (squiggle + speckle + stripes) establishes a distinct, reproducible system."
+      }
+    }
+  ]
+}

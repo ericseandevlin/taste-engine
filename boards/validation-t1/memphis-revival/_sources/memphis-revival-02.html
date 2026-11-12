@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Squiggle Club - After School Art and Building Workshops</title>
+<meta name="viewport" content="width=1440">
+<style>
+  :root{
+    --ink:#161616;
+    --paper:#eae2fa;
+    --orange:#f2542d;
+    --cobalt:#2e4cd6;
+    --yellow:#ffd23f;
+    --mint:#9de8c8;
+    --pink:#ffb3d1;
+    --lav:#c6b8f2;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:var(--paper);}
+  body{
+    width:1440px;
+    font-family:-apple-system, "Helvetica Neue", Arial, sans-serif;
+    color:var(--ink);
+    position:relative;
+  }
+  .page{width:1440px;position:relative;}
+  .ornament{position:absolute; pointer-events:none;}
+
+  .confetti{
+    background-color:var(--paper);
+    background-image:
+      radial-gradient(circle at 8% 15%, var(--orange) 0 7px, transparent 7px),
+      radial-gradient(circle at 22% 55%, var(--cobalt) 0 6px, transparent 6px),
+      radial-gradient(circle at 40% 20%, var(--yellow) 0 8px, transparent 8px),
+      radial-gradient(circle at 60% 60%, var(--pink) 0 6px, transparent 6px),
+      radial-gradient(circle at 78% 25%, var(--ink) 0 5px, transparent 5px),
+      radial-gradient(circle at 90% 70%, var(--lav) 0 7px, transparent 7px),
+      radial-gradient(circle at 15% 85%, var(--mint) 0 6px, transparent 6px),
+      radial-gradient(circle at 55% 90%, var(--orange) 0 5px, transparent 5px);
+    background-size:260px 260px;
+  }
+
+  .squiggle-field{
+    background-color:var(--paper);
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='32'><path d='M0 8 Q 8 0 16 8 T 32 8 T 48 8 T 64 8' fill='none' stroke='%23161616' stroke-width='4'/><path d='M0 24 Q 8 16 16 24 T 32 24 T 48 24 T 64 24' fill='none' stroke='%23161616' stroke-width='4'/></svg>");
+    background-size:64px 32px;
+  }
+  .clash-band{
+    display:flex;
+    height:140px;
+    border-top:5px solid var(--ink);
+    border-bottom:5px solid var(--ink);
+  }
+  .clash-band .half{flex:1;}
+  .clash-band .confetti{background-size:110px 110px;}
+
+  header{
+    padding:36px 70px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:var(--cobalt);
+    border-bottom:6px solid var(--ink);
+  }
+  .logo{
+    font-weight:900;
+    font-size:24px;
+    color:var(--paper);
+    letter-spacing:0.5px;
+    transform:rotate(-3deg);
+    display:inline-block;
+  }
+  nav a{
+    color:var(--paper);
+    text-decoration:none;
+    font-weight:800;
+    margin-left:28px;
+    font-size:15px;
+  }
+  .signup-btn{
+    background:var(--yellow);
+    color:var(--ink);
+    border:3px solid var(--ink);
+    padding:10px 20px;
+    font-weight:900;
+    box-shadow:5px 5px 0 var(--ink);
+    transform:rotate(2deg);
+    display:inline-block;
+  }
+
+  .hero{
+    position:relative;
+    padding:80px 70px 100px;
+    overflow:hidden;
+  }
+  .hero h1{
+    font-size:88px;
+    font-weight:900;
+    line-height:0.92;
+    max-width:760px;
+    letter-spacing:-1px;
+    position:relative;
+    z-index:4;
+    margin:0;
+  }
+  .hero h1 .hi{
+    color:var(--orange);
+    -webkit-text-stroke:2px var(--ink);
+  }
+  .hero p{
+    font-size:20px;
+    font-weight:600;
+    max-width:460px;
+    margin-top:24px;
+    position:relative;
+    z-index:4;
+  }
+
+  .scribble-underline{
+    width:260px;
+    height:26px;
+    margin-top:6px;
+  }
+
+  section.sessions{
+    padding:60px 70px 90px;
+    background:var(--mint);
+    border-top:6px solid var(--ink);
+    border-bottom:6px solid var(--ink);
+    position:relative;
+    overflow:hidden;
+  }
+  section.sessions h2{
+    font-size:44px;
+    font-weight:900;
+    margin:0 0 44px;
+    position:relative;
+    z-index:4;
+  }
+  .session-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:36px;
+    position:relative;
+    z-index:4;
+  }
+  .session-card{
+    background:var(--paper);
+    border:3px solid var(--ink);
+    padding:26px;
+    box-shadow:7px 7px 0 var(--orange);
+  }
+  .session-card:nth-child(2){transform:rotate(-4deg); box-shadow:7px 7px 0 var(--cobalt);}
+  .session-card:nth-child(3){transform:rotate(3deg); box-shadow:7px 7px 0 var(--pink);}
+  .session-card:nth-child(5){transform:rotate(-3deg); box-shadow:7px 7px 0 var(--yellow);}
+  .session-card:nth-child(6){transform:rotate(5deg); box-shadow:7px 7px 0 var(--lav);}
+  .session-card .badge{
+    display:inline-block;
+    background:var(--yellow);
+    border:2px solid var(--ink);
+    padding:3px 10px;
+    font-size:12px;
+    font-weight:800;
+    margin-bottom:12px;
+    text-transform:uppercase;
+  }
+  .session-card h3{
+    font-size:24px;
+    font-weight:900;
+    margin:0 0 8px;
+  }
+  .session-card p{
+    font-size:15px;
+    font-weight:500;
+    margin:0;
+  }
+
+  .block-primitive{
+    position:absolute;
+    width:170px;
+    height:170px;
+    z-index:1;
+  }
+
+  section.calendar{
+    padding:80px 70px;
+    position:relative;
+  }
+  section.calendar h2{
+    font-size:40px;
+    font-weight:900;
+    margin:0 0 36px;
+  }
+  .calendar-strip{
+    display:flex;
+    gap:18px;
+  }
+  .day{
+    flex:1;
+    border:3px solid var(--ink);
+    background:var(--paper);
+    padding:18px 12px;
+    text-align:center;
+    font-weight:800;
+  }
+  .day:nth-child(odd){transform:rotate(-2deg);}
+  .day:nth-child(even){transform:rotate(2deg);}
+  .day .dow{
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    color:#555;
+  }
+  .day .num{
+    font-size:36px;
+    margin:6px 0;
+  }
+  .day.active{
+    background:var(--pink);
+    box-shadow:5px 5px 0 var(--ink);
+  }
+
+  section.signup{
+    padding:80px 70px 100px;
+    background:var(--ink);
+    color:var(--paper);
+    position:relative;
+    overflow:hidden;
+  }
+  section.signup h2{
+    font-size:46px;
+    font-weight:900;
+    max-width:620px;
+    position:relative;
+    z-index:4;
+    margin:0 0 30px;
+  }
+  .form-row{
+    display:flex;
+    gap:16px;
+    position:relative;
+    z-index:4;
+  }
+  .form-row input{
+    flex:1;
+    max-width:340px;
+    padding:16px;
+    border:3px solid var(--paper);
+    background:transparent;
+    color:var(--paper);
+    font-size:15px;
+    font-weight:600;
+  }
+  .form-row input::placeholder{color:#cfcfcf;}
+  .form-row button{
+    background:var(--orange);
+    border:3px solid var(--paper);
+    color:var(--ink);
+    font-weight:900;
+    padding:16px 28px;
+    box-shadow:5px 5px 0 var(--yellow);
+    transform:rotate(-2deg);
+  }
+
+  footer{
+    padding:36px 70px;
+    background:var(--yellow);
+    display:flex;
+    justify-content:space-between;
+    font-weight:800;
+    font-size:14px;
+    border-top:6px solid var(--ink);
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="logo">SQUIGGLE CLUB</div>
+    <nav>
+      <a href="#">Sessions</a>
+      <a href="#">Calendar</a>
+      <a href="#">Pricing</a>
+      <a href="#" class="signup-btn">Sign Up</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Art class, but <span class="hi">louder.</span></h1>
+    <p>Weekly after-school workshops for ages 6 to 11. Paper sculpture, cardboard cities,
+    paint-splatter Fridays. Kids build the thing, not a worksheet about the thing.</p>
+    <svg class="scribble-underline" viewBox="0 0 260 26">
+      <path d="M5 15 Q 20 3, 35 15 T 65 15 T 95 15 T 125 15 T 155 15 T 185 15 T 215 15 T 245 15"
+            fill="none" stroke="#f2542d" stroke-width="6" stroke-linecap="round"/>
+    </svg>
+
+    <svg class="ornament" style="top:40px; left:900px; width:80px; height:80px;" viewBox="0 0 100 100">
+      <polygon points="50,5 95,95 5,95" fill="#ffd23f" stroke="#161616" stroke-width="5"/>
+    </svg>
+    <svg class="ornament" style="top:220px; left:1100px; width:60px; height:60px;" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="45" fill="#c6b8f2" stroke="#161616" stroke-width="5"/>
+    </svg>
+    <svg class="ornament" style="top:60px; left:1220px; width:70px; height:70px;" viewBox="0 0 100 100">
+      <rect x="30" y="10" width="12" height="80" fill="#161616"/>
+      <rect x="10" y="30" width="80" height="12" fill="#161616"/>
+    </svg>
+    <svg class="ornament" style="top:320px; left:980px; width:90px; height:50px;" viewBox="0 0 100 60">
+      <path d="M5 30 L25 10 L45 30 L65 10 L85 30" fill="none" stroke="#f2542d" stroke-width="7" stroke-linecap="round"/>
+    </svg>
+    <svg class="ornament" style="top:400px; left:620px; width:460px; height:70px;" viewBox="0 0 460 70">
+      <path d="M10 40 Q 38 5, 66 40 T 122 40 T 178 40 T 234 40 T 290 40 T 346 40 T 402 40 T 450 40" fill="none" stroke="#2e4cd6" stroke-width="10" stroke-linecap="round"/>
+    </svg>
+    <svg class="ornament" style="top:150px; left:800px; width:340px; height:56px;" viewBox="0 0 340 56">
+      <path d="M8 32 Q 30 2, 52 32 T 96 32 T 140 32 T 184 32 T 228 32 T 272 32 T 316 32 T 332 32" fill="none" stroke="#ffb3d1" stroke-width="9" stroke-linecap="round"/>
+    </svg>
+  </section>
+
+  <div class="clash-band">
+    <div class="half squiggle-field"></div>
+    <div class="half confetti"></div>
+  </div>
+
+  <section class="sessions">
+    <svg class="block-primitive" style="top:-40px; right:-40px;" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="45" fill="#ffb3d1" stroke="#161616" stroke-width="4"/>
+    </svg>
+    <h2>Pick a session</h2>
+    <div class="session-grid">
+      <div class="session-card">
+        <div class="badge">Mondays</div>
+        <h3>Paper Sculpture</h3>
+        <p>Fold, cut, and stack paper into things that stand up on their own.</p>
+      </div>
+      <div class="session-card">
+        <div class="badge">Wednesdays</div>
+        <h3>Cardboard Cities</h3>
+        <p>A shared tabletop city, block by block, built over six weeks.</p>
+      </div>
+      <div class="session-card">
+        <div class="badge">Fridays</div>
+        <h3>Paint Splatter</h3>
+        <p>Drop cloths down, brushes out. This one gets messy on purpose.</p>
+      </div>
+      <div class="session-card">
+        <div class="badge">Tuesdays</div>
+        <h3>Clay Club</h3>
+        <p>Hand-building with air-dry clay, no wheel required.</p>
+      </div>
+      <div class="session-card">
+        <div class="badge">Thursdays</div>
+        <h3>Puppet Lab</h3>
+        <p>Sock puppets, shadow puppets, and a tiny stage to show them off.</p>
+      </div>
+      <div class="session-card">
+        <div class="badge">Saturdays</div>
+        <h3>Big Build Day</h3>
+        <p>One giant project, all morning, all hands on deck.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="calendar">
+    <h2>This week</h2>
+    <div class="calendar-strip">
+      <div class="day"><div class="dow">Mon</div><div class="num">14</div>Paper</div>
+      <div class="day active"><div class="dow">Tue</div><div class="num">15</div>Clay</div>
+      <div class="day"><div class="dow">Wed</div><div class="num">16</div>Cardboard</div>
+      <div class="day"><div class="dow">Thu</div><div class="num">17</div>Puppets</div>
+      <div class="day active"><div class="dow">Fri</div><div class="num">18</div>Paint</div>
+    </div>
+  </section>
+
+  <section class="signup">
+    <svg class="ornament" style="top:20px; left:1000px; width:120px; height:120px;" viewBox="0 0 100 100">
+      <polygon points="50,10 61,39 92,39 67,58 76,88 50,70 24,88 33,58 8,39 39,39" fill="#ffd23f"/>
+    </svg>
+    <svg class="ornament" style="bottom:10px; left:850px; width:70px; height:70px;" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="45" fill="none" stroke="#f2542d" stroke-width="8"/>
+    </svg>
+    <h2>Save a spot for your kid before sessions fill up.</h2>
+    <div class="form-row">
+      <input type="text" placeholder="Parent name">
+      <input type="email" placeholder="Email address">
+      <button type="button">Reserve a spot</button>
+    </div>
+  </section>
+
+  <footer>
+    <div>SQUIGGLE CLUB, EST. 2019</div>
+    <div>412 Birch Street, studio open 3-6pm weekdays</div>
+  </footer>
+
+</div>
+</body>
+</html>

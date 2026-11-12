@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Loop City - Weekend Festival</title>
+<meta name="viewport" content="width=1440">
+<style>
+  :root{
+    --ink:#141414;
+    --paper:#f5f0e2;
+    --red:#e0392c;
+    --cobalt:#233fd0;
+    --yellow:#f7c93f;
+    --mint:#9fe3bf;
+    --pink:#f4addb;
+    --lav:#bdaaf0;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:var(--ink);}
+  body{
+    width:1440px;
+    font-family:-apple-system, "Helvetica Neue", Arial, sans-serif;
+    color:var(--ink);
+    position:relative;
+  }
+  .page{width:1440px;position:relative;}
+  .ornament{position:absolute; pointer-events:none;}
+
+  header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:32px 74px;
+  }
+  .logo{
+    font-weight:900;
+    font-size:26px;
+    letter-spacing:1px;
+    transform:rotate(-3deg);
+    display:inline-block;
+    background:var(--yellow);
+    border:3px solid var(--ink);
+    padding:6px 14px;
+    box-shadow:5px 5px 0 var(--ink);
+  }
+  nav a{
+    color:var(--paper);
+    text-decoration:none;
+    font-weight:700;
+    margin-left:26px;
+    font-size:15px;
+  }
+  .ticket-btn{
+    background:var(--red);
+    color:var(--paper);
+    border:3px solid var(--ink);
+    padding:10px 20px;
+    font-weight:900;
+    box-shadow:5px 5px 0 var(--ink);
+    transform:rotate(2deg);
+    display:inline-block;
+  }
+
+  .hero{
+    position:relative;
+    padding:30px 74px 90px;
+    overflow:hidden;
+  }
+  .hero h1{
+    font-size:100px;
+    font-weight:900;
+    line-height:1.04;
+    letter-spacing:-2px;
+    margin:0;
+    position:relative;
+    z-index:4;
+  }
+  .hero h1 span{
+    display:inline-block;
+    padding:0 22px;
+    border:4px solid var(--ink);
+    color:var(--ink);
+  }
+  .hero h1 .l1{background:var(--yellow); transform:rotate(-3deg);}
+  .hero h1 .l2{background:var(--pink); transform:rotate(2deg);}
+  .hero h1 .l3{background:var(--mint); transform:rotate(-2deg);}
+  .hero .dates{
+    font-size:22px;
+    font-weight:700;
+    margin-top:24px;
+    position:relative;
+    z-index:4;
+    color:var(--paper);
+  }
+  .zigzag-divider{
+    width:100%;
+    height:60px;
+    position:relative;
+    z-index:3;
+  }
+
+  section.lineup{
+    padding:20px 74px 30px;
+    position:relative;
+  }
+  section.lineup h2{
+    font-size:16px;
+    text-transform:uppercase;
+    letter-spacing:2px;
+    font-weight:800;
+    margin:0 0 30px;
+    color:var(--paper);
+  }
+  .day-block{
+    margin-bottom:0;
+    position:relative;
+  }
+  .day-block .checker-panel{
+    background-image:repeating-conic-gradient(#141414 0% 25%, #f5f0e2 0% 50%);
+    background-size:56px 56px;
+    padding:70px 60px;
+    border:6px solid var(--ink);
+  }
+  .day-block:nth-child(odd) .checker-panel{
+    background-image:repeating-linear-gradient(45deg, #141414 0 14px, #f5f0e2 14px 28px);
+  }
+  .day-label{
+    font-size:14px;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    color:var(--paper);
+    background:var(--red);
+    display:inline-block;
+    padding:4px 12px;
+    margin-bottom:14px;
+  }
+  .headliner-row{
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+  }
+  .headliner{
+    background:var(--yellow);
+    border:3px solid var(--ink);
+    padding:16px 24px;
+    font-size:28px;
+    font-weight:900;
+    letter-spacing:-0.5px;
+  }
+  .headliner:nth-child(2){background:var(--pink); transform:rotate(-4deg);}
+  .headliner:nth-child(3){background:var(--mint); transform:rotate(3deg);}
+  .headliner:nth-child(4){background:var(--lav); transform:rotate(-2deg);}
+  .support-row{
+    margin-top:16px;
+    font-size:15px;
+    font-weight:600;
+    color:var(--paper);
+    background:var(--cobalt);
+    display:inline-block;
+    padding:8px 16px;
+  }
+
+  section.map{
+    padding:60px 74px 100px;
+    background:var(--cobalt);
+    color:var(--paper);
+    border-top:6px solid var(--ink);
+    border-bottom:6px solid var(--ink);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:relative;
+    overflow:hidden;
+  }
+  section.map h2{
+    font-size:36px;
+    font-weight:900;
+    max-width:460px;
+    position:relative;
+    z-index:4;
+    margin:0;
+  }
+  .map-link{
+    background:var(--yellow);
+    color:var(--ink);
+    border:3px solid var(--ink);
+    padding:14px 28px;
+    font-weight:900;
+    box-shadow:6px 6px 0 var(--red);
+    position:relative;
+    z-index:4;
+  }
+
+  footer{
+    padding:40px 74px;
+    display:flex;
+    justify-content:space-between;
+    font-size:14px;
+    font-weight:700;
+    color:var(--paper);
+  }
+
+  .squiggle-field{
+    background-color:var(--pink);
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='32'><path d='M0 8 Q 8 0 16 8 T 32 8 T 48 8 T 64 8' fill='none' stroke='%23141414' stroke-width='4'/><path d='M0 24 Q 8 16 16 24 T 32 24 T 48 24 T 64 24' fill='none' stroke='%23141414' stroke-width='4'/></svg>");
+    background-size:48px 24px;
+  }
+  .squiggle-band{
+    height:90px;
+    border-top:6px solid var(--ink);
+    border-bottom:6px solid var(--ink);
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="logo">LOOP CITY</div>
+    <nav>
+      <a href="#">Lineup</a>
+      <a href="#">Map</a>
+      <a href="#">FAQ</a>
+      <a href="#" class="ticket-btn">Buy Tickets</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1><span class="l1">Two days.</span><br><span class="l2">One loop.</span><br><span class="l3">No headliner egos.</span></h1>
+    <div class="dates">Aug 8-9, Fairview Park Grounds</div>
+
+    <svg class="ornament" style="top:20px; left:980px; width:100px; height:100px;" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="45" fill="none" stroke="#e0392c" stroke-width="7"/>
+    </svg>
+    <svg class="ornament" style="top:220px; left:1150px; width:70px; height:70px;" viewBox="0 0 100 100">
+      <polygon points="50,5 95,95 5,95" fill="#f7c93f" stroke="#141414" stroke-width="5"/>
+    </svg>
+    <svg class="ornament" style="top:60px; left:1250px; width:60px; height:60px;" viewBox="0 0 100 100">
+      <rect x="30" y="10" width="12" height="80" fill="#bdaaf0"/>
+      <rect x="10" y="30" width="80" height="12" fill="#bdaaf0"/>
+    </svg>
+    <svg class="ornament" style="top:300px; left:660px; width:440px; height:66px;" viewBox="0 0 440 66">
+      <path d="M10 38 Q 36 4, 62 38 T 114 38 T 166 38 T 218 38 T 270 38 T 322 38 T 374 38 T 430 38" fill="none" stroke="#f7c93f" stroke-width="10" stroke-linecap="round"/>
+    </svg>
+    <svg class="ornament" style="top:120px; left:1080px; width:320px; height:56px;" viewBox="0 0 320 56">
+      <path d="M8 32 Q 29 2, 50 32 T 92 32 T 134 32 T 176 32 T 218 32 T 260 32 T 302 32" fill="none" stroke="#9fe3bf" stroke-width="9" stroke-linecap="round"/>
+    </svg>
+  </section>
+
+  <svg class="zigzag-divider" viewBox="0 0 1440 60" preserveAspectRatio="none">
+    <path d="M0 30 L60 10 L120 50 L180 10 L240 50 L300 10 L360 50 L420 10 L480 50 L540 10
+             L600 50 L660 10 L720 50 L780 10 L840 50 L900 10 L960 50 L1020 10 L1080 50
+             L1140 10 L1200 50 L1260 10 L1320 50 L1380 10 L1440 30"
+          fill="none" stroke="#e0392c" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+
+  <div class="squiggle-band squiggle-field"></div>
+
+  <section class="lineup">
+    <h2>Lineup by day</h2>
+
+    <div class="day-block">
+      <div class="checker-panel">
+        <div class="day-label">Saturday, Aug 8</div>
+        <div class="headliner-row">
+          <div class="headliner">Marigold Static</div>
+          <div class="headliner">The Cold Foxes</div>
+          <div class="headliner">DJ Perimeter</div>
+        </div>
+        <div class="support-row">Also: Halogen Youth, Pace Room, Vessel Line, Norrie</div>
+      </div>
+    </div>
+
+    <div class="day-block">
+      <div class="checker-panel">
+        <div class="day-label">Sunday, Aug 9</div>
+        <div class="headliner-row">
+          <div class="headliner">Bramble &amp; Wire</div>
+          <div class="headliner">Public Weather</div>
+          <div class="headliner">Kessel Run Club</div>
+        </div>
+        <div class="support-row">Also: Low Season, Faultline Radio, Ottoline, Grey Coast</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="map">
+    <svg class="ornament" style="top:-30px; right:200px; width:180px; height:180px;" viewBox="0 0 100 100">
+      <path d="M10 50 Q 25 20, 40 50 T 70 50 T 100 50" fill="none" stroke="#f7c93f" stroke-width="6" stroke-linecap="round"/>
+    </svg>
+    <h2>Stage map and grounds layout, four stages across the park loop.</h2>
+    <a href="#" class="map-link">View Stage Map</a>
+  </section>
+
+  <footer>
+    <div>LOOP CITY FESTIVAL</div>
+    <div>Fairview Park Grounds, Aug 8-9</div>
+  </footer>
+
+</div>
+</body>
+</html>

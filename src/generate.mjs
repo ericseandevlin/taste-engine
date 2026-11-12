@@ -16,14 +16,26 @@ import { getBoard, MODELS, loadEnv } from './config.mjs';
 import { readManifest } from './manifest.mjs';
 import { resolveTextCaller } from './models.mjs';
 import { stripEmDash } from './thesis.mjs';
+import { getSurface, gateSurface, surfaceDirectives, DEFAULT_SURFACE } from './surfaces.mjs';
 
 function parseArgs(argv) {
-  const args = { board: 'demo', direction: null, variants: 1, model: MODELS.generate };
+  const args = {
+    board: 'demo',
+    direction: null,
+    variants: 1,
+    model: MODELS.generate,
+    kind: DEFAULT_SURFACE,
+    context: null,
+    skipGate: false,
+  };
   for (let i = 0; i < argv.length; i++) {
     if (argv[i] === '--board') args.board = argv[++i];
     else if (argv[i] === '--direction') args.direction = argv[++i];
     else if (argv[i] === '--variants') args.variants = Number(argv[++i]);
     else if (argv[i] === '--model') args.model = argv[++i];
+    else if (argv[i] === '--kind') args.kind = argv[++i];
+    else if (argv[i] === '--context') args.context = argv[++i];
+    else if (argv[i] === '--skip-gate') args.skipGate = true;
   }
   return args;
 }
@@ -50,10 +62,17 @@ export function resolveDirection(directionsDoc, channelsDoc, id) {
 
 // Pure: build the generation prompt. extraRules are critique rules from prior
 // rounds; profile (if present) is the user's real content, kept separate from taste.
-export function buildGeneratePrompt(resolved, extraRules = [], profile = null) {
+// Channel and direction NAMES never enter the prompt (naming decoupling): the model
+// sees only recipes, briefs, palettes, forbidden moves, and critique rules.
+export function buildGeneratePrompt(
+  resolved,
+  extraRules = [],
+  profile = null,
+  surface = getSurface(DEFAULT_SURFACE),
+  context = null,
+) {
   const lines = [
-    'Build a complete, production-quality single-page website (a homepage) as ONE self-contained HTML file with inline <style>.',
-    'No external assets, no frameworks, no CDN links, no web fonts that require network. It must open directly from disk and be responsive (desktop and mobile).',
+    ...surfaceDirectives(surface, context),
     '',
     `BRIEF: ${resolved.brief}`,
     '',
@@ -61,7 +80,7 @@ export function buildGeneratePrompt(resolved, extraRules = [], profile = null) {
     '',
     'DESIGN RECIPES (blend these; together they define the taste):',
     ...resolved.recipes.map(
-      (r) => `- ${r.name}: ${Object.entries(r.recipe).map(([k, v]) => `${k}: ${v}`).join('; ')}`,
+      (r) => `- ${Object.entries(r.recipe).map(([k, v]) => `${k}: ${v}`).join('; ')}`,
     ),
     '',
     'FORBIDDEN (hard constraints, do not violate any):',
@@ -72,7 +91,7 @@ export function buildGeneratePrompt(resolved, extraRules = [], profile = null) {
   }
   lines.push(
     '',
-    'At the very top of the file, include an HTML comment block (the lineage) listing: the direction name, the channel ids blended, the key params, and the content source (profile or placeholder).',
+    'At the very top of the file, include an HTML comment block (the lineage) listing: the number of design recipes blended, the number of critique rules applied, and the content source (profile or placeholder).',
   );
   if (profile) {
     const { _note, ...content } = profile;
@@ -110,11 +129,12 @@ function pad(n) {
   return String(n).padStart(3, '0');
 }
 
-// Next free <direction>-NNN index so re-running preserves prior rounds for comparison.
-function nextIndex(genRoot, direction) {
+// Next free <prefix>-NNN index so re-running preserves prior rounds for comparison.
+// Each surface numbers independently: poster-001 does not consume homepage-001.
+export function nextIndex(genRoot, prefix) {
   let max = 0;
   if (existsSync(genRoot)) {
-    const re = new RegExp(`^${direction}-(\\d+)$`);
+    const re = new RegExp(`^${prefix}-(\\d+)$`);
     for (const d of readdirSync(genRoot)) {
       const m = re.exec(d);
       if (m) max = Math.max(max, Number(m[1]));
@@ -137,6 +157,27 @@ async function main() {
   }
   const { caller: call } = resolveTextCaller(model, env);
 
+  // The complexity gate runs BEFORE anything is spent. A board fully specifies a
+  // poster; it does not fully specify a website. When the request needs context
+  // the board cannot carry, ask for it instead of generating something that will
+  // look plausible and teach nothing. See surfaces.mjs for why.
+  const surface = getSurface(args.kind);
+  const context = args.context ? readManifest(args.context) : null;
+  if (args.context && !context) throw new Error(`Could not read context file: ${args.context}`);
+  const gate = gateSurface(surface.id, context);
+  if (!gate.allowed && !args.skipGate) {
+    console.error(gate.message);
+    process.exitCode = 1;
+    return;
+  }
+  if (!gate.allowed && args.skipGate) {
+    console.warn(
+      `[gate] BYPASSED for ${surface.name} (missing: ${gate.missing.join(', ')}). Output is not evidence about the taste extraction.`,
+    );
+  } else {
+    console.log(gate.message);
+  }
+
   const board = getBoard(args.board);
   const channelsDoc = readManifest(join(board.absDir, 'channels.json'));
   const directionsDoc = readManifest(join(board.absDir, 'directions.json'));
@@ -154,16 +195,18 @@ async function main() {
       `[generate] no profile.json in ${board.dir} — using labeled placeholder content. Add ${board.dir}/profile.json to put your own name and work on the page.`,
     );
   }
-  const prompt = buildGeneratePrompt(resolved, extraRules, profile);
+  const prompt = buildGeneratePrompt(resolved, extraRules, profile, surface, context);
 
   const genRoot = join(board.absDir, 'generated');
   mkdirSync(genRoot, { recursive: true });
-  const start = nextIndex(genRoot, args.direction);
+  const prefix =
+    surface.id === DEFAULT_SURFACE ? args.direction : `${args.direction}-${surface.id}`;
+  const start = nextIndex(genRoot, prefix);
 
   for (let v = 0; v < args.variants; v++) {
     const raw = await call({ prompt, maxTokens: 16000 });
     const html = stripEmDash(extractHtml(raw)); // no AI tells in published copy
-    const slug = `${args.direction}-${pad(start + v)}`;
+    const slug = `${prefix}-${pad(start + v)}`;
     const dir = join(genRoot, slug);
     mkdirSync(dir, { recursive: true });
     writeFileSync(join(dir, 'index.html'), html);
@@ -173,6 +216,10 @@ async function main() {
         {
           direction: resolved.id,
           name: resolved.name,
+          kind: surface.id,
+          tier: surface.tier,
+          canvas: surface.canvas,
+          gate: gate.allowed ? 'passed' : 'bypassed',
           channels: resolved.recipes.map((r) => r.id),
           model: args.model,
           rulesApplied: extraRules.length,

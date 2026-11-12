@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Public Lecture Series: Department of Urban Studies</title>
+<style>
+  :root{
+    --red:#E5231B;
+    --yellow:#FFD200;
+    --blue:#0047AB;
+    --black:#141414;
+    --paper:#d5d5d5;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{width:1440px;background:var(--paper);}
+  body{
+    font-family:Futura, "Avenir Next", Avenir, sans-serif;
+    color:var(--black);
+  }
+  .canvas{
+    position:relative;
+    width:1440px;
+    height:1200px;
+    background:var(--paper);
+    overflow:hidden;
+  }
+  .bar{position:absolute;background:var(--black);}
+  .series-title{
+    position:absolute;
+    top:80px;
+    left:150px;
+    font-size:112px;
+    text-transform:lowercase;
+    font-weight:700;
+    line-height:0.95;
+    letter-spacing:-2px;
+    transform:rotate(-6deg);
+    transform-origin:left top;
+    width:900px;
+  }
+  .dept{
+    position:absolute;
+    top:40px;
+    left:64px;
+    font-size:15px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    writing-mode:vertical-rl;
+  }
+  .reg-note{
+    position:absolute;
+    top:310px;
+    left:150px;
+    width:520px;
+    font-size:15px;
+    line-height:1.6;
+    text-align:left;
+  }
+  .circle-blue{
+    position:absolute;
+    top:40px;
+    left:1030px;
+    width:360px;
+    height:360px;
+    border-radius:50%;
+    background:var(--blue);
+  }
+  .square-red{
+    position:absolute;
+    top:520px;
+    left:1160px;
+    width:200px;
+    height:200px;
+    background:var(--red);
+  }
+  .triangle-yellow{
+    position:absolute;
+    width:0;
+    height:0;
+    border-left:140px solid transparent;
+    border-right:140px solid transparent;
+    border-bottom:240px solid var(--yellow);
+    top:830px;
+    left:1110px;
+  }
+  .diag-red{
+    position:absolute;
+    width:760px;
+    height:30px;
+    background:var(--red);
+    top:520px;
+    left:760px;
+    transform:rotate(-20deg);
+  }
+  .lecture{
+    position:absolute;
+    width:640px;
+    text-align:left;
+  }
+  .lecture .marker{
+    display:inline-block;
+    width:24px;
+    height:24px;
+    background:var(--red);
+    margin-bottom:10px;
+  }
+  .lecture.next .marker{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    background:var(--blue);
+  }
+  .lecture .speaker{
+    font-size:40px;
+    font-weight:700;
+    line-height:1.05;
+  }
+  .lecture.next .speaker{font-size:54px;color:var(--blue);}
+  .lecture .meta{
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    color:#555;
+    margin-top:5px;
+  }
+  .lecture .abstract{
+    font-size:16px;
+    line-height:1.5;
+    margin-top:8px;
+    white-space:nowrap;
+  }
+</style>
+</head>
+<body>
+<div class="canvas">
+
+  <div class="bar" style="top:0; left:0; width:100%; height:14px;"></div>
+  <div class="dept">department of urban studies</div>
+
+  <div class="circle-blue"></div>
+
+  <div class="series-title">public<br>lectures</div>
+
+  <div class="reg-note">
+    Free and open to the public. Seating is first come. A recording is
+    posted to the department site within one week of each talk.
+  </div>
+
+  <div class="bar" style="top:400px; left:150px; width:1130px; height:12px;"></div>
+
+  <div class="diag-red"></div>
+  <div class="square-red"></div>
+  <div class="triangle-yellow"></div>
+
+  <div class="lecture" style="top:440px; left:150px;">
+    <div class="marker"></div>
+    <div class="speaker">Odalys Ferreira</div>
+    <div class="meta">September 9, Hall B</div>
+    <div class="abstract">Sidewalk width as policy, and who a curb quietly leaves out.</div>
+  </div>
+
+  <div class="lecture" style="top:580px; left:340px;">
+    <div class="marker"></div>
+    <div class="speaker">Halvard Kim</div>
+    <div class="meta">September 23, Hall B</div>
+    <div class="abstract">Zoning maps read as fiction, not as a record of what got built.</div>
+  </div>
+
+  <div class="lecture next" style="top:710px; left:200px;">
+    <div class="marker"></div>
+    <div class="speaker">Renata Voss</div>
+    <div class="meta">Next talk: October 7, Main Auditorium</div>
+    <div class="abstract">Transit deserts and the twenty minute walk planners keep overestimating.</div>
+  </div>
+
+  <div class="lecture" style="top:880px; left:430px;">
+    <div class="marker"></div>
+    <div class="speaker">Grant Achebe</div>
+    <div class="meta">October 21, Hall B</div>
+    <div class="abstract">Alley economies, and the commerce a city plan never names.</div>
+  </div>
+
+  <div class="lecture" style="top:1010px; left:150px;">
+    <div class="marker"></div>
+    <div class="speaker">Junko Adeyemi</div>
+    <div class="meta">November 4, Hall B</div>
+    <div class="abstract">Housing density without a single tower, in three case-study cities.</div>
+  </div>
+
+  <div class="lecture" style="top:1058px; left:640px;">
+    <div class="marker"></div>
+    <div class="speaker">Corin Blaszczyk</div>
+    <div class="meta">November 18, Hall B</div>
+    <div class="abstract">Who a plaza is actually for, read through its benches and sightlines.</div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1440">
+<title>Weekend Service Change: Riverline &amp; Crosstown</title>
+<style>
+  :root {
+    --accent: #e06a1a;
+    --ink: #111111;
+    --grey: #6b6b6b;
+    --line: #d9d9d9;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    width: 1440px;
+    background: #e9e6de;
+    color: var(--ink);
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .band {
+    width: 1440px;
+    height: 200px;
+    background: var(--accent);
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: 24px;
+    align-items: center;
+  }
+  .band .label {
+    grid-column: 2 / 9;
+    color: #ffffff;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .band .label span { font-weight: 400; opacity: 0.85; font-size: 15px; display: block; margin-top: 2px; }
+  .page { width: 1440px; padding: 56px 64px 48px 64px; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: 24px;
+  }
+  h1 {
+    grid-column: 2 / 10;
+    font-size: 96px;
+    line-height: 0.92;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+  .h1-sub {
+    grid-column: 2 / 8;
+    font-size: 17px;
+    line-height: 1.5;
+    color: var(--ink);
+    margin-top: 24px;
+  }
+  .dates {
+    grid-column: 10 / 13;
+    align-self: end;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--grey);
+  }
+  .dates strong { display: block; color: var(--accent); font-size: 15px; font-weight: 700; }
+  .rule { grid-column: 2 / 13; height: 1px; background: var(--ink); margin: 40px 0 0 0; }
+  .diagram-wrap {
+    grid-column: 2 / 8;
+    padding-top: 40px;
+  }
+  .diagram-label {
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--grey);
+    margin-bottom: 28px;
+  }
+  .diagram {
+    position: relative;
+    height: 220px;
+  }
+  .diagram .track {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 6px;
+    background: var(--ink);
+    transform: translateY(-50%);
+  }
+  .diagram .track.alt {
+    top: 50%;
+    background: var(--accent);
+    height: 6px;
+    transform: translateY(60px);
+    right: 40%;
+  }
+  .station {
+    position: absolute;
+    top: 50%;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 6px solid var(--ink);
+    transform: translate(-50%, -50%);
+  }
+  .station.alt { border-color: var(--accent); transform: translate(-50%, 10px); }
+  .stationname {
+    position: absolute;
+    top: calc(50% + 24px);
+    font-size: 11px;
+    color: var(--grey);
+    transform: translateX(-50%);
+    text-align: center;
+    width: 90px;
+  }
+  .text-block {
+    grid-column: 8 / 13;
+    padding-top: 40px;
+  }
+  .text-block p {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--ink);
+    margin-bottom: 24px;
+  }
+  .text-block p.small {
+    font-size: 13px;
+    color: var(--grey);
+  }
+  .rule2 { grid-column: 2 / 13; height: 1px; background: var(--line); margin: 40px 0 0 0; }
+  .table {
+    grid-column: 2 / 13;
+    margin-top: 24px;
+  }
+  .row {
+    display: grid;
+    grid-template-columns: 140px 1fr 1fr;
+    column-gap: 24px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line);
+    align-items: baseline;
+  }
+  .row .line { font-size: 14px; font-weight: 700; color: var(--accent); }
+  .row .from, .row .to { font-size: 14px; color: var(--ink); }
+  .row .to { color: var(--grey); }
+  .footer {
+    grid-column: 2 / 6;
+    font-size: 12px;
+    color: var(--grey);
+    line-height: 1.6;
+    margin-top: 32px;
+  }
+</style>
+</head>
+<body>
+<div class="band">
+  <div class="label">
+    Service Alert
+    <span>Effective Saturday through Monday, all hours</span>
+  </div>
+</div>
+
+<div class="page">
+  <div class="grid">
+    <h1>Riverline &amp; Crosstown</h1>
+    <div class="h1-sub">
+      Track work between Dockside and Union Approach will change stopping
+      patterns and add a shuttle segment for the full weekend.
+    </div>
+    <div class="dates">
+      <strong>Sat–Mon</strong>
+      All departures affected<br>
+      Normal service resumes Tuesday, first train
+    </div>
+
+    <div class="rule"></div>
+
+    <div class="diagram-wrap">
+      <div class="diagram-label">Affected Segment</div>
+      <div class="diagram">
+        <div class="track" style="left: 0; right: 0;"></div>
+        <div class="station" style="left: 8%;"></div>
+        <div class="stationname" style="left: 8%;">Dockside</div>
+        <div class="station" style="left: 32%;"></div>
+        <div class="stationname" style="left: 32%;">Mill Street</div>
+        <div class="station" style="left: 56%;"></div>
+        <div class="stationname" style="left: 56%;">Fenwick Sq.</div>
+        <div class="station" style="left: 80%;"></div>
+        <div class="stationname" style="left: 80%;">Union Approach</div>
+
+        <div class="track alt" style="left: 32%;"></div>
+        <div class="station alt" style="left: 32%;"></div>
+        <div class="station alt" style="left: 60%;"></div>
+        <div class="stationname" style="left: 46%; top: calc(50% + 84px); color: var(--accent); width: 160px;">Shuttle bus, Mill St. to Fenwick Sq.</div>
+      </div>
+    </div>
+
+    <div class="text-block">
+      <p>
+        Riverline trains will run Dockside to Mill Street and Fenwick Square
+        to Union Approach on their normal schedule. Between Mill Street and
+        Fenwick Square, a replacement shuttle bus will run every twelve
+        minutes, stopping at street level outside each station.
+      </p>
+      <p class="small">
+        Crosstown service is not affected but should expect crowding at
+        Fenwick Square during the shuttle transfer.
+      </p>
+    </div>
+
+    <div class="rule2"></div>
+
+    <div class="table">
+      <div class="row">
+        <div class="line">Riverline</div>
+        <div class="from">Dockside → Mill Street</div>
+        <div class="to">Normal schedule, all weekend</div>
+      </div>
+      <div class="row">
+        <div class="line">Shuttle</div>
+        <div class="from">Mill Street → Fenwick Square</div>
+        <div class="to">Every 12 minutes, street level</div>
+      </div>
+      <div class="row">
+        <div class="line">Riverline</div>
+        <div class="from">Fenwick Square → Union Approach</div>
+        <div class="to">Normal schedule, all weekend</div>
+      </div>
+      <div class="row">
+        <div class="line">Crosstown</div>
+        <div class="from">Full route</div>
+        <div class="to">Unaffected, expect transfer crowding</div>
+      </div>
+    </div>
+
+    <div class="footer">
+      Questions about this service change can be directed to the rider
+      information line, staffed daily from six in the morning to midnight.
+    </div>
+  </div>
+</div>
+</body>
+</html>

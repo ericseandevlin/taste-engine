@@ -9,11 +9,17 @@
 // demo numbers voids the demo run.
 
 // --- Frozen tuning constants (one block, per the design doc) ---
+// v2 axis set (2026-07-11): accentCount (palette-entry counting, coverage-blind,
+// d=1.00 on all six Phase 1 demo pages) is RETIRED, replaced by pixel-level
+// accentCoverage + accentHueCount measured in measure.mjs. Constants frozen at
+// the v2 freeze commit; moving one after the freeze voids the run.
 export const CONSTANTS = {
   // Per-axis normalization divisors: raw extractor value / divisor -> [0,1].
   // contrast (std luminance / 255) mathematically maxes at 0.5; density
   // (mean adjacent-pixel delta / 255) stays under ~0.15 on real pages.
-  AXIS_SCALE: { contrast: 0.5, density: 0.15, chroma: 1, groundLightness: 1, accentCount: 4 },
+  // accentCoverage saturates at half the canvas chromatic-distinct; hue-family
+  // count saturates at 4 families (same ceiling the v1 accentCount used).
+  AXIS_SCALE: { contrast: 0.5, density: 0.15, chroma: 1, groundLightness: 1, accentCoverage: 1, accentHueCount: 8 },
   SPREAD_FLOOR: 0.05, // min spread in the scalar distance denominator (normalized scale)
   DISTANCE_SPREADS: 2, // two spreads off = fully off
   SALIENCE_REF_SPREAD: 0.371, // scaled-MAD spread of a uniform [0,1] distribution
@@ -21,11 +27,30 @@ export const CONSTANTS = {
   TAG_EXPECTED_FREQ: 0.5, // tags at/above this scope frequency are expected
   TAG_ALIEN_FREQ: 0.25, // output tags below this scope frequency are alien
   ACCENT_SATURATION: 0.25, // HSL saturation above this = chromatic
-  ACCENT_HUE_DELTA: 30, // degrees of hue separation from the ground to count as an accent
+  ACCENT_HUE_DELTA: 30, // degrees of hue separation from the GROUND hue to count as an accent
+  ACCENT_HUE_BIN: 30, // v2: hue-family bin width (degrees) for accentHueCount
+  ACCENT_COVERAGE_FLOOR: 0.005, // v2: min opaque-pixel fraction for a hue family to count. Calibrated pre-freeze on bin histograms: kills the flickering sub-0.5% anti-aliasing tail while the design's ~0.7% pink-chip fixture still registers. NOTE the measured scale: at SAMPLE resolution, boundary blends between large adjacent saturated fields form 1-2.5% bins, so accentHueCount runs ABOVE the designer-intended family count on hard-clash pages; it is consistent and class-separating, and predicted ranges in docs/styles/classes.json are calibrated to this measured scale.
   PALETTE_TOP_K: 8, // entries kept in an aggregate palette
 };
 
-export const SCALAR_AXES = ['contrast', 'density', 'chroma', 'groundLightness', 'accentCount'];
+export const SCALAR_AXES = ['contrast', 'density', 'chroma', 'groundLightness', 'accentCoverage', 'accentHueCount'];
+
+// --- Axis families (v2 family-balanced weighting, design doc section 2) ---
+// v1 let five correlated pixel-statistics axes outvote the one behavioral axis.
+// Each family carries equal aggregate weight; salience distributes WITHIN a
+// family as before. Structural, pre-registered, not tuned on any run.
+export const AXIS_FAMILIES = {
+  surface: SCALAR_AXES,
+  color: ['palette'],
+  behavior: ['tags'],
+};
+
+export function familyOf(axisId) {
+  for (const [family, ids] of Object.entries(AXIS_FAMILIES)) {
+    if (ids.includes(axisId)) return family;
+  }
+  return null;
+}
 
 // --- Color helpers ---
 
@@ -82,7 +107,7 @@ export function deltaE76(lab1, lab2) {
   return Math.hypot(lab1.L - lab2.L, lab1.a - lab2.a, lab1.b - lab2.b);
 }
 
-function hueDelta(a, b) {
+export function hueDelta(a, b) {
   const d = Math.abs(a - b) % 360;
   return d > 180 ? 360 - d : d;
 }
@@ -115,21 +140,12 @@ export function groundLightnessOf(palette) {
   return luminance601(hexToRgb(pal[0].hex));
 }
 
-// Non-ground entries that are chromatic and hue-distinct from the ground.
-// If the ground itself is achromatic, any chromatic entry counts.
-export function accentCountOf(palette) {
-  const pal = sortedPalette(palette);
-  if (!pal.length) return null;
-  const ground = rgbToHsl(hexToRgb(pal[0].hex));
-  const groundAchromatic = ground.s <= CONSTANTS.ACCENT_SATURATION;
-  let count = 0;
-  for (const p of pal.slice(1)) {
-    const hsl = rgbToHsl(hexToRgb(p.hex));
-    if (hsl.s <= CONSTANTS.ACCENT_SATURATION) continue;
-    if (groundAchromatic || hueDelta(hsl.h, ground.h) >= CONSTANTS.ACCENT_HUE_DELTA) count++;
-  }
-  return count;
-}
+// v1's accentCountOf (chromatic entries in the top-5 quantized palette) is
+// retired: coverage-blind, it scored d=1.00 on all six Phase 1 demo pages.
+// v2 accent metrics (accentCoverage, accentHueCount) are pixel-level and live
+// in measure.mjs computeFeatures; the anchor hue is GROUND-derived (dominant
+// palette entry, achromatic-ground escape), matching the v1 lineage, never the
+// modal chromatic hue (the two diverge exactly on chromatic-ground pages).
 
 // --- Normalization & robust stats (all stats live on the normalized scale) ---
 
@@ -201,34 +217,68 @@ export function aggregatePalette(refPalettes) {
   return entries.map(([hex, w]) => ({ hex, weight: +(w / total).toFixed(4) }));
 }
 
-// One-sided: coverage-weighted mean of each output color's clipped distance to
-// its nearest aggregate entry. Using a subset of the board's palette is free;
-// introducing colors the board never uses is what scores as distance.
+// v2: SYMMETRIC under scope (design doc section 2). v1 was one-sided (output
+// colors must exist in the board; missing board colors were free), which made
+// the axis inert on grayscale lanes. v2 = mean of both directions, computed
+// against the SCOPE palette: forward (each output color to its nearest scope
+// entry, coverage-weighted) and reverse (each scope entry to its nearest
+// output color, weight-weighted). A lane legitimately using a subset of the
+// BOARD is not punished because the ruler is the lane's own colors; a page
+// missing the lane's accent now pays for it in the reverse direction.
 export function paletteDistance(outPalette, entries) {
   const pal = sortedPalette(outPalette);
   if (!pal.length || !entries.length) return null;
-  const labs = entries.map((e) => rgbToLab(hexToRgb(e.hex)));
-  let sum = 0;
-  let wsum = 0;
+  const entryLabs = entries.map((e) => rgbToLab(hexToRgb(e.hex)));
+  const outLabs = pal.map((p) => rgbToLab(hexToRgb(p.hex)));
+
+  let fwdSum = 0;
+  let fwdW = 0;
   const nearest = [];
-  for (const p of pal) {
-    const lab = rgbToLab(hexToRgb(p.hex));
+  pal.forEach((p, pi) => {
     let best = Infinity;
     let bestHex = null;
-    labs.forEach((l, i) => {
-      const d = deltaE76(lab, l);
+    entryLabs.forEach((l, i) => {
+      const d = deltaE76(outLabs[pi], l);
       if (d < best) {
         best = d;
         bestHex = entries[i].hex;
       }
     });
     const w = p.pct ?? 1;
-    sum += Math.min(1, best / CONSTANTS.DELTA_E_NORM) * w;
-    wsum += w;
+    fwdSum += Math.min(1, best / CONSTANTS.DELTA_E_NORM) * w;
+    fwdW += w;
     nearest.push({ hex: p.hex, nearest: bestHex, deltaE: +best.toFixed(1) });
-  }
-  if (!wsum) return null;
-  return { d: +(sum / wsum).toFixed(4), nearest };
+  });
+
+  let revSum = 0;
+  let revW = 0;
+  const missing = [];
+  entries.forEach((e, ei) => {
+    let best = Infinity;
+    let bestHex = null;
+    outLabs.forEach((l, i) => {
+      const d = deltaE76(entryLabs[ei], l);
+      if (d < best) {
+        best = d;
+        bestHex = pal[i].hex;
+      }
+    });
+    const w = e.weight ?? 1;
+    revSum += Math.min(1, best / CONSTANTS.DELTA_E_NORM) * w;
+    revW += w;
+    missing.push({ hex: e.hex, nearestOut: bestHex, deltaE: +best.toFixed(1) });
+  });
+
+  if (!fwdW || !revW) return null;
+  const dForward = fwdSum / fwdW;
+  const dReverse = revSum / revW;
+  return {
+    d: +((dForward + dReverse) / 2).toFixed(4),
+    dForward: +dForward.toFixed(4),
+    dReverse: +dReverse.toFixed(4),
+    nearest,
+    missing: missing.filter((m) => m.deltaE > 20).sort((a, b) => b.deltaE - a.deltaE),
+  };
 }
 
 // Leave-one-out self-agreement: each ref's palette against the aggregate of
@@ -283,6 +333,21 @@ export function tagDistance(outputTags, freq) {
   };
 }
 
+// Majority vote across tag passes (votes=1 passes tags through). Lives here
+// (pure, shared): score.mjs uses it on outputs, tag.mjs on board manifests
+// (--votes), so references and outputs go through the same stabilization.
+export function majorityTags(voteLists) {
+  const need = Math.floor(voteLists.length / 2) + 1;
+  const counts = new Map();
+  for (const tags of voteLists) {
+    for (const t of new Set(tags || [])) counts.set(t, (counts.get(t) || 0) + 1);
+  }
+  return [...counts.entries()]
+    .filter(([, c]) => c >= need)
+    .map(([t]) => t)
+    .sort();
+}
+
 // Leave-one-out self-agreement on tags.
 export function tagSelfAgreement(refTagLists) {
   const lists = refTagLists.filter((t) => (t || []).length);
@@ -304,7 +369,12 @@ export function refFeatures(item) {
     density: item.measured?.density ?? null,
     chroma: chromaOf(palette) != null ? +chromaOf(palette).toFixed(4) : null,
     groundLightness: groundLightnessOf(palette) != null ? +groundLightnessOf(palette).toFixed(4) : null,
-    accentCount: accentCountOf(palette),
+    // v2 pixel-level accent metrics come from measure.mjs, never derived from
+    // the quantized palette (that was the coverage-blind v1 bug). A ref
+    // measured pre-v2 yields nulls here; the score stage's schema guard turns
+    // that into a clear "re-run measure --force" error instead of silence.
+    accentCoverage: item.measured?.accentCoverage ?? null,
+    accentHueCount: item.measured?.accentHueCount ?? null,
     aspect: item.measured?.aspect ?? null, // metadata for score-time cropping, not an axis
     palette,
     tags: item.tags || [],
@@ -401,23 +471,69 @@ export function scalarDistance(outNorm, axis) {
   return { delta: +delta.toFixed(4), d: +Math.min(1, Math.abs(delta) / denom).toFixed(4) };
 }
 
-// Weighted alignment. Returns null when no axis carries weight (a scope so
-// incoherent the number would be meaningless).
-export function alignmentScore(rows) {
-  const usable = rows.filter((r) => r.distance != null && r.weight > 0);
-  const wsum = usable.reduce((a, r) => a + r.weight, 0);
-  if (!wsum) return null;
-  const weighted = usable.reduce((a, r) => a + r.weight * r.distance, 0);
-  return +(100 * (1 - weighted / wsum)).toFixed(1);
+// v2 family-balanced alignment (exact pre-registered formula, design doc
+// section 2): alignment = 100 x (1 - (1/F) x sum over families of D_f), where
+// D_f = sum(w_a x d_a) / sum(w_a) over the family's usable axes with
+// w_a = salience_a x confidence_a. F = families with at least one usable axis;
+// a family whose every axis is null drops out and F shrinks (reported).
+// Stated consequence, accepted: palette and tags are single-axis families, so
+// their salience no longer scales their weight (a flat 1/F each); their
+// selfAgreement still prints so an incoherent board stays visible.
+export function familyRollup(rows) {
+  const byFamily = {};
+  for (const r of rows) {
+    if (r.distance == null || !(r.weight > 0)) continue;
+    const fam = familyOf(r.id);
+    if (!fam) continue;
+    (byFamily[fam] ||= []).push(r);
+  }
+  const families = {};
+  for (const [fam, rs] of Object.entries(byFamily)) {
+    const wsum = rs.reduce((a, r) => a + r.weight, 0);
+    families[fam] = {
+      D: +(rs.reduce((a, r) => a + r.weight * r.distance, 0) / wsum).toFixed(4),
+      wsum: +wsum.toFixed(4),
+      axes: rs.map((r) => r.id),
+    };
+  }
+  return families;
 }
 
-// Each axis's share of the total weighted distance (the alignment deficit).
+// Returns null when no family carries a usable axis (a scope so incoherent
+// the number would be meaningless).
+export function alignmentScore(rows) {
+  const families = familyRollup(rows);
+  const F = Object.keys(families).length;
+  if (!F) return null;
+  const meanD = Object.values(families).reduce((a, f) => a + f.D, 0) / F;
+  return +(100 * (1 - meanD)).toFixed(1);
+}
+
+// Each axis's share of the total alignment deficit under family balancing:
+// axis a in family f contributes (1/F) x (w_a x d_a / wsum_f) of the deficit.
+// Computed unrounded (familyRollup rounds for display/serialization).
 export function contributions(rows) {
-  const usable = rows.filter((r) => r.distance != null && r.weight > 0);
-  const total = usable.reduce((a, r) => a + r.weight * r.distance, 0);
+  const byFamily = {};
+  for (const r of rows) {
+    if (r.distance == null || !(r.weight > 0)) continue;
+    const fam = familyOf(r.id);
+    if (!fam) continue;
+    (byFamily[fam] ||= []).push(r);
+  }
+  const F = Object.keys(byFamily).length;
   const out = {};
-  for (const r of usable) {
-    out[r.id] = total ? +((r.weight * r.distance) / total).toFixed(4) : 0;
+  if (!F) return out;
+  const wsums = {};
+  let total = 0;
+  for (const [fam, rs] of Object.entries(byFamily)) {
+    wsums[fam] = rs.reduce((a, r) => a + r.weight, 0);
+    total += rs.reduce((a, r) => a + r.weight * r.distance, 0) / wsums[fam] / F;
+  }
+  for (const [fam, rs] of Object.entries(byFamily)) {
+    for (const r of rs) {
+      const share = (r.weight * r.distance) / wsums[fam] / F;
+      out[r.id] = total ? +(share / total).toFixed(4) : 0;
+    }
   }
   return out;
 }

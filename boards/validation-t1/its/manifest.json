@@ -1,0 +1,438 @@
+{
+  "board": "validation-t1/its",
+  "kind": "visual-ui",
+  "generated": "2026-07-12T16:26:23.174Z",
+  "items": [
+    {
+      "id": "w001",
+      "file": "its-01.png",
+      "title": "Its",
+      "source": {
+        "name": "Its",
+        "url": null,
+        "local": "boards/validation-t1/its/its-01.png",
+        "arena": null
+      },
+      "measured": {
+        "w": 1440,
+        "h": 1200,
+        "aspect": 1.2,
+        "palette": [
+          {
+            "hex": "#ffffff",
+            "pct": 81
+          },
+          {
+            "hex": "#000000",
+            "pct": 11
+          },
+          {
+            "hex": "#cccccc",
+            "pct": 3
+          },
+          {
+            "hex": "#666666",
+            "pct": 1
+          },
+          {
+            "hex": "#999999",
+            "pct": 1
+          }
+        ],
+        "contrast": 0.31,
+        "density": 0.024,
+        "accentCoverage": 0.0338,
+        "accentHueCount": 1
+      },
+      "tags": [
+        "active-negative-space",
+        "asymmetric-composition",
+        "extreme-type-scale-contrast",
+        "flat-geometric-primitives",
+        "flat-unmodulated-color-fields",
+        "flush-left-ragged-right",
+        "grotesk-display",
+        "hairline-dividers",
+        "hard-edged-zero-effects",
+        "index-table-listing",
+        "low-density",
+        "objective-documentary-imagery",
+        "restricted-palette-single-accent",
+        "single-sans-family",
+        "size-weight-position-hierarchy",
+        "strict-column-grid",
+        "undisguised-construction",
+        "warm-ground"
+      ],
+      "channels": [
+        "oversized-wordmark",
+        "grid-index",
+        "process-documentation"
+      ],
+      "notes": {
+        "why": "Massive left-aligned headline dominates while a thin red rule and flush-left indexed program listing create hierarchical clarity through type scale and minimal structural dividers alone.",
+        "avoid": "Do not add decorative elements, shadows, or rounded corners—the power comes from restraint and the contrast between the huge display type and the dense information listing below.",
+        "keep": "The combination of an oversized sans-serif wordmark paired with a thin horizontal rule and tabular program index creates a modernist editorial structure that feels both authoritative and approachable."
+      }
+    },
+    {
+      "id": "w002",
+      "file": "its-02.png",
+      "title": "Its",
+      "source": {
+        "name": "Its",
+        "url": null,
+        "local": "boards/validation-t1/its/its-02.png",
+        "arena": null
+      },
+      "measured": {
+        "w": 1440,
+        "h": 1200,
+        "aspect": 1.2,
+        "palette": [
+          {
+            "hex": "#ffffff",
+            "pct": 60
+          },
+          {
+            "hex": "#ffffcc",
+            "pct": 11
+          },
+          {
+            "hex": "#000000",
+            "pct": 11
+          },
+          {
+            "hex": "#cccccc",
+            "pct": 11
+          },
+          {
+            "hex": "#999999",
+            "pct": 2
+          }
+        ],
+        "contrast": 0.281,
+        "density": 0.034,
+        "accentCoverage": 0.1084,
+        "accentHueCount": 2
+      },
+      "tags": [
+        "active-negative-space",
+        "asymmetric-composition",
+        "extreme-type-scale-contrast",
+        "flat-unmodulated-color-fields",
+        "flush-left-ragged-right",
+        "grotesk-display",
+        "hard-edged-zero-effects",
+        "heavy-rule-scaffolding",
+        "index-table-listing",
+        "low-density",
+        "objective-documentary-imagery",
+        "process-documentation",
+        "restricted-palette-single-accent",
+        "single-sans-family",
+        "size-weight-position-hierarchy",
+        "strict-column-grid",
+        "undisguised-construction",
+        "warm-ground"
+      ],
+      "channels": [
+        "grid-index",
+        "process-documentation",
+        "dark-editorial"
+      ],
+      "notes": {
+        "why": "A strict two-column grid paired with heavy horizontal rules and indexed course listings creates institutional clarity through structure rather than decoration.",
+        "avoid": "Do not add decorative layers, imagery, or color: the authority comes from restraint and orthogonal alignment, not visual ornament.",
+        "keep": "The black band anchoring the top and the bold rule separating course index sections—thick structural elements that frame and organize without softening."
+      }
+    },
+    {
+      "id": "w003",
+      "file": "its-03.png",
+      "title": "Its",
+      "source": {
+        "name": "Its",
+        "url": null,
+        "local": "boards/validation-t1/its/its-03.png",
+        "arena": null
+      },
+      "measured": {
+        "w": 1440,
+        "h": 1200,
+        "aspect": 1.2,
+        "palette": [
+          {
+            "hex": "#ffffcc",
+            "pct": 58
+          },
+          {
+            "hex": "#cc6633",
+            "pct": 14
+          },
+          {
+            "hex": "#cccccc",
+            "pct": 11
+          },
+          {
+            "hex": "#ffcccc",
+            "pct": 9
+          },
+          {
+            "hex": "#cc6600",
+            "pct": 1
+          }
+        ],
+        "contrast": 0.161,
+        "density": 0.024,
+        "accentCoverage": 0.1758,
+        "accentHueCount": 1
+      },
+      "tags": [
+        "active-negative-space",
+        "asymmetric-composition",
+        "flat-geometric-primitives",
+        "flat-unmodulated-color-fields",
+        "flush-left-ragged-right",
+        "grotesk-display",
+        "hairline-dividers",
+        "hard-edged-zero-effects",
+        "low-density",
+        "objective-documentary-imagery",
+        "process-documentation",
+        "restricted-palette-single-accent",
+        "single-sans-family",
+        "size-weight-position-hierarchy",
+        "strict-column-grid",
+        "undisguised-construction",
+        "warm-ground"
+      ],
+      "channels": [
+        "process-documentation",
+        "warm-editorial",
+        "grid-index"
+      ],
+      "notes": {
+        "why": "Austere, left-aligned process documentation using a single sans-serif, thin dividers, and generous negative space to explain service disruption with clarity and hierarchy.",
+        "avoid": "Do not add decorative flourishes, rounded corners, shadows, or color beyond the restricted orange accent—this register demands structural honesty and minimal ornament.",
+        "keep": "The combination of a large flush-left heading, tabular metadata layout, and thin horizontal rules as the sole dividing device creates readable urgency without visual noise."
+      }
+    },
+    {
+      "id": "w004",
+      "file": "its-04.png",
+      "title": "Its",
+      "source": {
+        "name": "Its",
+        "url": null,
+        "local": "boards/validation-t1/its/its-04.png",
+        "arena": null
+      },
+      "measured": {
+        "w": 1440,
+        "h": 1200,
+        "aspect": 1.2,
+        "palette": [
+          {
+            "hex": "#000000",
+            "pct": 85
+          },
+          {
+            "hex": "#333333",
+            "pct": 6
+          },
+          {
+            "hex": "#cc0000",
+            "pct": 3
+          },
+          {
+            "hex": "#999999",
+            "pct": 3
+          },
+          {
+            "hex": "#666666",
+            "pct": 2
+          }
+        ],
+        "contrast": 0.127,
+        "density": 0.023,
+        "accentCoverage": 0.0425,
+        "accentHueCount": 1
+      },
+      "tags": [
+        "active-negative-space",
+        "asymmetric-composition",
+        "bold-primary",
+        "dark-field",
+        "extreme-type-scale-contrast",
+        "flat-geometric-primitives",
+        "flat-unmodulated-color-fields",
+        "flush-left-ragged-right",
+        "grotesk-display",
+        "hard-edged-zero-effects",
+        "index-table-listing",
+        "low-density",
+        "objective-documentary-imagery",
+        "restricted-palette-single-accent",
+        "single-sans-family",
+        "size-weight-position-hierarchy",
+        "strict-column-grid"
+      ],
+      "channels": [
+        "oversized-wordmark",
+        "dark-editorial",
+        "grid-index"
+      ],
+      "notes": {
+        "why": "Oversized sans-serif wordmark dominates the dark field while a tabular index of works anchors the lower half, with flat color blocks providing visual weight asymmetrically.",
+        "avoid": "Do not add decorative elements, gradients, or shadows—the power comes from restraint and the contrast between the monumental type and sparse geometric blocks.",
+        "keep": "The pairing of extreme type scale (huge headline vs. small metadata) with a structured index table creates both visual drama and clear information hierarchy without ornamentation."
+      }
+    },
+    {
+      "id": "w005",
+      "file": "its-05.png",
+      "title": "Its",
+      "source": {
+        "name": "Its",
+        "url": null,
+        "local": "boards/validation-t1/its/its-05.png",
+        "arena": null
+      },
+      "measured": {
+        "w": 1440,
+        "h": 1200,
+        "aspect": 1.2,
+        "palette": [
+          {
+            "hex": "#cccccc",
+            "pct": 97
+          },
+          {
+            "hex": "#999999",
+            "pct": 1
+          },
+          {
+            "hex": "#666666",
+            "pct": 1
+          },
+          {
+            "hex": "#333333",
+            "pct": 1
+          },
+          {
+            "hex": "#cccc99",
+            "pct": 0
+          }
+        ],
+        "contrast": 0.066,
+        "density": 0.013,
+        "accentCoverage": 0,
+        "accentHueCount": 0
+      },
+      "tags": [
+        "active-negative-space",
+        "asymmetric-composition",
+        "extreme-type-scale-contrast",
+        "flat-geometric-primitives",
+        "flat-unmodulated-color-fields",
+        "flush-left-ragged-right",
+        "grotesk-display",
+        "hairline-dividers",
+        "hard-edged-zero-effects",
+        "low-density",
+        "muted-chroma",
+        "objective-documentary-imagery",
+        "process-documentation",
+        "restricted-palette-single-accent",
+        "single-sans-family",
+        "size-weight-position-hierarchy",
+        "strict-column-grid",
+        "undisguised-construction",
+        "warm-ground"
+      ],
+      "channels": [
+        "oversized-wordmark",
+        "process-documentation",
+        "warm-editorial"
+      ],
+      "notes": {
+        "why": "Extreme type scale and generous negative space create a calm, authoritative presentation of structural engineering credentials through deliberate restraint and alignment.",
+        "avoid": "Do not add decorative elements, colors, or imagery beyond the documentary geometric diagram; the power lies in what is omitted.",
+        "keep": "The massive headline paired with hairline dividers and sparse metric callouts—this creates authority through understatement and proportion alone."
+      }
+    },
+    {
+      "id": "w006",
+      "file": "its-06.png",
+      "title": "Its",
+      "source": {
+        "name": "Its",
+        "url": null,
+        "local": "boards/validation-t1/its/its-06.png",
+        "arena": null
+      },
+      "measured": {
+        "w": 1440,
+        "h": 1200,
+        "aspect": 1.2,
+        "palette": [
+          {
+            "hex": "#cccccc",
+            "pct": 82
+          },
+          {
+            "hex": "#000000",
+            "pct": 15
+          },
+          {
+            "hex": "#666666",
+            "pct": 1
+          },
+          {
+            "hex": "#999999",
+            "pct": 1
+          },
+          {
+            "hex": "#333333",
+            "pct": 1
+          }
+        ],
+        "contrast": 0.275,
+        "density": 0.015,
+        "accentCoverage": 0,
+        "accentHueCount": 0
+      },
+      "tags": [
+        "active-negative-space",
+        "asymmetric-composition",
+        "extreme-type-scale-contrast",
+        "flat-unmodulated-color-fields",
+        "flush-left-ragged-right",
+        "grotesk-display",
+        "hairline-dividers",
+        "hard-edged-zero-effects",
+        "low-density",
+        "objective-documentary-imagery",
+        "oversized-wordmark",
+        "process-documentation",
+        "restricted-palette-single-accent",
+        "single-sans-family",
+        "size-weight-position-hierarchy",
+        "strict-column-grid",
+        "undisguised-construction",
+        "warm-ground"
+      ],
+      "channels": [
+        "oversized-wordmark",
+        "dark-editorial",
+        "process-documentation"
+      ],
+      "notes": {
+        "why": "A monumental sans-serif numeral anchors a sparse, grid-locked layout where negative space and thin rules create deliberate breathing room around indexed content.",
+        "avoid": "Do not add decorative imagery, color, or rounded elements; the power lies in restraint and structural clarity, not visual ornamentation.",
+        "keep": "The extreme scale jump between the oversized 'no. 14' and body text, combined with strict vertical alignment and ample white space, creates a confident editorial system."
+      }
+    }
+  ]
+}
