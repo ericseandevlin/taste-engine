@@ -1,0 +1,350 @@
+{
+  "target": "swiss-case-index-001",
+  "board": "gallery-run",
+  "fingerprint": {
+    "label": "v001",
+    "hash": "sha256:774cbba04ce55bdcaca505d168581d41d54297256a8ff5381002c6bfba8b2370",
+    "experiment": null
+  },
+  "scope": {
+    "type": "direction",
+    "channels": [
+      "swiss-index",
+      "case-study-functional"
+    ],
+    "refIds": [
+      "w002",
+      "w003",
+      "w004",
+      "w005",
+      "w006",
+      "w008"
+    ],
+    "n": 6
+  },
+  "crop": {
+    "source": {
+      "width": 1440,
+      "height": 3228
+    },
+    "width": 1440,
+    "height": 1200,
+    "aspect": 1.2,
+    "file": "boards/gallery-run/generated/swiss-case-index-001/score-crop.png"
+  },
+  "model": "claude-cli:sonnet",
+  "tagVotes": 1,
+  "tagVoteDetail": [
+    [
+      "swiss-index",
+      "mono-meta",
+      "grotesk-display",
+      "case-study",
+      "low-density",
+      "muted-chroma"
+    ]
+  ],
+  "output": {
+    "contrast": 0.144,
+    "density": 0.032,
+    "chroma": 0,
+    "groundLightness": 1,
+    "accentCount": 0,
+    "palette": [
+      {
+        "hex": "#ffffff",
+        "pct": 90
+      },
+      {
+        "hex": "#cccccc",
+        "pct": 4
+      },
+      {
+        "hex": "#666666",
+        "pct": 3
+      },
+      {
+        "hex": "#999999",
+        "pct": 2
+      },
+      {
+        "hex": "#333333",
+        "pct": 1
+      }
+    ],
+    "tags": [
+      "case-study",
+      "grotesk-display",
+      "low-density",
+      "mono-meta",
+      "muted-chroma",
+      "swiss-index"
+    ]
+  },
+  "axes": {
+    "scope": [
+      {
+        "id": "contrast",
+        "kind": "scalar",
+        "center": 0.218,
+        "spread": 0.1082,
+        "out": 0.144,
+        "outNorm": 0.288,
+        "delta": 0.07,
+        "distance": 0.3235,
+        "salience": 0.7083,
+        "confidence": 1,
+        "weight": 0.7083
+      },
+      {
+        "id": "density",
+        "kind": "scalar",
+        "center": 0.1133,
+        "spread": 0.0247,
+        "out": 0.032,
+        "outNorm": 0.2133,
+        "delta": 0.1,
+        "distance": 1,
+        "salience": 0.9334,
+        "confidence": 1,
+        "weight": 0.9334
+      },
+      {
+        "id": "chroma",
+        "kind": "scalar",
+        "center": 0.0408,
+        "spread": 0.0605,
+        "out": 0,
+        "outNorm": 0,
+        "delta": -0.0408,
+        "distance": 0.3372,
+        "salience": 0.837,
+        "confidence": 1,
+        "weight": 0.837
+      },
+      {
+        "id": "groundLightness",
+        "kind": "scalar",
+        "center": 0.6968,
+        "spread": 0.4495,
+        "out": 1,
+        "outNorm": 1,
+        "delta": 0.3032,
+        "distance": 0.3373,
+        "salience": 0,
+        "confidence": 1,
+        "weight": 0
+      },
+      {
+        "id": "accentCount",
+        "kind": "scalar",
+        "center": 0.25,
+        "spread": 0,
+        "out": 0,
+        "outNorm": 0,
+        "delta": -0.25,
+        "distance": 1,
+        "salience": 1,
+        "confidence": 1,
+        "weight": 1
+      },
+      {
+        "id": "palette",
+        "kind": "palette",
+        "out": null,
+        "delta": null,
+        "distance": 0.0103,
+        "detail": [
+          {
+            "hex": "#ffffff",
+            "nearest": "#ffffff",
+            "deltaE": 0
+          },
+          {
+            "hex": "#cccccc",
+            "nearest": "#cccccc",
+            "deltaE": 0
+          },
+          {
+            "hex": "#666666",
+            "nearest": "#333333",
+            "deltaE": 21.9
+          },
+          {
+            "hex": "#999999",
+            "nearest": "#cccccc",
+            "deltaE": 18.8
+          },
+          {
+            "hex": "#333333",
+            "nearest": "#333333",
+            "deltaE": 0
+          }
+        ],
+        "salience": 0.8182,
+        "confidence": 1,
+        "weight": 0.8182
+      },
+      {
+        "id": "tags",
+        "kind": "tags",
+        "out": null,
+        "delta": null,
+        "distance": 0.0625,
+        "detail": {
+          "missing": [
+            {
+              "tag": "dark-field",
+              "freq": 0.5
+            }
+          ],
+          "alien": []
+        },
+        "salience": 0.6101,
+        "confidence": 1,
+        "weight": 0.6101
+      }
+    ],
+    "board": [
+      {
+        "id": "contrast",
+        "kind": "scalar",
+        "center": 0.218,
+        "spread": 0.1082,
+        "out": 0.144,
+        "outNorm": 0.288,
+        "delta": 0.07,
+        "distance": 0.3235,
+        "salience": 0.7083,
+        "confidence": 1,
+        "weight": 0.7083
+      },
+      {
+        "id": "density",
+        "kind": "scalar",
+        "center": 0.1067,
+        "spread": 0.0198,
+        "out": 0.032,
+        "outNorm": 0.2133,
+        "delta": 0.1066,
+        "distance": 1,
+        "salience": 0.9467,
+        "confidence": 1,
+        "weight": 0.9467
+      },
+      {
+        "id": "chroma",
+        "kind": "scalar",
+        "center": 0.4584,
+        "spread": 0.6692,
+        "out": 0,
+        "outNorm": 0,
+        "delta": -0.4584,
+        "distance": 0.3425,
+        "salience": 0,
+        "confidence": 1,
+        "weight": 0
+      },
+      {
+        "id": "groundLightness",
+        "kind": "scalar",
+        "center": 0.8011,
+        "spread": 0.2949,
+        "out": 1,
+        "outNorm": 1,
+        "delta": 0.1989,
+        "distance": 0.3372,
+        "salience": 0.2052,
+        "confidence": 1,
+        "weight": 0.2052
+      },
+      {
+        "id": "accentCount",
+        "kind": "scalar",
+        "center": 0.25,
+        "spread": 0,
+        "out": 0,
+        "outNorm": 0,
+        "delta": -0.25,
+        "distance": 1,
+        "salience": 1,
+        "confidence": 1,
+        "weight": 1
+      },
+      {
+        "id": "palette",
+        "kind": "palette",
+        "out": null,
+        "delta": null,
+        "distance": 0.0103,
+        "detail": [
+          {
+            "hex": "#ffffff",
+            "nearest": "#ffffff",
+            "deltaE": 0
+          },
+          {
+            "hex": "#cccccc",
+            "nearest": "#cccccc",
+            "deltaE": 0
+          },
+          {
+            "hex": "#666666",
+            "nearest": "#333333",
+            "deltaE": 21.9
+          },
+          {
+            "hex": "#999999",
+            "nearest": "#cccccc",
+            "deltaE": 18.8
+          },
+          {
+            "hex": "#333333",
+            "nearest": "#333333",
+            "deltaE": 0
+          }
+        ],
+        "salience": 0.8177,
+        "confidence": 1,
+        "weight": 0.8177
+      },
+      {
+        "id": "tags",
+        "kind": "tags",
+        "out": null,
+        "delta": null,
+        "distance": 0,
+        "detail": {
+          "missing": [],
+          "alien": []
+        },
+        "salience": 0.535,
+        "confidence": 1,
+        "weight": 0.535
+      }
+    ]
+  },
+  "alignment": {
+    "scope": 49.2,
+    "board": 46.5
+  },
+  "contributions": {
+    "scope": {
+      "contrast": 0.092,
+      "density": 0.3747,
+      "chroma": 0.1133,
+      "accentCount": 0.4014,
+      "palette": 0.0034,
+      "tags": 0.0153
+    },
+    "board": {
+      "contrast": 0.1017,
+      "density": 0.4201,
+      "groundLightness": 0.0307,
+      "accentCount": 0.4438,
+      "palette": 0.0037,
+      "tags": 0
+    }
+  },
+  "generated": "2026-11-11T15:31:08.342Z"
+}

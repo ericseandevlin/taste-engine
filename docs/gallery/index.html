@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Taste Engine Demo Gallery</title>
+<meta name="description" content="One real Taste Engine run on the neutral demo board: the input, the extracted profile, and generated pages checked against it.">
+<style>
+  :root {
+    --ink: #000;
+    --body: #333;
+    --meta: #666;
+    --rule: #ccc;
+    --ground: #fff;
+    --tint: #f4f4f1;
+    --mark: #ff3300;
+    --pass: #0a7a3d;
+    --fail: #c22a00;
+    --gutter: 40px;
+    --sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--ground); color: var(--body); font: 16px/1.5 var(--sans); }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; }
+  .wrap { max-width: 1360px; margin: 0 auto; padding: 0 var(--gutter); }
+  .mono { font-family: var(--mono); font-size: 12px; letter-spacing: .02em; }
+  .meta { font-family: var(--mono); font-size: 12px; color: var(--meta); text-transform: uppercase; letter-spacing: .06em; }
+  hr { border: 0; border-top: 1px solid var(--rule); margin: 0; }
+
+  header.top { display: flex; justify-content: space-between; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--ink); }
+  header.top a { text-decoration: none; }
+
+  .hero { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: 24px; padding: 72px 0 56px; }
+  .hero .label { grid-column: 1 / 4; }
+  .hero h1 { grid-column: 4 / 13; margin: 0; font-size: clamp(56px, 9vw, 132px); line-height: .92; letter-spacing: -.035em; color: var(--ink); font-weight: 700; }
+  .hero p { grid-column: 4 / 11; margin: 28px 0 0; font-size: 20px; line-height: 1.4; color: var(--body); }
+
+  /* the 10-second strip */
+  .strip { display: grid; grid-template-columns: 1.1fr auto 1fr auto 1fr; gap: 20px; align-items: stretch; padding: 32px 0 64px; }
+  .strip .cell { border-top: 1px solid var(--ink); padding-top: 12px; min-width: 0; }
+  .strip .arrow { align-self: center; font: 28px var(--mono); color: var(--meta); }
+  .thumbs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-top: 12px; }
+  .thumbs img { aspect-ratio: 1440 / 1200; object-fit: cover; width: 100%; border: 1px solid var(--rule); }
+  pre.record { margin: 12px 0 0; padding: 14px; background: var(--tint); font: 12px/1.55 var(--mono); color: var(--ink); white-space: pre-wrap; word-break: break-word; }
+  pre.record .k { color: var(--meta); }
+  .tally { display: flex; gap: 16px; margin-top: 12px; }
+  .tally > div { flex: 1; min-width: 0; }
+  .tally img { width: 100%; aspect-ratio: 1440 / 1200; object-fit: cover; object-position: top; border: 1px solid var(--rule); }
+  .big { font: 700 44px/1 var(--sans); color: var(--ink); letter-spacing: -.02em; margin-top: 8px; }
+  .big.ok { color: var(--pass); }
+  .big.bad { color: var(--fail); }
+
+  section { padding: 64px 0; border-top: 1px solid var(--ink); }
+  .sechead { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: 24px; margin-bottom: 40px; }
+  .sechead .num { grid-column: 1 / 4; }
+  .sechead h2 { grid-column: 4 / 13; margin: 0; font-size: 40px; line-height: 1.05; letter-spacing: -.02em; color: var(--ink); }
+  .sechead p { grid-column: 4 / 11; margin: 16px 0 0; font-size: 17px; }
+
+  /* board */
+  .board { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px 24px; }
+  .ref { min-width: 0; }
+  .ref img { width: 100%; aspect-ratio: 1440 / 1200; object-fit: cover; border: 1px solid var(--rule); }
+  .ref h3 { margin: 12px 0 4px; font-size: 16px; color: var(--ink); display: flex; justify-content: space-between; gap: 8px; }
+  .swatches { display: flex; height: 14px; margin: 8px 0; border: 1px solid var(--rule); }
+  .swatches span { display: block; height: 100%; }
+  .nums { display: flex; gap: 16px; color: var(--meta); }
+  .tags { display: flex; flex-wrap: wrap; gap: 4px; margin: 10px 0; }
+  .tag { font: 11px/1 var(--mono); padding: 4px 6px; border: 1px solid var(--rule); color: var(--ink); white-space: nowrap; }
+  .avoid { font-size: 13px; line-height: 1.45; color: var(--body); margin: 0; }
+  .avoid b { font: 11px var(--mono); color: var(--fail); letter-spacing: .06em; margin-right: 4px; }
+
+  /* channels */
+  .chan { display: grid; grid-template-columns: 48px 1.2fr 2fr 2fr; gap: 24px; padding: 20px 0; border-top: 1px solid var(--rule); }
+  .chan:last-child { border-bottom: 1px solid var(--rule); }
+  .chan h3 { margin: 0; font-size: 20px; color: var(--ink); line-height: 1.15; }
+  .weight { display: flex; gap: 3px; margin-top: 10px; }
+  .weight i { width: 10px; height: 10px; border: 1px solid var(--ink); }
+  .weight i.on { background: var(--ink); }
+  .chan dl { margin: 0; display: grid; grid-template-columns: 56px 1fr; gap: 4px 10px; font-size: 13px; }
+  .chan dt { font: 11px var(--mono); color: var(--meta); text-transform: uppercase; padding-top: 2px; }
+  .chan dd { margin: 0; }
+  .chan ul { margin: 0; padding: 0; list-style: none; font-size: 13px; }
+  .chan li { padding: 3px 0 3px 18px; position: relative; }
+  .chan li::before { content: "\00d7"; position: absolute; left: 0; color: var(--fail); font-weight: 700; }
+
+  .dirs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 48px; }
+  .dir { border-top: 1px solid var(--ink); padding-top: 12px; min-width: 0; }
+  .dir h3 { margin: 6px 0 8px; font-size: 18px; color: var(--ink); }
+  .dir p { margin: 0; font-size: 13px; }
+
+  /* loop */
+  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .shot { min-width: 0; }
+  .shot .frame { height: 720px; overflow: hidden; border: 1px solid var(--rule); background: var(--tint); }
+  .shot .frame img { width: 100%; }
+  .shot .cap a { white-space: nowrap; }
+  .shot .cap { display: flex; justify-content: space-between; gap: 8px; padding: 10px 0; }
+  table.rules { width: 100%; border-collapse: collapse; margin-top: 40px; font-size: 13px; }
+  table.rules th { text-align: left; font: 11px var(--mono); color: var(--meta); text-transform: uppercase; letter-spacing: .06em; padding: 8px 8px 8px 0; border-bottom: 1px solid var(--ink); }
+  table.rules td { vertical-align: top; padding: 12px 8px 12px 0; border-bottom: 1px solid var(--rule); }
+  table.rules td.n { font: 12px var(--mono); color: var(--meta); width: 32px; }
+  table.rules td.v { width: 22%; }
+  .verdict { font: 700 11px var(--mono); letter-spacing: .06em; }
+  .verdict.p { color: var(--pass); }
+  .verdict.f { color: var(--fail); }
+  .ml { display: none; font: 11px var(--mono); color: var(--meta); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 2px; }
+  .why { display: block; color: var(--meta); margin-top: 4px; font-size: 12px; }
+
+  /* lanes */
+  .matrix { width: 100%; border-collapse: collapse; font-size: 15px; }
+  .matrix th, .matrix td { padding: 14px 12px 14px 0; border-bottom: 1px solid var(--rule); text-align: left; }
+  .matrix th { font: 11px var(--mono); color: var(--meta); text-transform: uppercase; letter-spacing: .06em; border-bottom: 1px solid var(--ink); }
+  .matrix td.s { font: 700 28px/1 var(--sans); color: var(--meta); }
+  .matrix td.s.home { color: var(--ink); }
+  .matrix td.s.home::after { content: " own lane"; font: 11px var(--mono); color: var(--mark); letter-spacing: .04em; }
+  .lanes { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 32px; }
+  .lanes .frame { height: 360px; }
+
+  .note { font-size: 14px; max-width: 760px; }
+  .runs { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .runs td, .runs th { text-align: left; padding: 10px 12px 10px 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  .runs th { font: 11px var(--mono); color: var(--meta); text-transform: uppercase; border-bottom: 1px solid var(--ink); }
+  .runs td:first-child { font-family: var(--mono); font-size: 13px; color: var(--ink); white-space: nowrap; }
+  pre.cmd { background: var(--tint); padding: 16px; font: 12px/1.6 var(--mono); overflow-x: auto; color: var(--ink); }
+  .cols2 { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; }
+  .cols2 h3 { font-size: 18px; color: var(--ink); margin: 0 0 12px; }
+  .cols2 ul { margin: 0; padding-left: 18px; font-size: 14px; }
+  .cols2 li { margin-bottom: 8px; }
+  footer { border-top: 1px solid var(--ink); padding: 24px 0 48px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+  @media (max-width: 1100px) {
+    .board { grid-template-columns: repeat(2, 1fr); }
+    .dirs { grid-template-columns: repeat(2, 1fr); }
+    .chan { grid-template-columns: 1fr 1fr; }
+    .chan .idx { display: none; }
+    .chan > div:nth-child(2) { grid-column: 1 / -1; }
+  }
+  @media (max-width: 760px) {
+    :root { --gutter: 16px; }
+    .hero { padding: 48px 0 32px; }
+    .hero .label, .hero h1, .hero p, .sechead .num, .sechead h2, .sechead p { grid-column: 1 / -1; }
+    .hero h1 { margin-top: 12px; }
+    .hero p { font-size: 17px; }
+    .sechead h2 { margin-top: 8px; font-size: 30px; }
+    .strip { grid-template-columns: 1fr; gap: 12px; padding-bottom: 40px; }
+    .strip .arrow { transform: rotate(90deg); justify-self: start; padding-left: 8px; }
+    section { padding: 48px 0; }
+    .board { grid-template-columns: 1fr 1fr; gap: 28px 12px; }
+    .ref .avoid, .ref .nums { display: none; }
+    .chan { grid-template-columns: 1fr; gap: 12px; }
+    .dirs { grid-template-columns: 1fr; }
+    .pair, .lanes { grid-template-columns: 1fr; }
+    .shot .frame { height: 520px; }
+    .lanes .frame { height: 260px; }
+    table.rules thead { display: none; }
+    .ml { display: block; }
+    table.rules tr { display: grid; grid-template-columns: 28px 1fr 1fr; border-bottom: 1px solid var(--rule); padding: 10px 0; }
+    table.rules td { border: 0; padding: 4px 8px 4px 0; }
+    table.rules td.r { grid-column: 2 / 4; }
+    table.rules td.v { width: auto; grid-row: 2; }
+    table.rules td.v:nth-of-type(3) { grid-column: 2; }
+    table.rules td.v:nth-of-type(4) { grid-column: 3; }
+    .matrix td.s { font-size: 22px; }
+    .matrix td.s.home::after { display: block; margin-top: 4px; }
+    .runs td:first-child { white-space: normal; }
+    .cols2 { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <span class="meta">Taste Engine / demo gallery</span>
+    <a class="meta" href="https://github.com/ericseandevlin/taste-engine">GitHub</a>
+  </header>
+
+  <div class="hero">
+    <div class="label meta" id="runstamp"></div>
+    <h1>Taste is data.</h1>
+    <p id="lede"></p>
+  </div>
+
+  <div class="strip" id="strip"></div>
+
+  <section id="input">
+    <div class="sechead">
+      <div class="num meta">01 / Input</div>
+      <h2>The board</h2>
+      <p>Eight synthetic homepage mockups, rendered from the HTML in <span class="mono">boards/demo/_sources/</span>. No real sites. Each one gets measured locally, then tagged by a vision model from a fixed vocabulary. Tags outside the vocabulary are thrown away.</p>
+    </div>
+    <div class="board" id="board"></div>
+  </section>
+
+  <section id="profile">
+    <div class="sechead">
+      <div class="num meta">02 / Extracted</div>
+      <h2>The profile</h2>
+      <p>The records cluster into DNA channels by what they do, not what they show. Each channel is a recipe plus a list of forbidden moves. The forbidden moves are the part a generator can be held to.</p>
+    </div>
+    <div id="channels"></div>
+    <div class="dirs" id="dirs"></div>
+  </section>
+
+  <section id="loop">
+    <div class="sechead">
+      <div class="num meta">03 / Pass or fail</div>
+      <h2>Build, critique, rebuild</h2>
+      <p id="looplede"></p>
+    </div>
+    <div class="pair" id="pair"></div>
+    <table class="rules" id="rules"></table>
+  </section>
+
+  <section id="lanes">
+    <div class="sechead">
+      <div class="num meta">04 / Lanes</div>
+      <h2>Same board, two lanes</h2>
+      <p>The board also yielded other directions. One page from the heaviest lane, one from the loudest, each re-measured with the same extractors the references went through and scored against both lanes. Higher means closer. It is a diagnostic for choosing, not a judge.</p>
+    </div>
+    <div class="lanes" id="lanepics"></div>
+    <table class="matrix" id="matrix"></table>
+  </section>
+
+  <section id="run">
+    <div class="sechead">
+      <div class="num meta">05 / Receipts</div>
+      <h2>What actually ran</h2>
+      <p>Every number on this page comes from files in <span class="mono">docs/gallery/run/</span>, copied unedited from the run.</p>
+    </div>
+    <table class="runs" id="runs"></table>
+    <div class="cols2" style="margin-top:48px">
+      <div>
+        <h3>Reproduce it</h3>
+        <pre class="cmd" id="cmds"></pre>
+      </div>
+      <div>
+        <h3>What this does not show</h3>
+        <ul id="limits"></ul>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span class="meta">Method adapted from the Taste DNA Method by Randy Roberts (<a href="https://www.instagram.com/rndyrbrts/">@rndyrbrts</a>), shared with permission.</span>
+    <span class="meta">MIT</span>
+  </footer>
+</div>
+
+<script src="data.js"></script>
+<script>
+(function () {
+  const G = window.GALLERY;
+  const $ = (id) => document.getElementById(id);
+  const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const chans = [...(G.channels.channels || [])].sort((a, b) => (b.members || []).length - (a.members || []).length);
+  const forbiddenCount = chans.reduce((n, c) => n + (c.forbidden || []).length, 0);
+  const tagCount = G.items.reduce((n, it) => n + (it.tags || []).length, 0);
+  const gen = Object.fromEntries(G.generated.map((g) => [g.slug, g]));
+  const run = G.runInfo || {};
+  const before = gen[run.before], after = gen[run.after];
+  const passN = (g) => g && g.check ? g.check.results.filter((r) => r.pass).length : null;
+  const ruleN = before && before.check ? before.check.results.length : 0;
+
+  $('runstamp').textContent = 'Run ' + (run.date || '') + ' / board: demo';
+  $('lede').textContent = `${G.items.length} screenshots in. Out: ${tagCount} rule-tags, measured palettes, ${chans.length} channels, ${forbiddenCount} forbidden moves. A page built from that gets checked against it, one rule at a time.`;
+
+  // 10-second strip
+  const rec = G.items.find((i) => i.id === run.featured) || G.items[0];
+  const recJson = [
+    `<span class="k">"id":</span> "${esc(rec.id)}",  <span class="k">"file":</span> "${esc(rec.file)}"`,
+    `<span class="k">"palette":</span> ${esc(rec.measure.palette.slice(0, 3).map((p) => p.hex + ' ' + p.pct + '%').join(', '))}`,
+    `<span class="k">"contrast":</span> ${rec.measure.contrast}, <span class="k">"density":</span> ${rec.measure.density}`,
+    `<span class="k">"tags":</span> ${esc(JSON.stringify(rec.tags))}`,
+    `<span class="k">"channels":</span> ${esc(JSON.stringify(rec.channels))}`,
+  ].join('\n');
+  $('strip').innerHTML = `
+    <div class="cell"><div class="meta">In: ${G.items.length} references</div>
+      <div class="thumbs">${G.items.map((i) => `<img src="${i.img}" alt="${esc(i.title)}" loading="lazy">`).join('')}</div></div>
+    <div class="arrow">&rarr;</div>
+    <div class="cell"><div class="meta">Out: one record of ${G.items.length}</div><pre class="record">${recJson}</pre></div>
+    <div class="arrow">&rarr;</div>
+    <div class="cell"><div class="meta">Checked: ${ruleN} critique rules</div>
+      <div class="tally">
+        <div><img src="${before.shots.desktop}" alt="First build"><div class="big bad">${passN(before)}/${ruleN}</div><div class="meta">first build</div></div>
+        <div><img src="${after.shots.desktop}" alt="Rebuild"><div class="big ${passN(after) > passN(before) ? 'ok' : 'bad'}">${passN(after)}/${ruleN}</div><div class="meta">rebuild with rules</div></div>
+      </div></div>`;
+
+  // board
+  $('board').innerHTML = G.items.map((it) => `
+    <article class="ref">
+      <img src="${it.img}" alt="${esc(it.title)} reference" loading="lazy">
+      <h3><span>${esc(it.title)}</span><span class="meta">${esc(it.id)}</span></h3>
+      <div class="swatches">${it.measure.palette.map((p) => `<span title="${p.hex} ${p.pct}%" style="background:${p.hex};flex:${Math.max(p.pct, 1)}"></span>`).join('')}</div>
+      <div class="nums mono"><span>contrast ${it.measure.contrast}</span><span>density ${it.measure.density}</span></div>
+      <div class="tags">${(it.tags || []).map((t) => `<span class="tag">${esc(t)}</span>`).join('')}</div>
+      <p class="avoid"><b>AVOID</b>${esc(it.notes && it.notes.avoid)}</p>
+    </article>`).join('');
+
+  // channels
+  const maxW = Math.max(...chans.map((c) => (c.members || []).length));
+  $('channels').innerHTML = chans.map((c, i) => `
+    <div class="chan">
+      <div class="idx meta">${String(i + 1).padStart(2, '0')}</div>
+      <div><h3>${esc(c.name)}</h3><div class="meta" style="margin-top:6px">${(c.members || []).length} of ${G.items.length} refs</div>
+        <div class="weight">${Array.from({ length: maxW }, (_, k) => `<i class="${k < (c.members || []).length ? 'on' : ''}"></i>`).join('')}</div></div>
+      <dl>${['ground', 'type', 'accent', 'space'].map((k) => c.recipe && c.recipe[k] ? `<dt>${k}</dt><dd>${esc(c.recipe[k])}</dd>` : '').join('')}</dl>
+      <div><div class="meta" style="margin-bottom:6px">Forbidden</div><ul>${(c.forbidden || []).map((f) => `<li>${esc(f)}</li>`).join('')}</ul></div>
+    </div>`).join('');
+
+  const dirs = (G.directions && G.directions.directions) || {};
+  $('dirs').innerHTML = Object.entries(dirs).map(([id, d]) => `
+    <div class="dir"><div class="meta">Direction / ${esc(d.channels.join(' + '))}</div><h3>${esc(d.name)}</h3><p>${esc(d.brief)}</p></div>`).join('');
+
+  // loop
+  $('looplede').textContent = `The engine built a page from its heaviest direction, ${dirs[before.meta.direction] ? dirs[before.meta.direction].name : before.meta.direction}. The critique stage looked at screenshots and wrote ${ruleN} concrete rules. Those rules went into the next build. A separate vision pass then judged both pages against every rule.`;
+  const shot = (g, label, mobile = true) => `
+    <div class="shot">
+      <div class="frame"><picture>${mobile && g.shots.mobile ? `<source media="(max-width: 760px)" srcset="${g.shots.mobile}">` : ''}<img src="${g.shots.desktop}" alt="${esc(label)} screenshot"></picture></div>
+      <div class="cap"><span class="meta">${esc(label)} / ${esc(g.slug)} / ${g.meta.rulesApplied || 0} rules in</span><a class="meta" href="${g.page}">Open page</a></div>
+    </div>`;
+  $('pair').innerHTML = shot(before, 'First build') + shot(after, 'Rebuild');
+  const v = (r) => `<span class="verdict ${r.pass ? 'p' : 'f'}">${r.pass ? 'PASS' : 'FAIL'}</span><span class="why">${esc(r.reason)}</span>`;
+  $('rules').innerHTML = `<thead><tr><th></th><th>Rule written by critique</th><th>First build</th><th>Rebuild</th></tr></thead><tbody>` +
+    before.check.results.map((r, i) => `<tr><td class="n">${String(i + 1).padStart(2, '0')}</td><td class="r">${esc(r.rule)}</td><td class="v"><span class="ml">First build</span>${v(r)}</td><td class="v"><span class="ml">Rebuild</span>${v(after.check.results[i])}</td></tr>`).join('') + '</tbody>';
+
+  // lanes
+  const laneSlugs = run.lanes || [];
+  const laneDirs = laneSlugs.map((s) => gen[s].meta.direction);
+  $('lanepics').innerHTML = laneSlugs.map((s) => shot(gen[s], dirs[gen[s].meta.direction].name, false)).join('');
+  const scoreOf = (g, dir) => {
+    for (const sc of Object.values(g.scores)) {
+      const sd = sc.scope && sc.scope.channels ? sc.scope.channels.join('+') : '';
+      if (sd === dirs[dir].channels.join('+')) return sc.alignment.scope;
+    }
+    return null;
+  };
+  $('matrix').innerHTML = `<thead><tr><th>Page</th>${laneDirs.map((d) => `<th>vs ${esc(dirs[d].name)}</th>`).join('')}</tr></thead><tbody>` +
+    laneSlugs.map((s) => `<tr><td>${esc(dirs[gen[s].meta.direction].name)}<div class="meta">${esc(s)}</div></td>${laneDirs.map((d) => {
+      const n = scoreOf(gen[s], d);
+      return `<td class="s ${d === gen[s].meta.direction ? 'home' : ''}">${n == null ? '-' : Math.round(n * 10) / 10}</td>`;
+    }).join('')}</tr>`).join('') + '</tbody>';
+
+  // receipts
+  $('runs').innerHTML = `<thead><tr><th>Stage</th><th>Model</th><th>What came out</th></tr></thead><tbody>` +
+    (run.stages || []).map((s) => `<tr><td>${esc(s.stage)}</td><td class="mono">${esc(s.model)}</td><td>${esc(s.out)}</td></tr>`).join('') + '</tbody>';
+  $('cmds').textContent = (run.commands || []).join('\n');
+  $('limits').innerHTML = (run.limits || []).map((l) => `<li>${esc(l)}</li>`).join('');
+})();
+</script>
+</body>
+</html>

@@ -15,3 +15,5 @@ boards/*/generated/**/*.png
 /boards/negative-space
 /boards/experimental-type
 /boards/gothic-heraldry
+# Scratch board the demo gallery was built from (re-creatable from boards/demo)
+/boards/gallery-run

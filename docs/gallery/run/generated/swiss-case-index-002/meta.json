@@ -1,0 +1,12 @@
+{
+  "direction": "swiss-case-index",
+  "name": "Swiss Case Index",
+  "channels": [
+    "swiss-index",
+    "case-study-functional"
+  ],
+  "model": "claude-cli:sonnet",
+  "rulesApplied": 8,
+  "content": "profile.json",
+  "generated": "2026-11-11T15:32:37.757Z"
+}

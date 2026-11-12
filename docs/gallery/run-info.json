@@ -1,0 +1,40 @@
+{
+  "date": "2026-11-11",
+  "featured": "w004",
+  "before": "swiss-case-index-001",
+  "after": "swiss-case-index-002",
+  "lanes": ["swiss-case-index-002", "red-monolith-brutal-001"],
+  "stages": [
+    { "stage": "import", "model": "local", "out": "8 records from the 8 demo PNGs (copied to a scratch board so the shipped demo files stay untouched)" },
+    { "stage": "measure", "model": "local (Sharp)", "out": "Palette, contrast and density per image" },
+    { "stage": "tag", "model": "claude-cli:sonnet", "out": "Rule-tags plus WHY / AVOID / KEEP notes per image, vocabulary-gated" },
+    { "stage": "cluster", "model": "claude-cli:sonnet", "out": "8 DNA channels with recipes and forbidden moves" },
+    { "stage": "directions", "model": "claude-cli:sonnet", "out": "4 candidate directions derived from the channels" },
+    { "stage": "thesis", "model": "claude-cli:sonnet", "out": "THESIS.md" },
+    { "stage": "atlas, fingerprint", "model": "local", "out": "Atlas viewer and fingerprint v001" },
+    { "stage": "generate", "model": "claude-cli:sonnet", "out": "swiss-case-index-001 and red-monolith-brutal-001 (0 rules in), then swiss-case-index-002 (8 rules in)" },
+    { "stage": "capture", "model": "Playwright, Chrome for Testing", "out": "Full-page shots at a 1440x1200 and 390x844 viewport" },
+    { "stage": "critique", "model": "claude-cli:sonnet", "out": "8 concrete rules from swiss-case-index-001" },
+    { "stage": "check-rules", "model": "claude-cli:sonnet", "out": "PASS or FAIL per rule for 001 and 002 (new helper, scripts/check-rules.mjs)" },
+    { "stage": "score", "model": "local extractors + claude-cli:sonnet re-tag", "out": "Alignment of each page against each lane" }
+  ],
+  "commands": [
+    "mkdir boards/gallery-run && cp boards/demo/*.png boards/demo/profile.json boards/gallery-run/",
+    "npm run pipeline -- --board gallery-run --model claude-cli:sonnet",
+    "npm run generate -- --board gallery-run --direction swiss-case-index --model claude-cli:sonnet",
+    "npm run generate -- --board gallery-run --direction red-monolith-brutal --model claude-cli:sonnet",
+    "# screenshot each page into generated/<slug>/desktop.png + mobile.png",
+    "npm run critique -- --board gallery-run --slug swiss-case-index-001 --model claude-cli:sonnet",
+    "npm run generate -- --board gallery-run --direction swiss-case-index --model claude-cli:sonnet",
+    "node scripts/check-rules.mjs --board gallery-run --slug <slug> --model claude-cli:sonnet",
+    "npm run score -- --board gallery-run --slug <slug> [--direction <other-lane>] --model claude-cli:sonnet",
+    "node scripts/build-gallery.mjs --board gallery-run --out docs/gallery"
+  ],
+  "limits": [
+    "One run, one round of critique. The rebuild fixed 3 of 8 rules and broke the mobile layout in new ways (it scrolls sideways at 390px). The loop helps; it does not finish the job.",
+    "The pass/fail verdicts come from a vision model reading screenshots. They are a second opinion, not ground truth.",
+    "The score measures palette, contrast, density and tags. It can say a page sits in the right lane. It cannot say the page is good.",
+    "Every model step ran through the Claude Code CLI on Sonnet (the claude-cli: provider added in this branch), not the repo's default Gemini routing. A different model will give different tags and channels.",
+    "The board is 8 synthetic mockups built to span very different styles. A real board should be bigger and more focused than this."
+  ]
+}

@@ -1,0 +1,220 @@
+<!doctype html>
+<!--
+LINEAGE
+direction: Monolith Wordmark x Bold Primary Brutalist
+channels blended: monolith-wordmark, bold-primary-brutalist
+key params:
+  palette: ground #ff3300, ink and blocks #000000, inversion #ffffff
+  colors per screen: two (red/black, black/red, white/black)
+  display: one oversized grotesk wordmark on first screen, fitted to viewport width, tight tracking
+  meta: small mono, pinned to corner
+  hover: instant color inversion, no transitions
+  motion: hard cuts only, stepped marquee below the fold
+  rules: thick rules and heavy blocks on inner screens
+  forbidden respected: no photo, gradient, shadow, radius, light weights, fades
+content source: profile (Avery Quinn, supplied details only)
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Avery Quinn, Design Technologist</title>
+<meta name="description" content="Avery Quinn is a design technologist in Brooklyn, NY. Design systems, prototyping in code, production components.">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;border-radius:0}
+html{scroll-behavior:auto;-webkit-text-size-adjust:100%}
+body{
+  background:#000;color:#fff;
+  font-family:"Arial Black","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-weight:900;line-height:1.1;
+}
+.mono{
+  font-family:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+  font-weight:700;font-size:.78rem;letter-spacing:0;text-transform:uppercase;line-height:1.35;
+}
+a{color:inherit;text-decoration:underline;text-decoration-thickness:.18em;text-underline-offset:.2em}
+a:hover,a:focus-visible{background:var(--fg);color:var(--bg);outline:none;text-decoration:none}
+
+/* screens: two colors each, instant inversion */
+.s{background:var(--bg);color:var(--fg);padding:1rem}
+.red{--bg:#ff3300;--fg:#000;--hbg:#000;--hfg:#ff3300}
+.black{--bg:#000;--fg:#ff3300;--hbg:#ff3300;--hfg:#000}
+.white{--bg:#fff;--fg:#000;--hbg:#000;--hfg:#fff}
+.flip:hover{--bg:var(--hbg);--fg:var(--hfg)}
+
+/* hero */
+.hero{
+  min-height:100vh;min-height:100svh;
+  display:flex;flex-direction:column;justify-content:space-between;
+  overflow:hidden;
+}
+.top{display:flex;gap:1.25rem;flex-wrap:nowrap;white-space:nowrap}
+.mark{
+  margin-top:1.5rem;
+  font-size:24vw;line-height:.8;letter-spacing:-.065em;text-transform:uppercase;
+  margin-left:-.04em;
+}
+.ln{display:block;width:max-content;white-space:nowrap;padding-bottom:.04em}
+.meta{align-self:flex-end;text-align:right;max-width:34rem}
+
+/* marquee */
+.band{overflow:hidden;white-space:nowrap;border-top:1.2rem solid var(--fg);border-bottom:1.2rem solid var(--fg);padding:.6rem 0}
+.track{display:inline-block;animation:run 18s steps(36) infinite}
+.track span{font-size:1.6rem;text-transform:uppercase;padding-right:2rem;letter-spacing:-.02em}
+@keyframes run{to{transform:translateX(-50%)}}
+
+/* work */
+.work{padding:0}
+.lab{padding:1rem;display:flex;justify-content:space-between;gap:1rem}
+.row{
+  display:grid;grid-template-columns:5rem 1fr;gap:1rem 1rem;
+  border-top:1.2rem solid var(--fg);padding:1rem 1rem 1.5rem;
+}
+.row:last-child{border-bottom:1.2rem solid var(--fg)}
+.row:hover{background:var(--fg);color:var(--bg)}
+.num{grid-row:1}
+.row h2{
+  grid-column:2;font-size:clamp(2rem,8vw,7rem);line-height:.88;letter-spacing:-.05em;text-transform:uppercase;
+  overflow-wrap:anywhere;
+}
+.facts{grid-column:2;display:flex;flex-wrap:wrap;gap:.35rem 1.5rem}
+.facts span b{font-weight:900;opacity:1}
+.row p{
+  grid-column:2;max-width:40rem;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-weight:700;font-size:1.1rem;line-height:1.35;
+}
+
+/* about */
+.about{padding:1rem 1rem 3rem}
+.about h2{
+  margin-top:1.5rem;font-size:clamp(2rem,7.2vw,6.5rem);line-height:.92;letter-spacing:-.055em;
+  text-transform:uppercase;max-width:18ch;
+}
+.about p.body{
+  margin-top:2rem;max-width:36rem;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-weight:700;font-size:1.2rem;line-height:1.35;
+}
+.blocks{margin-top:2.5rem;display:grid;grid-template-columns:repeat(3,1fr);border-top:1.2rem solid var(--fg)}
+.blocks div{background:var(--fg);color:var(--bg);padding:1rem 1rem 1.25rem;min-height:9rem;display:flex;flex-direction:column;justify-content:space-between;gap:2rem}
+.blocks div+div{border-left:1.2rem solid var(--bg)}
+.blocks strong{font-size:clamp(1.3rem,2.6vw,2.2rem);line-height:.95;letter-spacing:-.04em;text-transform:uppercase}
+
+/* contact */
+.contact{padding:1rem 1rem 1rem;min-height:70vh;display:flex;flex-direction:column;justify-content:space-between;gap:3rem}
+.mail{
+  display:block;font-size:clamp(1.25rem,5.2vw,5rem);letter-spacing:-.05em;line-height:.95;
+  overflow-wrap:anywhere;text-decoration:none;border-top:1.2rem solid var(--fg);padding-top:1rem;
+}
+.mail:hover,.mail:focus-visible{background:var(--fg);color:var(--bg)}
+.links{display:flex;flex-direction:column;gap:.5rem;margin-top:1.5rem;font-size:1.4rem;letter-spacing:-.03em}
+.links a{width:max-content;max-width:100%;text-decoration:none;border-bottom:.4rem solid currentColor}
+.links a:hover,.links a:focus-visible{border-bottom-color:var(--fg)}
+.foot{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+
+@media (max-width:720px){
+  .blocks{grid-template-columns:1fr}
+  .blocks div+div{border-left:0;border-top:1.2rem solid var(--bg)}
+  .blocks div{min-height:6rem}
+  .row{grid-template-columns:2.5rem 1fr}
+  .meta{max-width:100%}
+  .track span{font-size:1.2rem}
+}
+@media (prefers-reduced-motion:reduce){.track{animation:none}}
+</style>
+</head>
+<body>
+
+<header class="s red flip hero" id="top">
+  <nav class="top mono" aria-label="Sections">
+    <a href="#work">Work</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <h1 class="mark" data-fit aria-label="Avery Quinn">
+    <span class="ln">Avery</span>
+    <span class="ln">Quinn</span>
+  </h1>
+  <p class="meta mono">Design Technologist / Brooklyn, NY / Open to select work from Q3 2026</p>
+</header>
+
+<div class="s black flip band mono-band" aria-hidden="true">
+  <div class="track">
+    <span>Open to select work from Q3 2026</span><span>Brooklyn, NY</span><span>Design Technologist</span><span>Open to select work from Q3 2026</span><span>Brooklyn, NY</span><span>Design Technologist</span>
+    <span>Open to select work from Q3 2026</span><span>Brooklyn, NY</span><span>Design Technologist</span><span>Open to select work from Q3 2026</span><span>Brooklyn, NY</span><span>Design Technologist</span>
+  </div>
+</div>
+
+<main>
+<section class="s black work" id="work">
+  <div class="lab mono"><span>Work</span><span>03 projects</span></div>
+
+  <article class="row">
+    <span class="num mono">01</span>
+    <h2>Lattice Design System</h2>
+    <p class="facts mono"><span>Role: Lead</span><span>Stack: React, Style Dictionary</span><span>Output: 140 components</span></p>
+    <p>Component library and token pipeline for a multi-product platform. Cut design-to-production drift across nine teams.</p>
+  </article>
+
+  <article class="row">
+    <span class="num mono">02</span>
+    <h2>Signal Prototyping Kit</h2>
+    <p class="facts mono"><span>Role: Design technologist</span><span>Stack: TypeScript, Vite</span><span>Output: Internal tool</span></p>
+    <p>A toolkit for building interactive prototypes against real API data, so reviews test behavior rather than static screens.</p>
+  </article>
+
+  <article class="row">
+    <span class="num mono">03</span>
+    <h2>Grid Audit Tooling</h2>
+    <p class="facts mono"><span>Role: Author</span><span>Stack: JavaScript, PostCSS</span><span>Output: Open source</span></p>
+    <p>A linter and visual overlay that checks layouts against a defined column grid in the browser, flagging spacing that falls off the baseline.</p>
+  </article>
+</section>
+
+<section class="s white flip about" id="about">
+  <div class="mono">About</div>
+  <h2>I build the connective tissue between design systems and the code that ships them.</h2>
+  <p class="body">I work between design and engineering: design systems, prototyping in code, and the production components that keep teams consistent. Before consulting I led the design systems group at a payments company.</p>
+  <div class="blocks">
+    <div><span class="mono">Role</span><strong>Design Technologist</strong></div>
+    <div><span class="mono">Location</span><strong>Brooklyn, NY</strong></div>
+    <div><span class="mono">Availability</span><strong>Open to select work from Q3 2026</strong></div>
+  </div>
+</section>
+
+<section class="s red flip contact" id="contact">
+  <div>
+    <div class="mono" style="margin-bottom:1.5rem">Contact</div>
+    <a class="mail" href="mailto:hello@averyquinn.studio">hello@averyquinn.studio</a>
+    <div class="links">
+      <a href="https://github.com/averyq">github.com/averyq</a>
+      <a href="https://read.cv/averyq">read.cv/averyq</a>
+    </div>
+  </div>
+  <div class="foot mono">
+    <span>Avery Quinn</span>
+    <span>Design Technologist</span>
+    <a href="#top">Top</a>
+  </div>
+</section>
+</main>
+
+<script>
+(function(){
+  function fit(){
+    document.querySelectorAll('[data-fit]').forEach(function(el){
+      var cs=getComputedStyle(el.parentElement);
+      var avail=el.parentElement.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight);
+      el.style.fontSize='100px';
+      var w=0;
+      el.querySelectorAll('.ln').forEach(function(l){w=Math.max(w,l.getBoundingClientRect().width);});
+      if(w>0){el.style.fontSize=(100*avail/w*0.995)+'px';}
+    });
+  }
+  fit();
+  window.addEventListener('resize',fit);
+  window.addEventListener('load',fit);
+  if(document.fonts&&document.fonts.ready){document.fonts.ready.then(fit);}
+})();
+</script>
+</body>
+</html>
