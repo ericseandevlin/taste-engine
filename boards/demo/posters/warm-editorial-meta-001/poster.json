@@ -8,156 +8,162 @@
     "20 Nov 2026",
     "Doors 7pm"
   ],
+  "type": "set",
   "model": "gemini-3.1-flash-image",
   "judge": "gemini-3.5-flash",
-  "made": "2026-11-12T17:28:53.741Z",
+  "made": "2026-11-17T21:42:44.081Z",
+  "references": [
+    "paper-press.png",
+    "casebook.png",
+    "gridwork.png"
+  ],
   "best": "round-2.png",
   "rounds": [
     {
       "round": 1,
       "file": "round-1.png",
-      "passed": 10,
+      "passed": 9,
       "total": 13,
       "checked": true,
       "results": [
         {
           "rule": "The poster does not use this: Serif editorial typefaces.",
           "pass": true,
-          "reason": "The poster uses a clean sans-serif typeface, not an editorial serif one."
+          "reason": "The text on the poster is rendered in a clean sans-serif typeface, not serif."
         },
         {
           "rule": "The poster does not use this: Warm or emotive color palettes.",
           "pass": false,
-          "reason": "The poster features a warm cream background and light pink text accents."
+          "reason": "The poster uses a warm cream and soft pink color palette."
         },
         {
           "rule": "The poster does not use this: Photography as atmosphere.",
-          "pass": true,
-          "reason": "There are no photographic elements or atmospheric imagery in the poster."
+          "pass": false,
+          "reason": "The poster features a prominent photographic portrait of a woman's face split into strips."
         },
         {
           "rule": "The poster does not use this: Organic or irregular shapes.",
           "pass": true,
-          "reason": "The layout contains only text and simple registration lines without any organic shapes."
+          "reason": "The graphic elements are strictly geometric, with no organic or irregular shapes used."
         },
         {
           "rule": "The poster does not use this: Expressive motion or easing.",
           "pass": true,
-          "reason": "The poster is a static graphic and contains no motion or animation."
+          "reason": "The poster is a static design with no motion elements."
         },
         {
           "rule": "The poster does not use this: High-density decorative elements.",
           "pass": true,
-          "reason": "The design is highly minimalist, featuring ample whitespace and very few elements."
+          "reason": "The layout is highly minimalist with minimal decoration."
         },
         {
           "rule": "The poster does not use this: Cold white or dark backgrounds.",
           "pass": true,
-          "reason": "The background color is a warm, soft cream-beige tone rather than cold white or black."
+          "reason": "The poster has a warm, light cream background."
         },
         {
           "rule": "The poster does not use this: High-chroma neon accents.",
           "pass": true,
-          "reason": "The colors are muted and pastel, with no high-chroma neon accents."
+          "reason": "The pink tones used are pastel and soft, not high-chroma neon."
         },
         {
           "rule": "The poster does not use this: Dense information grids.",
           "pass": true,
-          "reason": "The text is sparsely arranged with a large amount of empty space."
+          "reason": "The text layout is very sparse and contains very little information."
         },
         {
           "rule": "The poster does not use this: Hard geometric shapes.",
-          "pass": true,
-          "reason": "No solid geometric shapes like circles, triangles, or squares are present."
+          "pass": false,
+          "reason": "The design is structured around hard geometric rectangular strips, a circle, and a small square."
         },
         {
           "rule": "The poster does not use this: Bold sans-serif display type.",
           "pass": false,
-          "reason": "The design prominently features bold sans-serif typefaces for the main text."
+          "reason": "The main title 'Open Studio' is set in a bold sans-serif display typeface."
         },
         {
           "rule": "The poster does not use this: Fast or bouncy motion.",
           "pass": true,
-          "reason": "The poster is completely static and has no motion."
+          "reason": "The poster is a static image without any animation."
         },
         {
           "rule": "The copy is rendered exactly as given: every word spelled correctly, nothing added, nothing missing.",
-          "pass": false,
-          "reason": "The poster contains extra text such as hex color codes and repeated lines not in the original copy."
+          "pass": true,
+          "reason": "The copy 'Open Studio', '20 Nov 2026', and 'Doors 7pm' is rendered exactly as requested."
         }
       ]
     },
     {
       "round": 2,
       "file": "round-2.png",
-      "passed": 10,
+      "passed": 9,
       "total": 13,
       "checked": true,
       "results": [
         {
           "rule": "The poster does not use this: Serif editorial typefaces.",
           "pass": true,
-          "reason": "The poster uses a clean sans-serif typeface instead of a serif typeface."
+          "reason": "The text on the poster is rendered in a sans-serif typeface, not a serif editorial typeface."
         },
         {
           "rule": "The poster does not use this: Warm or emotive color palettes.",
-          "pass": true,
-          "reason": "The poster has a minimalist, neutral cream and black color palette."
+          "pass": false,
+          "reason": "The poster uses a warm color palette of cream and pastel pink."
         },
         {
           "rule": "The poster does not use this: Photography as atmosphere.",
           "pass": true,
-          "reason": "There are no photographic elements on the poster."
+          "reason": "The poster uses a graphic halftone-patterned portrait rather than photography as atmosphere."
         },
         {
           "rule": "The poster does not use this: Organic or irregular shapes.",
-          "pass": true,
-          "reason": "The design consists of clean typographic and strict geometric forms with no organic shapes."
+          "pass": false,
+          "reason": "The silhouette of the person's curly hair forms an organic and irregular shape."
         },
         {
           "rule": "The poster does not use this: Expressive motion or easing.",
           "pass": true,
-          "reason": "This is a static image with no movement or animation."
+          "reason": "The poster is a static image with no animation or motion."
         },
         {
           "rule": "The poster does not use this: High-density decorative elements.",
           "pass": true,
-          "reason": "The design is highly minimalist with very few graphical elements."
+          "reason": "The layout is clean and minimalist with no high-density decorative elements."
         },
         {
           "rule": "The poster does not use this: Cold white or dark backgrounds.",
           "pass": true,
-          "reason": "The background is a warm cream off-white color."
+          "reason": "The poster's background is a warm cream color, not a cold white or dark color."
         },
         {
           "rule": "The poster does not use this: High-chroma neon accents.",
           "pass": true,
-          "reason": "The color scheme is strictly black and off-white with no neon colors."
+          "reason": "The poster uses soft, muted pastel pink instead of high-chroma neon accents."
         },
         {
           "rule": "The poster does not use this: Dense information grids.",
           "pass": true,
-          "reason": "The text is sparsely arranged with plenty of empty space."
+          "reason": "The poster contains only three lines of text, with no dense information grid."
         },
         {
           "rule": "The poster does not use this: Hard geometric shapes.",
           "pass": false,
-          "reason": "There is a prominent square with a diagonal cross on the right side."
+          "reason": "The poster uses horizontal rectangular strips and a circular dot, which are hard geometric shapes."
         },
         {
           "rule": "The poster does not use this: Bold sans-serif display type.",
           "pass": false,
-          "reason": "The poster uses a large, prominent sans-serif typeface as its primary design element."
+          "reason": "The text 'Open Studio' is set in a bold sans-serif display typeface."
         },
         {
           "rule": "The poster does not use this: Fast or bouncy motion.",
           "pass": true,
-          "reason": "The image is a static printed poster."
+          "reason": "The poster is static and does not contain any animation or motion."
         },
         {
           "rule": "The copy is rendered exactly as given: every word spelled correctly, nothing added, nothing missing.",
-          "pass": false,
-          "reason": "An extra letter 'K' and symbol graphics have been added to the layout."
+          "pass": true,
+          "reason": "The text matches the requested copy exactly, with no additions, omissions, or spelling errors."
         }
       ]
     }
