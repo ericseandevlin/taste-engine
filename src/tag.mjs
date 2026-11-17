@@ -112,6 +112,8 @@ export async function tagImage(absPath, board, callModel) {
         image: buf.toString('base64'),
         mediaType: 'image/jpeg',
         prompt,
+        // Thinking models spend ~500 tokens before answering; the old 600 default cut the JSON off.
+        maxTokens: 4000,
       });
       return parseTagResponse(raw, board.tagVocabulary, board.channelSeeds);
     } catch (err) {
