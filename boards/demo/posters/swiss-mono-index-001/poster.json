@@ -8,9 +8,15 @@
     "20 Nov 2026",
     "Doors 7pm"
   ],
+  "type": "set",
   "model": "gemini-3.1-flash-image",
   "judge": "gemini-3.5-flash",
-  "made": "2026-11-12T17:26:35.013Z",
+  "made": "2026-11-17T21:40:29.861Z",
+  "references": [
+    "casebook.png",
+    "gridwork.png",
+    "monolith.png"
+  ],
   "best": "round-2.png",
   "rounds": [
     {
@@ -23,141 +29,141 @@
         {
           "rule": "The poster does not use this: Decorative or display typefaces.",
           "pass": true,
-          "reason": "Only a clean sans-serif typeface is used throughout the entire poster."
+          "reason": "The text uses a clean, neutral sans-serif typeface without decorative styles."
         },
         {
           "rule": "The poster does not use this: Asymmetric blob layouts.",
           "pass": true,
-          "reason": "The layout is strictly structured on a rigid, rectangular grid."
+          "reason": "The poster is designed on a rigid, geometric grid with no organic blob shapes."
         },
         {
           "rule": "The poster does not use this: High-saturation color fields.",
           "pass": true,
-          "reason": "The poster is designed entirely in grayscale."
+          "reason": "The entire poster is strictly grayscale with no color fields."
         },
         {
           "rule": "The poster does not use this: Overlapping or collaged elements.",
           "pass": true,
-          "reason": "Every text block and image is cleanly separated within its own grid cell without overlapping."
+          "reason": "The design uses a single halftone image integrated with grid lines, without any collaged layers."
         },
         {
           "rule": "The poster does not use this: Gradient backgrounds.",
           "pass": true,
-          "reason": "The background consists of solid white and gray columns with no color gradients."
+          "reason": "The background consists of solid gray and white areas with no gradients."
         },
         {
           "rule": "The poster does not use this: Centered hero compositions.",
           "pass": true,
-          "reason": "The poster uses a modular, multi-block grid layout rather than a single centered focal point."
+          "reason": "The composition is asymmetrical, with text aligned left and a vertical grid structure."
         },
         {
           "rule": "The poster does not use this: Serif editorial typefaces.",
           "pass": true,
-          "reason": "All typefaces on the poster are clean sans-serif fonts."
+          "reason": "Only a clean sans-serif typeface is used in the layout."
         },
         {
           "rule": "The poster does not use this: Warm or emotive color palettes.",
           "pass": true,
-          "reason": "The color scheme is completely black, white, and gray."
+          "reason": "The color palette is entirely neutral, black-and-white, and grayscale."
         },
         {
           "rule": "The poster does not use this: Photography as atmosphere.",
           "pass": true,
-          "reason": "The photographs are literal, technical subject shots placed inside a structured grid."
+          "reason": "The hand photograph is used as a sharp graphic symbol rather than a soft, atmospheric background."
         },
         {
           "rule": "The poster does not use this: Organic or irregular shapes.",
-          "pass": true,
-          "reason": "The layout elements consist exclusively of straight lines and rectangular grid blocks."
+          "pass": false,
+          "reason": "The illustration of the hand introduces an organic, irregular human shape into the layout."
         },
         {
           "rule": "The poster does not use this: Expressive motion or easing.",
           "pass": true,
-          "reason": "The layout is entirely static, with no visual elements suggesting movement or speed."
+          "reason": "The composition is completely static with no graphic elements implying motion or speed."
         },
         {
           "rule": "The poster does not use this: High-density decorative elements.",
           "pass": true,
-          "reason": "The poster utilizes minimalist technical labels and simple grid lines rather than dense decoration."
+          "reason": "The poster has a highly minimalist design with a lot of empty space and clean grid lines."
         },
         {
           "rule": "The copy is rendered exactly as given: every word spelled correctly, nothing added, nothing missing.",
-          "pass": false,
-          "reason": "The poster contains numerous additional text elements, such as technical metadata and labels, that were not in the provided copy."
+          "pass": true,
+          "reason": "The copy 'Open Studio', '20 Nov 2026', and 'Doors 7pm' is rendered exactly as requested."
         }
       ]
     },
     {
       "round": 2,
       "file": "round-2.png",
-      "passed": 13,
+      "passed": 12,
       "total": 13,
       "checked": true,
       "results": [
         {
           "rule": "The poster does not use this: Decorative or display typefaces.",
           "pass": true,
-          "reason": "The typography is a clean, functional sans-serif face."
+          "reason": "The text uses a clean, standard sans-serif typeface with no decorative elements."
         },
         {
           "rule": "The poster does not use this: Asymmetric blob layouts.",
           "pass": true,
-          "reason": "The layout is designed on a strict, rectangular modular grid."
+          "reason": "The layout is strictly structured with rigid vertical columns rather than asymmetric blobs."
         },
         {
           "rule": "The poster does not use this: High-saturation color fields.",
           "pass": true,
-          "reason": "The poster is entirely monochrome with no colors."
+          "reason": "The poster is entirely grayscale with no high-saturation colors."
         },
         {
           "rule": "The poster does not use this: Overlapping or collaged elements.",
           "pass": true,
-          "reason": "Each photographic element is neatly contained within its respective grid boundary."
+          "reason": "The graphic is a clean, grid-sliced flat composition rather than a overlapping collage."
         },
         {
           "rule": "The poster does not use this: Gradient backgrounds.",
           "pass": true,
-          "reason": "The background consists of flat white paper with black grid lines."
+          "reason": "The background consists of solid, flat-colored vertical strips with no gradients."
         },
         {
           "rule": "The poster does not use this: Centered hero compositions.",
-          "pass": true,
-          "reason": "The composition uses a multi-frame grid instead of a single central focus."
+          "pass": false,
+          "reason": "The circular mechanical watch face is placed as a large, centered hero element in the composition."
         },
         {
           "rule": "The poster does not use this: Serif editorial typefaces.",
           "pass": true,
-          "reason": "A sans-serif typeface is used throughout the design."
+          "reason": "The typography consists entirely of a sans-serif typeface."
         },
         {
           "rule": "The poster does not use this: Warm or emotive color palettes.",
           "pass": true,
-          "reason": "The palette is strictly grayscale."
+          "reason": "The poster relies on a cold, neutral grayscale color palette."
         },
         {
           "rule": "The poster does not use this: Photography as atmosphere.",
           "pass": true,
-          "reason": "The photography consists of sharp, clear, geometric subjects and tools."
+          "reason": "The photograph serves as a sharp, graphic central object rather than a soft, atmospheric background."
         },
         {
           "rule": "The poster does not use this: Organic or irregular shapes.",
           "pass": true,
-          "reason": "Only rigid, rectilinear, and geometric forms are present."
+          "reason": "The visual elements consist solely of geometric shapes like circles, squares, and vertical rectangles."
         },
         {
           "rule": "The poster does not use this: Expressive motion or easing.",
           "pass": true,
-          "reason": "The layout is static, balanced, and perfectly aligned."
+          "reason": "The design is completely static and rigid, without any dynamic motion effects."
         },
         {
           "rule": "The poster does not use this: High-density decorative elements.",
           "pass": true,
-          "reason": "The design remains minimal, relying solely on structure and structural photography."
+          "reason": "The poster has a minimalist, functional aesthetic with no ornamental density."
         },
         {
           "rule": "The copy is rendered exactly as given: every word spelled correctly, nothing added, nothing missing.",
           "pass": true,
-          "reason": "The text matches 'Open Studio', '20 Nov 2026', and 'Doors 7pm' exactly."
+          "reason": "The copy matches the requested text exactly with correct spelling and layout."
         }
       ]
     }
