@@ -72,3 +72,10 @@ test('the prompt forbids printed color codes and a framed sheet', () => {
   assert.match(p, /runs to all four edges/);
   assert.match(p, /only text on the poster/);
 });
+
+test('buildPosterPrompt in set mode asks for no text and leaves out the copy', () => {
+  const p = buildPosterPrompt({ ...base, copy: ['Open Studio'], type: 'set' });
+  assert.match(p, /NO TEXT/);
+  assert.match(p, /top third calm/);
+  assert.doesNotMatch(p, /Open Studio/);
+});
