@@ -14,6 +14,10 @@
 // Usage:
 //   node src/poster.mjs --board demo --copy "Open Studio | 20 Nov 2026 | Doors 7pm"
 //   node src/poster.mjs --board demo --mode swiss-mono-index --rounds 3
+//   node src/poster.mjs --board demo --type drawn   # let the image model draw the words too
+//
+// By default the image model draws the artwork with no text and the copy is set
+// in code (typeset.mjs), because image models misspell and repeat words.
 //
 // Writes boards/<board>/posters/<mode>-NNN/{round-1.png,...,poster.json}.
 
@@ -26,18 +30,20 @@ import { readManifest } from './manifest.mjs';
 import { rulesForMode } from './brief.mjs';
 import { makeImageAgent } from './image-agent.mjs';
 import { resolveVisionCaller } from './models.mjs';
+import { typeset } from './typeset.mjs';
 
 export const DEFAULT_COPY = ['Open Studio', '20 Nov 2026', 'Doors 7pm'];
 const COPY_RULE = 'The copy is rendered exactly as given: every word spelled correctly, nothing added, nothing missing.';
 
 function parseArgs(argv) {
-  const args = { board: 'demo', mode: null, copy: null, rounds: 2, aspect: '3:4', model: MODELS.image, judge: MODELS.critique };
+  const args = { board: 'demo', mode: null, copy: null, rounds: 2, type: 'set', aspect: '3:4', model: MODELS.image, judge: MODELS.critique };
   for (let i = 0; i < argv.length; i++) {
     if (argv[i] === '--board') args.board = argv[++i];
     else if (argv[i] === '--mode') args.mode = argv[++i];
     else if (argv[i] === '--copy') args.copy = argv[++i];
     else if (argv[i] === '--rounds') args.rounds = Math.max(1, Number(argv[++i]));
     else if (argv[i] === '--aspect') args.aspect = argv[++i];
+    else if (argv[i] === '--type') args.type = argv[++i] === 'drawn' ? 'drawn' : 'set';
     else if (argv[i] === '--model') args.model = argv[++i];
     else if (argv[i] === '--judge') args.judge = argv[++i];
   }
@@ -52,14 +58,21 @@ export function parseCopy(text) {
 
 // Pure: the prompt the image agent draws from. `broken` holds the rules the
 // last round failed, so the repair is specific instead of "try again".
-export function buildPosterPrompt({ mode, dos, donts, palette, copy, broken = [] }) {
+export function buildPosterPrompt({ mode, dos, donts, palette, copy, broken = [], type = 'drawn' }) {
   const hexes = (mode.palette.length ? mode.palette : palette.map((p) => p.hex)).slice(0, 5);
   const out = [
     'Design one printed poster, portrait format. Return the image only.',
     '',
-    'COPY. Set exactly these lines:',
-    ...copy.map((l) => `  ${l}`),
-    'These lines are the only text on the poster. No labels, no captions, no numbers, no grid coordinates, no color codes, no invented words.',
+    ...(type === 'set'
+      ? [
+          'NO TEXT. Draw no letters, words, numbers or anything that reads as writing. The words are set on the poster later.',
+          'Leave the top third calm: mostly one flat palette color, so a title can sit there. The rest of the poster carries the artwork.',
+        ]
+      : [
+          'COPY. Set exactly these lines:',
+          ...copy.map((l) => `  ${l}`),
+          'These lines are the only text on the poster. No labels, no captions, no numbers, no grid coordinates, no color codes, no invented words.',
+        ]),
     '',
     `STYLE: ${mode.name}. ${mode.summary}`,
     '',
@@ -147,9 +160,17 @@ async function main() {
   const rounds = [];
   let broken = [];
   for (let n = 1; n <= args.rounds; n++) {
-    const img = await draw({ prompt: buildPosterPrompt({ mode, dos, donts, palette: brief.palette, copy, broken }), aspect: args.aspect });
-    const file = `round-${n}.${extOf(img.mimeType)}`;
+    const art = await draw({ prompt: buildPosterPrompt({ mode, dos, donts, palette: brief.palette, copy, broken, type: args.type }), aspect: args.aspect });
     mkdirSync(dir, { recursive: true });
+    let img = art;
+    let file = `round-${n}.${extOf(art.mimeType)}`;
+    if (args.type === 'set') {
+      writeFileSync(join(dir, `art-${n}.${extOf(art.mimeType)}`), Buffer.from(art.data, 'base64'));
+      const set = await typeset(Buffer.from(art.data, 'base64'), copy, { dos });
+      img = { data: set.data.toString('base64'), mimeType: 'image/png' };
+      file = `round-${n}.png`;
+      console.log(`[poster]   round ${n}: copy set in the ${set.band} band${set.panel ? ' on a panel' : ''}`);
+    }
     writeFileSync(join(dir, file), Buffer.from(img.data, 'base64'));
     let results;
     try {
@@ -170,7 +191,7 @@ async function main() {
   const best = bestRound(rounds);
   writeFileSync(
     join(dir, 'poster.json'),
-    JSON.stringify({ slug, board: board.name, mode: mode.id, modeName: mode.name, copy, model: args.model, judge: args.judge, made: new Date().toISOString(), best: best.file, rounds }, null, 2) + '\n',
+    JSON.stringify({ slug, board: board.name, mode: mode.id, modeName: mode.name, copy, type: args.type, model: args.model, judge: args.judge, made: new Date().toISOString(), best: best.file, rounds }, null, 2) + '\n',
   );
   console.log(`[poster] done: ${board.dir}/posters/${slug}/${best.file}`);
 }

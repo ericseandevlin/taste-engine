@@ -76,6 +76,7 @@ Then run `npm run poster -- --board myboard`. The next poster is made from your 
 ```bash
 npm run poster -- --board myboard --mode <mode-id>     # a different mode from brief.json
 npm run poster -- --board myboard --rounds 3           # allow more repair rounds
+npm run poster -- --board myboard --type drawn         # let the image model draw the words too (it misspells)
 npm run result -- --board myboard                      # rebuild the page
 ```
 
