@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { asClaim, parseCopy, buildPosterPrompt, buildCheckPrompt, parseVerdicts, bestRound, DEFAULT_COPY } from './poster.mjs';
-import { imageOfGemini, imageOfOpenRouter } from './image-agent.mjs';
+import { asClaim, parseCopy, buildPosterPrompt, pickReferences, buildCheckPrompt, parseVerdicts, bestRound, DEFAULT_COPY } from './poster.mjs';
+import { imageOfGemini, imageOfOpenRouter, openRouterContent, geminiParts } from './image-agent.mjs';
 import { routeModel, resolveVisionCaller, NO_KEY_MESSAGE } from './models.mjs';
 
 const mode = { id: 'm', name: 'Strict', summary: 'A grid.', palette: ['#000', '#fff'], lanes: ['grid'] };
@@ -78,4 +78,40 @@ test('buildPosterPrompt in set mode asks for no text and leaves out the copy', (
   assert.match(p, /NO TEXT/);
   assert.match(p, /top third calm/);
   assert.doesNotMatch(p, /Open Studio/);
+});
+
+test('buildPosterPrompt with references asks for their subject and treatment, not a copy', () => {
+  const p = buildPosterPrompt({ ...base, type: 'set', refs: 3 });
+  assert.match(p, /The 3 attached images are from the board/);
+  assert.match(p, /SUBJECT: if the references share a subject/);
+  assert.match(p, /Do not copy any reference/);
+  assert.match(p, /Render the photograph in them/);
+  assert.match(p, /NO TEXT/);
+  const plain = buildPosterPrompt(base);
+  assert.doesNotMatch(plain, /REFERENCES|SUBJECT|photograph/);
+});
+
+test('pickReferences ranks the ids cited most across the mode lanes', () => {
+  const brief = {
+    rules: [
+      { lane: 'grid', evidence: { refs: ['w1', 'w2', 'w3'] } },
+      { lane: 'grid', evidence: { refs: ['w1', 'w2', 'w3'] } },
+      { lane: 'pattern', evidence: { refs: ['w3', 'w4'] } },
+      { lane: 'other', evidence: { refs: ['w5', 'w5'] } },
+    ],
+  };
+  const manifest = { items: ['w1', 'w2', 'w3', 'w4', 'w5'].map((id) => ({ id, file: `${id}.webp` })) };
+  const m = { ...mode, lanes: ['grid', 'pattern'] };
+  assert.deepEqual(pickReferences(brief, m, manifest, 2).map((i) => i.id), ['w3', 'w1']);
+  assert.deepEqual(pickReferences(brief, m, manifest, 0), []);
+  assert.deepEqual(pickReferences({ rules: [] }, m, manifest, 2).map((i) => i.id), ['w1', 'w2']);
+  assert.deepEqual(pickReferences(brief, m, null, 2), []);
+});
+
+test('reference images ride along as image parts in both request shapes', () => {
+  const im = [{ data: 'QUJD', mimeType: 'image/jpeg' }];
+  assert.equal(openRouterContent('hi'), 'hi');
+  assert.deepEqual(openRouterContent('hi', im), [{ type: 'text', text: 'hi' }, { type: 'image_url', image_url: { url: 'data:image/jpeg;base64,QUJD' } }]);
+  assert.deepEqual(geminiParts('hi'), [{ text: 'hi' }]);
+  assert.deepEqual(geminiParts('hi', im), [{ text: 'hi' }, { inlineData: { mimeType: 'image/jpeg', data: 'QUJD' } }]);
 });
