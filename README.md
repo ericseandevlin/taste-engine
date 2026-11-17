@@ -77,8 +77,11 @@ Then run `npm run poster -- --board myboard`. The next poster is made from your 
 npm run poster -- --board myboard --mode <mode-id>     # a different mode from brief.json
 npm run poster -- --board myboard --rounds 3           # allow more repair rounds
 npm run poster -- --board myboard --type drawn         # let the image model draw the words too (it misspells)
+npm run poster -- --board myboard --refs 0            # text prompt only (default shows the model 3 board images)
 npm run result -- --board myboard                      # rebuild the page
 ```
+
+The image model sees up to three of your board images with the prompt, picked from the references the mode was drawn from, so the poster carries the board's subject and photography and not only its rules. It is told not to copy them.
 
 ## Models
 

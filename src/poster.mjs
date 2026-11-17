@@ -15,6 +15,11 @@
 //   node src/poster.mjs --board demo --copy "Open Studio | 20 Nov 2026 | Doors 7pm"
 //   node src/poster.mjs --board demo --mode swiss-mono-index --rounds 3
 //   node src/poster.mjs --board demo --type drawn   # let the image model draw the words too
+//   node src/poster.mjs --board demo --refs 0       # text prompt only, no reference images
+//
+// The image agent also sees up to --refs (default 3) of the board's own
+// images, picked from the mode's evidence, so it matches what the board
+// actually shows (its subject, its photography) and not only the rule text.
 //
 // By default the image model draws the artwork with no text and the copy is set
 // in code (typeset.mjs), because image models misspell and repeat words.
@@ -23,6 +28,7 @@
 
 import { runMain } from './run.mjs';
 import { existsSync, mkdirSync, readdirSync, writeFileSync } from 'fs';
+import sharp from 'sharp';
 import { join } from 'path';
 import { fileURLToPath } from 'url';
 import { getBoard, MODELS, loadEnv } from './config.mjs';
@@ -36,12 +42,13 @@ export const DEFAULT_COPY = ['Open Studio', '20 Nov 2026', 'Doors 7pm'];
 const COPY_RULE = 'The copy is rendered exactly as given: every word spelled correctly, nothing added, nothing missing.';
 
 function parseArgs(argv) {
-  const args = { board: 'demo', mode: null, copy: null, rounds: 2, type: 'set', aspect: '3:4', model: MODELS.image, judge: MODELS.critique };
+  const args = { board: 'demo', mode: null, copy: null, rounds: 2, refs: 3, type: 'set', aspect: '3:4', model: MODELS.image, judge: MODELS.critique };
   for (let i = 0; i < argv.length; i++) {
     if (argv[i] === '--board') args.board = argv[++i];
     else if (argv[i] === '--mode') args.mode = argv[++i];
     else if (argv[i] === '--copy') args.copy = argv[++i];
     else if (argv[i] === '--rounds') args.rounds = Math.max(1, Number(argv[++i]));
+    else if (argv[i] === '--refs') args.refs = Math.max(0, Number(argv[++i]) || 0);
     else if (argv[i] === '--aspect') args.aspect = argv[++i];
     else if (argv[i] === '--type') args.type = argv[++i] === 'drawn' ? 'drawn' : 'set';
     else if (argv[i] === '--model') args.model = argv[++i];
@@ -56,9 +63,26 @@ export function parseCopy(text) {
   return lines.length ? lines : DEFAULT_COPY;
 }
 
+// Pure: which board images to show the image agent. Each rule carries the
+// reference ids its lane was drawn from; the ids cited most across the mode's
+// lanes win, ties in order of first citation. Returns manifest items.
+export function pickReferences(brief, mode, manifest, n = 3) {
+  if (!n || !manifest?.items?.length) return [];
+  const counts = new Map();
+  const seenLane = new Set();
+  for (const r of brief.rules || []) {
+    if (!mode.lanes.includes(r.lane) || seenLane.has(r.lane)) continue;
+    seenLane.add(r.lane);
+    for (const id of r.evidence?.refs || []) counts.set(id, (counts.get(id) || 0) + 1);
+  }
+  const byId = new Map(manifest.items.map((it) => [it.id, it]));
+  const ranked = [...counts.entries()].filter(([id]) => byId.has(id)).sort((a, b) => b[1] - a[1]).map(([id]) => byId.get(id));
+  return (ranked.length ? ranked : manifest.items).slice(0, n);
+}
+
 // Pure: the prompt the image agent draws from. `broken` holds the rules the
 // last round failed, so the repair is specific instead of "try again".
-export function buildPosterPrompt({ mode, dos, donts, palette, copy, broken = [], type = 'drawn' }) {
+export function buildPosterPrompt({ mode, dos, donts, palette, copy, broken = [], type = 'drawn', refs = 0 }) {
   const hexes = (mode.palette.length ? mode.palette : palette.map((p) => p.hex)).slice(0, 5);
   const out = [
     'Design one printed poster, portrait format. Return the image only.',
@@ -76,7 +100,17 @@ export function buildPosterPrompt({ mode, dos, donts, palette, copy, broken = []
     '',
     `STYLE: ${mode.name}. ${mode.summary}`,
     '',
-    `PALETTE. Use only these colors: ${hexes.join(', ')}. The codes tell you the colors. Never print a color code on the poster.`,
+    ...(refs
+      ? [
+          `REFERENCES. The ${refs} attached image${refs > 1 ? 's are' : ' is'} from the board this style was read from. They outrank the written style.`,
+          'SUBJECT: if the references share a subject (a face, a figure, an object), make that the subject of this poster, large and photographic, not a pattern or an icon of it.',
+          'Match their visual language: how the photograph is treated (sliced into strips or offset blocks, cut out, halftoned, collaged, re-colored), the scale of the subject, the amount of empty space, and how sparingly small graphic accents are placed (a few tiny shapes of a contrasting color, never a pattern of them).',
+          'Do not copy any reference or any person in them: make a new image with a new subject. Ignore any text in the references.',
+          'The references are photos of printed posters. Ignore their paper margins, borders and backgrounds: your image is the print itself, edge to edge.',
+          '',
+        ]
+      : []),
+    `PALETTE. Use only these colors: ${hexes.join(', ')}.${refs ? ' Render the photograph in them too (black and white, duotone, halftone), not in its natural colors.' : ''} The codes tell you the colors. Never print a color code on the poster.`,
     '',
     'DO:',
     ...dos.map((r) => `- ${r.rule}`),
@@ -135,6 +169,19 @@ function nextIndex(root, prefix) {
   return max + 1;
 }
 
+// Reference images go to the model as JPEG at most 1024px on the long side:
+// any board format works and the request stays small.
+async function loadReferences(dir, items) {
+  const out = [];
+  for (const it of items) {
+    const file = join(dir, it.file);
+    if (!existsSync(file)) continue;
+    const buf = await sharp(file).resize(1024, 1024, { fit: 'inside', withoutEnlargement: true }).jpeg({ quality: 85 }).toBuffer();
+    out.push({ data: buf.toString('base64'), mimeType: 'image/jpeg' });
+  }
+  return out;
+}
+
 const extOf = (mime) => (mime.includes('jpeg') || mime.includes('jpg') ? 'jpg' : mime.includes('webp') ? 'webp' : 'png');
 
 async function main() {
@@ -149,6 +196,8 @@ async function main() {
   const dos = picked.dos.filter((r) => r.aspect !== 'motion');
   const copy = parseCopy(args.copy);
   const draw = makeImageAgent(process.env, args.model);
+  const refItems = pickReferences(brief, mode, readManifest(join(board.absDir, 'manifest.json')), args.refs);
+  const images = await loadReferences(board.absDir, refItems);
   const { caller: look } = resolveVisionCaller(args.judge, process.env);
 
   const root = join(board.absDir, 'posters');
@@ -156,11 +205,12 @@ async function main() {
   const dir = join(root, slug);
   const checked = [...donts.map((r) => asClaim(r.rule)), COPY_RULE];
   console.log(`[poster] ${board.name} / ${mode.name}: ${dos.length} do, ${donts.length} don't, copy "${copy.join(' | ')}"`);
+  if (images.length) console.log(`[poster] references: ${refItems.map((it) => it.file).join(', ')}`);
 
   const rounds = [];
   let broken = [];
   for (let n = 1; n <= args.rounds; n++) {
-    const art = await draw({ prompt: buildPosterPrompt({ mode, dos, donts, palette: brief.palette, copy, broken, type: args.type }), aspect: args.aspect });
+    const art = await draw({ prompt: buildPosterPrompt({ mode, dos, donts, palette: brief.palette, copy, broken, type: args.type, refs: images.length }), aspect: args.aspect, images });
     mkdirSync(dir, { recursive: true });
     let img = art;
     let file = `round-${n}.${extOf(art.mimeType)}`;
@@ -191,7 +241,7 @@ async function main() {
   const best = bestRound(rounds);
   writeFileSync(
     join(dir, 'poster.json'),
-    JSON.stringify({ slug, board: board.name, mode: mode.id, modeName: mode.name, copy, type: args.type, model: args.model, judge: args.judge, made: new Date().toISOString(), best: best.file, rounds }, null, 2) + '\n',
+    JSON.stringify({ slug, board: board.name, mode: mode.id, modeName: mode.name, copy, type: args.type, model: args.model, judge: args.judge, made: new Date().toISOString(), references: refItems.map((it) => it.file), best: best.file, rounds }, null, 2) + '\n',
   );
   console.log(`[poster] done: ${board.dir}/posters/${slug}/${best.file}`);
 }

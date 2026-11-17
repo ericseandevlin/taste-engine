@@ -9,6 +9,10 @@
 //
 //   const draw = makeImageAgent(process.env);
 //   const { data, mimeType, note } = await draw({ prompt, aspect: '3:4' });
+//
+// `images` (optional) are reference images sent with the prompt, each
+// { data: base64, mimeType }, so the model sees the board instead of only
+// reading a description of it.
 
 import { MODELS } from './config.mjs';
 import { routeModel } from './models.mjs';
@@ -33,10 +37,22 @@ export function imageOfOpenRouter(json) {
   return m ? { data: m[2], mimeType: m[1], note } : null;
 }
 
+// Pure: the user message content for OpenRouter. Text alone stays a string;
+// with references it becomes text plus image_url data parts.
+export function openRouterContent(prompt, images = []) {
+  if (!images.length) return prompt;
+  return [{ type: 'text', text: prompt }, ...images.map((im) => ({ type: 'image_url', image_url: { url: `data:${im.mimeType};base64,${im.data}` } }))];
+}
+
+// Pure: the request parts for the Google API: text, then inlineData per reference.
+export function geminiParts(prompt, images = []) {
+  return [{ text: prompt }, ...images.map((im) => ({ inlineData: { mimeType: im.mimeType, data: im.data } }))];
+}
+
 export function makeImageAgent(env, model = MODELS.image) {
   const routed = routeModel(model, env);
   const viaOpenRouter = routed.includes('/');
-  return async function draw({ prompt, aspect = '3:4' }) {
+  return async function draw({ prompt, aspect = '3:4', images = [] }) {
     let out;
     if (viaOpenRouter) {
       const res = await fetch(OPENROUTER_ENDPOINT, {
@@ -51,7 +67,7 @@ export function makeImageAgent(env, model = MODELS.image) {
           model: routed,
           modalities: ['image', 'text'],
           image_config: { aspect_ratio: aspect },
-          messages: [{ role: 'user', content: prompt }],
+          messages: [{ role: 'user', content: openRouterContent(prompt, images) }],
         }),
       });
       if (!res.ok) throw new Error(`image agent (openrouter) ${res.status}: ${(await res.text()).slice(0, 400)}`);
@@ -61,7 +77,7 @@ export function makeImageAgent(env, model = MODELS.image) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'x-goog-api-key': env.GEMINI_API_KEY },
         body: JSON.stringify({
-          contents: [{ parts: [{ text: prompt }] }],
+          contents: [{ parts: geminiParts(prompt, images) }],
           generationConfig: { responseModalities: ['IMAGE', 'TEXT'], imageConfig: { aspectRatio: aspect } },
         }),
       });
