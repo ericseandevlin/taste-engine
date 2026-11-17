@@ -43,7 +43,7 @@ If your references are posters and not websites, add `boards/myboard/board.json`
 | `measure` | Reads palette, contrast and density from the pixels. | no |
 | `tag` | A vision model describes each image with a fixed vocabulary of rules. Words outside the vocabulary are dropped. | yes |
 | `cluster` | Groups the images into lanes by shared behavior. Each lane gets a recipe and a list of forbidden moves. | yes |
-| `directions` | Names the modes your board can support. Each mode is a blend of its heaviest lanes. | yes |
+| `directions` | Names three modes your board can support. A vision model picks the references each mode stands on and says how they treat the subject and build the page. Each mode's palette is measured from its own references. Code checks the three are far apart (palette, shared references, wording) and asks again once if two are too close. Each mode also gets a lineage line: the tradition, era or place its references seem to draw on, stored as an interpretation with a confidence, never as a fact and never as a rule. | yes |
 | `brief` | Composes the rule sheet: `brief.json` and a readable `brief.md`. | no |
 | `poster` | Draws a poster from one mode, checks it against that mode's Don't rules and the copy, and redraws with the broken rules named. | yes |
 | `result` | Builds `result.html`. | no |

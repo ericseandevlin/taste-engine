@@ -12,6 +12,7 @@ import { fileURLToPath } from 'url';
 import { getBoard } from './config.mjs';
 import { readManifest } from './manifest.mjs';
 import { rulesForMode } from './brief.mjs';
+import { lineageLine } from './directions.mjs';
 
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
 
@@ -44,7 +45,13 @@ export function renderResult({ board, manifest, brief, posters }) {
   const modes = brief.modes.map((m) => {
     const { dos, donts } = rulesForMode(brief, m.id);
     const li = (rs) => rs.map((r) => `<li>${esc(r.rule)}</li>`).join('');
-    return `<div class="mode"><h3>${esc(m.name)}</h3><p class="mute">${esc(m.summary)}</p>
+    const sw = (m.palette || []).map((h) => `<span><i style="background:${esc(h)}"></i>${esc(h)}</span>`).join('');
+    const meta = [
+      sw ? `<div class="sw">${sw}</div>` : '',
+      m.refs?.length ? `<p class="mute">From ${m.refs.map(esc).join(', ')}${m.stretch ? `. ${esc(m.stretch)}` : ''}</p>` : '',
+      m.lineage ? `<p class="mute"><i>${esc(lineageLine(m.lineage))}.</i></p>` : '',
+    ].join('');
+    return `<div class="mode"><h3>${esc(m.name)}</h3><p class="mute">${esc(m.summary)}</p>${meta}
 <div class="cols"><div><b>Do</b><ul>${li(dos)}</ul></div><div><b>Don't</b><ul>${li(donts)}</ul></div></div></div>`;
   }).join('\n');
   const posterHtml = posters.length

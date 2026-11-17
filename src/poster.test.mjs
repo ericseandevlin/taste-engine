@@ -115,3 +115,23 @@ test('reference images ride along as image parts in both request shapes', () => 
   assert.deepEqual(geminiParts('hi'), [{ text: 'hi' }]);
   assert.deepEqual(geminiParts('hi', im), [{ text: 'hi' }, { inlineData: { mimeType: 'image/jpeg', data: 'QUJD' } }]);
 });
+
+test('pickReferences prefers the mode\'s own refs', () => {
+  const manifest = { items: [{ id: 'w1', file: '1' }, { id: 'w2', file: '2' }, { id: 'w3', file: '3' }] };
+  const brief = { rules: [{ lane: 'grid', evidence: { refs: ['w1', 'w2'] } }] };
+  assert.deepEqual(pickReferences(brief, { lanes: ['grid'], refs: ['w3', 'w2'] }, manifest, 3).map((i) => i.id), ['w3', 'w2']);
+  assert.deepEqual(pickReferences(brief, { lanes: ['grid'] }, manifest, 3).map((i) => i.id), ['w1', 'w2']);
+});
+
+test('buildPosterPrompt uses the mode\'s own subject, composition and lineage instead of the generic treatment list', () => {
+  const m = { ...mode, lineage: { tradition: 'Film posters', era: '1970s', place: 'unclear', confidence: 'low' } };
+  const dos = [{ rule: 'Face painted by hand', mode: 'm', aspect: 'subject' }, { rule: 'Subject low, field above', mode: 'm', aspect: 'composition' }, { rule: 'One grotesk family' }];
+  const p = buildPosterPrompt({ ...base, mode: m, dos, refs: 2, type: 'set' });
+  assert.match(p, /SUBJECT TREATMENT: Face painted by hand/);
+  assert.match(p, /COMPOSITION: Subject low, field above/);
+  assert.match(p, /LINEAGE \(an interpretation of the references, low confidence, not a fact\): Film posters, 1970s\./);
+  assert.match(p, /top or the bottom edge/);
+  assert.ok(!/halftoned, collaged/.test(p));
+  assert.ok(!/DO:\n- Face painted/.test(p)); // said once, not twice
+  assert.match(buildPosterPrompt({ ...base, refs: 2 }), /halftoned, collaged/); // no own rules: generic text stays
+});

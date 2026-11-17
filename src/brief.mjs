@@ -20,6 +20,7 @@ import { fileURLToPath } from 'url';
 import { getBoard } from './config.mjs';
 import { readManifest } from './manifest.mjs';
 import { stripEmDash } from './thesis.mjs';
+import { lineageLine } from './directions.mjs';
 
 const KEPT = new Set(['edited', 'locked', 'rejected']);
 const slug = (s) => String(s).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
@@ -61,8 +62,25 @@ export function composeBrief({ boardName, manifest, channels, directions, prior 
     name: d.name || id,
     summary: stripEmDash(d.brief || ''),
     lanes: d.channels || [],
-    palette: String(d.palette || '').split(',').map((s) => s.trim()).filter(Boolean),
+    refs: d.refs || [],
+    palette: (Array.isArray(d.palette) ? d.palette : String(d.palette || '').split(',')).map((s) => s.trim()).filter(Boolean),
+    ...(d.stretch ? { stretch: stripEmDash(d.stretch) } : {}),
+    // An interpretation of the references, with a confidence. Shown and used as
+    // a hint for the image; never the source of a rule.
+    ...(d.lineage ? { lineage: d.lineage } : {}),
   }));
+  // Each direction's own rules: how its references treat the subject and build
+  // the page, and what they never do. Traced to the direction's refs.
+  for (const [id, d] of Object.entries(directions || {})) {
+    if (!d.refs?.length) continue;
+    const evidence = { mode: id, refs: d.refs };
+    for (const aspect of ['subject', 'composition']) {
+      if (d[aspect]) push({ id: `${id}.do.${aspect}`, mode: id, kind: 'do', aspect, rule: stripEmDash(d[aspect]), evidence, status: 'extracted' });
+    }
+    for (const text of d.avoid || []) {
+      push({ id: `${id}.dont.${slug(text).slice(0, 40)}`, mode: id, kind: 'dont', rule: stripEmDash(text), evidence, status: 'extracted' });
+    }
+  }
   return {
     board: boardName,
     references: manifest.items.length,
@@ -77,7 +95,10 @@ export function composeBrief({ boardName, manifest, channels, directions, prior 
 export function rulesForMode(brief, modeId) {
   const mode = brief.modes.find((m) => m.id === modeId) || brief.modes[0];
   if (!mode) throw new Error('The brief has no modes. Run the directions stage first.');
-  const live = brief.rules.filter((r) => r.status !== 'rejected' && mode.lanes.includes(r.lane));
+  // A mode's own rules come first: they are what sets it apart from the others.
+  const own = brief.rules.filter((r) => r.status !== 'rejected' && r.mode === mode.id);
+  const lane = brief.rules.filter((r) => r.status !== 'rejected' && !r.mode && mode.lanes.includes(r.lane));
+  const live = [...own, ...lane];
   return { mode, dos: live.filter((r) => r.kind === 'do'), donts: live.filter((r) => r.kind === 'dont') };
 }
 
@@ -89,6 +110,8 @@ export function renderBrief(brief) {
   for (const mode of brief.modes) {
     const { dos, donts } = rulesForMode(brief, mode.id);
     out.push(`## Mode: ${mode.name} (\`${mode.id}\`)`, '', mode.summary, '');
+    if (mode.palette.length) out.push(`Palette (measured from ${mode.refs?.length ? mode.refs.join(', ') : 'the board'}): ${mode.palette.map((h) => `\`${h}\``).join(' ')}`, '');
+    if (mode.lineage) out.push(`_${lineageLine(mode.lineage)}. Cues: ${mode.lineage.cues.join('; ') || 'none named'}._`, '');
     out.push('**Do**', '', ...dos.map((r) => `- ${r.rule}${r.status !== 'extracted' ? ` _(${r.status})_` : ''}`), '');
     out.push("**Don't**", '', ...donts.map((r) => `- ${r.rule}${r.status !== 'extracted' ? ` _(${r.status})_` : ''}`), '');
   }

@@ -68,6 +68,13 @@ export function parseCopy(text) {
 // lanes win, ties in order of first citation. Returns manifest items.
 export function pickReferences(brief, mode, manifest, n = 3) {
   if (!n || !manifest?.items?.length) return [];
+  // A direction names the references it stands on. Those come first, so two
+  // directions never send the image model the same pictures.
+  if (mode.refs?.length) {
+    const byRef = new Map(manifest.items.map((it) => [it.id, it]));
+    const own = mode.refs.map((id) => byRef.get(id)).filter(Boolean);
+    if (own.length) return own.slice(0, n);
+  }
   const counts = new Map();
   const seenLane = new Set();
   for (const r of brief.rules || []) {
@@ -84,13 +91,20 @@ export function pickReferences(brief, mode, manifest, n = 3) {
 // last round failed, so the repair is specific instead of "try again".
 export function buildPosterPrompt({ mode, dos, donts, palette, copy, broken = [], type = 'drawn', refs = 0 }) {
   const hexes = (mode.palette.length ? mode.palette : palette.map((p) => p.hex)).slice(0, 5);
+  // A direction that says how its own references treat the subject replaces the
+  // generic list, so three directions do not collapse into one treatment.
+  const own = (aspect) => dos.find((r) => r.mode === mode.id && r.aspect === aspect)?.rule;
+  const subject = own('subject');
+  const composition = own('composition');
   const out = [
     'Design one printed poster, portrait format. Return the image only.',
     '',
     ...(type === 'set'
       ? [
           'NO TEXT. Draw no letters, words, numbers or anything that reads as writing. The words are set on the poster later.',
-          'Leave the top third calm: mostly one flat palette color, so a title can sit there. The rest of the poster carries the artwork.',
+          composition
+            ? 'Leave one calm band, about a quarter to a third of the height, along the top or the bottom edge, whichever this composition wants: mostly one flat palette color, so a title can sit there. The rest of the poster carries the artwork.'
+            : 'Leave the top third calm: mostly one flat palette color, so a title can sit there. The rest of the poster carries the artwork.',
         ]
       : [
           'COPY. Set exactly these lines:',
@@ -99,21 +113,28 @@ export function buildPosterPrompt({ mode, dos, donts, palette, copy, broken = []
         ]),
     '',
     `STYLE: ${mode.name}. ${mode.summary}`,
+    ...(subject ? [`SUBJECT TREATMENT: ${subject}`] : []),
+    ...(composition ? [`COMPOSITION: ${composition}`] : []),
+    ...(mode.lineage
+      ? [`LINEAGE (an interpretation of the references, ${mode.lineage.confidence} confidence, not a fact): ${[mode.lineage.tradition, mode.lineage.era, mode.lineage.place].filter((x) => x && x !== 'unclear').join(', ')}. Use it only as a hint for period craft and print method; the references and rules outrank it.`]
+      : []),
     '',
     ...(refs
       ? [
           `REFERENCES. The ${refs} attached image${refs > 1 ? 's are' : ' is'} from the board this style was read from. They outrank the written style.`,
           'SUBJECT: if the references share a subject (a face, a figure, an object), make that the subject of this poster, large and photographic, not a pattern or an icon of it.',
-          'Match their visual language: how the photograph is treated (sliced into strips or offset blocks, cut out, halftoned, collaged, re-colored), the scale of the subject, the amount of empty space, and how sparingly small graphic accents are placed (a few tiny shapes of a contrasting color, never a pattern of them).',
+          subject
+            ? 'Match their visual language as the SUBJECT TREATMENT and COMPOSITION above describe it: the treatment of the subject, its scale, the amount of empty space, and how sparingly small graphic accents are placed.'
+            : 'Match their visual language: how the photograph is treated (sliced into strips or offset blocks, cut out, halftoned, collaged, re-colored), the scale of the subject, the amount of empty space, and how sparingly small graphic accents are placed (a few tiny shapes of a contrasting color, never a pattern of them).',
           'Do not copy any reference or any person in them: make a new image with a new subject. Ignore any text in the references.',
           'The references are photos of printed posters. Ignore their paper margins, borders and backgrounds: your image is the print itself, edge to edge.',
           '',
         ]
       : []),
-    `PALETTE. Use only these colors: ${hexes.join(', ')}.${refs ? ' Render the photograph in them too (black and white, duotone, halftone), not in its natural colors.' : ''} The codes tell you the colors. Never print a color code on the poster.`,
+    `PALETTE. Use only these colors: ${hexes.join(', ')}.${refs ? (subject ? ' Render the subject in these colors too, not in its natural colors.' : ' Render the photograph in them too (black and white, duotone, halftone), not in its natural colors.') : ''} The codes tell you the colors. Never print a color code on the poster.`,
     '',
     'DO:',
-    ...dos.map((r) => `- ${r.rule}`),
+    ...dos.filter((r) => !(r.mode === mode.id && (r.aspect === 'subject' || r.aspect === 'composition'))).map((r) => `- ${r.rule}`),
     '',
     'DO NOT. Each of these is a hard rule:',
     ...donts.map((r) => `- ${r.rule}`),
