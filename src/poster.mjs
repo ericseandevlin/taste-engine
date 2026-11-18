@@ -126,6 +126,7 @@ export function buildPosterPrompt({ mode, dos, donts, palette, copy, broken = []
       ? [
           `REFERENCES. The ${refs} attached image${refs > 1 ? 's are' : ' is'} from the board this style was read from. They outrank the written style.`,
           'SUBJECT: if the references share a subject (a face, a figure, an object), make that the subject of this poster, large and photographic, not a pattern or an icon of it.',
+          'CASTING: if the subject is a person, cast a real character, not a model. A face with personality and a strong expression (defiance, unease, mischief, grief, a sideways glance, mid-laugh), and with irregular features: asymmetry, a crooked nose, heavy brows, wrinkles, gaps, scars, an unusual age or build. Never a stock-photo face: no symmetrical beauty-ad features, no smooth retouched skin, no neutral blank stare into the camera.',
           subject
             ? 'Match their visual language as the SUBJECT TREATMENT and COMPOSITION above describe it: the treatment of the subject, its scale, the amount of empty space, and how sparingly small graphic accents are placed.'
             : 'Match their visual language: how the photograph is treated (sliced into strips or offset blocks, cut out, halftoned, collaged, re-colored), the scale of the subject, the amount of empty space, and how sparingly small graphic accents are placed (a few tiny shapes of a contrasting color, never a pattern of them).',

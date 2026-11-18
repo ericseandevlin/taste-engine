@@ -148,3 +148,9 @@ test('poster prompt with references forbids copying their lettering and credits'
   assert.match(p, /Never copy any of it/);
   assert.match(p, /no names, credits, captions/);
 });
+
+test('poster prompt with references casts a character with expression, not a stock face', () => {
+  const p = buildPosterPrompt({ ...base, type: 'set', refs: 3 });
+  assert.match(p, /CASTING/);
+  assert.match(p, /Never a stock-photo face/);
+});
