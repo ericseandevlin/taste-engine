@@ -154,3 +154,13 @@ test('poster prompt with references casts a character with expression, not a sto
   assert.match(p, /CASTING/);
   assert.match(p, /Never a stock-photo face/);
 });
+
+test('tee surface: a flat screen-print graphic with drawn lettering, no poster edge-to-edge rule', () => {
+  const p = buildPosterPrompt({ ...base, copy: ['Ectogenesis'], type: 'drawn', refs: 3, surface: 'tee' });
+  assert.match(p, /t-shirt graphic/);
+  assert.match(p, /LETTERING/);
+  assert.match(p, /Ectogenesis/);
+  assert.match(p, /3 to 5 flat spot colors/);
+  assert.doesNotMatch(p, /edge to edge/);
+  assert.doesNotMatch(p, /put no names, credits, captions or words of any kind/);
+});
