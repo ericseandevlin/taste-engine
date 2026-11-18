@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import sharp from 'sharp';
-import { pickFont, calmRun, inkFor, layoutType, typeset } from './typeset.mjs';
+import { pickFont, calmRun, inkFor, layoutType, panelColor, typeset } from './typeset.mjs';
 
 test('pickFont: sans by default, serif only when the type rules ask for serif and no sans', () => {
   assert.match(pickFont([]), /sans-serif$/);
@@ -54,4 +54,11 @@ test('typeset never lets the date line overlap the title (short band)', async ()
   const [title, rest] = out.boxes;
   assert.ok(rest.top >= title.top + title.height, `date line at ${rest.top} starts below title bottom ${title.top + title.height}`);
   assert.ok(rest.top + rest.height <= out.bandBox.top + out.bandBox.height + 1, 'date line stays inside the calm band');
+});
+
+test('panelColor uses the palette lightest color, else white', () => {
+  assert.equal(panelColor(['#000000', '#ffcccc', '#cccc99']), '#ffcccc');
+  assert.equal(panelColor(['#000000', '#333333']), '#ffffff');
+  assert.equal(panelColor([]), '#ffffff');
+  assert.equal(panelColor(['bad', 'eeeeee']), '#eeeeee');
 });

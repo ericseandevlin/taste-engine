@@ -40,6 +40,9 @@ import { typeset } from './typeset.mjs';
 
 export const DEFAULT_COPY = ['Open Studio', '20 Nov 2026', 'Doors 7pm'];
 const COPY_RULE = 'The copy is rendered exactly as given: every word spelled correctly, nothing added, nothing missing.';
+// Checked on the bare artwork before the type goes on (--type set): the model must leave all words to code.
+export const ART_RULE = 'The image contains no letters, words, numbers or writing of any kind: no titles, names, credits or captions.';
+export const CALM_RULE = 'The image leaves a calm area for the title: the top or bottom third is mostly one flat color with no detail.';
 
 function parseArgs(argv) {
   const args = { board: 'demo', mode: null, copy: null, rounds: 2, refs: 3, type: 'set', aspect: '3:4', model: MODELS.image, judge: MODELS.critique };
@@ -126,7 +129,8 @@ export function buildPosterPrompt({ mode, dos, donts, palette, copy, broken = []
           subject
             ? 'Match their visual language as the SUBJECT TREATMENT and COMPOSITION above describe it: the treatment of the subject, its scale, the amount of empty space, and how sparingly small graphic accents are placed.'
             : 'Match their visual language: how the photograph is treated (sliced into strips or offset blocks, cut out, halftoned, collaged, re-colored), the scale of the subject, the amount of empty space, and how sparingly small graphic accents are placed (a few tiny shapes of a contrasting color, never a pattern of them).',
-          'Do not copy any reference or any person in them: make a new image with a new subject. Ignore any text in the references.',
+          'Do not copy any reference or any person in them: make a new image with a new subject.',
+          'The references carry lettering, titles and film credits. Never copy any of it, and put no names, credits, captions or words of any kind in your image.',
           'The references are photos of printed posters. Ignore their paper margins, borders and backgrounds: your image is the print itself, edge to edge.',
           '',
         ]
@@ -160,6 +164,16 @@ export function buildCheckPrompt(rules, copy) {
   return (
     `The image is a poster. Its copy was meant to be exactly these lines:\n${copy.map((l) => `  ${l}`).join('\n')}\n\n` +
     `Judge the poster against each statement. PASS if the statement is true of the image, FAIL if it is false. ` +
+    `Judge strictly from what is visible. Reason: one short sentence naming what you see.\n\n` +
+    rules.map((r, i) => `${i + 1}. ${r}`).join('\n') +
+    `\n\nReturn only JSON: {"verdicts":[{"verdict":"PASS"|"FAIL","reason":"..."}]} with exactly ${rules.length} entries in order.`
+  );
+}
+
+// Pure: the check for the bare artwork, one statement at a time.
+export function buildArtCheckPrompt(rules) {
+  return (
+    `The image is poster artwork before any type is added. Judge it against each statement. PASS if the statement is true of the image, FAIL if it is false. ` +
     `Judge strictly from what is visible. Reason: one short sentence naming what you see.\n\n` +
     rules.map((r, i) => `${i + 1}. ${r}`).join('\n') +
     `\n\nReturn only JSON: {"verdicts":[{"verdict":"PASS"|"FAIL","reason":"..."}]} with exactly ${rules.length} entries in order.`
@@ -235,18 +249,29 @@ async function main() {
     mkdirSync(dir, { recursive: true });
     let img = art;
     let file = `round-${n}.${extOf(art.mimeType)}`;
+    const artResults = [];
     if (args.type === 'set') {
       writeFileSync(join(dir, `art-${n}.${extOf(art.mimeType)}`), Buffer.from(art.data, 'base64'));
-      const set = await typeset(Buffer.from(art.data, 'base64'), copy, { dos });
+      // Any lettering in the art (copied credits, invented titles) breaks the round before type is set.
+      try {
+        const rawArt = await look({ image: art.data, mediaType: art.mimeType, prompt: buildArtCheckPrompt([ART_RULE]), maxTokens: 2000 });
+        const [v] = parseVerdicts(rawArt, 1);
+        artResults.push({ rule: ART_RULE, ...v });
+      } catch (err) {
+        console.log(`[poster]   round ${n}: art text check failed (${err.message})`);
+      }
+      const set = await typeset(Buffer.from(art.data, 'base64'), copy, { dos, palette: mode.palette?.length ? mode.palette : (brief.palette || []).map((p) => p.hex) });
       img = { data: set.data.toString('base64'), mimeType: 'image/png' };
       file = `round-${n}.png`;
+      // No calm field means the art ignored the brief; the type had to go on a panel. Redraw if rounds remain.
+      artResults.push({ rule: CALM_RULE, pass: !set.panel, reason: set.panel ? 'no calm area was left, so the type needed a panel' : 'a calm area held the type' });
       console.log(`[poster]   round ${n}: copy set in the ${set.band} band${set.panel ? ' on a panel' : ''}`);
     }
     writeFileSync(join(dir, file), Buffer.from(img.data, 'base64'));
     let results;
     try {
       const raw = await look({ image: img.data, mediaType: img.mimeType, prompt: buildCheckPrompt(checked, copy), maxTokens: 4000 });
-      results = parseVerdicts(raw, checked.length).map((v, i) => ({ rule: checked[i], ...v }));
+      results = [...parseVerdicts(raw, checked.length).map((v, i) => ({ rule: checked[i], ...v })), ...artResults];
     } catch (err) {
       console.log(`[poster]   round ${n}: drawn, check failed (${err.message})`);
       rounds.push({ round: n, file, passed: 0, total: checked.length, checked: false, results: [] });

@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { asClaim, parseCopy, buildPosterPrompt, pickReferences, buildCheckPrompt, parseVerdicts, bestRound, DEFAULT_COPY } from './poster.mjs';
+import { asClaim, parseCopy, buildPosterPrompt, pickReferences, buildCheckPrompt, parseVerdicts, bestRound, DEFAULT_COPY, buildArtCheckPrompt, ART_RULE } from './poster.mjs';
 import { imageOfGemini, imageOfOpenRouter, openRouterContent, geminiParts } from './image-agent.mjs';
 import { routeModel, resolveVisionCaller, NO_KEY_MESSAGE } from './models.mjs';
 
@@ -134,4 +134,17 @@ test('buildPosterPrompt uses the mode\'s own subject, composition and lineage in
   assert.ok(!/halftoned, collaged/.test(p));
   assert.ok(!/DO:\n- Face painted/.test(p)); // said once, not twice
   assert.match(buildPosterPrompt({ ...base, refs: 2 }), /halftoned, collaged/); // no own rules: generic text stays
+});
+
+test('buildArtCheckPrompt asks about the bare artwork and wants one verdict per rule', () => {
+  const p = buildArtCheckPrompt([ART_RULE]);
+  assert.match(p, /before any type is added/);
+  assert.match(p, /exactly 1 entries/);
+  assert.match(p, /no letters, words, numbers/);
+});
+
+test('poster prompt with references forbids copying their lettering and credits', () => {
+  const p = buildPosterPrompt({ ...base, type: 'set', refs: 3 });
+  assert.match(p, /Never copy any of it/);
+  assert.match(p, /no names, credits, captions/);
 });
