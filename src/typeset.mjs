@@ -56,6 +56,19 @@ export function inkFor([r, g, b]) {
   return lum > 140 ? '#000000' : '#ffffff';
 }
 
+// Pure: where the title and the smaller lines go inside the band. Margins and sizes come from the
+// band's own height, so a short band shrinks the type instead of stacking the date on the title.
+export function layoutType(bandTop, bandHeight, width, hasRest) {
+  const padX = Math.round(width * 0.06);
+  const padY = Math.round(Math.min(padX, bandHeight * 0.12));
+  const avail = Math.max(1, bandHeight - padY * 2);
+  const gap = hasRest ? Math.max(4, Math.round(avail * 0.06)) : 0;
+  const titleH = hasRest ? Math.round((avail - gap) * 0.62) : avail;
+  const restH = hasRest ? avail - gap - titleH : 0;
+  const titleTop = bandTop + padY;
+  return { padX, inner: width - padX * 2, titleTop, titleH, gap, restTop: titleTop + titleH + gap, restH };
+}
+
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
 // Text as an image, auto-fitted to the box: sharp sizes the type so it fills width x height.
@@ -83,22 +96,23 @@ export async function typeset(art, copy, { dos = [] } = {}) {
   const mean = [0, 1, 2].map((c) => slice.reduce((a, r) => a + r.mean[c], 0) / Math.max(1, slice.length));
   const font = pickFont(dos);
   const ink = busy ? '#000000' : inkFor(mean);
-  const pad = Math.round(w * 0.06);
-  const inner = w - pad * 2;
   const [title, ...rest] = copy;
-  const titleH = Math.round(band.height * (rest.length ? 0.5 : 0.8));
-  const t = await textBlock([title], font, ink, inner, titleH, 'heavy');
+  const L = layoutType(band.top, band.height, w, rest.length > 0);
+  const t = await textBlock([title], font, ink, L.inner, L.titleH, 'heavy');
   const layers = [];
   if (busy) {
     const panel = Buffer.from(`<svg width="${w}" height="${band.height}"><rect width="100%" height="100%" fill="#ffffff"/></svg>`);
     layers.push({ input: panel, left: 0, top: band.top });
   }
-  const y0 = band.top + pad;
-  layers.push({ input: t.data, left: pad, top: y0 });
+  layers.push({ input: t.data, left: L.padX, top: L.titleTop });
+  const boxes = [{ top: L.titleTop, height: t.info.height }];
   if (rest.length) {
-    const r = await textBlock(rest, font, ink, inner, Math.round(band.height * 0.28), 'bold');
-    layers.push({ input: r.data, left: pad, top: Math.min(y0 + t.info.height + Math.round(pad * 0.4), band.top + band.height - r.info.height) });
+    const r = await textBlock(rest, font, ink, L.inner, L.restH, 'bold');
+    // Right under the title as set (never above its bottom edge), so the lines read as one block.
+    const top = L.titleTop + t.info.height + L.gap;
+    layers.push({ input: r.data, left: L.padX, top });
+    boxes.push({ top, height: r.info.height });
   }
   const data = await img.composite(layers).png().toBuffer();
-  return { data, band: band.at, font, panel: busy };
+  return { data, band: band.at, font, panel: busy, boxes, bandBox: { top: band.top, height: band.height } };
 }

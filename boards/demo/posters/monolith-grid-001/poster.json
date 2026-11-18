@@ -8,82 +8,162 @@
     "20 Nov 2026",
     "Doors 7pm"
   ],
+  "type": "set",
   "model": "gemini-3.1-flash-image",
   "judge": "gemini-3.5-flash",
-  "made": "2026-11-12T17:27:17.283Z",
+  "made": "2026-11-17T21:41:19.294Z",
+  "references": [
+    "casebook.png",
+    "glyphlab.png",
+    "monolith.png"
+  ],
   "best": "round-1.png",
   "rounds": [
     {
       "round": 1,
       "file": "round-1.png",
-      "passed": 13,
+      "passed": 12,
       "total": 13,
       "checked": true,
       "results": [
         {
           "rule": "The poster does not use this: Decorative or display typefaces.",
           "pass": true,
-          "reason": "The poster uses clean, standard sans-serif and monospaced typefaces without any decorative elements."
+          "reason": "The text is set in a clean, neutral sans-serif typeface."
         },
         {
           "rule": "The poster does not use this: Asymmetric blob layouts.",
           "pass": true,
-          "reason": "The layout is structured strictly within a rectangular grid with no organic or blob-like shapes."
+          "reason": "The layout is composed of structured rectangular columns without any organic or asymmetric blob shapes."
         },
         {
           "rule": "The poster does not use this: High-saturation color fields.",
           "pass": true,
-          "reason": "The design uses flat, neutral cream, white, and black colors with no large high-saturation color fields."
+          "reason": "The poster uses highly muted tones of black, cream, and a minor red accent instead of high-saturation colors."
         },
         {
           "rule": "The poster does not use this: Overlapping or collaged elements.",
           "pass": true,
-          "reason": "All text and grid elements are neatly separated within their own cells and do not overlap."
+          "reason": "The elements are separated cleanly into distinct areas without any overlapping or collaged layers."
         },
         {
           "rule": "The poster does not use this: Gradient backgrounds.",
           "pass": true,
-          "reason": "The backgrounds in the grid compartments are solid cream and white colors without gradients."
+          "reason": "The background colors are solid and do not feature any gradients."
         },
         {
           "rule": "The poster does not use this: Centered hero compositions.",
-          "pass": true,
-          "reason": "The layout uses an asymmetrical, block-based grid structure rather than a centered hero layout."
+          "pass": false,
+          "reason": "The primary split-face graphic is positioned as a centered hero composition."
         },
         {
           "rule": "The poster does not use this: Multiple competing headlines.",
           "pass": true,
-          "reason": "There is only one main headline ('Open Studio') on the poster."
+          "reason": "There is only one clear headline, 'Open Studio', at the top of the poster."
         },
         {
           "rule": "The poster does not use this: Busy grid of content modules.",
           "pass": true,
-          "reason": "The grid structure is minimal and spacious, leaving several large modules entirely blank."
+          "reason": "The design is simple and uncluttered, lacking any dense grids of content modules."
         },
         {
           "rule": "The poster does not use this: High-density navigation bars.",
           "pass": true,
-          "reason": "There are no navigation bars or high-density link structures present."
+          "reason": "There are no navigation bars or menus included on the poster."
         },
         {
           "rule": "The poster does not use this: Decorative background textures.",
           "pass": true,
-          "reason": "The backgrounds are completely solid and free of any textures or patterns."
+          "reason": "The background areas are flat and solid, without decorative textures."
         },
         {
           "rule": "The poster does not use this: Photography as hero.",
           "pass": true,
-          "reason": "No photographic imagery is used anywhere on the poster."
+          "reason": "The main visual is a stylized halftone graphic illustration rather than direct photography."
         },
         {
           "rule": "The poster does not use this: Rainbow or multi-hue palettes.",
           "pass": true,
-          "reason": "The poster relies on a limited palette of black, white, cream, and a single red line accent."
+          "reason": "The color scheme is limited to black, cream, and a small red accent."
         },
         {
           "rule": "The copy is rendered exactly as given: every word spelled correctly, nothing added, nothing missing.",
           "pass": true,
-          "reason": "The poster displays exactly the words 'Open Studio', '20 Nov 2026', and 'Doors 7pm' without additions or errors."
+          "reason": "The text on the poster perfectly matches the requested copy with correct spelling and no additions or omissions."
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "file": "round-2.png",
+      "passed": 11,
+      "total": 13,
+      "checked": true,
+      "results": [
+        {
+          "rule": "The poster does not use this: Decorative or display typefaces.",
+          "pass": true,
+          "reason": "The typography consists of a clean, standard sans-serif typeface."
+        },
+        {
+          "rule": "The poster does not use this: Asymmetric blob layouts.",
+          "pass": true,
+          "reason": "The layout is constructed using a precise, rigid geometric grid."
+        },
+        {
+          "rule": "The poster does not use this: High-saturation color fields.",
+          "pass": true,
+          "reason": "The design uses a muted color scheme of cream and black with only small red accents."
+        },
+        {
+          "rule": "The poster does not use this: Overlapping or collaged elements.",
+          "pass": false,
+          "reason": "The central image is a collage of segmented and rearranged face parts."
+        },
+        {
+          "rule": "The poster does not use this: Gradient backgrounds.",
+          "pass": true,
+          "reason": "The background consists of flat solid colors and grid lines with no gradients."
+        },
+        {
+          "rule": "The poster does not use this: Centered hero compositions.",
+          "pass": true,
+          "reason": "The visual element is a deconstructed, grid-aligned composition rather than a traditional centered hero element."
+        },
+        {
+          "rule": "The poster does not use this: Multiple competing headlines.",
+          "pass": true,
+          "reason": "There is only one primary headline 'Open Studio' at the top."
+        },
+        {
+          "rule": "The poster does not use this: Busy grid of content modules.",
+          "pass": true,
+          "reason": "The layout contains only a single visual grid and one text block, avoiding busy content modules."
+        },
+        {
+          "rule": "The poster does not use this: High-density navigation bars.",
+          "pass": true,
+          "reason": "The poster has no navigation menus or bars."
+        },
+        {
+          "rule": "The poster does not use this: Decorative background textures.",
+          "pass": true,
+          "reason": "The background is a clean, solid color with simple grid lines rather than decorative textures."
+        },
+        {
+          "rule": "The poster does not use this: Photography as hero.",
+          "pass": false,
+          "reason": "The central focal point is a halftone photographic portrait of a face."
+        },
+        {
+          "rule": "The poster does not use this: Rainbow or multi-hue palettes.",
+          "pass": true,
+          "reason": "The color scheme is highly restricted to cream, black, and a single red accent."
+        },
+        {
+          "rule": "The copy is rendered exactly as given: every word spelled correctly, nothing added, nothing missing.",
+          "pass": true,
+          "reason": "The poster text exactly matches the requested copy with correct spelling and no additions."
         }
       ]
     }
