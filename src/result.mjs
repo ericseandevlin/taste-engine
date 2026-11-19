@@ -31,13 +31,14 @@ h3{font-size:20px;margin:0 0 4px}p{margin:0 0 12px;max-width:70ch}.mute{color:va
 .mode{background:var(--card);border:1px solid var(--line);padding:20px;margin-bottom:16px}
 .cols{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:12px}@media (max-width:640px){.cols{grid-template-columns:1fr}}
 ul{margin:0;padding-left:18px}li{margin:2px 0}.cols b{display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px}
-.poster{display:grid;grid-template-columns:minmax(0,340px) 1fr;gap:24px;background:var(--card);border:1px solid var(--line);padding:20px;margin-bottom:16px}
-@media (max-width:720px){.poster{grid-template-columns:1fr}}.poster img{width:100%;display:block;border:1px solid var(--line)}
-.rounds{display:flex;gap:8px;margin-top:8px}.rounds img{width:72px}
-.v{font:12px ui-monospace,Menlo,monospace;font-weight:700}.pass{color:var(--pass)}.fail{color:var(--fail)}
+.poster{background:var(--card);border:1px solid var(--line);padding:20px;margin-bottom:16px}
+.poster img{width:100%;display:block;border:1px solid var(--line)}
+.rounds{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:16px;margin-top:12px}.rounds.one{grid-template-columns:minmax(0,520px)}
+.rounds figure{margin:0}.rounds figcaption{font-size:12px;color:var(--mute);margin-top:4px}
+summary{cursor:pointer}summary h3{display:inline}details.mode[open] summary{margin-bottom:12px}
 .tabs{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 16px}.tabs label{cursor:pointer;border:1px solid var(--line);background:var(--card);padding:6px 12px;font-size:13px}
 .gen{display:none}.notes{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--fg);padding:16px 20px;margin-bottom:16px}.notes b{display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;margin:8px 0 4px}
-.checks li{list-style:none;margin:6px 0}.checks{padding:0}code{font:13px ui-monospace,Menlo,monospace;background:var(--card);border:1px solid var(--line);padding:1px 5px}
+code{font:13px ui-monospace,Menlo,monospace;background:var(--card);border:1px solid var(--line);padding:1px 5px}
 `;
 
 // Pure: put posters into generations. With a generations list (each { id, label, from, feedback, changed }),
@@ -80,18 +81,15 @@ export function renderResult({ board, manifest, brief, posters, generations = []
       m.refs?.length ? `<p class="mute">From ${m.refs.map(esc).join(', ')}${m.stretch ? `. ${esc(m.stretch)}` : ''}</p>` : '',
       m.lineage ? `<p class="mute"><i>${esc(lineageLine(m.lineage))}.</i></p>` : '',
     ].join('');
-    return `<div class="mode"><h3>${esc(m.name)}</h3><p class="mute">${esc(m.summary)}</p>${meta}
-<div class="cols"><div><b>Do</b><ul>${li(dos)}</ul></div><div><b>Don't</b><ul>${li(donts)}</ul></div></div></div>`;
+    return `<details class="mode"><summary><h3>${esc(m.name)}</h3> <span class="mute">${dos.length + donts.length} rules</span></summary><p class="mute">${esc(m.summary)}</p>${meta}
+<div class="cols"><div><b>Do</b><ul>${li(dos)}</ul></div><div><b>Don't</b><ul>${li(donts)}</ul></div></div></details>`;
   }).join('\n');
+  // Every round at full size, the kept one first. The rule checks still run and stay in poster.json; the page does not list them.
   const card = (p) => {
-        const best = p.rounds.find((r) => r.file === p.best) || p.rounds[p.rounds.length - 1];
-        const thumbs = p.rounds.length > 1
-          ? `<div class="rounds">${p.rounds.map((r) => `<a href="posters/${esc(p.slug)}/${esc(r.file)}" title="Round ${r.round}: ${r.passed}/${r.total}"><img src="posters/${esc(p.slug)}/${esc(r.file)}" alt="Round ${r.round}"></a>`).join('')}</div>`
-          : '';
-        const trail = p.rounds.map((r) => (r.checked ? `round ${r.round}: ${r.passed}/${r.total}` : `round ${r.round}: not checked`)).join(' &rarr; ');
-        const checks = best.results.map((c) => `<li><span class="v ${c.pass ? 'pass' : 'fail'}">${c.pass ? 'PASS' : 'FAIL'}</span> ${esc(c.rule.replace(/^The poster does not use this: /, 'No: '))}<br><span class="mute">${esc(c.reason)}</span></li>`).join('');
-        return `<div class="poster"><div><a href="posters/${esc(p.slug)}/${esc(best.file)}"><img src="posters/${esc(p.slug)}/${esc(best.file)}" alt="${esc(p.copy.join(', '))}"></a>${thumbs}</div>
-<div><h3>${esc(p.modeName)}</h3><p class="mute">${esc(p.copy.join(' | '))}<br>${trail}</p><ul class="checks">${checks}</ul></div></div>`;
+    const best = p.rounds.find((r) => r.file === p.best) || p.rounds[p.rounds.length - 1];
+    const ordered = [best, ...p.rounds.filter((r) => r !== best)];
+    const imgs = ordered.map((r) => `<figure><a href="posters/${esc(p.slug)}/${esc(r.file)}"><img src="posters/${esc(p.slug)}/${esc(r.file)}" alt="${esc(p.copy.join(', '))}, round ${r.round}" loading="lazy"></a>${p.rounds.length > 1 ? `<figcaption>Round ${r.round}${r === best ? ', kept' : ''}</figcaption>` : ''}</figure>`).join('');
+    return `<div class="poster"><h3>${esc(p.modeName)}</h3><p class="mute">${esc(p.copy.join(' | '))}</p><div class="rounds${p.rounds.length > 1 ? '' : ' one'}">${imgs}</div></div>`;
   };
   const gens = groupGenerations(posters, generations);
   const when = (iso) => (iso ? new Date(iso).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit', timeZone: 'America/New_York' }) : '');
@@ -113,8 +111,8 @@ ${gens.map((g) => {
 <p class="mute">${manifest.items.length} references in. ${brief.rules.filter((r) => r.status !== 'rejected').length} rules out, in ${brief.modes.length} modes. ${posters.length} poster${posters.length === 1 ? '' : 's'}.</p>
 <h2>1. The board</h2><div class="grid">${refs}</div>
 <h2>2. The palette, measured</h2><div class="sw">${palette}</div>
-<h2>3. The rule sheet</h2><p class="mute">Edit <code>brief.json</code> to change a rule, lock it or reject it. The next poster obeys the edit.</p>${modes}
-<h2>4. The posters, by generation</h2><p class="mute">Each tab is one round of posters, newest first, with the feedback that shaped it. The check is a vision model's second opinion on rules that have a right answer. Whether a poster is good is your call.</p>${posterHtml}
+<h2>3. The rule sheet</h2><p class="mute">Open a mode to read its rules. Edit <code>brief.json</code> to change a rule, lock it or reject it. The next poster obeys the edit.</p>${modes}
+<h2>4. The posters, by generation</h2><p class="mute">Each tab is one round of posters, newest first, with the feedback that shaped it. Every image is full size. The rule checks still run, and the scores are in each <code>poster.json</code>.</p>${posterHtml}
 </main></body></html>
 `;
 }

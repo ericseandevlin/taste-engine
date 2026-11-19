@@ -27,12 +27,18 @@ test('renderResult shows the board, live rules and escapes text', () => {
   assert.match(html, /No posters yet/);
 });
 
-test('renderResult shows the best round first with its verdicts and the trail', () => {
+test('renderResult shows every round at full size, the kept one first, and no rule checks', () => {
   const html = renderResult({ board: 'b', manifest, brief, posters: [poster] });
-  assert.match(html, /<a href="posters\/m-001\/round-2.png"><img src="posters\/m-001\/round-2.png"/);
-  assert.match(html, /round 1: 0\/1 &rarr; round 2: 1\/1/);
-  assert.match(html, /class="v pass">PASS/);
+  assert.ok(html.indexOf('posters/m-001/round-2.png') < html.indexOf('posters/m-001/round-1.png'));
+  assert.match(html, /Round 2, kept/);
+  assert.ok(!/PASS|FAIL|1\/1/.test(html));
   assert.ok(!html.includes('shadow<'));
+});
+
+test('renderResult folds each mode of the rule sheet into a closed accordion', () => {
+  const html = renderResult({ board: 'b', manifest, brief, posters: [] });
+  assert.match(html, /<details class="mode"><summary>/);
+  assert.ok(!html.includes('<details class="mode" open'));
 });
 
 const mk = (slug, made) => ({ slug, made, modeName: slug, copy: ['A'], best: 'round-1.png', rounds: [{ round: 1, file: 'round-1.png', passed: 1, total: 1, checked: true, results: [] }] });
