@@ -1,0 +1,42 @@
+name: Bug
+description: Something broke or gave a wrong result
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you ran, what you expected, and what you got.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: The exact command, and the board kind (`visual-ui` or `poster`). Use the demo board if you can.
+      render: shell
+    validations:
+      required: true
+  - type: textarea
+    id: output
+    attributes:
+      label: Error output
+      description: Paste the terminal output. Remove any API keys first.
+      render: shell
+  - type: input
+    id: env
+    attributes:
+      label: Environment
+      description: Node version, operating system, and model provider (Gemini or OpenRouter).
+      placeholder: Node 22.11, macOS 15, Gemini
+    validations:
+      required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before you send
+      options:
+        - label: No API keys are in this issue.
+          required: true
+        - label: No private or copyrighted reference images are attached.
+          required: true

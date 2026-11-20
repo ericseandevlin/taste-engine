@@ -1,0 +1,39 @@
+name: Idea
+description: A new kind, a better measure strategy, or another change
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: The problem
+      description: What you tried to do and where the engine got in the way.
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: The idea
+      description: What you would change. A rough sketch is enough.
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - A new kind
+        - Measure strategy
+        - Rule sheet
+        - Directions and posters
+        - Result page
+        - Docs and examples
+        - Other
+    validations:
+      required: true
+  - type: checkboxes
+    id: roadmap
+    attributes:
+      label: Roadmap
+      options:
+        - label: I read ROADMAP.md, including the Parked list.
+          required: true
