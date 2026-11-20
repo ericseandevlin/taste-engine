@@ -40,19 +40,29 @@ import { typeset } from './typeset.mjs';
 
 export const DEFAULT_COPY = ['Open Studio', '20 Nov 2026', 'Doors 7pm'];
 const COPY_RULE = 'The copy is rendered exactly as given: every word spelled correctly, nothing added, nothing missing.';
+// Checked on the bare artwork before the type goes on (--type set): the model must leave all words to code.
+export const ART_RULE = 'The image contains no letters, words, numbers or writing of any kind: no titles, names, credits or captions.';
+export const CALM_RULE = 'The image leaves a calm area for the title: the top or bottom third is mostly one flat color with no detail.';
 
 function parseArgs(argv) {
-  const args = { board: 'demo', mode: null, copy: null, rounds: 2, refs: 3, type: 'set', aspect: '3:4', model: MODELS.image, judge: MODELS.critique };
+  const args = { board: 'demo', mode: null, copy: null, rounds: 2, refs: 3, type: 'set', aspect: '3:4', surface: 'poster', model: MODELS.image, judge: MODELS.critique };
+  let typeGiven = false, aspectGiven = false;
   for (let i = 0; i < argv.length; i++) {
     if (argv[i] === '--board') args.board = argv[++i];
     else if (argv[i] === '--mode') args.mode = argv[++i];
     else if (argv[i] === '--copy') args.copy = argv[++i];
     else if (argv[i] === '--rounds') args.rounds = Math.max(1, Number(argv[++i]));
     else if (argv[i] === '--refs') args.refs = Math.max(0, Number(argv[++i]) || 0);
-    else if (argv[i] === '--aspect') args.aspect = argv[++i];
-    else if (argv[i] === '--type') args.type = argv[++i] === 'drawn' ? 'drawn' : 'set';
+    else if (argv[i] === '--aspect') { args.aspect = argv[++i]; aspectGiven = true; }
+    else if (argv[i] === '--surface') args.surface = argv[++i] === 'tee' ? 'tee' : 'poster';
+    else if (argv[i] === '--type') { args.type = argv[++i] === 'drawn' ? 'drawn' : 'set'; typeGiven = true; }
     else if (argv[i] === '--model') args.model = argv[++i];
     else if (argv[i] === '--judge') args.judge = argv[++i];
+  }
+  // A t-shirt graphic is lettering-led: the words are drawn into the art (and spell-checked), on a 4:5 print.
+  if (args.surface === 'tee') {
+    if (!typeGiven) args.type = 'drawn';
+    if (!aspectGiven) args.aspect = '4:5';
   }
   return args;
 }
@@ -68,6 +78,13 @@ export function parseCopy(text) {
 // lanes win, ties in order of first citation. Returns manifest items.
 export function pickReferences(brief, mode, manifest, n = 3) {
   if (!n || !manifest?.items?.length) return [];
+  // A direction names the references it stands on. Those come first, so two
+  // directions never send the image model the same pictures.
+  if (mode.refs?.length) {
+    const byRef = new Map(manifest.items.map((it) => [it.id, it]));
+    const own = mode.refs.map((id) => byRef.get(id)).filter(Boolean);
+    if (own.length) return own.slice(0, n);
+  }
   const counts = new Map();
   const seenLane = new Set();
   for (const r of brief.rules || []) {
@@ -82,44 +99,76 @@ export function pickReferences(brief, mode, manifest, n = 3) {
 
 // Pure: the prompt the image agent draws from. `broken` holds the rules the
 // last round failed, so the repair is specific instead of "try again".
-export function buildPosterPrompt({ mode, dos, donts, palette, copy, broken = [], type = 'drawn', refs = 0 }) {
+export function buildPosterPrompt({ mode, dos, donts, palette, copy, broken = [], type = 'drawn', refs = 0, surface = 'poster' }) {
+  const tee = surface === 'tee';
   const hexes = (mode.palette.length ? mode.palette : palette.map((p) => p.hex)).slice(0, 5);
+  // A direction that says how its own references treat the subject replaces the
+  // generic list, so three directions do not collapse into one treatment.
+  const own = (aspect) => dos.find((r) => r.mode === mode.id && r.aspect === aspect)?.rule;
+  const subject = own('subject');
+  const composition = own('composition');
   const out = [
-    'Design one printed poster, portrait format. Return the image only.',
+    tee
+      ? 'Design one t-shirt graphic: screen-print artwork shown flat on a plain solid background. Not on a shirt, no mockup, no person, no hanger, no folds. Return the image only.'
+      : 'Design one printed poster, portrait format. Return the image only.',
     '',
     ...(type === 'set'
       ? [
           'NO TEXT. Draw no letters, words, numbers or anything that reads as writing. The words are set on the poster later.',
-          'Leave the top third calm: mostly one flat palette color, so a title can sit there. The rest of the poster carries the artwork.',
+          composition
+            ? 'Leave one calm band, about a quarter to a third of the height, along the top or the bottom edge, whichever this composition wants: mostly one flat palette color, so a title can sit there. The rest of the poster carries the artwork.'
+            : 'Leave the top third calm: mostly one flat palette color, so a title can sit there. The rest of the poster carries the artwork.',
         ]
       : [
-          'COPY. Set exactly these lines:',
+          tee ? 'LETTERING. The words are the hero of the graphic. Draw exactly this text, spelled exactly, letter for letter:' : 'COPY. Set exactly these lines:',
           ...copy.map((l) => `  ${l}`),
-          'These lines are the only text on the poster. No labels, no captions, no numbers, no grid coordinates, no color codes, no invented words.',
+          tee
+            ? 'Draw it in the lettering style of the references. It is the only text in the graphic: no taglines, prices, dates, labels or invented words.'
+            : 'These lines are the only text on the poster. No labels, no captions, no numbers, no grid coordinates, no color codes, no invented words.',
         ]),
     '',
     `STYLE: ${mode.name}. ${mode.summary}`,
+    ...(subject ? [`SUBJECT TREATMENT: ${subject}`] : []),
+    ...(composition ? [`COMPOSITION: ${composition}`] : []),
+    ...(mode.lineage
+      ? [`LINEAGE (an interpretation of the references, ${mode.lineage.confidence} confidence, not a fact): ${[mode.lineage.tradition, mode.lineage.era, mode.lineage.place].filter((x) => x && x !== 'unclear').join(', ')}. Use it only as a hint for period craft and print method; the references and rules outrank it.`]
+      : []),
     '',
     ...(refs
       ? [
           `REFERENCES. The ${refs} attached image${refs > 1 ? 's are' : ' is'} from the board this style was read from. They outrank the written style.`,
-          'SUBJECT: if the references share a subject (a face, a figure, an object), make that the subject of this poster, large and photographic, not a pattern or an icon of it.',
-          'Match their visual language: how the photograph is treated (sliced into strips or offset blocks, cut out, halftoned, collaged, re-colored), the scale of the subject, the amount of empty space, and how sparingly small graphic accents are placed (a few tiny shapes of a contrasting color, never a pattern of them).',
-          'Do not copy any reference or any person in them: make a new image with a new subject. Ignore any text in the references.',
-          'The references are photos of printed posters. Ignore their paper margins, borders and backgrounds: your image is the print itself, edge to edge.',
+          ...(tee
+            ? ['Use their visual language: lettering style, ornament, framing devices (badges, banners, cartouches, starbursts, borders), color and print texture. Any image supports the words.']
+            : ['SUBJECT: if the references share a subject (a face, a figure, an object), make that the subject of this poster, large and photographic, not a pattern or an icon of it.']),
+          'CASTING: if the subject is a person, cast a real character, not a model. A face with personality and a strong expression (defiance, unease, mischief, grief, a sideways glance, mid-laugh), and with irregular features: asymmetry, a crooked nose, heavy brows, wrinkles, gaps, scars, an unusual age or build. Never a stock-photo face: no symmetrical beauty-ad features, no smooth retouched skin, no neutral blank stare into the camera.',
+          subject
+            ? 'Match their visual language as the SUBJECT TREATMENT and COMPOSITION above describe it: the treatment of the subject, its scale, the amount of empty space, and how sparingly small graphic accents are placed.'
+            : 'Match their visual language: how the photograph is treated (sliced into strips or offset blocks, cut out, halftoned, collaged, re-colored), the scale of the subject, the amount of empty space, and how sparingly small graphic accents are placed (a few tiny shapes of a contrasting color, never a pattern of them).',
+          'Do not copy any reference or any person in them: make a new image with a new subject.',
+          type === 'set'
+            ? 'The references carry lettering, titles and film credits. Never copy any of it, and put no names, credits, captions or words of any kind in your image.'
+            : 'Never copy any words from the references. The only words are the ones given above.',
+          ...(tee ? [] : ['The references are photos of printed posters. Ignore their paper margins, borders and backgrounds: your image is the print itself, edge to edge.']),
           '',
         ]
       : []),
-    `PALETTE. Use only these colors: ${hexes.join(', ')}.${refs ? ' Render the photograph in them too (black and white, duotone, halftone), not in its natural colors.' : ''} The codes tell you the colors. Never print a color code on the poster.`,
+    `PALETTE. Use only these colors: ${hexes.join(', ')}.${refs ? (subject ? ' Render the subject in these colors too, not in its natural colors.' : ' Render the photograph in them too (black and white, duotone, halftone), not in its natural colors.') : ''} The codes tell you the colors. Never print a color code on the poster.`,
     '',
     'DO:',
-    ...dos.map((r) => `- ${r.rule}`),
+    ...dos.filter((r) => !(r.mode === mode.id && (r.aspect === 'subject' || r.aspect === 'composition'))).map((r) => `- ${r.rule}`),
     '',
     'DO NOT. Each of these is a hard rule:',
     ...donts.map((r) => `- ${r.rule}`),
     '',
-    'This is a poster, not a web page: no navigation, no buttons, no browser frame, no device mockup.',
-    'The image IS the poster. The artwork runs to all four edges of the image. No paper sheet on a background, no border around it, no shadow under it.',
+    ...(tee
+      ? [
+          'This is a t-shirt print: one contained composition with a strong silhouette, centered, with a plain margin all around it on the solid background.',
+          'Use 3 to 5 flat spot colors that screen-print cleanly: no photographic gradients, no soft drop shadows. Bold enough to read from across a room.',
+        ]
+      : [
+          'This is a poster, not a web page: no navigation, no buttons, no browser frame, no device mockup.',
+          'The image IS the poster. The artwork runs to all four edges of the image. No paper sheet on a background, no border around it, no shadow under it.',
+        ]),
   ];
   if (broken.length) {
     out.push('', 'YOUR LAST ATTEMPT BROKE THESE RULES. Fix each one:', ...broken.map((b) => `- ${b.rule} (seen: ${b.reason})`));
@@ -139,6 +188,16 @@ export function buildCheckPrompt(rules, copy) {
   return (
     `The image is a poster. Its copy was meant to be exactly these lines:\n${copy.map((l) => `  ${l}`).join('\n')}\n\n` +
     `Judge the poster against each statement. PASS if the statement is true of the image, FAIL if it is false. ` +
+    `Judge strictly from what is visible. Reason: one short sentence naming what you see.\n\n` +
+    rules.map((r, i) => `${i + 1}. ${r}`).join('\n') +
+    `\n\nReturn only JSON: {"verdicts":[{"verdict":"PASS"|"FAIL","reason":"..."}]} with exactly ${rules.length} entries in order.`
+  );
+}
+
+// Pure: the check for the bare artwork, one statement at a time.
+export function buildArtCheckPrompt(rules) {
+  return (
+    `The image is poster artwork before any type is added. Judge it against each statement. PASS if the statement is true of the image, FAIL if it is false. ` +
     `Judge strictly from what is visible. Reason: one short sentence naming what you see.\n\n` +
     rules.map((r, i) => `${i + 1}. ${r}`).join('\n') +
     `\n\nReturn only JSON: {"verdicts":[{"verdict":"PASS"|"FAIL","reason":"..."}]} with exactly ${rules.length} entries in order.`
@@ -210,22 +269,33 @@ async function main() {
   const rounds = [];
   let broken = [];
   for (let n = 1; n <= args.rounds; n++) {
-    const art = await draw({ prompt: buildPosterPrompt({ mode, dos, donts, palette: brief.palette, copy, broken, type: args.type, refs: images.length }), aspect: args.aspect, images });
+    const art = await draw({ prompt: buildPosterPrompt({ mode, dos, donts, palette: brief.palette, copy, broken, type: args.type, refs: images.length, surface: args.surface }), aspect: args.aspect, images });
     mkdirSync(dir, { recursive: true });
     let img = art;
     let file = `round-${n}.${extOf(art.mimeType)}`;
+    const artResults = [];
     if (args.type === 'set') {
       writeFileSync(join(dir, `art-${n}.${extOf(art.mimeType)}`), Buffer.from(art.data, 'base64'));
-      const set = await typeset(Buffer.from(art.data, 'base64'), copy, { dos });
+      // Any lettering in the art (copied credits, invented titles) breaks the round before type is set.
+      try {
+        const rawArt = await look({ image: art.data, mediaType: art.mimeType, prompt: buildArtCheckPrompt([ART_RULE]), maxTokens: 2000 });
+        const [v] = parseVerdicts(rawArt, 1);
+        artResults.push({ rule: ART_RULE, ...v });
+      } catch (err) {
+        console.log(`[poster]   round ${n}: art text check failed (${err.message})`);
+      }
+      const set = await typeset(Buffer.from(art.data, 'base64'), copy, { dos, palette: mode.palette?.length ? mode.palette : (brief.palette || []).map((p) => p.hex) });
       img = { data: set.data.toString('base64'), mimeType: 'image/png' };
       file = `round-${n}.png`;
+      // No calm field means the art ignored the brief; the type had to go on a panel. Redraw if rounds remain.
+      artResults.push({ rule: CALM_RULE, pass: !set.panel, reason: set.panel ? 'no calm area was left, so the type needed a panel' : 'a calm area held the type' });
       console.log(`[poster]   round ${n}: copy set in the ${set.band} band${set.panel ? ' on a panel' : ''}`);
     }
     writeFileSync(join(dir, file), Buffer.from(img.data, 'base64'));
     let results;
     try {
       const raw = await look({ image: img.data, mediaType: img.mimeType, prompt: buildCheckPrompt(checked, copy), maxTokens: 4000 });
-      results = parseVerdicts(raw, checked.length).map((v, i) => ({ rule: checked[i], ...v }));
+      results = [...parseVerdicts(raw, checked.length).map((v, i) => ({ rule: checked[i], ...v })), ...artResults];
     } catch (err) {
       console.log(`[poster]   round ${n}: drawn, check failed (${err.message})`);
       rounds.push({ round: n, file, passed: 0, total: checked.length, checked: false, results: [] });
@@ -241,7 +311,7 @@ async function main() {
   const best = bestRound(rounds);
   writeFileSync(
     join(dir, 'poster.json'),
-    JSON.stringify({ slug, board: board.name, mode: mode.id, modeName: mode.name, copy, type: args.type, model: args.model, judge: args.judge, made: new Date().toISOString(), references: refItems.map((it) => it.file), best: best.file, rounds }, null, 2) + '\n',
+    JSON.stringify({ slug, board: board.name, mode: mode.id, modeName: mode.name, copy, type: args.type, surface: args.surface, aspect: args.aspect, model: args.model, judge: args.judge, made: new Date().toISOString(), references: refItems.map((it) => it.file), best: best.file, rounds }, null, 2) + '\n',
   );
   console.log(`[poster] done: ${board.dir}/posters/${slug}/${best.file}`);
 }

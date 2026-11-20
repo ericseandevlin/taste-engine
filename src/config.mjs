@@ -55,6 +55,8 @@ export const MODELS = {
 export const KINDS = {
   'visual-ui': {
     measure: 'visual', // measure.mjs strategy key
+    surface: 'website', // what the board's references are, and what a direction proposes
+    referenceNoun: 'website / UI screenshot',
     // Controlled tag vocabulary (rules, not vibes). tag.mjs rejects anything
     // outside this list so taste stays inspectable, not freeform adjectives.
     tagVocabulary: [
@@ -135,6 +137,8 @@ export const KINDS = {
   // board's actual 44 references — see issue #3 for provenance — not invented.
   poster: {
     measure: 'visual',
+    surface: 'poster',
+    referenceNoun: 'printed poster',
     // Poster taste axes: composition, type, color, image, density, surface/print.
     // tag.mjs rejects anything outside this list, same discipline as visual-ui.
     tagVocabulary: [
@@ -161,6 +165,15 @@ export const KINDS = {
       'duotone-treated',
       'illustration',
       'no-image',
+      // Subject treatment: how the poster's central subject (often a face) is
+      // reworked. Added for the face-treatments board, where this is the axis
+      // the references differ on most.
+      { id: 'halftone-subject', definition: 'The central photographic subject is rendered as a visible halftone or line screen: dots or lines large enough to read as pattern.' },
+      { id: 'sliced-subject', definition: 'The central subject is cut into strips, bands or blocks that are offset, shifted or re-ordered against each other.' },
+      { id: 'cut-out-subject', definition: 'The subject, or part of it, is a hard-edged cut-out silhouette set against a flat field or nested inside another shape.' },
+      { id: 'painted-subject', definition: 'The subject is painted or drawn by hand rather than photographed, with visible brush, airbrush or pen work.' },
+      { id: 'collaged-subject', definition: 'The subject is assembled from several unrelated image fragments (photo, pattern, drawing) layered together.' },
+      { id: 'recolored-subject', definition: 'A photographic subject is printed in non-natural flat colors (a single ink, a duotone, or flat poster colors) instead of its natural colors.' },
       // Density (generous margin vs tabular index vs collage)
       'generous-margin',
       'tabular-index',

@@ -9,7 +9,7 @@
 
 import sharp from 'sharp';
 
-const BAND = 0.32; // panel height when the art left no calm field
+const BAND = 0.26; // panel height when the art left no calm field
 const MIN_FIELD = 0.15; // a calm field shorter than this does not count
 const CALM = 18; // a row is calm when its pixels vary less than this (mean channel stdev)
 const SANS = 'Helvetica Neue,Arial,Liberation Sans,sans-serif';
@@ -77,7 +77,19 @@ async function textBlock(lines, font, ink, width, height, weight) {
   return sharp({ text: { text: markup, font, width, height, rgba: true, align: 'left', spacing: 0 } }).png().toBuffer({ resolveWithObject: true });
 }
 
-export async function typeset(art, copy, { dos = [] } = {}) {
+// Pure: the panel color when the art left no calm field: the palette's lightest color, else white.
+export function panelColor(palette = []) {
+  const lum = (hex) => {
+    const m = /^#?([0-9a-f]{6})$/i.exec(String(hex).trim());
+    if (!m) return -1;
+    const n = parseInt(m[1], 16);
+    return 0.2126 * (n >> 16) + 0.7152 * ((n >> 8) & 255) + 0.0722 * (n & 255);
+  };
+  const best = [...palette].filter((h) => lum(h) >= 0).sort((a, b) => lum(b) - lum(a))[0];
+  return best && lum(best) > 150 ? (best.startsWith('#') ? best : `#${best}`) : '#ffffff';
+}
+
+export async function typeset(art, copy, { dos = [], palette = [] } = {}) {
   const img = sharp(art);
   const { width: w, height: h } = await img.metadata();
   const { rows, scale } = await rowProfile(img, h);
@@ -95,13 +107,15 @@ export async function typeset(art, copy, { dos = [] } = {}) {
   const slice = pick.at === 'top' ? rows.slice(pick.skip, pick.skip + pick.rows) : rows.slice(rows.length - pick.skip - pick.rows, rows.length - pick.skip);
   const mean = [0, 1, 2].map((c) => slice.reduce((a, r) => a + r.mean[c], 0) / Math.max(1, slice.length));
   const font = pickFont(dos);
-  const ink = busy ? '#000000' : inkFor(mean);
+  const fill = panelColor(palette);
+  const hexRgb = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
+  const ink = busy ? inkFor(hexRgb(fill)) : inkFor(mean);
   const [title, ...rest] = copy;
   const L = layoutType(band.top, band.height, w, rest.length > 0);
   const t = await textBlock([title], font, ink, L.inner, L.titleH, 'heavy');
   const layers = [];
   if (busy) {
-    const panel = Buffer.from(`<svg width="${w}" height="${band.height}"><rect width="100%" height="100%" fill="#ffffff"/></svg>`);
+    const panel = Buffer.from(`<svg width="${w}" height="${band.height}"><rect width="100%" height="100%" fill="${fill}"/></svg>`);
     layers.push({ input: panel, left: 0, top: band.top });
   }
   layers.push({ input: t.data, left: L.padX, top: L.titleTop });
