@@ -8,8 +8,7 @@ Taste Engine is pre-1.0. Only the latest commit on `main` gets security fixes.
 
 Do not open a public issue for a security problem.
 
-1. Go to the **Security** tab of this repo and click **Report a vulnerability**. This opens a private report that only the maintainer can read.
-2. If that button is not there, email ericdevlin@me.com with "taste-engine security" in the subject.
+Go to the **Security** tab of this repo and click **Report a vulnerability**. This opens a private report that only the maintainer can read.
 
 Please include:
 
