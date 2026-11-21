@@ -12,6 +12,7 @@ import { fileURLToPath } from 'url';
 import { getBoard } from './config.mjs';
 import { readManifest } from './manifest.mjs';
 import { rulesForMode } from './brief.mjs';
+import { lineageLine } from './directions.mjs';
 
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
 
@@ -30,34 +31,79 @@ h3{font-size:20px;margin:0 0 4px}p{margin:0 0 12px;max-width:70ch}.mute{color:va
 .mode{background:var(--card);border:1px solid var(--line);padding:20px;margin-bottom:16px}
 .cols{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:12px}@media (max-width:640px){.cols{grid-template-columns:1fr}}
 ul{margin:0;padding-left:18px}li{margin:2px 0}.cols b{display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px}
-.poster{display:grid;grid-template-columns:minmax(0,340px) 1fr;gap:24px;background:var(--card);border:1px solid var(--line);padding:20px;margin-bottom:16px}
-@media (max-width:720px){.poster{grid-template-columns:1fr}}.poster img{width:100%;display:block;border:1px solid var(--line)}
-.rounds{display:flex;gap:8px;margin-top:8px}.rounds img{width:72px}
-.v{font:12px ui-monospace,Menlo,monospace;font-weight:700}.pass{color:var(--pass)}.fail{color:var(--fail)}
-.checks li{list-style:none;margin:6px 0}.checks{padding:0}code{font:13px ui-monospace,Menlo,monospace;background:var(--card);border:1px solid var(--line);padding:1px 5px}
+.poster{background:var(--card);border:1px solid var(--line);padding:20px;margin-bottom:16px}
+.poster img{width:100%;display:block;border:1px solid var(--line)}
+.rounds{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:16px;margin-top:12px}.rounds.one{grid-template-columns:minmax(0,520px)}
+.rounds figure{margin:0}.rounds figcaption{font-size:12px;color:var(--mute);margin-top:4px}
+summary{cursor:pointer}summary h3{display:inline}details.mode[open] summary{margin-bottom:12px}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 16px}.tabs label{cursor:pointer;border:1px solid var(--line);background:var(--card);padding:6px 12px;font-size:13px}
+.gen{display:none}.notes{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--fg);padding:16px 20px;margin-bottom:16px}.notes b{display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;margin:8px 0 4px}
+code{font:13px ui-monospace,Menlo,monospace;background:var(--card);border:1px solid var(--line);padding:1px 5px}
 `;
 
+// Pure: put posters into generations. With a generations list (each { id, label, from, feedback, changed }),
+// a poster belongs to the latest generation that started at or before it was made. Without one, a gap of
+// more than 45 minutes between posters starts a new generation. Newest generation first.
+export function groupGenerations(posters, gens = []) {
+  const byTime = [...posters].sort((a, b) => String(a.made).localeCompare(String(b.made)));
+  if (gens.length) {
+    const sorted = [...gens].sort((a, b) => String(a.from).localeCompare(String(b.from)));
+    const out = sorted.map((g) => ({ ...g, posters: [] }));
+    const earlier = { id: 'earlier', label: 'Earlier', posters: [] };
+    for (const p of byTime) {
+      let idx = -1;
+      for (let i = 0; i < sorted.length; i++) if (String(sorted[i].from) <= String(p.made)) idx = i;
+      (idx < 0 ? earlier : out[idx]).posters.push(p);
+    }
+    return [...(earlier.posters.length ? [earlier] : []), ...out].reverse();
+  }
+  const out = [];
+  let last = null;
+  for (const p of byTime) {
+    const t = Date.parse(p.made);
+    if (!out.length || !(t - last <= 45 * 60 * 1000)) out.push({ id: `g${out.length + 1}`, label: `Generation ${out.length + 1}`, from: p.made, posters: [] });
+    out[out.length - 1].posters.push(p);
+    last = t;
+  }
+  return out.reverse();
+}
+
 // Pure: the whole page from loaded data. Image paths are relative to the board folder.
-export function renderResult({ board, manifest, brief, posters }) {
+export function renderResult({ board, manifest, brief, posters, generations = [] }) {
   const refs = manifest.items.map((it) => `<img src="${esc(it.file)}" alt="${esc(it.title || it.file)}" loading="lazy">`).join('');
   const palette = brief.palette.map((p) => `<span><i style="background:${esc(p.hex)}"></i>${esc(p.hex)} ${p.share}%</span>`).join('');
   const modes = brief.modes.map((m) => {
     const { dos, donts } = rulesForMode(brief, m.id);
     const li = (rs) => rs.map((r) => `<li>${esc(r.rule)}</li>`).join('');
-    return `<div class="mode"><h3>${esc(m.name)}</h3><p class="mute">${esc(m.summary)}</p>
-<div class="cols"><div><b>Do</b><ul>${li(dos)}</ul></div><div><b>Don't</b><ul>${li(donts)}</ul></div></div></div>`;
+    const sw = (m.palette || []).map((h) => `<span><i style="background:${esc(h)}"></i>${esc(h)}</span>`).join('');
+    const meta = [
+      sw ? `<div class="sw">${sw}</div>` : '',
+      m.refs?.length ? `<p class="mute">From ${m.refs.map(esc).join(', ')}${m.stretch ? `. ${esc(m.stretch)}` : ''}</p>` : '',
+      m.lineage ? `<p class="mute"><i>${esc(lineageLine(m.lineage))}.</i></p>` : '',
+    ].join('');
+    return `<details class="mode"><summary><h3>${esc(m.name)}</h3> <span class="mute">${dos.length + donts.length} rules</span></summary><p class="mute">${esc(m.summary)}</p>${meta}
+<div class="cols"><div><b>Do</b><ul>${li(dos)}</ul></div><div><b>Don't</b><ul>${li(donts)}</ul></div></div></details>`;
   }).join('\n');
-  const posterHtml = posters.length
-    ? posters.map((p) => {
-        const best = p.rounds.find((r) => r.file === p.best) || p.rounds[p.rounds.length - 1];
-        const thumbs = p.rounds.length > 1
-          ? `<div class="rounds">${p.rounds.map((r) => `<a href="posters/${esc(p.slug)}/${esc(r.file)}" title="Round ${r.round}: ${r.passed}/${r.total}"><img src="posters/${esc(p.slug)}/${esc(r.file)}" alt="Round ${r.round}"></a>`).join('')}</div>`
-          : '';
-        const trail = p.rounds.map((r) => (r.checked ? `round ${r.round}: ${r.passed}/${r.total}` : `round ${r.round}: not checked`)).join(' &rarr; ');
-        const checks = best.results.map((c) => `<li><span class="v ${c.pass ? 'pass' : 'fail'}">${c.pass ? 'PASS' : 'FAIL'}</span> ${esc(c.rule.replace(/^The poster does not use this: /, 'No: '))}<br><span class="mute">${esc(c.reason)}</span></li>`).join('');
-        return `<div class="poster"><div><a href="posters/${esc(p.slug)}/${esc(best.file)}"><img src="posters/${esc(p.slug)}/${esc(best.file)}" alt="${esc(p.copy.join(', '))}"></a>${thumbs}</div>
-<div><h3>${esc(p.modeName)}</h3><p class="mute">${esc(p.copy.join(' | '))}<br>${trail}</p><ul class="checks">${checks}</ul></div></div>`;
-      }).join('\n')
+  // Every round at full size, the kept one first. The rule checks still run and stay in poster.json; the page does not list them.
+  const card = (p) => {
+    const best = p.rounds.find((r) => r.file === p.best) || p.rounds[p.rounds.length - 1];
+    const ordered = [best, ...p.rounds.filter((r) => r !== best)];
+    const imgs = ordered.map((r) => `<figure><a href="posters/${esc(p.slug)}/${esc(r.file)}"><img src="posters/${esc(p.slug)}/${esc(r.file)}" alt="${esc(p.copy.join(', '))}, round ${r.round}" loading="lazy"></a>${p.rounds.length > 1 ? `<figcaption>Round ${r.round}${r === best ? ', kept' : ''}</figcaption>` : ''}</figure>`).join('');
+    return `<div class="poster"><h3>${esc(p.modeName)}</h3><p class="mute">${esc(p.copy.join(' | '))}</p><div class="rounds${p.rounds.length > 1 ? '' : ' one'}">${imgs}</div></div>`;
+  };
+  const gens = groupGenerations(posters, generations);
+  const when = (iso) => (iso ? new Date(iso).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit', timeZone: 'America/New_York' }) : '');
+  const posterHtml = gens.length
+    ? `${gens.map((g, i) => `<input type="radio" name="gen" id="t-${esc(g.id)}" hidden${i === 0 ? ' checked' : ''}>`).join('')}
+<div class="tabs">${gens.map((g) => `<label for="t-${esc(g.id)}">${esc(g.label)}${g.posters.length ? ` (${g.posters.length})` : ''}</label>`).join('')}</div>
+${gens.map((g) => {
+  const notes = g.feedback || g.changed
+    ? `<div class="notes">${g.feedback ? `<b>Your feedback</b><p>${esc(g.feedback)}</p>` : ''}${g.changed ? `<b>What changed in response</b><p>${esc(g.changed)}</p>` : ''}</div>`
+    : '';
+  const body = g.posters.length ? g.posters.map(card).join('\n') : '<p class="mute">Not run yet.</p>';
+  return `<section class="gen" id="gen-${esc(g.id)}"><h3>${esc(g.label)}</h3><p class="mute">${esc(when(g.from))}</p>${notes}${body}</section>`;
+}).join('\n')}
+<style>${gens.map((g) => `#t-${g.id.replace(/[^a-z0-9_-]/gi, '')}:checked~#gen-${g.id.replace(/[^a-z0-9_-]/gi, '')}{display:block}#t-${g.id.replace(/[^a-z0-9_-]/gi, '')}:checked~.tabs label[for="t-${g.id.replace(/[^a-z0-9_-]/gi, '')}"]{background:var(--fg);color:var(--bg)}`).join('')}</style>`
     : `<p class="mute">No posters yet. Run <code>npm run poster -- --board ${esc(board)}</code>.</p>`;
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${esc(board)}: Taste Engine</title><style>${CSS}</style></head><body><main>
@@ -65,8 +111,8 @@ export function renderResult({ board, manifest, brief, posters }) {
 <p class="mute">${manifest.items.length} references in. ${brief.rules.filter((r) => r.status !== 'rejected').length} rules out, in ${brief.modes.length} modes. ${posters.length} poster${posters.length === 1 ? '' : 's'}.</p>
 <h2>1. The board</h2><div class="grid">${refs}</div>
 <h2>2. The palette, measured</h2><div class="sw">${palette}</div>
-<h2>3. The rule sheet</h2><p class="mute">Edit <code>brief.json</code> to change a rule, lock it or reject it. The next poster obeys the edit.</p>${modes}
-<h2>4. The posters, checked against the rules</h2><p class="mute">The check is a vision model's second opinion on rules that have a right answer. Whether a poster is good is your call.</p>${posterHtml}
+<h2>3. The rule sheet</h2><p class="mute">Open a mode to read its rules. Edit <code>brief.json</code> to change a rule, lock it or reject it. The next poster obeys the edit.</p>${modes}
+<h2>4. The posters, by generation</h2><p class="mute">Each tab is one round of posters, newest first, with the feedback that shaped it. Every image is full size. The rule checks still run, and the scores are in each <code>poster.json</code>.</p>${posterHtml}
 </main></body></html>
 `;
 }
@@ -84,7 +130,9 @@ function main() {
   const brief = readManifest(join(board.absDir, 'brief.json'));
   if (!manifest || !brief) throw new Error(`Nothing to show for ${board.name} yet. Run \`npm run taste -- --board ${board.name}\`.`);
   const posters = loadPosters(board.absDir);
-  writeFileSync(join(board.absDir, 'result.html'), renderResult({ board: board.name, manifest, brief, posters }));
+  // Optional: boards/<board>/generations.json, a list of { id, label, from (ISO time), feedback, changed }.
+  const generations = readManifest(join(board.absDir, 'generations.json')) || [];
+  writeFileSync(join(board.absDir, 'result.html'), renderResult({ board: board.name, manifest, brief, posters, generations }));
   console.log(`[result] ${board.dir}/result.html (${posters.length} posters)`);
 }
 

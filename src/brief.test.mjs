@@ -50,3 +50,22 @@ test('renderBrief lists each mode with Do and Don\'t', () => {
   assert.match(md, /## Mode: Strict/);
   assert.match(md, /\*\*Don't\*\*\n\n- Drop shadows/);
 });
+
+test('a direction with refs adds its own subject, composition and avoid rules, traced to those refs', () => {
+  const dirs = {
+    strict: { name: 'Strict', brief: 'A grid.', palette: '#000, #fff', channels: ['grid'], refs: ['w1'], subject: 'Face cut into strips', composition: 'Mass low, field above', avoid: ['Painted faces'], lineage: { tradition: 'T', era: 'unclear', place: 'P', cues: ['c'], confidence: 'low' } },
+    soft: { name: 'Soft', brief: 'Pop.', palette: ['#f00'], channels: ['pop'], refs: ['w2'], subject: 'Painted face' },
+  };
+  const b = composeBrief({ boardName: 'b', manifest, channels, directions: dirs });
+  const own = b.rules.filter((r) => r.mode === 'strict');
+  assert.deepEqual(own.map((r) => r.aspect || r.kind), ['subject', 'composition', 'dont']);
+  for (const r of own) assert.deepEqual(r.evidence, { mode: 'strict', refs: ['w1'] });
+  const { dos, donts } = rulesForMode(b, 'strict');
+  assert.equal(dos[0].rule, 'Face cut into strips'); // own rules lead
+  assert.ok(!dos.some((r) => r.rule === 'Painted face')); // never another mode's
+  assert.ok(donts.some((r) => r.rule === 'Painted faces'));
+  assert.deepEqual(b.modes.find((m) => m.id === 'soft').palette, ['#f00']);
+  const md = renderBrief(b);
+  assert.match(md, /Palette \(measured from w1\)/);
+  assert.match(md, /interpretation, low confidence/);
+});

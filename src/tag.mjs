@@ -45,17 +45,17 @@ function parseArgs(argv) {
 // semantic instruction; a brand-flavored id contaminated measurement with the
 // model's prior on the word. Apply a tag only when its DEFINITION holds.
 // Legacy string vocabularies (BYO boards) still render as bare ids.
-export function buildTagPrompt(vocabulary, channelSeeds) {
+export function buildTagPrompt(vocabulary, channelSeeds, referenceNoun = 'website / UI screenshot') {
   const vocabLines = vocabulary.map((v) =>
     typeof v === 'string' ? `  ${v}` : `  ${v.id}: ${v.definition}`,
   );
   return [
-    'You are analyzing a website / UI screenshot to extract its design DNA as inspectable data.',
+    `You are analyzing a ${referenceNoun} to extract its design DNA as inspectable data.`,
     'Describe what the design DOES, in rules, not vibe words.',
     '',
     'Return ONLY a JSON object with exactly these keys:',
     '  "tags":    array of ids chosen ONLY from the controlled vocabulary below.',
-    '             Apply an id only when its definition holds for this screenshot;',
+    '             Apply an id only when its definition holds for this image;',
     '             judge by the definition, never by associations with the id text.',
     ...vocabLines,
     '  "channels": array of 1-3 candidate channel ids chosen ONLY from:',
@@ -104,7 +104,7 @@ export async function tagImage(absPath, board, callModel) {
     .resize(512, 512, { fit: 'inside' })
     .jpeg({ quality: 80 })
     .toBuffer();
-  const prompt = buildTagPrompt(board.tagVocabulary, board.channelSeeds);
+  const prompt = buildTagPrompt(board.tagVocabulary, board.channelSeeds, board.referenceNoun);
   let lastErr;
   for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
     try {

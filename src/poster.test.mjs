@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { asClaim, parseCopy, buildPosterPrompt, pickReferences, buildCheckPrompt, parseVerdicts, bestRound, DEFAULT_COPY } from './poster.mjs';
+import { asClaim, parseCopy, buildPosterPrompt, pickReferences, buildCheckPrompt, parseVerdicts, bestRound, DEFAULT_COPY, buildArtCheckPrompt, ART_RULE } from './poster.mjs';
 import { imageOfGemini, imageOfOpenRouter, openRouterContent, geminiParts } from './image-agent.mjs';
 import { routeModel, resolveVisionCaller, NO_KEY_MESSAGE } from './models.mjs';
 
@@ -114,4 +114,53 @@ test('reference images ride along as image parts in both request shapes', () => 
   assert.deepEqual(openRouterContent('hi', im), [{ type: 'text', text: 'hi' }, { type: 'image_url', image_url: { url: 'data:image/jpeg;base64,QUJD' } }]);
   assert.deepEqual(geminiParts('hi'), [{ text: 'hi' }]);
   assert.deepEqual(geminiParts('hi', im), [{ text: 'hi' }, { inlineData: { mimeType: 'image/jpeg', data: 'QUJD' } }]);
+});
+
+test('pickReferences prefers the mode\'s own refs', () => {
+  const manifest = { items: [{ id: 'w1', file: '1' }, { id: 'w2', file: '2' }, { id: 'w3', file: '3' }] };
+  const brief = { rules: [{ lane: 'grid', evidence: { refs: ['w1', 'w2'] } }] };
+  assert.deepEqual(pickReferences(brief, { lanes: ['grid'], refs: ['w3', 'w2'] }, manifest, 3).map((i) => i.id), ['w3', 'w2']);
+  assert.deepEqual(pickReferences(brief, { lanes: ['grid'] }, manifest, 3).map((i) => i.id), ['w1', 'w2']);
+});
+
+test('buildPosterPrompt uses the mode\'s own subject, composition and lineage instead of the generic treatment list', () => {
+  const m = { ...mode, lineage: { tradition: 'Film posters', era: '1970s', place: 'unclear', confidence: 'low' } };
+  const dos = [{ rule: 'Face painted by hand', mode: 'm', aspect: 'subject' }, { rule: 'Subject low, field above', mode: 'm', aspect: 'composition' }, { rule: 'One grotesk family' }];
+  const p = buildPosterPrompt({ ...base, mode: m, dos, refs: 2, type: 'set' });
+  assert.match(p, /SUBJECT TREATMENT: Face painted by hand/);
+  assert.match(p, /COMPOSITION: Subject low, field above/);
+  assert.match(p, /LINEAGE \(an interpretation of the references, low confidence, not a fact\): Film posters, 1970s\./);
+  assert.match(p, /top or the bottom edge/);
+  assert.ok(!/halftoned, collaged/.test(p));
+  assert.ok(!/DO:\n- Face painted/.test(p)); // said once, not twice
+  assert.match(buildPosterPrompt({ ...base, refs: 2 }), /halftoned, collaged/); // no own rules: generic text stays
+});
+
+test('buildArtCheckPrompt asks about the bare artwork and wants one verdict per rule', () => {
+  const p = buildArtCheckPrompt([ART_RULE]);
+  assert.match(p, /before any type is added/);
+  assert.match(p, /exactly 1 entries/);
+  assert.match(p, /no letters, words, numbers/);
+});
+
+test('poster prompt with references forbids copying their lettering and credits', () => {
+  const p = buildPosterPrompt({ ...base, type: 'set', refs: 3 });
+  assert.match(p, /Never copy any of it/);
+  assert.match(p, /no names, credits, captions/);
+});
+
+test('poster prompt with references casts a character with expression, not a stock face', () => {
+  const p = buildPosterPrompt({ ...base, type: 'set', refs: 3 });
+  assert.match(p, /CASTING/);
+  assert.match(p, /Never a stock-photo face/);
+});
+
+test('tee surface: a flat screen-print graphic with drawn lettering, no poster edge-to-edge rule', () => {
+  const p = buildPosterPrompt({ ...base, copy: ['Ectogenesis'], type: 'drawn', refs: 3, surface: 'tee' });
+  assert.match(p, /t-shirt graphic/);
+  assert.match(p, /LETTERING/);
+  assert.match(p, /Ectogenesis/);
+  assert.match(p, /3 to 5 flat spot colors/);
+  assert.doesNotMatch(p, /edge to edge/);
+  assert.doesNotMatch(p, /put no names, credits, captions or words of any kind/);
 });

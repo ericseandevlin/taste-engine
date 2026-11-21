@@ -42,9 +42,9 @@ export function buildClusterInput(manifest) {
   }));
 }
 
-export function buildClusterPrompt(input, channelSeeds) {
+export function buildClusterPrompt(input, channelSeeds, referenceNoun = 'website/UI') {
   return [
-    `You are clustering ${input.length} website/UI references into visual DNA channels.`,
+    `You are clustering ${input.length} ${referenceNoun} references into visual DNA channels.`,
     'Group by shared BEHAVIOR (how they compose), not by subject. Aim for 6-12 channels.',
     'Each channel is a generative recipe an agent can build from — not an adjective.',
     '',
@@ -131,7 +131,7 @@ async function main() {
 
   const input = buildClusterInput(manifest);
   const validIds = input.map((i) => i.id);
-  const prompt = buildClusterPrompt(input, board.channelSeeds);
+  const prompt = buildClusterPrompt(input, board.channelSeeds, board.referenceNoun);
   const { caller: call } = resolveTextCaller(args.model, process.env);
 
   let channels;
